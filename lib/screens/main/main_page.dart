@@ -7,6 +7,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     GlobalKey<ScaffoldState> _scaoffoldKey = GlobalKey();
 
     return ChangeNotifierProvider<BottomNavigationBarProvider>(

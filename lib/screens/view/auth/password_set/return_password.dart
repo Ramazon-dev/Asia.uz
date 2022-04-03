@@ -11,6 +11,7 @@ class ReturnPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
