@@ -6,4 +6,5 @@ class SvgIcons {
   static String review = 'assets/icons/review.svg';
   static String shops = 'assets/icons/shop.svg';
   static String karti = 'assets/icons/karti.svg';
+  static String phone = 'assets/icons/phone.svg';
 }

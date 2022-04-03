@@ -1,10 +1,6 @@
-import 'package:asia_uz/core/widgets/my_text_form_fields.dart';
-import 'package:asia_uz/cubit/login_cubit/auth_cubit.dart';
-import 'package:asia_uz/screens/view/auth/sms/sms_field.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
 
 class EnterPhoneNumberPage extends StatelessWidget {
   EnterPhoneNumberPage({Key? key}) : super(key: key);
@@ -133,7 +129,9 @@ class EnterPhoneNumberPage extends StatelessWidget {
                 SizedBox(height: getHeight(34.0)),
                 MyElevatedButton(
                   text: 'Продолжить',
-                  onPressed: () {
+                  onPressed: () async {
+                    await GetStorage()
+                        .write('telNumber', _phoneNumberController.text);
                     context.read<AuthCubit>().login();
                     Navigator.push(
                       context,
