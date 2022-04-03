@@ -1,3 +1,4 @@
+            //  boldi
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/core/widgets/containers/my_containers.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               height: 20.0,
             ),
+
+
             SizedBox(height: getHeight(20.0)),
             qrCode(),
             SizedBox(height: getHeight(20.0)),
