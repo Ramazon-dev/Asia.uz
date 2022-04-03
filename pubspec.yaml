@@ -19,6 +19,8 @@ dependencies:
   easy_padding: ^0.1.7
   sms_autofill: ^2.2.0
   get_storage: ^2.0.3
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:
