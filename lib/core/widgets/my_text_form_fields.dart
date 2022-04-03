@@ -15,6 +15,8 @@ class MyTextFormFiels extends StatelessWidget {
     this.sideColor,
     this.sideWidth,
     this.inputFormatters,
+    this.onChanged,
+    this.validator,
   }) : super(key: key);
 
   TextEditingController controller;
@@ -24,6 +26,8 @@ class MyTextFormFiels extends StatelessWidget {
   bool? obscureText;
   Color? sideColor;
   List<TextInputFormatter>? inputFormatters;
+  Function(String)? onChanged;
+  FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,8 @@ class MyTextFormFiels extends StatelessWidget {
       obscureText: obscureText!,
       controller: controller,
       decoration: _decoration(),
+      onChanged: onChanged,
+      validator: validator,
     );
   }
 

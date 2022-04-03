@@ -14,4 +14,6 @@ class AppColors {
   static const Color drawerTextColor = Color(0xFF767676);
   static const Color onPressColor = Color(0xFF00A0E3);
   static const Color whiteColor = Colors.white;
+  static const Color orangeColor = Color(0xFFF07F1C);
+  static const Color bottomNavigationBgColor = Color(0xFF0D0D0D);
 }

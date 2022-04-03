@@ -14,30 +14,30 @@ class MyBottomNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
       unselectedItemColor: AppColors.unselectedColor,
       selectedItemColor: AppColors.unselectedColor,
-      backgroundColor: AppColors.drawerBgColor,
+      backgroundColor: AppColors.bottomNavigationBgColor,
       items: [
         BottomNavigationBarItem(
           label: 'Главная',
           icon: _context.currentTab == 0
-              ? SvgPicture.asset(SvgIcons.home)
-              : SvgPicture.asset(SvgIcons.home),
+              ? SvgPicture.asset(SvgIcons.home, color: AppColors.orangeColor,)
+              : SvgPicture.asset(SvgIcons.home,),
         ),
         BottomNavigationBarItem(
           label: 'Магазины',
           icon: _context.currentTab == 1
-              ? SvgPicture.asset(SvgIcons.shops)
+              ? SvgPicture.asset(SvgIcons.shops, color: AppColors.orangeColor,)
               : SvgPicture.asset(SvgIcons.shops),
         ),
         BottomNavigationBarItem(
           label: 'Отзывы',
           icon: _context.currentTab == 2
-              ? SvgPicture.asset(SvgIcons.review)
+              ? SvgPicture.asset(SvgIcons.review, color: AppColors.orangeColor,)
               : SvgPicture.asset(SvgIcons.review),
         ),
         BottomNavigationBarItem(
           label: 'Карты',
           icon: _context.currentTab == 3
-              ? SvgPicture.asset(SvgIcons.karti)
+              ? SvgPicture.asset(SvgIcons.karti, color: AppColors.orangeColor,)
               : SvgPicture.asset(SvgIcons.karti),
         ),
       ],

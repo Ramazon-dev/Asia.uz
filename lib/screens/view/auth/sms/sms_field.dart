@@ -1,8 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/core/widgets/appbar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_padding/easy_padding.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 
 class SmsField extends StatelessWidget {
   String text;
@@ -14,6 +11,7 @@ class SmsField extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   String code = '';
   bool isActive = false;
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -50,10 +48,13 @@ class SmsField extends StatelessWidget {
                 currentCode: code,
                 onCodeSubmitted: (code) async {
                   if (code.length == 4) {
+                    hideKeyboard(context);
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MainPage()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainPage(),
+                      ),
+                    );
                   }
                 },
                 onCodeChanged: (code) async {
@@ -76,7 +77,7 @@ class SmsField extends StatelessWidget {
                       ? Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MainPage(),
+                            builder: (context) => MainPage(),
                           ),
                         )
                       : null;
@@ -87,5 +88,9 @@ class SmsField extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void hideKeyboard(context) {
+    FocusScope.of(context).requestFocus(FocusNode());
   }
 }

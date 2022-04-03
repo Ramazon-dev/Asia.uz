@@ -1,10 +1,12 @@
 import 'package:asia_uz/screens/view/splash_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await GetStorage.init();
   runApp(
     EasyLocalization(
       supportedLocales: const [

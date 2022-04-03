@@ -1,8 +1,9 @@
+import 'package:asia_uz/core/components/view/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +15,11 @@ class MainPage extends StatelessWidget {
         builder: (context, model, child) => Scaffold(
           backgroundColor: AppColors.unselectedColor,
           key: _scaoffoldKey,
-          appBar: AppBar(
-            backgroundColor: AppColors.unselectedColor,
-            elevation: 0,
-            leading: IconButton(
-              icon: SvgPicture.asset(SvgIcons.menu),
-              onPressed: () {
-                _scaoffoldKey.currentState!.openDrawer();
-              },
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  SvgIcons.avatar,
-                ),
-              ),
-            ],
+          appBar: MyAppBar(
+            text: titlesOfAppBar[model.currentTab].toString(),
+            onTab: () {
+              _scaoffoldKey.currentState!.openDrawer();
+            },
           ),
           drawer: MyDrawer(),
           body: model.currentScreens,
@@ -41,4 +30,11 @@ class MainPage extends StatelessWidget {
       ),
     );
   }
+
+  List<String> titlesOfAppBar = [
+    'Главная',
+    'Карты',
+    'Отзывы',
+    'Новости и акции',
+  ];
 }
