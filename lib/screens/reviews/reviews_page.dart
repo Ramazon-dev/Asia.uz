@@ -98,9 +98,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                     MyBottomSheet(),
                     MyElevatedButton(
                       text: 'Продолжить',
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                      onPressed: () {},
                       height: 50.0,
                       // width: 161.0,
                       primaryColor: AppColors.transparentColor,
