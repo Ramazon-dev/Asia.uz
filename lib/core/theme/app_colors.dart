@@ -16,4 +16,6 @@ class AppColors {
   static const Color whiteColor = Colors.white;
   static const Color orangeColor = Color(0xFFF07F1C);
   static const Color bottomNavigationBgColor = Color(0xFF0D0D0D);
+
+  static const Color bgColor = Color(0xFFC0C0C0);
 }

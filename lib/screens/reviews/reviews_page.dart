@@ -32,10 +32,11 @@ class _ReviewsPageState extends State<ReviewsPage>
             margin: EdgeInsets.all(getWidth(10.0)),
             height: getHeight(50.0),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  getWidth(15.0),
-                ),
-                color: Colors.orange.shade200),
+              borderRadius: BorderRadius.circular(
+                getWidth(15.0),
+              ),
+              color: Colors.orange.shade200,
+            ),
             // color: Colors.cyanAccent,
             child: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
