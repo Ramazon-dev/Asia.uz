@@ -7,7 +7,7 @@ class BottomNavigationBarProvider extends ChangeNotifier {
     const HomePage(),
     const ShopsPage(),
     const ReviewsPage(),
-    const CardsPage(),
+     CardsPage(),
   ];
 
 

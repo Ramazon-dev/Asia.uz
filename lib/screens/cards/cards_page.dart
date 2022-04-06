@@ -1,4 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:card_scanner/card_scanner.dart';
 import 'package:flutter/material.dart';
 
 class CardsPage extends StatelessWidget {
@@ -126,30 +127,33 @@ class CardsPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Container(
-                  margin: EdgeInsets.all(getWidth(14.0)),
-                  height: getHeight(69.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      getWidth(15.0),
+                GestureDetector(
+                  onTap: (){},
+                  child: Container(
+                    margin: EdgeInsets.all(getWidth(14.0)),
+                    height: getHeight(69.0),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        getWidth(15.0),
+                      ),
+                      color: Colors.orange.shade300,
                     ),
-                    color: Colors.orange.shade300,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.add_circle, color: AppColors.whiteColor),
-                      SizedBox(width: getWidth(5.0)),
-                      Text(
-                        'Добавить имеющуюся карту',
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.w400,
-                          fontSize: getWidth(16.0),
-                        ),
-                      )
-                    ],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.add_circle, color: AppColors.whiteColor),
+                        SizedBox(width: getWidth(5.0)),
+                        Text(
+                          'Добавить имеющуюся карту',
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w400,
+                            fontSize: getWidth(16.0),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Text(

@@ -1,3 +1,5 @@
+import 'package:asia_uz/provider/drawer_provider.dart';
+import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -61,19 +63,30 @@ class MyDrawer extends StatelessWidget {
                   padding: EdgeInsets.only(
                     top: getHeight(0.0),
                   ),
-                  itemCount: 9,
+                  itemCount: titles.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: getHeight(20.0),
+                    return GestureDetector(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: getHeight(20.0),
+                        ),
+                        child: MyTextWidget(
+                          textAlign: TextAlign.left,
+                          text: titles[index],
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w500,
+                          textColor: Colors.white,
+                        ),
                       ),
-                      child: MyTextWidget(
-                        textAlign: TextAlign.left,
-                        text: titles[index],
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w500,
-                        textColor: Colors.white,
-                      ),
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NewsPage(),
+                          ),
+                        );
+                        Navigator.of(context).pop();
+                      },
                     );
                   },
                 ),
@@ -113,7 +126,7 @@ class MyDrawer extends StatelessWidget {
             sideWidth: 2.0,
             text: "O'ZB",
             onPressed: () {
-              onPressProvider!.onPress();
+              // onPressProvider!.onPress();
               _onPress1 = !_onPress1;
               _onPress2 = false;
               _onPress3 = false;
@@ -129,7 +142,7 @@ class MyDrawer extends StatelessWidget {
             sideWidth: 2.0,
             text: "РУС",
             onPressed: () {
-              onPressProvider!.onPress();
+              // onPressProvider!.onPress();
               _onPress2 = !_onPress2;
               _onPress1 = false;
               _onPress3 = false;
@@ -145,7 +158,7 @@ class MyDrawer extends StatelessWidget {
             sideWidth: 2.0,
             text: "ENG",
             onPressed: () {
-              onPressProvider!.onPress();
+              // onPressProvider!.onPress();
               _onPress3 = !_onPress3;
               _onPress1 = false;
               _onPress2 = false;

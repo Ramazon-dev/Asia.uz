@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import '../../imports/imports.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  MyAppBar({Key? key, this.text, this.onTab,this.widget}) : super(key: key);
+  MyAppBar(
+      {Key? key, this.text, this.onTab, this.widget, this.onPress, this.icon})
+      : super(key: key);
 
   String? text;
-  VoidCallback? onTab;
-  Widget? widget;
-
+  VoidCallback? onTab, onPress;
+  Widget? widget, icon;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,6 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       leading: IconButton(
         icon: widget!,
-
         onPressed: onTab,
       ),
       title: Container(
@@ -45,26 +45,14 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {
-            // debugPrint("on tab");
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>  ProfilePage(),
-              ),
-            );
-          },
-          icon: SvgPicture.asset(
-            SvgIcons.avatar,
-            // color: AppColors.orangeColor,
-          ),
+          onPressed: onPress,
+          icon: icon!
         ),
       ],
     );
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size(
         getWidth(327.0),
         getHeight(80.0),

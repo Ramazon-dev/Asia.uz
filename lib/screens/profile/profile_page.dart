@@ -77,6 +77,8 @@ class ProfilePage extends StatelessWidget {
           back(context);
         },
         text: 'Профиль',
+        onPress: (){},
+        icon: SvgPicture.asset(SvgIcons.avatar),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -244,7 +246,6 @@ class ProfilePage extends StatelessWidget {
                   onPressed: () {
                     _context.validateState();
                     _context.clear();
-                    // Navigator.pop(context);
                   },
                   height: 50.0,
                   // width: 161.0,
