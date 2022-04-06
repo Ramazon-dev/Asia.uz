@@ -1,11 +1,14 @@
+import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import '../../imports/imports.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  MyAppBar({Key? key, this.text, this.onTab}) : super(key: key);
+  MyAppBar({Key? key, this.text, this.onTab,this.widget}) : super(key: key);
 
   String? text;
   VoidCallback? onTab;
+  Widget? widget;
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,8 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
       ),
       leading: IconButton(
-        icon: SvgPicture.asset(SvgIcons.menu),
+        icon: widget!,
+
         onPressed: onTab,
       ),
       title: Container(
@@ -42,11 +46,17 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            debugPrint("on tab");
+            // debugPrint("on tab");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>  ProfilePage(),
+              ),
+            );
           },
           icon: SvgPicture.asset(
             SvgIcons.avatar,
-            // color: AppColors.unselectedColor,
+            // color: AppColors.orangeColor,
           ),
         ),
       ],

@@ -17,6 +17,7 @@ class MainPage extends StatelessWidget {
           backgroundColor: AppColors.unselectedColor,
           key: _scaoffoldKey,
           appBar: MyAppBar(
+            widget: SvgPicture.asset(SvgIcons.menu),
             text: titlesOfAppBar[model.currentTab].toString(),
             onTab: () {
               _scaoffoldKey.currentState!.openDrawer();
