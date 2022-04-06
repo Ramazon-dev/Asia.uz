@@ -1,4 +1,3 @@
-import 'package:asia_uz/provider/drawer_provider.dart';
 import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';

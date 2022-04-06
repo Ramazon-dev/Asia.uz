@@ -1,5 +1,4 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:card_scanner/card_scanner.dart';
 import 'package:flutter/material.dart';
 
 class CardsPage extends StatelessWidget {
