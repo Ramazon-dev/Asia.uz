@@ -1,5 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
+import 'package:asia_uz/screens/shop/local_auth_api.dart';
 import 'package:flutter/material.dart';
 
 class ReturnPassword extends StatelessWidget {
@@ -48,20 +48,36 @@ class ReturnPassword extends StatelessWidget {
                   }
                 },
               ).only(bottom: getHeight(200)),
-              MyElevatedButton(
-                primaryColor: AppColors.transparentColor,
-                text: 'Войти'.tr(),
-                onPressed: () {
-                  isActive == true && text == controller.text
-                      ? Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MainPage(),
-                          ),
-                        )
-                      : null;
+              ElevatedButton(
+                child: const Text(
+                  'Authenticate',
+                ),
+                onPressed: () async {
+                  final isAuthenticated = await LocalAuthApi.authenticate();
+                  if (isAuthenticated) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainPage(),
+                      ),
+                    );
+                  }
                 },
               ),
+              // MyElevatedButton(
+              //   primaryColor: AppColors.transparentColor,
+              //   text: 'Войти'.tr(),
+              //   onPressed: () {
+              //     isActive == true && text == controller.text
+              //         ? Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => MainPage(),
+              //             ),
+              //           )
+              //         : null;
+              //   },
+              // ),
             ],
           ),
         ),
