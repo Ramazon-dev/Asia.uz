@@ -1,4 +1,5 @@
 import 'package:asia_uz/screens/pages/news_page.dart';
+import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -27,7 +28,7 @@ class MyDrawer extends StatelessWidget {
         ),
       ),
       child: Drawer(
-        backgroundColor: AppColors.drawerBgColor,
+        // backgroundColor: AppColors.drawerBgColor,
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -64,6 +65,48 @@ class MyDrawer extends StatelessWidget {
                   ),
                   itemCount: titles.length,
                   itemBuilder: (context, index) {
+                    navigations(int i) {
+                      switch (i) {
+                        case 0:
+                          debugPrint("bosildi 0 glavnaya");
+                          break;
+                        case 1:
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NewsPage(),
+                            ),
+                          );
+                          break;
+                        case 2:
+                          debugPrint("bosildi 2 karta loyalnosti");
+                          break;
+                        case 3:
+                          debugPrint("bosildi : 3 otzivi ");
+                          break;
+                        case 4:
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfilePage(),
+                            ),
+                          );
+                          break;
+                        case 5:
+                          debugPrint("bosildi : 5 karta ");
+                          break;
+                        case 6:
+                          debugPrint("bosildi : 6 kontakti ");
+                          break;
+                        case 7:
+                          debugPrint("bosildi : 7 o nas");
+                          break;
+                        case 8:
+                          debugPrint("bosildi : 8 chiqish");
+                          break;
+                      }
+                    }
+
                     return GestureDetector(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -77,14 +120,9 @@ class MyDrawer extends StatelessWidget {
                           textColor: Colors.white,
                         ),
                       ),
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NewsPage(),
-                          ),
-                        );
-                        Navigator.of(context).pop();
+                      onTap: () {
+                        navigations(index);
+                        // Navigator.of(context).pop();
                       },
                     );
                   },

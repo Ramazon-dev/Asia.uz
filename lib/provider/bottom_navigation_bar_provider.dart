@@ -5,11 +5,10 @@ class BottomNavigationBarProvider extends ChangeNotifier {
   int _currentIndex = 0;
   final List<Widget> _screens = [
     const HomePage(),
-    const ShopsPage(),
+    ShopsPage(),
     const ReviewsPage(),
-     CardsPage(),
+    CardsPage(),
   ];
-
 
   set currentTab(int tab) {
     _currentIndex = tab;

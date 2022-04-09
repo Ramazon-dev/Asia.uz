@@ -75,6 +75,7 @@ class ProfilePage extends StatelessWidget {
         ),
         onTab: () {
           back(context);
+          Navigator.of(context).pop();
         },
         text: 'Профиль',
         onPress: (){},

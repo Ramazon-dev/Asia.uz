@@ -6,7 +6,7 @@ import 'package:asia_uz/core/imports/imports.dart';
 class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
 
-  bool isOpenDrawer = true;
+  bool closeDrawer = true;
 
   OnPressProvider? onPressProvider;
 
@@ -20,19 +20,19 @@ class MainPage extends StatelessWidget {
       create: (context) => BottomNavigationBarProvider(),
       child: Consumer<BottomNavigationBarProvider>(
         builder: (context, model, child) => Scaffold(
-          onDrawerChanged: (valueDrawer){
+          onDrawerChanged: (valueDrawer) {
             debugPrint("ffffff : $valueDrawer");
-            // onPressProvider!.onPress();
 
-            if(valueDrawer == true){
-              isOpenDrawer = true;
+            if (_scaoffoldKey.currentState!.isDrawerOpen == true) {
+              closeDrawer = true;
             } else {
-              isOpenDrawer = false;
+              closeDrawer = false;
             }
-            debugPrint("rrrr : $isOpenDrawer");
 
+            debugPrint("drawer : $closeDrawer");
 
-
+            debugPrint(
+                "is open drawer : ${_scaoffoldKey.currentState!.isDrawerOpen}");
           },
           backgroundColor: AppColors.unselectedColor,
           key: _scaoffoldKey,
@@ -42,6 +42,7 @@ class MainPage extends StatelessWidget {
             onTab: () {
               _scaoffoldKey.currentState!.openDrawer();
 
+              _scaoffoldKey.currentState!.isDrawerOpen;
             },
             onPress: () {
               Navigator.push(
