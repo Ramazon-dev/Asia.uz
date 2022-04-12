@@ -1,4 +1,3 @@
-import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import '../../imports/imports.dart';
 

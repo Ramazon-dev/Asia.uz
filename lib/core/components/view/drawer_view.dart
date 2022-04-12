@@ -1,3 +1,4 @@
+import 'package:asia_uz/screens/about_us/about_us_page.dart';
 import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +100,12 @@ class MyDrawer extends StatelessWidget {
                           debugPrint("bosildi : 6 kontakti ");
                           break;
                         case 7:
-                          debugPrint("bosildi : 7 o nas");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AboutUsPage(),
+                            ),
+                          );
                           break;
                         case 8:
                           debugPrint("bosildi : 8 chiqish");

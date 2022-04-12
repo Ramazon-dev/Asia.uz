@@ -74,7 +74,7 @@ class ProfilePage extends StatelessWidget {
           color: AppColors.whiteColor,
         ),
         onTab: () {
-          back(context);
+          // back(context);
           Navigator.of(context).pop();
         },
         text: 'Профиль',
