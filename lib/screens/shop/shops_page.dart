@@ -11,7 +11,7 @@ class ShopsPage extends StatelessWidget {
 
   final CameraPosition _kGooglePlex = const CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    zoom: 10.4746,
   );
 
   final CameraPosition _kLake = const CameraPosition(
@@ -30,9 +30,10 @@ class ShopsPage extends StatelessWidget {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
-        child: const Icon(Icons.navigation),
+        label: const Text('To the lake!'),
+        icon: const Icon(Icons.directions_boat),
       ),
     );
   }

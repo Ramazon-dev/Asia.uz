@@ -8,9 +8,8 @@
         android:label="asia_uz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.android.geo.AIzaSyBZiaoR6LhBci4bSDYJynj54hVLYZgm6pA"
-               android:value="AIzaSyBZiaoR6LhBci4bSDYJynj54hVLYZgm6pA"/>
-        <meta-data android:name="com.google.android.geo.AIzaSyBZiaoR6LhBci4bSDYJynj54hVLYZgm6pA" android:value="AIzaSyBZiaoR6LhBci4bSDYJynj54hVLYZgm6pA"/>
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyA0BPUNranJRlAvm93nwux9PvcFVgjqtS0"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,6 +26,7 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
