@@ -37,22 +37,28 @@ class MainPage extends StatelessWidget {
           backgroundColor: AppColors.unselectedColor,
           key: _scaoffoldKey,
           appBar: MyAppBar(
-            widget: SvgPicture.asset(SvgIcons.menu),
-            text: titlesOfAppBar[model.currentTab].toString(),
-            onTab: () {
-              _scaoffoldKey.currentState!.openDrawer();
+            leading: InkWell(
+              onTap: () {
+                _scaoffoldKey.currentState!.openDrawer();
 
-              _scaoffoldKey.currentState!.isDrawerOpen;
-            },
-            onPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfilePage(),
-                ),
-              );
-            },
-            icon: SvgPicture.asset(SvgIcons.avatar),
+                _scaoffoldKey.currentState!.isDrawerOpen;
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SvgPicture.asset(SvgIcons.menu),
+              ),
+            ),
+            text: titlesOfAppBar[model.currentTab].toString(),
+            action: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfilePage(),
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(SvgIcons.avatar)),
           ),
           drawer: MyDrawer(),
           body: model.currentScreens,

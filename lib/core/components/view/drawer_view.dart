@@ -42,20 +42,20 @@ class MyDrawer extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: getHeight(65.0)),
-              Container(
-                alignment: Alignment.centerLeft,
-                height: getHeight(50.0),
-                width: double.infinity,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: SvgPicture.asset(
-                    SvgIcons.menu,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // Container(
+              //   alignment: Alignment.centerLeft,
+              //   height: getHeight(50.0),
+              //   width: double.infinity,
+              //   child: IconButton(
+              //     onPressed: () {
+              //       Navigator.pop(context);
+              //     },
+              //     icon: SvgPicture.asset(
+              //       SvgIcons.menu,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
               Container(
                 alignment: Alignment.centerLeft,
                 height: MediaQuery.of(context).size.height * 0.7,

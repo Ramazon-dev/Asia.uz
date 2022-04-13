@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import '../../imports/imports.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  MyAppBar(
-      {Key? key, this.text, this.onTab, this.widget, this.onPress, this.icon})
-      : super(key: key);
+  MyAppBar({
+    Key? key,
+    this.text,
+    // this.onTab,
+    this.leading,
+    // this.onPress,
+    this.action,
+  }) : super(key: key);
 
   String? text;
-  VoidCallback? onTab, onPress;
-  Widget? widget, icon;
+  // VoidCallback? onTab, onPress;
+  Widget? leading, action;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +31,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
           ),
         ),
       ),
-      leading: IconButton(
-        icon: widget!,
-        onPressed: onTab,
-      ),
+      leading: leading ?? Container(),
       title: Container(
         alignment: Alignment.center,
         width: getWidth(300.0),
@@ -43,10 +45,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
       ),
       actions: [
-        IconButton(
-          onPressed: onPress,
-          icon: icon!
-        ),
+        action ?? Container(),
       ],
     );
   }

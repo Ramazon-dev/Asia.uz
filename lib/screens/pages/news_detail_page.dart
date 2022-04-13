@@ -1,9 +1,7 @@
-import 'package:asia_uz/core/constants/size_config.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/components/view/my_app_bar.dart';
-import '../../core/theme/app_colors.dart';
 
 class NewsDetailPage extends StatelessWidget {
   const NewsDetailPage({Key? key}) : super(key: key);
@@ -14,15 +12,15 @@ class NewsDetailPage extends StatelessWidget {
       backgroundColor: AppColors.bgColor,
       appBar: MyAppBar(
         text: 'События',
-        widget: const Icon(
-          Icons.arrow_back,
+        leading: IconButton(
+          onPressed: () {
+          Navigator.pop(context);
+
+          },
+          icon: const Icon(Icons.arrow_back),
           color: AppColors.whiteColor,
         ),
-        onTab: () {
-          Navigator.pop(context);
-        },
-        onPress: () {},
-        icon: const Icon(
+        action: const Icon(
           Icons.height,
           color: AppColors.orangeColor,
         ),

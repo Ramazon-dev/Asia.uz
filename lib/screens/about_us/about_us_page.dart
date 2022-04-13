@@ -10,18 +10,17 @@ class AboutUsPage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         text: "About us",
-        widget: const Icon(
-          Icons.arrow_back,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
           color: AppColors.whiteColor,
         ),
-        onTab: () {
-          Navigator.pop(context);
-        },
-        icon: const Icon(
+        action: const Icon(
           Icons.arrow_back,
           color: Colors.transparent,
         ),
-        onPress: () {},
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,6 +50,13 @@ Asia.uz — качество во всём.""",
           ).symmetric(
             horizontal: getHeight(20),
             vertical: getHeight(30),
+          ),
+          Image(
+            image: const AssetImage(
+              "assets/images/logo.png",
+            ),
+            height: getHeight(230),
+            fit: BoxFit.cover,
           ),
         ],
       ),

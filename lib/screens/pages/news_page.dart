@@ -10,24 +10,24 @@ class NewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.unselectedColor,
       appBar: MyAppBar(
         text: 'Новости и акции',
-        widget: const Icon(
-          Icons.arrow_back,
+        leading: IconButton(
+          onPressed: () {
+          Navigator.pop(context);
+
+          },
+          icon: const Icon(Icons.arrow_back),
           color: AppColors.whiteColor,
         ),
-        onTab: () {
-          Navigator.pop(context);
           // Navigator.of(context).pop();
           // if(scaffoldKey!.currentState!.isDrawerOpen == true){
           //   false;
           // }else{
           //   true;
           // }
-        },
-        onPress: () {},
-        icon: const Icon(
+        action: const Icon(
           Icons.height,
           color: AppColors.orangeColor,
         ),

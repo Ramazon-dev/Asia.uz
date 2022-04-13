@@ -69,17 +69,15 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
-        widget: const Icon(
-          Icons.arrow_back_ios,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
           color: AppColors.whiteColor,
         ),
-        onTab: () {
-          // back(context);
-          Navigator.of(context).pop();
-        },
         text: 'Профиль',
-        onPress: (){},
-        icon: SvgPicture.asset(SvgIcons.avatar),
+        action: SvgPicture.asset(SvgIcons.avatar),
       ),
       body: SingleChildScrollView(
         child: Form(
