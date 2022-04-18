@@ -1,5 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/core/widgets/containers/my_containers.dart';
+import 'package:asia_uz/screens/home/qr_code.dart';
+import 'package:asia_uz/screens/home/qr_scanner_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,7 +27,7 @@ class HomePage extends StatelessWidget {
               height: 20.0,
             ),
             SizedBox(height: getHeight(20.0)),
-            qrCode(),
+            const QrCodeCreator(),
             SizedBox(height: getHeight(20.0)),
             cashback(),
             SizedBox(height: getHeight(25.0)),
@@ -120,40 +121,38 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: getWidth(10.0),
-              vertical: getHeight(10.0),
-            ),
-            child: Container(
-              height: getHeight(120.0),
-              width: getWidth(228.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  getWidth(15.0),
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const QRCodeScannerPage(),
                 ),
-                image: const DecorationImage(
-                  image: AssetImage(
-                    'assets/images/i.png',
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: getWidth(10.0),
+                vertical: getHeight(10.0),
+              ),
+              child: Container(
+                height: getHeight(120.0),
+                width: getWidth(228.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    getWidth(15.0),
                   ),
-                  // fit: BoxFit.cover,
+                  image: const DecorationImage(
+                    image: AssetImage(
+                      'assets/images/i.png',
+                    ),
+                    // fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
           );
         },
-      ),
-    );
-  }
-
-  qrCode() {
-    return MyContainer(
-      height: 285.0,
-      width: 285.0,
-      radius: 10.0,
-      colors: Colors.white,
-      child: Image.asset(
-        'assets/images/qr_code.png',
       ),
     );
   }
