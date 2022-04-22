@@ -51,7 +51,7 @@ class ShopsPage extends StatelessWidget {
             } else if (state is ShopCompledet) {
               debugPrint('state : ${state.response[0].city}');
               return GoogleMap(
-                mapType: MapType.hybrid,
+                mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
