@@ -1,4 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/screens/cards/widgets/card_widget.dart';
+import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:flutter/material.dart';
 
 class CardsPage extends StatelessWidget {
@@ -28,44 +30,16 @@ class CardsPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: getHeight(40.0)),
-                Container(
-                  height: getHeight(204.0),
-                  width: getWidth(319.0),
-                  decoration: BoxDecoration(
-                    color: AppColors.orangeColor,
-                    borderRadius: BorderRadius.circular(
-                      getWidth(15.0),
-                    ),
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        'assets/images/bg.png',
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NoConnectionPage(),
                       ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: getHeight(35.0)),
-                      Text(
-                        'Ваша карта лояльности',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: getHeight(18.0),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      SizedBox(height: getHeight(31.0)),
-                      Text(
-                        '2935 **** **** 1562',
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.w400,
-                          fontSize: getWidth(24.0),
-                        ),
-                      )
-                    ],
-                  ),
+                    );
+                  },
+                  child: const CardWidget()
                 ),
                 SizedBox(height: getHeight(20.0)),
                 Row(
@@ -127,7 +101,7 @@ class CardsPage extends StatelessWidget {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: Container(
                     margin: EdgeInsets.all(getWidth(14.0)),
                     height: getHeight(69.0),
@@ -141,7 +115,8 @@ class CardsPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.add_circle, color: AppColors.whiteColor),
+                        const Icon(Icons.add_circle,
+                            color: AppColors.whiteColor),
                         SizedBox(width: getWidth(5.0)),
                         Text(
                           'Добавить имеющуюся карту',
