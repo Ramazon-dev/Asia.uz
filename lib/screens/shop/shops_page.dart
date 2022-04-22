@@ -1,8 +1,10 @@
 import 'dart:async';
-
+import 'package:asia_uz/core/constants/loader.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/core/model/shops_model.dart';
-import 'package:asia_uz/service/api/shops_service.dart';
+import 'package:asia_uz/core/model/get/shop_api_model.dart';
+import 'package:asia_uz/cubit/shop_cubit/shop_cubit.dart';
+import 'package:asia_uz/cubit/shop_cubit/shop_cubit_state.dart';
+import 'package:asia_uz/service/api/get/shop_api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -24,32 +26,50 @@ class ShopsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<ShopsModel>(
-          future: getShops(),
-          builder: (context, AsyncSnapshot<ShopsModel> snap) {
-            if (snap.hasError) {
-              return const Center(
-                child: CircularProgressIndicator(strokeWidth: 40),
+    return BlocProvider(
+      create: (context) => ShopCubit(
+        SampleShopRepository(),
+      ),
+      child: Scaffold(
+        body: BlocConsumer<ShopCubit, ShopState>(
+          listener: (context, state) {
+            if (state is ShopError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    state.errorMessage.toString(),
+                  ),
+                ),
               );
-            } else if (snap.hasData) {
-              debugPrint("api dan keladigan malumot ${snap.data!.address}");
+            }
+          },
+          builder: (context, state) {
+            if (state is ShopInitial) {
+              return Loader.loader();
+            } else if (state is ShopLoading) {
+              return Loader.loader();
+            } else if (state is ShopCompledet) {
+              debugPrint('state : ${state.response[0].city}');
               return GoogleMap(
-                mapType: MapType.hybrid,
+                mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
               );
+            } else {
+              final error = state as ShopError;
+              return Center(
+                child: Text(error.errorMessage),
+              );
             }
-            return const Center(
-              child: CircularProgressIndicator(strokeWidth: 10),
-            );
-          }),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+          },
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: _goToTheLake,
+          label: const Text('To the lake!'),
+          icon: const Icon(Icons.directions_boat),
+        ),
       ),
     );
   }
@@ -59,3 +79,15 @@ class ShopsPage extends StatelessWidget {
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
+
+
+/*
+ Scaffold(
+      body: 
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: const Text('To the lake!'),
+        icon: const Icon(Icons.directions_boat),
+      ),
+    );
+ */
