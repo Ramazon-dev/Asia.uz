@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/core/model/shops_model.dart';
+import 'package:asia_uz/service/api/shops_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -23,13 +25,27 @@ class ShopsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
+      body: FutureBuilder<ShopsModel>(
+          future: getShops(),
+          builder: (context, AsyncSnapshot<ShopsModel> snap) {
+            if (snap.hasError) {
+              return const Center(
+                child: CircularProgressIndicator(strokeWidth: 40),
+              );
+            } else if (snap.hasData) {
+              debugPrint("api dan keladigan malumot ${snap.data!.address}");
+              return GoogleMap(
+                mapType: MapType.hybrid,
+                initialCameraPosition: _kGooglePlex,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            );
+          }),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
         label: const Text('To the lake!'),
