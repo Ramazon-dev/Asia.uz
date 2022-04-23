@@ -79,15 +79,3 @@ class ShopsPage extends StatelessWidget {
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
-
-
-/*
- Scaffold(
-      body: 
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
-      ),
-    );
- */
