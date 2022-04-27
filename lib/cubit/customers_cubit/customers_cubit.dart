@@ -69,4 +69,17 @@ class CustomersCubit extends Cubit<CustomersState> {
       emit(CuspomersValidateState(isValidateState));
     }
   }
+
+  void clearControllers() {
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    landlineController.clear();
+    backupPhoneController.clear();
+    dopController.clear();
+    gemderController.clear();
+    occupationController.clear();
+    notificationPreferenceController.clear();
+    notificationLanguageController.clear();
+  }
 }
