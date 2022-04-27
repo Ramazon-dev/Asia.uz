@@ -121,33 +121,23 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const QRCodeScannerPage(),
+          return Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getWidth(10.0),
+              vertical: getHeight(10.0),
+            ),
+            child: Container(
+              height: getHeight(120.0),
+              width: getWidth(228.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  getWidth(15.0),
                 ),
-              );
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: getWidth(10.0),
-                vertical: getHeight(10.0),
-              ),
-              child: Container(
-                height: getHeight(120.0),
-                width: getWidth(228.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    getWidth(15.0),
+                image: const DecorationImage(
+                  image: AssetImage(
+                    'assets/images/i.png',
                   ),
-                  image: const DecorationImage(
-                    image: AssetImage(
-                      'assets/images/i.png',
-                    ),
-                    // fit: BoxFit.cover,
-                  ),
+                  // fit: BoxFit.cover,
                 ),
               ),
             ),

@@ -40,7 +40,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
           buildQRView(context),
           Positioned(
             child: buildResult(),
-            bottom: getHeight(10),
+            bottom: getHeight(40),
           ),
         ],
       ),
@@ -60,13 +60,35 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
       );
 
   Widget buildResult() => Container(
+        alignment: Alignment.center,
+        height: getHeight(167),
+        width: getWidth(311),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.white24,
+          borderRadius: BorderRadius.circular(22),
+          color: Colors.white,
         ),
-        child: Text(
-          barcode != null ? "Result: ${barcode!.code}" : "Scan a code!",
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              barcode != null ? "Result: ${barcode!.code}" : "Scan a code!",
+              style: TextStyle(
+                fontSize: getHeight(16),
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            MyElevatedButton(
+              height: getHeight(52),
+              width: getWidth(223),
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "Закрыть",textColor: AppColors.whiteColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
       );
 

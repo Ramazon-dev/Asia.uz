@@ -1,5 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/cards/widgets/card_widget.dart';
+import 'package:asia_uz/screens/home/qrcode/qr_scanner_page.dart';
 import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:flutter/material.dart';
 
@@ -31,16 +32,15 @@ class CardsPage extends StatelessWidget {
                 ),
                 SizedBox(height: getHeight(40.0)),
                 InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NoConnectionPage(),
-                      ),
-                    );
-                  },
-                  child: const CardWidget()
-                ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NoConnectionPage(),
+                        ),
+                      );
+                    },
+                    child: const CardWidget()),
                 SizedBox(height: getHeight(20.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,7 +101,14 @@ class CardsPage extends StatelessWidget {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QRCodeScannerPage(),
+                      ),
+                    );
+                  },
                   child: Container(
                     margin: EdgeInsets.all(getWidth(14.0)),
                     height: getHeight(69.0),
