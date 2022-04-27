@@ -73,7 +73,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                 SizedBox(height: getHeight(56.0)),
                 MyTextWidget(
                   text: 'Введите номер телефона',
-                  fontSize: 16.0,
+                  fontSize: getWidth(16.0),
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(height: getHeight(33.0)),
@@ -133,6 +133,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                     await GetStorage()
                         .write('telNumber', _phoneNumberController.text);
                     context.read<AuthCubit>().login();
+                    context.read<AuthCubit>().clear();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
