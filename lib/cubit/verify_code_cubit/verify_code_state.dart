@@ -14,3 +14,8 @@ class VerifyCodeError extends VerifyCodeState{
   final String errorMessage;
   const VerifyCodeError(this.errorMessage);
 }
+
+class VerifyCodeValidateState extends VerifyCodeState{
+  final bool isValidateState;
+  const VerifyCodeValidateState(this.isValidateState);
+}

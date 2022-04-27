@@ -7,11 +7,9 @@ import 'package:flutter/material.dart';
 class SmsField extends StatelessWidget {
   String text;
 
-  SmsField({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
+  SmsField({Key? key, required this.text}) : super(key: key);
   TextEditingController smsController = TextEditingController();
+  final _validateKey = GlobalKey<FormState>();
   String code = '';
   bool isActive = false;
 
@@ -19,12 +17,12 @@ class SmsField extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return BlocProvider(
-      create: (context) => VerifyCodeCubit(),
+      create: (context) => VerifyCodeCubit(_validateKey, smsController),
       child: BlocConsumer<VerifyCodeCubit, VerifyCodeState>(
         listener: (context, state) {},
         builder: (context, state) {
           if (state is VerifyCodeInitial) {
-            return buildScaffold(context);
+            return buildScaffold(context, state);
           } else {
             final error = state as VerifyCodeError;
             return Center(
@@ -36,7 +34,7 @@ class SmsField extends StatelessWidget {
     );
   }
 
-  buildScaffold(BuildContext context) {
+  buildScaffold(BuildContext context, VerifyCodeState state) {
     return Scaffold(
       // backgroundColor: AppColors.unselectedColor,
       appBar: const AppBarWidget(),

@@ -20,7 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
       );
     } else {
       isValidateState = true;
-      AuthValidateState(isValidateState);
+      emit(AuthValidateState(isValidateState));
     }
   }
 
