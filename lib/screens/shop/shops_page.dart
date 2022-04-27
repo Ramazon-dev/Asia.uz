@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:asia_uz/core/constants/loader.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/core/model/get/shop_api_model.dart';
+import 'package:asia_uz/core/widgets/notification/notification_page.dart';
 import 'package:asia_uz/cubit/shop_cubit/shop_cubit.dart';
 import 'package:asia_uz/cubit/shop_cubit/shop_cubit_state.dart';
 import 'package:asia_uz/service/api/get/shop_api_services.dart';
@@ -34,13 +35,8 @@ class ShopsPage extends StatelessWidget {
         body: BlocConsumer<ShopCubit, ShopState>(
           listener: (context, state) {
             if (state is ShopError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    state.errorMessage.toString(),
-                  ),
-                ),
-              );
+              const Notifications()
+                  .flash(context, state.errorMessage, Colors.red);
             }
           },
           builder: (context, state) {

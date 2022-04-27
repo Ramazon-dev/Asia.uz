@@ -2,24 +2,24 @@ part of 'auth_cubit.dart';
 
 @immutable
 abstract class AuthState {
-
+  const AuthState();
 }
 
 class AuthInitial extends AuthState {
-
+  const AuthInitial();
 }
 
 class AuthValidateState extends AuthState {
   final bool _isValidateState;
 
-  AuthValidateState(this._isValidateState);
+  const AuthValidateState(this._isValidateState);
 }
 
 class AuthCompleted extends AuthState{
-
+  const AuthCompleted();
 }
 
-class AuthErrorState extends AuthState{
+class AuthError extends AuthState{
   final String errorState;
-  AuthErrorState(this.errorState);
+  const AuthError(this.errorState);
 }

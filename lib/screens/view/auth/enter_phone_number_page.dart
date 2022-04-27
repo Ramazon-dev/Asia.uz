@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
-
 class EnterPhoneNumberPage extends StatelessWidget {
   EnterPhoneNumberPage({Key? key}) : super(key: key);
 
@@ -29,16 +28,9 @@ class EnterPhoneNumberPage extends StatelessWidget {
           if (state is AuthInitial) {
             return buildScaffold(context, state);
           } else {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text(
-                  'Home Page',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                centerTitle: true,
-              ),
+            final error = state as AuthError;
+            return Center(
+              child: Text(error.errorState),
             );
           }
         },
@@ -73,7 +65,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                 SizedBox(height: getHeight(56.0)),
                 MyTextWidget(
                   text: 'Введите номер телефона',
-                  fontSize: 16.0,
+                  fontSize: getWidth(16.0),
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(height: getHeight(33.0)),
@@ -133,6 +125,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                     await GetStorage()
                         .write('telNumber', _phoneNumberController.text);
                     context.read<AuthCubit>().login();
+                    context.read<AuthCubit>().clear();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
