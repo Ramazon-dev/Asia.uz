@@ -1,15 +1,15 @@
 import 'package:asia_uz/core/model/get/customers_api_model.dart';
 import 'package:flutter/foundation.dart';
 
-abstract class CustomersState{
+abstract class CustomersState {
   const CustomersState();
 }
 
-class CustomersInitial extends CustomersState{
+class CustomersInitial extends CustomersState {
   const CustomersInitial();
 }
 
-class CustomersLoading extends CustomersState{
+class CustomersLoading extends CustomersState {
   const CustomersLoading();
 }
 
@@ -29,7 +29,12 @@ class CustomersCompledet extends CustomersState {
   int get hashCode => response.hashCode;
 }
 
-class CustomersError extends CustomersState{
+class CustomersError extends CustomersState {
   final String errorMessage;
   const CustomersError(this.errorMessage);
+}
+
+class CuspomersValidateState extends CustomersState {
+  final bool isValidateState;
+  const CuspomersValidateState(this.isValidateState);
 }
