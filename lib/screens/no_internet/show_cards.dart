@@ -1,6 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/cards/widgets/card_widget.dart';
-import 'package:asia_uz/screens/home/qr_code.dart';
+import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
 import 'package:flutter/material.dart';
 
 class ShowCards extends StatelessWidget {
