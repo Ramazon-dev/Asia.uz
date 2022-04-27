@@ -19,7 +19,7 @@ class AuthCompleted extends AuthState{
   const AuthCompleted();
 }
 
-class AuthErrorState extends AuthState{
+class AuthError extends AuthState{
   final String errorState;
-  const AuthErrorState(this.errorState);
+  const AuthError(this.errorState);
 }

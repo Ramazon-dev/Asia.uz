@@ -1,4 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
+import 'package:asia_uz/cubit/verify_code_cubit/verify_code_state.dart';
 import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
 import 'package:flutter/material.dart';
 
@@ -9,13 +11,32 @@ class SmsField extends StatelessWidget {
     Key? key,
     required this.text,
   }) : super(key: key);
-  TextEditingController controller = TextEditingController();
+  TextEditingController smsController = TextEditingController();
   String code = '';
   bool isActive = false;
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    return BlocProvider(
+      create: (context) => VerifyCodeCubit(),
+      child: BlocConsumer<VerifyCodeCubit, VerifyCodeState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is VerifyCodeInitial) {
+            return buildScaffold(context);
+          } else {
+            final error = state as VerifyCodeError;
+            return Center(
+              child: Text(error.errorMessage),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  buildScaffold(BuildContext context) {
     return Scaffold(
       // backgroundColor: AppColors.unselectedColor,
       appBar: const AppBarWidget(),
@@ -39,7 +60,7 @@ class SmsField extends StatelessWidget {
               PinFieldAutoFill(
                 codeLength: 4,
                 // autoFocus: true,
-                controller: controller,
+                controller: smsController,
                 decoration: BoxLooseDecoration(
                   strokeColorBuilder: const FixedColorBuilder(
                     AppColors.textFormFieldColor,

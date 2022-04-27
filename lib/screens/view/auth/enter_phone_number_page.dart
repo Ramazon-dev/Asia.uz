@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
-
 class EnterPhoneNumberPage extends StatelessWidget {
   EnterPhoneNumberPage({Key? key}) : super(key: key);
 
@@ -29,16 +28,9 @@ class EnterPhoneNumberPage extends StatelessWidget {
           if (state is AuthInitial) {
             return buildScaffold(context, state);
           } else {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text(
-                  'Home Page',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                centerTitle: true,
-              ),
+            final error = state as AuthError;
+            return Center(
+              child: Text(error.errorState),
             );
           }
         },
