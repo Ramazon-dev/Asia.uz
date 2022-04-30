@@ -1,6 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
-import 'package:asia_uz/screens/home/qrcode/qr_scanner_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,46 +15,68 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              alignment: Alignment.center,
-              child: MyTextWidget(
-                text: 'Покажите QR-код  кассиру',
-                fontSize: 16.0,
-                textColor: AppColors.black,
-                fontWeight: FontWeight.w500,
-              ),
-              width: double.infinity,
-              height: 20.0,
-            ),
-            SizedBox(height: getHeight(20.0)),
-            QrCodeCreator(size: getHeight(400)),
-            SizedBox(height: getHeight(20.0)),
-            cashback(),
-            SizedBox(height: getHeight(25.0)),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: getWidth(20.0),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              color: Colors.white,
+              child: Column(
                 children: [
-                  MyTextWidget(
-                    text: 'События',
-                    textAlign: TextAlign.left,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.black,
+                  Container(
+                    alignment: Alignment.center,
+                    child: MyTextWidget(
+                      text: 'Покажите QR-код  кассиру',
+                      fontSize: 16.0,
+                      textColor: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    width: double.infinity,
+                    height: 20.0,
                   ),
-                  MyTextWidget(
-                    text: 'Все',
-                    textAlign: TextAlign.right,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.black,
-                  ),
+                  SizedBox(height: getHeight(20.0)),
+                  QrCodeCreator(size: getHeight(350)),
+                  SizedBox(height: getHeight(20.0)),
+                  cashback(),
+                  SizedBox(height: getHeight(25.0)),
                 ],
               ),
             ),
-            information(context),
+            Container(
+              padding: EdgeInsets.only(top: getHeight(12)),
+              margin: EdgeInsets.only(top: getHeight(20)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(getHeight(10)),
+                  topRight: Radius.circular(getHeight(10)),
+                ),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getWidth(20.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MyTextWidget(
+                          text: 'События',
+                          textAlign: TextAlign.left,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          textColor: AppColors.black,
+                        ),
+                        MyTextWidget(
+                          text: 'Все',
+                          textAlign: TextAlign.right,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          textColor: AppColors.black,
+                        ),
+                      ],
+                    ),
+                  ),
+                  information(context),
+                ],
+              ),
+            ),
           ],
         ),
       ),
