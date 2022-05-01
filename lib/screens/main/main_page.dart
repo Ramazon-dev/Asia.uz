@@ -26,7 +26,6 @@ class MainPage extends StatelessWidget {
       child: Consumer<BottomNavigationBarProvider>(
         builder: (context, model, child) => Scaffold(
           onDrawerChanged: (valueDrawer) {
-
             if (_scaoffoldKey.currentState!.isDrawerOpen == true) {
               closeDrawer = true;
             } else {

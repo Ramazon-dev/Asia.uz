@@ -13,12 +13,11 @@ class MyBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var _context = context.watch<BottomNavigationBarProvider>();
     SizeConfig().init(context);
     return BottomNavigationBar(
-      unselectedItemColor: AppColors.unselectedColor,
-      selectedItemColor: AppColors.unselectedColor,
+      unselectedItemColor: AppColors.bottomUnselectedColor,
+      selectedItemColor: AppColors.bottomUnselectedColor,
       backgroundColor: AppColors.bottomNavigationBgColor,
       items: [
         BottomNavigationBarItem(
@@ -30,6 +29,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                 )
               : SvgPicture.asset(
                   SvgIcons.home,
+                  color: AppColors.bottomUnselectedColor,
                 ),
         ),
         BottomNavigationBarItem(
@@ -39,7 +39,10 @@ class MyBottomNavigationBar extends StatelessWidget {
                   SvgIcons.shops,
                   color: AppColors.orangeColor,
                 )
-              : SvgPicture.asset(SvgIcons.shops),
+              : SvgPicture.asset(
+                  SvgIcons.shops,
+                  color: AppColors.bottomUnselectedColor,
+                ),
         ),
         BottomNavigationBarItem(
           label: 'Отзывы',
@@ -48,7 +51,10 @@ class MyBottomNavigationBar extends StatelessWidget {
                   SvgIcons.review,
                   color: AppColors.orangeColor,
                 )
-              : SvgPicture.asset(SvgIcons.review),
+              : SvgPicture.asset(
+                  SvgIcons.review,
+                  color: AppColors.bottomUnselectedColor,
+                ),
         ),
         BottomNavigationBarItem(
           label: 'Карты',
@@ -57,7 +63,10 @@ class MyBottomNavigationBar extends StatelessWidget {
                   SvgIcons.karti,
                   color: AppColors.orangeColor,
                 )
-              : SvgPicture.asset(SvgIcons.karti),
+              : SvgPicture.asset(
+                  SvgIcons.karti,
+                  color: AppColors.bottomUnselectedColor,
+                ),
         ),
       ],
       type: BottomNavigationBarType.fixed,
@@ -68,4 +77,3 @@ class MyBottomNavigationBar extends StatelessWidget {
     );
   }
 }
-  
