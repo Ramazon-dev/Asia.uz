@@ -3,12 +3,17 @@ import 'package:asia_uz/core/imports/imports.dart';
 
 // ignore: must_be_immutable
 class MyBottomNavigationBar extends StatelessWidget {
-  MyBottomNavigationBar({Key? key, required this.model}) : super(key: key);
+  int? index;
+  MyBottomNavigationBar({Key? key, required this.model, this.index})
+      : super(key: key);
 
   BottomNavigationBarProvider model;
 
+  bool first = true;
+
   @override
   Widget build(BuildContext context) {
+
     var _context = context.watch<BottomNavigationBarProvider>();
     SizeConfig().init(context);
     return BottomNavigationBar(
@@ -19,25 +24,39 @@ class MyBottomNavigationBar extends StatelessWidget {
         BottomNavigationBarItem(
           label: 'Главная',
           icon: _context.currentTab == 0
-              ? SvgPicture.asset(SvgIcons.home, color: AppColors.orangeColor,)
-              : SvgPicture.asset(SvgIcons.home,),
+              ? SvgPicture.asset(
+                  SvgIcons.home,
+                  color: AppColors.orangeColor,
+                )
+              : SvgPicture.asset(
+                  SvgIcons.home,
+                ),
         ),
         BottomNavigationBarItem(
           label: 'Магазины',
           icon: _context.currentTab == 1
-              ? SvgPicture.asset(SvgIcons.shops, color: AppColors.orangeColor,)
+              ? SvgPicture.asset(
+                  SvgIcons.shops,
+                  color: AppColors.orangeColor,
+                )
               : SvgPicture.asset(SvgIcons.shops),
         ),
         BottomNavigationBarItem(
           label: 'Отзывы',
           icon: _context.currentTab == 2
-              ? SvgPicture.asset(SvgIcons.review, color: AppColors.orangeColor,)
+              ? SvgPicture.asset(
+                  SvgIcons.review,
+                  color: AppColors.orangeColor,
+                )
               : SvgPicture.asset(SvgIcons.review),
         ),
         BottomNavigationBarItem(
           label: 'Карты',
           icon: _context.currentTab == 3
-              ? SvgPicture.asset(SvgIcons.karti, color: AppColors.orangeColor,)
+              ? SvgPicture.asset(
+                  SvgIcons.karti,
+                  color: AppColors.orangeColor,
+                )
               : SvgPicture.asset(SvgIcons.karti),
         ),
       ],
@@ -49,3 +68,4 @@ class MyBottomNavigationBar extends StatelessWidget {
     );
   }
 }
+  

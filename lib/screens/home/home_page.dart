@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
               height: 20.0,
             ),
             SizedBox(height: getHeight(20.0)),
-            QrCodeCreator(size: getHeight(400)),
+            QrCodeCreator(size: getHeight(350)),
             SizedBox(height: getHeight(20.0)),
             cashback(),
             SizedBox(height: getHeight(25.0)),

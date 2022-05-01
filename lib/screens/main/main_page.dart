@@ -4,14 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
 class MainPage extends StatelessWidget {
+  // int? index;
   MainPage({Key? key}) : super(key: key);
 
   bool closeDrawer = true;
 
+  bool first = true;
+  // BottomNavigationBarProvider? updateProvider;
   OnPressProvider? onPressProvider;
 
   @override
   Widget build(BuildContext context) {
+    // updateProvider = Provider.of<BottomNavigationBarProvider>(context);
+    // first?{ updateProvider!.currentTab = index ?? 0,first = false}:null;
     onPressProvider = Provider.of<OnPressProvider>(context);
     SizeConfig().init(context);
     GlobalKey<ScaffoldState> _scaoffoldKey = GlobalKey();
@@ -21,18 +26,12 @@ class MainPage extends StatelessWidget {
       child: Consumer<BottomNavigationBarProvider>(
         builder: (context, model, child) => Scaffold(
           onDrawerChanged: (valueDrawer) {
-            debugPrint("ffffff : $valueDrawer");
 
             if (_scaoffoldKey.currentState!.isDrawerOpen == true) {
               closeDrawer = true;
             } else {
               closeDrawer = false;
             }
-
-            debugPrint("drawer : $closeDrawer");
-
-            debugPrint(
-                "is open drawer : ${_scaoffoldKey.currentState!.isDrawerOpen}");
           },
           backgroundColor: AppColors.unselectedColor,
           key: _scaoffoldKey,

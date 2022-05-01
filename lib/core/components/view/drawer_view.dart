@@ -14,10 +14,12 @@ class MyDrawer extends StatelessWidget {
 
   OnPressProvider? onPressProvider;
 
+  BottomNavigationBarProvider? model;
+
   @override
   Widget build(BuildContext context) {
-    // onPressProvider = Provider.of<OnPressProvider>(context);
     onPressProvider = context.read<OnPressProvider>();
+    // model = Provider.of<BottomNavigationBarProvider>(context);
     SizeConfig().init(context);
     return ClipRRect(
       borderRadius: BorderRadius.only(
@@ -29,7 +31,6 @@ class MyDrawer extends StatelessWidget {
         ),
       ),
       child: Drawer(
-        // backgroundColor: AppColors.drawerBgColor,
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -42,20 +43,6 @@ class MyDrawer extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: getHeight(65.0)),
-              // Container(
-              //   alignment: Alignment.centerLeft,
-              //   height: getHeight(50.0),
-              //   width: double.infinity,
-              //   child: IconButton(
-              //     onPressed: () {
-              //       Navigator.pop(context);
-              //     },
-              //     icon: SvgPicture.asset(
-              //       SvgIcons.menu,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
               Container(
                 alignment: Alignment.centerLeft,
                 height: MediaQuery.of(context).size.height * 0.7,
@@ -69,7 +56,15 @@ class MyDrawer extends StatelessWidget {
                     navigations(int i) {
                       switch (i) {
                         case 0:
-                          debugPrint("bosildi 0 glavnaya");
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => MyBottomNavigationBar(
+                          //       index: model!.currentTab = 0,
+                          //       model: model!,
+                          //     ),
+                          //   ),
+                          // );
                           break;
                         case 1:
                           Navigator.push(
