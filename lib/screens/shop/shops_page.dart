@@ -61,10 +61,17 @@ class ShopsPage extends StatelessWidget {
             }
           },
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: _goToTheLake,
-          label: const Text('To the lake!'),
-          icon: const Icon(Icons.directions_boat),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+        floatingActionButton: Container(
+          width: getWidth(500.0),
+          height: getHeight(200.0),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(getWidth(20.0)),
+                topRight: Radius.circular(getWidth(20.0)),
+              )),
         ),
       ),
     );
