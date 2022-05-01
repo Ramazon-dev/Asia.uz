@@ -5,7 +5,7 @@ import 'package:asia_uz/screens/view/auth/enter_phone_number_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreens extends StatefulWidget {
-  SplashScreens({Key? key}) : super(key: key);
+  const SplashScreens({Key? key}) : super(key: key);
 
   @override
   State<SplashScreens> createState() => _SplashScreensState();
@@ -17,8 +17,13 @@ class _SplashScreensState extends State<SplashScreens> {
     super.initState();
     Timer(
         const Duration(seconds: 2),
-        () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EnterPhoneNumberPage())));
+        () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => GetStorage().read('telNumber') != null
+                  ? MainPage()
+                  : EnterPhoneNumberPage(),
+            )));
   }
 
   @override
