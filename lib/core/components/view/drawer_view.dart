@@ -1,6 +1,8 @@
+
 import 'package:asia_uz/screens/about_us/about_us_page.dart';
 import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
+import 'package:asia_uz/screens/view/splash_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -103,7 +105,14 @@ class MyDrawer extends StatelessWidget {
                           );
                           break;
                         case 8:
-                          debugPrint("bosildi : 8 chiqish");
+                          GetStorage().remove('telNumber');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SplashScreens(),
+                            ),
+                          );
+                          // debugPrint("bosildi : 8 chiqish");
                           break;
                       }
                     }

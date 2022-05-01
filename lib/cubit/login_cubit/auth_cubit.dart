@@ -13,18 +13,16 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this.formKey, this.phoneNumberController)
       : super(const AuthInitial());
 
-  void login() async {
+  Future login(String number) async {
     if (formKey.currentState!.validate()) {
-      VerifyNumberService.verifyNumberService(
-        int.parse(phoneNumberController.text),
-      );
+      await VerifyNumberService.verifyNumberService(number);
     } else {
       isValidateState = true;
       emit(AuthValidateState(isValidateState));
     }
   }
 
-  void clear(){
+  void clear() {
     phoneNumberController.clear();
   }
 }

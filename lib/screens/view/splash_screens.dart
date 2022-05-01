@@ -16,14 +16,16 @@ class _SplashScreensState extends State<SplashScreens> {
   void initState() {
     super.initState();
     Timer(
-        const Duration(seconds: 2),
-        () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => GetStorage().read('telNumber') != null
-                  ? MainPage()
-                  : EnterPhoneNumberPage(),
-            )));
+      const Duration(seconds: 2),
+      () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GetStorage().read('telNumber') != null
+              ? MainPage()
+              : EnterPhoneNumberPage(),
+        ),
+      ),
+    );
   }
 
   @override

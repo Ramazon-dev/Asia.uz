@@ -1,3 +1,4 @@
+import 'package:asia_uz/service/api/post/verify_number_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -122,17 +123,18 @@ class EnterPhoneNumberPage extends StatelessWidget {
                 MyElevatedButton(
                   text: 'Продолжить',
                   onPressed: () async {
+                    debugPrint(
+                        "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
+
+                    debugPrint('on tab');
                     await GetStorage()
                         .write('telNumber', _phoneNumberController.text);
-                    context.read<AuthCubit>().login();
+                    // context.read<AuthCubit>().login(int.parse(
+                    //     _phoneNumberController.text.replaceAll(' ', '')));
                     context.read<AuthCubit>().clear();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SmsField(text: _phoneNumberController.text),
-                      ),
-                    );
+                    await VerifyNumberService.verifyNumberService(
+                        _phoneNumberController.text);
+                    await next(context);
                   },
                   primaryColor: AppColors.transparentColor,
                   sideColor: AppColors.unselectedColor,
@@ -191,6 +193,15 @@ class EnterPhoneNumberPage extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  next(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SmsField(text: _phoneNumberController.text),
       ),
     );
   }

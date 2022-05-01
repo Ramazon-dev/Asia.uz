@@ -2,6 +2,7 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
 import 'package:asia_uz/cubit/verify_code_cubit/verify_code_state.dart';
 import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
+import 'package:asia_uz/service/api/post/verify_code_service.dart';
 import 'package:flutter/material.dart';
 
 class SmsField extends StatelessWidget {
@@ -80,6 +81,12 @@ class SmsField extends StatelessWidget {
                 onCodeChanged: (code) async {
                   if (code!.length == 4) {
                     isActive = true;
+
+                    // context.read<VerifyCodeCubit>().onTab();
+                    await VerifyCodeService.verifyCodeService(
+                      int.parse(smsController.text),
+                      GetStorage().read('telNumber'),
+                    );
                   }
                 },
               ).only(bottom: getHeight(70)),

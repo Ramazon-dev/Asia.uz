@@ -2,11 +2,15 @@ import 'package:http/http.dart' as http;
 import 'package:asia_uz/core/imports/imports.dart';
 
 class VerifyNumberService {
-  static Future verifyNumberService(int phoneNumber) async {
+  static Future verifyNumberService(String phoneNumber) async {
     var response = await http.post(
       Uri.parse(BaseUrl.baseUrl + '/customers/verify-number'),
-      body: {"number": "$phoneNumber"},
+      body: {
+        "number": "$phoneNumber",
+      },
     );
+
+    debugPrint("dfdfdfdfdfd : ${response.body}");
 
     try {
       if (response.statusCode == 200 || response.statusCode == 201) {
