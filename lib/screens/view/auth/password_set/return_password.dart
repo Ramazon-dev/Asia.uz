@@ -13,18 +13,26 @@ class ReturnPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
+            // color: Colors.yellow,
             image: DecorationImage(
               image: AssetImage(
                 "assets/images/background.png",
               ),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
-          padding: const EdgeInsets.all(80.0),
+          padding: EdgeInsets.only(
+            top: getHeight(143),
+            left: getWidth(80),
+            right: getWidth(80),
+          ),
           child: Column(
             children: [
               MyTextWidget(text: 'Повторите свой PIN-код')
@@ -63,6 +71,7 @@ class ReturnPassword extends StatelessWidget {
                 onPressed: () async {
                   final isAuthenticated = await LocalAuthApi.authenticate();
                   if (isAuthenticated) {
+                    debugPrint("");
                     Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -36,19 +36,27 @@ class SmsField extends StatelessWidget {
 
   buildScaffold(BuildContext context, VerifyCodeState state) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.unselectedColor,
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
+            // color: Colors.yellow,
             image: DecorationImage(
               image: AssetImage(
                 "assets/images/background.png",
               ),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
-          padding: EdgeInsets.all(getHeight(80)),
+          padding: EdgeInsets.only(
+            top: getHeight(143),
+            left: getWidth(80),
+            right: getWidth(80),
+          ),
           child: Column(
             children: [
               MyTextWidget(

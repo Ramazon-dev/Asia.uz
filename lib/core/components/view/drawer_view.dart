@@ -125,19 +125,29 @@ class MyDrawer extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(
-                height: getHeight(30.0),
-                child: Align(
-                  child: MyTextWidget(
-                    text: 'Выберите язык'.tr(),
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    textColor: Colors.white,
-                  ),
+              Container(
+                margin: EdgeInsets.only(top: getHeight(50)),
+                height: getHeight(76),
+                width: getWidth(300),
+                color: const Color(0xff800D0D0D),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: getHeight(20.0),
+                      child: Align(
+                        child: MyTextWidget(
+                          text: 'Выберите язык'.tr(),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          textColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: getHeight(10.0)),
+                    languages(context),
+                  ],
                 ),
               ),
-              SizedBox(height: getHeight(10.0)),
-              languages(context),
             ],
           ),
         ),
@@ -159,6 +169,7 @@ class MyDrawer extends StatelessWidget {
             sideColor: _onPress1 ? AppColors.onPressColor : Colors.white,
             sideWidth: 2.0,
             text: "O'ZB",
+            textColor: AppColors.whiteColor,
             onPressed: () {
               // onPressProvider!.onPress();
               _onPress1 = !_onPress1;
@@ -169,6 +180,7 @@ class MyDrawer extends StatelessWidget {
           ),
           MyElevatedButton(
             height: 32.0,
+            textColor: AppColors.whiteColor,
             width: 65.0,
             radius: 22.0,
             primaryColor: AppColors.transparentColor,
@@ -185,6 +197,7 @@ class MyDrawer extends StatelessWidget {
           ),
           MyElevatedButton(
             height: 32.0,
+            textColor: AppColors.whiteColor,
             width: 65.0,
             radius: 22.0,
             primaryColor: AppColors.transparentColor,
