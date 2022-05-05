@@ -14,8 +14,9 @@ class CardsPage extends StatelessWidget {
       backgroundColor: AppColors.bgColor,
       body: Column(
         children: [
-          Container(padding: EdgeInsets.only(top: getHeight(20)),
-            height: getHeight(420.0),
+          Container(
+            padding: EdgeInsets.only(top: getHeight(125)),
+            height: getHeight(540.0),
             width: double.infinity,
             color: AppColors.whiteColor,
             child: Column(
@@ -63,7 +64,7 @@ class CardsPage extends StatelessWidget {
                     ),
                   ],
                 ).symmetric(horizontal: getWidth(24.0)),
-                SizedBox(height: getHeight(20.0)),
+                SizedBox(height: getHeight(35.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

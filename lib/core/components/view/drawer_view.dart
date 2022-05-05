@@ -44,9 +44,24 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: getHeight(65.0)),
+              SizedBox(height: getHeight(58.0)),
+              Padding(
+                padding: EdgeInsets.only(left: getHeight(20)),
+                child: InkWell(
+                  onTap: () => Navigator.pop(context),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: SvgPicture.asset(
+                      SvgIcons.menu,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+              ),
               Container(
+                padding: EdgeInsets.only(top: getHeight(25)),
                 alignment: Alignment.centerLeft,
                 height: MediaQuery.of(context).size.height * 0.7,
                 width: getWidth(171.0),
@@ -68,7 +83,7 @@ class MyDrawer extends StatelessWidget {
                                   builder: (context) => const NewsPage()));
                           break;
                         case 2:
-                          _context.currentTab = 1;
+                          _context.currentTab = 3;
                           Navigator.pop(context);
                           break;
                         case 3:
@@ -82,7 +97,7 @@ class MyDrawer extends StatelessWidget {
                                   builder: (context) => ProfilePage()));
                           break;
                         case 5:
-                          _context.currentTab = 3;
+                          _context.currentTab = 1;
                           Navigator.pop(context);
                           break;
                         case 6:

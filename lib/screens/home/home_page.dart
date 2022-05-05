@@ -14,7 +14,9 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: getHeight(13)),
+            height: getHeight(540),
+            // margin: EdgeInsets.only(top: getHeight(114)),
+            padding: EdgeInsets.only(top: getHeight(135)),
             color: Colors.white,
             child: Column(
               children: [
@@ -22,18 +24,18 @@ class HomePage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: MyTextWidget(
                     text: 'Покажите QR-код  кассиру',
-                    fontSize: 16.0,
+                    fontSize: 19.0,
                     textColor: AppColors.black,
                     fontWeight: FontWeight.w500,
                   ),
                   width: double.infinity,
                   height: 20.0,
                 ),
-                SizedBox(height: getHeight(17.0)),
-                QrCodeCreator(size: getHeight(300)),
-                SizedBox(height: getHeight(17.0)),
+                SizedBox(height: getHeight(20.0)),
+                QrCodeCreator(size: getHeight(280)),
+                SizedBox(height: getHeight(20.0)),
                 cashback(),
-                SizedBox(height: getHeight(25.0)),
+                SizedBox(height: getHeight(18.0)),
               ],
             ),
           ),
