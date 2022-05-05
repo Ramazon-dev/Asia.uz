@@ -19,6 +19,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return AppBar(
+      toolbarHeight: 100,
       backgroundColor: AppColors.orangeColor,
       elevation: 1,
       shape: RoundedRectangleBorder(

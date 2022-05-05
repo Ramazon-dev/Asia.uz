@@ -97,7 +97,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                       ),
                       MyBottomSheet(),
                       MyElevatedButton(
-                        text: 'Продолжить',
+                        text: 'Продолжить', textSize: getHeight(18),
                         onPressed: () {},
                         height: 50.0,
                         // width: 161.0,
@@ -138,7 +138,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(SvgIcons.phone),
-                            SizedBox(width: getWidth(5.0)),
+                            SizedBox(width: getWidth(25.0)),
                             Text(
                               '+998 ' + GetStorage().read('telNumber'),
                               style: TextStyle(

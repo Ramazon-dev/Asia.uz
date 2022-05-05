@@ -15,7 +15,15 @@ class ReturnPassword extends StatelessWidget {
     return Scaffold(
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
-        child: Padding(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/background.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           padding: const EdgeInsets.all(80.0),
           child: Column(
             children: [
@@ -27,7 +35,7 @@ class ReturnPassword extends StatelessWidget {
                 controller: controller,
                 decoration: BoxLooseDecoration(
                   strokeColorBuilder: const FixedColorBuilder(
-                    AppColors.textFormFieldColor,
+                    AppColors.teal,
                   ),
                   radius: Radius.circular(getHeight(10)),
                 ),

@@ -58,11 +58,9 @@ class MainPage extends StatelessWidget {
                 },
                 child: SvgPicture.asset(SvgIcons.avatar)),
           ),
-          drawer: MyDrawer(),
+          drawer: MyDrawer(model: model),
           body: model.currentScreens,
-          bottomNavigationBar: MyBottomNavigationBar(
-            model: model,
-          ),
+          bottomNavigationBar: MyBottomNavigationBar(model: model),
         ),
       ),
     );

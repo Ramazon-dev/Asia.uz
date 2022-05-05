@@ -46,6 +46,20 @@ class MyTextFormFiels extends StatelessWidget {
 
   _decoration() {
     return InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
+      disabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: AppColors.orangeColor,
+        ),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: AppColors.orangeColor,
+        ),
+        borderRadius: BorderRadius.circular(30),
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
           getWidth(radius!),

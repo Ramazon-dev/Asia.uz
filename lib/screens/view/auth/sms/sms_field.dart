@@ -1,6 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
-import 'package:asia_uz/cubit/verify_code_cubit/verify_code_state.dart';
 import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
 import 'package:asia_uz/service/api/post/verify_code_service.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,15 @@ class SmsField extends StatelessWidget {
       // backgroundColor: AppColors.unselectedColor,
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
-        child: Padding(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/background.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           padding: EdgeInsets.all(getHeight(80)),
           child: Column(
             children: [
@@ -62,7 +69,7 @@ class SmsField extends StatelessWidget {
                 controller: smsController,
                 decoration: BoxLooseDecoration(
                   strokeColorBuilder: const FixedColorBuilder(
-                    AppColors.textFormFieldColor,
+                    AppColors.teal,
                   ),
                   radius: Radius.circular(getHeight(10)),
                 ),
@@ -94,10 +101,14 @@ class SmsField extends StatelessWidget {
                 onPressed: () {},
                 child: const Text(
                   "Отправить код повторно",
+                  style: TextStyle(
+                    color: AppColors.drawerTextColor,
+                  ),
                 ),
               ).only(bottom: getHeight(200)),
               MyElevatedButton(
-                primaryColor: AppColors.transparentColor,
+                primaryColor: AppColors.orangeColor,
+                textColor: AppColors.whiteColor,
                 text: 'Войти'.tr(),
                 onPressed: () {
                   isActive == true

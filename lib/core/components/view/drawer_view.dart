@@ -1,4 +1,3 @@
-
 import 'package:asia_uz/screens/about_us/about_us_page.dart';
 import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
@@ -8,7 +7,7 @@ import 'package:asia_uz/core/imports/imports.dart';
 
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
-  MyDrawer({Key? key}) : super(key: key);
+  MyDrawer({Key? key, required this.model}) : super(key: key);
 
   bool _onPress1 = false;
   bool _onPress2 = false;
@@ -21,7 +20,9 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onPressProvider = context.read<OnPressProvider>();
-    // model = Provider.of<BottomNavigationBarProvider>(context);
+
+    var _context = context.watch<BottomNavigationBarProvider>();
+
     SizeConfig().init(context);
     return ClipRRect(
       borderRadius: BorderRadius.only(
@@ -58,61 +59,47 @@ class MyDrawer extends StatelessWidget {
                     navigations(int i) {
                       switch (i) {
                         case 0:
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => MyBottomNavigationBar(
-                          //       index: model!.currentTab = 0,
-                          //       model: model!,
-                          //     ),
-                          //   ),
-                          // );
+                          Navigator.pop(context);
                           break;
                         case 1:
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const NewsPage(),
-                            ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const NewsPage()));
                           break;
                         case 2:
-                          debugPrint("bosildi 2 karta loyalnosti");
+                          _context.currentTab = 1;
+                          Navigator.pop(context);
                           break;
                         case 3:
-                          debugPrint("bosildi : 3 otzivi ");
+                          _context.currentTab = 2;
+                          Navigator.pop(context);
                           break;
                         case 4:
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProfilePage(),
-                            ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfilePage()));
                           break;
                         case 5:
-                          debugPrint("bosildi : 5 karta ");
+                          _context.currentTab = 3;
+                          Navigator.pop(context);
                           break;
                         case 6:
                           debugPrint("bosildi : 6 kontakti ");
                           break;
                         case 7:
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AboutUsPage(),
-                            ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AboutUsPage()));
                           break;
                         case 8:
                           GetStorage().remove('telNumber');
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SplashScreens(),
-                            ),
-                          );
-                          // debugPrint("bosildi : 8 chiqish");
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SplashScreens()));
                           break;
                       }
                     }

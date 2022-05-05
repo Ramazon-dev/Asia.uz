@@ -6,7 +6,7 @@ class VerifyNumberService {
     var response = await http.post(
       Uri.parse(BaseUrl.baseUrl + '/customers/verify-number'),
       body: {
-        "number": "$phoneNumber",
+        "number": phoneNumber,
       },
     );
 

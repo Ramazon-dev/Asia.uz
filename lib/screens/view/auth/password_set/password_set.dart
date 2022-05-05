@@ -3,9 +3,6 @@ import 'package:asia_uz/screens/view/auth/password_set/return_password.dart';
 import 'package:flutter/material.dart';
 
 class PasswordSet extends StatelessWidget {
-
-
-  
   PasswordSet({Key? key}) : super(key: key);
   TextEditingController controller = TextEditingController();
   String code = '';
@@ -17,7 +14,15 @@ class PasswordSet extends StatelessWidget {
     return Scaffold(
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
-        child: Padding(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/background.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           padding: const EdgeInsets.all(80.0),
           child: Column(
             children: [
@@ -29,7 +34,7 @@ class PasswordSet extends StatelessWidget {
                 controller: controller,
                 decoration: BoxLooseDecoration(
                   strokeColorBuilder: const FixedColorBuilder(
-                    AppColors.textFormFieldColor,
+                    AppColors.teal,
                   ),
                   radius: Radius.circular(getHeight(10)),
                 ),
@@ -52,7 +57,7 @@ class PasswordSet extends StatelessWidget {
                 },
               ).only(bottom: getHeight(200)),
               MyElevatedButton(
-                primaryColor: AppColors.transparentColor,
+                primaryColor: AppColors.orangeColor,
                 text: 'Войти'.tr(),
                 onPressed: () {
                   isActive == true
@@ -72,5 +77,4 @@ class PasswordSet extends StatelessWidget {
       ),
     );
   }
-
 }

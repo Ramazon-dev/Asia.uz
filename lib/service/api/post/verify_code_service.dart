@@ -12,7 +12,7 @@ class VerifyCodeService {
         'token': 'token',
       },
       body: {
-        "number": "$number",
+        "number": number,
         "code": "$verifyCode",
       },
     );
