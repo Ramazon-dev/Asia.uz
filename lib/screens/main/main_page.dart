@@ -25,6 +25,7 @@ class MainPage extends StatelessWidget {
       create: (context) => BottomNavigationBarProvider(),
       child: Consumer<BottomNavigationBarProvider>(
         builder: (context, model, child) => Scaffold(
+          extendBodyBehindAppBar: true,
           onDrawerChanged: (valueDrawer) {
             if (_scaoffoldKey.currentState!.isDrawerOpen == true) {
               closeDrawer = true;
@@ -43,7 +44,10 @@ class MainPage extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: SvgPicture.asset(SvgIcons.menu),
+                child: SvgPicture.asset(
+                  SvgIcons.menu,
+                  color: AppColors.black,
+                ),
               ),
             ),
             text: titlesOfAppBar[model.currentTab].toString(),
@@ -58,11 +62,9 @@ class MainPage extends StatelessWidget {
                 },
                 child: SvgPicture.asset(SvgIcons.avatar)),
           ),
-          drawer: MyDrawer(),
+          drawer: MyDrawer(model: model),
           body: model.currentScreens,
-          bottomNavigationBar: MyBottomNavigationBar(
-            model: model,
-          ),
+          bottomNavigationBar: MyBottomNavigationBar(model: model),
         ),
       ),
     );

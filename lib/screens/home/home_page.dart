@@ -11,93 +11,75 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
       // backgroundColor: Colors.cyanAccent,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              child: MyTextWidget(
-                text: 'Покажите QR-код  кассиру',
-                fontSize: 16.0,
-                textColor: AppColors.black,
-                fontWeight: FontWeight.w500,
-              ),
-              width: double.infinity,
-              height: 20.0,
-            ),
-            SizedBox(height: getHeight(20.0)),
-            QrCodeCreator(size: getHeight(350)),
-            SizedBox(height: getHeight(20.0)),
-            cashback(),
-            SizedBox(height: getHeight(25.0)),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: getWidth(20.0),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: MyTextWidget(
-                      text: 'Покажите QR-код  кассиру',
-                      fontSize: 16.0,
-                      textColor: AppColors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    width: double.infinity,
-                    height: 20.0,
+      body: Column(
+        children: [
+          Container(
+            height: getHeight(540),
+            // margin: EdgeInsets.only(top: getHeight(114)),
+            padding: EdgeInsets.only(top: getHeight(135)),
+            color: Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: MyTextWidget(
+                    text: 'Покажите QR-код  кассиру',
+                    fontSize: 19.0,
+                    textColor: AppColors.black,
+                    fontWeight: FontWeight.w500,
                   ),
-                  SizedBox(height: getHeight(20.0)),
-                  QrCodeCreator(size: getHeight(350)),
-                  SizedBox(height: getHeight(20.0)),
-                  cashback(),
-                  SizedBox(height: getHeight(25.0)),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: getHeight(12)),
-              margin: EdgeInsets.only(top: getHeight(20)),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(getHeight(10)),
-                  topRight: Radius.circular(getHeight(10)),
+                  width: double.infinity,
+                  height: 20.0,
                 ),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: getWidth(20.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MyTextWidget(
-                          text: 'События',
-                          textAlign: TextAlign.left,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          textColor: AppColors.black,
-                        ),
-                        MyTextWidget(
-                          text: 'Все',
-                          textAlign: TextAlign.right,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          textColor: AppColors.black,
-                        ),
-                      ],
-                    ),
-                  ),
-                  information(context),
-                ],
-              ),
+                SizedBox(height: getHeight(20.0)),
+                QrCodeCreator(size: getHeight(280)),
+                SizedBox(height: getHeight(20.0)),
+                cashback(),
+                SizedBox(height: getHeight(18.0)),
+              ],
             ),
-          ],
-        ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: getHeight(20)),
+            margin: EdgeInsets.only(top: getHeight(25)),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(getHeight(10)),
+                topRight: Radius.circular(getHeight(10)),
+              ),
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getWidth(20.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MyTextWidget(
+                        text: 'События',
+                        textAlign: TextAlign.left,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w500,
+                        textColor: AppColors.black,
+                      ),
+                      MyTextWidget(
+                        text: 'Все',
+                        textAlign: TextAlign.right,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w500,
+                        textColor: AppColors.textButton,
+                      ),
+                    ],
+                  ),
+                ),
+                information(context),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -155,7 +137,7 @@ class HomePage extends StatelessWidget {
 
   information(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: getHeight(150),
       width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

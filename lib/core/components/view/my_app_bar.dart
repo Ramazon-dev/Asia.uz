@@ -19,6 +19,19 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return AppBar(
+      // flexibleSpace: Container(
+      //   // height: getHeight(130),
+      //   // width: MediaQuery.of(context).size.width,
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //         "assets/images/appbar_bg.png",
+      //       ),
+      //       // fit: BoxFit.cover,
+      //     ),
+      //   ),
+      // ),
+      toolbarHeight: 100,
       backgroundColor: AppColors.orangeColor,
       elevation: 1,
       shape: RoundedRectangleBorder(

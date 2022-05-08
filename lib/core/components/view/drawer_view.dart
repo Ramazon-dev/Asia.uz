@@ -1,4 +1,3 @@
-
 import 'package:asia_uz/screens/about_us/about_us_page.dart';
 import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
@@ -8,7 +7,7 @@ import 'package:asia_uz/core/imports/imports.dart';
 
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
-  MyDrawer({Key? key}) : super(key: key);
+  MyDrawer({Key? key, required this.model}) : super(key: key);
 
   bool _onPress1 = false;
   bool _onPress2 = false;
@@ -21,7 +20,9 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onPressProvider = context.read<OnPressProvider>();
-    // model = Provider.of<BottomNavigationBarProvider>(context);
+
+    var _context = context.watch<BottomNavigationBarProvider>();
+
     SizeConfig().init(context);
     return ClipRRect(
       borderRadius: BorderRadius.only(
@@ -43,9 +44,24 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: getHeight(65.0)),
+              SizedBox(height: getHeight(58.0)),
+              Padding(
+                padding: EdgeInsets.only(left: getHeight(20)),
+                child: InkWell(
+                  onTap: () => Navigator.pop(context),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: SvgPicture.asset(
+                      SvgIcons.menu,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+              ),
               Container(
+                padding: EdgeInsets.only(top: getHeight(25)),
                 alignment: Alignment.centerLeft,
                 height: MediaQuery.of(context).size.height * 0.7,
                 width: getWidth(171.0),
@@ -58,61 +74,47 @@ class MyDrawer extends StatelessWidget {
                     navigations(int i) {
                       switch (i) {
                         case 0:
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => MyBottomNavigationBar(
-                          //       index: model!.currentTab = 0,
-                          //       model: model!,
-                          //     ),
-                          //   ),
-                          // );
+                          Navigator.pop(context);
                           break;
                         case 1:
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const NewsPage(),
-                            ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const NewsPage()));
                           break;
                         case 2:
-                          debugPrint("bosildi 2 karta loyalnosti");
+                          _context.currentTab = 3;
+                          Navigator.pop(context);
                           break;
                         case 3:
-                          debugPrint("bosildi : 3 otzivi ");
+                          _context.currentTab = 2;
+                          Navigator.pop(context);
                           break;
                         case 4:
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProfilePage(),
-                            ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfilePage()));
                           break;
                         case 5:
-                          debugPrint("bosildi : 5 karta ");
+                          _context.currentTab = 1;
+                          Navigator.pop(context);
                           break;
                         case 6:
                           debugPrint("bosildi : 6 kontakti ");
                           break;
                         case 7:
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AboutUsPage(),
-                            ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AboutUsPage()));
                           break;
                         case 8:
                           GetStorage().remove('telNumber');
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SplashScreens(),
-                            ),
-                          );
-                          // debugPrint("bosildi : 8 chiqish");
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SplashScreens()));
                           break;
                       }
                     }
@@ -138,19 +140,29 @@ class MyDrawer extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(
-                height: getHeight(30.0),
-                child: Align(
-                  child: MyTextWidget(
-                    text: 'Выберите язык'.tr(),
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    textColor: Colors.white,
-                  ),
+              Container(
+                margin: EdgeInsets.only(top: getHeight(50)),
+                height: getHeight(76),
+                width: getWidth(300),
+                color: const Color(0xff800D0D0D),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: getHeight(20.0),
+                      child: Align(
+                        child: MyTextWidget(
+                          text: 'Выберите язык'.tr(),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          textColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: getHeight(10.0)),
+                    languages(context),
+                  ],
                 ),
               ),
-              SizedBox(height: getHeight(10.0)),
-              languages(context),
             ],
           ),
         ),
@@ -172,6 +184,7 @@ class MyDrawer extends StatelessWidget {
             sideColor: _onPress1 ? AppColors.onPressColor : Colors.white,
             sideWidth: 2.0,
             text: "O'ZB",
+            textColor: AppColors.whiteColor,
             onPressed: () {
               // onPressProvider!.onPress();
               _onPress1 = !_onPress1;
@@ -182,6 +195,7 @@ class MyDrawer extends StatelessWidget {
           ),
           MyElevatedButton(
             height: 32.0,
+            textColor: AppColors.whiteColor,
             width: 65.0,
             radius: 22.0,
             primaryColor: AppColors.transparentColor,
@@ -198,6 +212,7 @@ class MyDrawer extends StatelessWidget {
           ),
           MyElevatedButton(
             height: 32.0,
+            textColor: AppColors.whiteColor,
             width: 65.0,
             radius: 22.0,
             primaryColor: AppColors.transparentColor,

@@ -1,6 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
-import 'package:asia_uz/cubit/verify_code_cubit/verify_code_state.dart';
 import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
 import 'package:asia_uz/service/api/post/verify_code_service.dart';
 import 'package:flutter/material.dart';
@@ -37,11 +36,27 @@ class SmsField extends StatelessWidget {
 
   buildScaffold(BuildContext context, VerifyCodeState state) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.unselectedColor,
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(getHeight(80)),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+            // color: Colors.yellow,
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/background.png",
+              ),
+              fit: BoxFit.fill,
+            ),
+          ),
+          padding: EdgeInsets.only(
+            top: getHeight(143),
+            left: getWidth(80),
+            right: getWidth(80),
+          ),
           child: Column(
             children: [
               MyTextWidget(
@@ -62,7 +77,7 @@ class SmsField extends StatelessWidget {
                 controller: smsController,
                 decoration: BoxLooseDecoration(
                   strokeColorBuilder: const FixedColorBuilder(
-                    AppColors.textFormFieldColor,
+                    AppColors.teal,
                   ),
                   radius: Radius.circular(getHeight(10)),
                 ),
@@ -94,10 +109,14 @@ class SmsField extends StatelessWidget {
                 onPressed: () {},
                 child: const Text(
                   "Отправить код повторно",
+                  style: TextStyle(
+                    color: AppColors.drawerTextColor,
+                  ),
                 ),
               ).only(bottom: getHeight(200)),
               MyElevatedButton(
-                primaryColor: AppColors.transparentColor,
+                primaryColor: AppColors.orangeColor,
+                textColor: AppColors.whiteColor,
                 text: 'Войти'.tr(),
                 onPressed: () {
                   isActive == true

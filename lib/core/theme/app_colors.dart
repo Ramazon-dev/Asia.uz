@@ -12,6 +12,8 @@ class AppColors {
   static const Color orange = Color(0xFF70E000);
   static const Color teal = Color(0xFF9E9FA8);
   static const Color textFormFieldColor = Color(0xFF007EFC);
+  static const Color textButton = Color(0xFF0E2F8B);
+  static const Color textFormField = Color(0xFFC4C4C4);
 
   static const Color drawerTextColor = Color(0xFF767676);
   static const Color onPressColor = Color(0xFF00A0E3);

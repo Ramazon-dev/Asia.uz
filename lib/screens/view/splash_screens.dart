@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/screens/view/auth/choose_language.dart';
 import 'package:asia_uz/screens/view/auth/enter_phone_number_page.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class _SplashScreensState extends State<SplashScreens> {
         MaterialPageRoute(
           builder: (context) => GetStorage().read('telNumber') != null
               ? MainPage()
-              : EnterPhoneNumberPage(),
+              : ChooseLanguagePage(),
         ),
       ),
     );

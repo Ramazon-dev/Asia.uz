@@ -2,20 +2,29 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/view/auth/enter_phone_number_page.dart';
 import 'package:flutter/material.dart';
 
-class ChooseLanguagePage extends StatelessWidget {
+class ChooseLanguagePage extends StatefulWidget {
   ChooseLanguagePage({Key? key}) : super(key: key);
-  bool _onPress1 = false;
-  bool _onPress2 = false;
-  bool _onPress3 = false;
-
-  OnPressProvider? onPressProvider;
 
   @override
+  State<ChooseLanguagePage> createState() => _ChooseLanguagePageState();
+}
+
+class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
+  int? son;
+
+  List<String> listOfString = ["O'ZB", "РУС", "ENG"];
+  @override
   Widget build(BuildContext context) {
-    onPressProvider = Provider.of<OnPressProvider>(context);
     SizeConfig().init(context);
     return Scaffold(
-      body: Center(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/images/background.png",
+            ),
+          ),
+        ),
         child: Column(
           children: [
             SizedBox(height: getHeight(150.0)),
@@ -36,70 +45,43 @@ class ChooseLanguagePage extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ).only(bottom: getHeight(34.0)),
             Container(
+              height: getHeight(50),
               alignment: Alignment.center,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: getWidth(20.0)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyElevatedButton(
-                      height: 32.0,
-                      width: 65.0,
-                      radius: 22.0,
-                      primaryColor: AppColors.transparentColor,
-                      sideColor:
-                          _onPress1 ? AppColors.onPressColor : Colors.teal,
-                      sideWidth: 2.0,
-                      text: "O'ZB",
-                      textSize: getHeight(14),
-                      onPressed: () {
-                        onPressProvider!.onPress();
-                        _onPress1 = !_onPress1;
-                        _onPress2 = false;
-                        _onPress3 = false;
-                        // debugPrint("1. $_onPress1 2. $_onPress2 3. $_onPress3");
-                        context.setLocale(const Locale('uz', 'UZ'));
-                      },
-                    ),
-                    MyElevatedButton(
-                      height: 32.0,
-                      width: 65.0,
-                      radius: 22.0,
-                      primaryColor: AppColors.transparentColor,
-                      sideColor:
-                          _onPress2 ? AppColors.onPressColor : Colors.teal,
-                      sideWidth: 2.0,
-                      text: "РУС",
-                      textSize: getHeight(14),
-                      onPressed: () {
-                        onPressProvider!.onPress();
-                        _onPress2 = !_onPress2;
-                        _onPress1 = false;
-                        _onPress3 = false;
-                        // debugPrint("1. $_onPress1 2. $_onPress2 3. $_onPress3");
-
-                        context.setLocale(const Locale('ru', 'RU'));
-                      },
-                    ),
-                    MyElevatedButton(
-                      height: 32.0,
-                      width: 65.0,
-                      radius: 22.0,
-                      primaryColor: AppColors.transparentColor,
-                      sideColor:
-                          _onPress3 ? AppColors.onPressColor : Colors.teal,
-                      sideWidth: 2.0,
-                      text: "ENG",
-                      textSize: getHeight(14),
-                      onPressed: () {
-                        onPressProvider!.onPress();
-                        _onPress3 = !_onPress3;
-                        _onPress1 = false;
-                        _onPress2 = false;
-                        context.setLocale(const Locale('en', 'EN'));
-                      },
-                    ),
-                  ],
+                padding: EdgeInsets.symmetric(horizontal: getWidth(30.0)),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: MyElevatedButton(
+                        height: 32.0,
+                        width: 80.0,
+                        radius: 22.0,
+                        primaryColor: AppColors.transparentColor,
+                        textColor:
+                            son == index ? AppColors.orangeColor : Colors.teal,
+                        sideColor: son == index
+                            ? AppColors.orangeColor
+                            : AppColors.unselectedColor,
+                        sideWidth: 2.0,
+                        text: listOfString[index],
+                        textSize: getHeight(14),
+                        onPressed: () {
+                          son = index;
+                          if (son == 0) {
+                            context.setLocale(const Locale('uz', 'UZ'));
+                          } else if (son == 1) {
+                            context.setLocale(const Locale('ru', 'RU'));
+                          } else if (son == 2) {
+                            context.setLocale(const Locale('en', 'EN'));
+                          }
+                          setState(() {});
+                        },
+                      ).only(right: getWidth(20)),
+                    );
+                  },
                 ),
               ),
             ),
@@ -116,8 +98,9 @@ class ChooseLanguagePage extends StatelessWidget {
               },
               height: 50.0,
               width: 161.0,
-              primaryColor: AppColors.transparentColor,
-              sideColor: AppColors.onPressColor,
+              textColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              sideColor: AppColors.orangeColor,
               radius: 15.0,
               sideWidth: 2.0,
             ),
