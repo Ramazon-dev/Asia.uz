@@ -24,51 +24,54 @@ class _ReviewsPageState extends State<ReviewsPage>
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: getHeight(130),
-          ),
-          Container(
-            margin: EdgeInsets.all(getWidth(10.0)),
-            height: getHeight(50.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                getWidth(15.0),
-              ),
-              color: Colors.orange.shade200,
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: getHeight(130),
             ),
-            child: TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: AppColors.whiteColor,
-              unselectedLabelColor: AppColors.whiteColor,
-              indicatorWeight: getWidth(1.0),
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                color: AppColors.orangeColor,
-              ),
-              controller: _tabController,
-              tabs: const [
-                Tab(
-                  text: 'Новый отзыв',
+            Container(
+              margin: EdgeInsets.all(getWidth(10.0)),
+              height: getHeight(50.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  getWidth(15.0),
                 ),
-                Tab(
-                  text: 'История',
+                color: Colors.orange.shade200,
+              ),
+              child: TabBar(
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: AppColors.whiteColor,
+                unselectedLabelColor: AppColors.whiteColor,
+                indicatorWeight: getWidth(1.0),
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: AppColors.orangeColor,
                 ),
-              ],
+                controller: _tabController,
+                tabs: const [
+                  Tab(
+                    text: 'Новый отзыв',
+                  ),
+                  Tab(
+                    text: 'История',
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.65,
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                NewReviewPage(),
-                HistoryPage(),
-              ],
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.65,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  NewReviewPage(),
+                  HistoryPage(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

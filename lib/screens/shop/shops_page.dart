@@ -35,9 +35,12 @@ class _ShopsPageState extends State<ShopsPage> {
   ];
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   TextEditingController controller = TextEditingController();
+
+  OnPressProvider? onPressProvider;
   @override
   Widget build(BuildContext context) {
     List list = List.generate(5, (index) => _add(index));
+    onPressProvider = Provider.of<OnPressProvider>(context);
     return BlocProvider(
       create: (context) => ShopCubit(
         SampleShopRepository(),
@@ -136,34 +139,12 @@ class _ShopsPageState extends State<ShopsPage> {
                 ListTile(
                   leading: MyTextWidget(text: "Магазин", fontSize: 18),
                   trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
-                  onTap: () {
-                    // showModalBottomSheet(
-                    //   context: context,
-                    //   builder: (context) {
-                    //     return Container(
-                    //       height: getHeight(800),
-                    //       width: getWidth(375),
-                    //       color: Colors.white,
-                    //     );
-                    //   },
-                    // );
-                  },
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: MyTextWidget(text: "Город", fontSize: 18),
                   trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
-                  onTap: () {
-                    // showModalBottomSheet(
-                    //   context: context,
-                    //   builder: (context) {
-                    //     return Container(
-                    //       height: getHeight(800),
-                    //       width: getWidth(375),
-                    //       color: Colors.white,
-                    //     );
-                    //   },
-                    // );
-                  },
+                  onTap: () {},
                 ),
                 MyElevatedButton(
                   text: "Сохранить",
@@ -179,5 +160,7 @@ class _ShopsPageState extends State<ShopsPage> {
       ),
     );
     setState(() => markers[markerId] = marker);
+    // onPressProvider!.onPress();
+    // markers[markerId] = marker;
   }
 }
