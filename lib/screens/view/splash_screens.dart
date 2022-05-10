@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/view/auth/choose_language.dart';
-import 'package:asia_uz/screens/view/auth/enter_phone_number_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreens extends StatefulWidget {
@@ -21,9 +19,11 @@ class _SplashScreensState extends State<SplashScreens> {
       () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => GetStorage().read('token') != null
-              ? MainPage()
-              : ChooseLanguagePage(),
+          builder: (context) =>
+              // GetStorage().read('token') != null
+              //     ? MainPage()
+              //     :
+              ChooseLanguagePage(),
         ),
       ),
     );

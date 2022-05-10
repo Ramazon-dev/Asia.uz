@@ -8,7 +8,7 @@ class AppColors {
   static const Color unselectedColor = Color(0xFFE5E5E5);
   static const Color bottomUnselectedColor = Color(0xFF767676);
 
-  static const Color black = Colors.black;
+  static const Color black = Color(0xff0d0d0d);
   static const Color orange = Color(0xFF70E000);
   static const Color teal = Color(0xFF9E9FA8);
   static const Color textFormFieldColor = Color(0xFF007EFC);

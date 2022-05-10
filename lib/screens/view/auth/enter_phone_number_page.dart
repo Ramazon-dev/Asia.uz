@@ -46,7 +46,9 @@ class EnterPhoneNumberPage extends StatelessWidget {
   buildScaffold(BuildContext context, AuthState state) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
+          // color: Colors.yellow,
           image: DecorationImage(
             image: AssetImage(
               "assets/images/background.png",
@@ -96,48 +98,54 @@ class EnterPhoneNumberPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: getHeight(6.0)),
-                        MyTextFormFiels(
-                          inputFormatters: [maskFormatter],
-                          controller: _phoneNumberController,
-                          obscureText: false,
-                          prefixIcon: Container(
-                            margin: EdgeInsets.only(
-                              left: getWidth(5.0),
+                        SizedBox(
+                          height: 45,
+                          child: MyTextFormFiels(
+                            inputFormatters: [maskFormatter],
+                            controller: _phoneNumberController,
+                            obscureText: false,
+                            prefixIcon: Container(
+                              margin: EdgeInsets.only(
+                                left: getWidth(5.0),
+                                bottom: getHeight(2)
+                              ),
+                              alignment: Alignment.center,
+                              height: getHeight(40.0),
+                              width: getWidth(40.0),
+                              child: MyTextWidget(
+                                text: '+998',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w400,
+                                textColor: AppColors.black,
+                              ),
                             ),
-                            alignment: Alignment.center,
-                            height: getHeight(50.0),
-                            width: getWidth(50.0),
-                            child: MyTextWidget(
-                              text: '+998',
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400,
-                              textColor: AppColors.black,
-                            ),
+                            radius: 30.0,
+                            sideColor: AppColors.onPressColor,
+                            sideWidth: 2.0,
+                            onChanged: (value) {
+                              if ((value.replaceAll(' ', '').length == 9)) {
+                                hideKeyboard(context);
+                              }
+                            },
+                            validator: (v) =>
+                                v!.isEmpty ? 'Telefon raqam kiritilmadi' : null,
                           ),
-                          radius: 30.0,
-                          sideColor: AppColors.onPressColor,
-                          sideWidth: 2.0,
-                          onChanged: (value) {
-                            if ((value.replaceAll(' ', '').length == 9)) {
-                              hideKeyboard(context);
-                            }
-                          },
-                          validator: (v) =>
-                              v!.isEmpty ? 'Telefon raqam kiritilmadi' : null,
                         ),
                       ],
                     ),
                   ),
                   SizedBox(height: getHeight(34.0)),
                   MyElevatedButton(
+                    height: getHeight(50),
+                    width: getWidth(285),
                     text: 'Продолжить',
                     onPressed: () async {
                       debugPrint(
                           "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
 
                       debugPrint('on tab');
-                      await GetStorage()
-                          .write('telNumber', "+998${_phoneNumberController.text.replaceAll(' ', '')}");
+                      await GetStorage().write('telNumber',
+                          "+998${_phoneNumberController.text.replaceAll(' ', '')}");
                       // context.read<AuthCubit>().login(int.parse(
                       //     _phoneNumberController.text.replaceAll(' ', '')));
                       context.read<AuthCubit>().clear();
@@ -147,7 +155,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                     },
                     primaryColor: AppColors.orangeColor,
                     textColor: AppColors.whiteColor,
-                    sideColor: AppColors.unselectedColor,
+                    sideColor: AppColors.transparentColor,
                   ),
                   SizedBox(height: getHeight(120.0)),
                   SizedBox(
@@ -176,7 +184,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: getWidth(12.0),
                               fontWeight: FontWeight.w400,
-                              color: AppColors.orange,
+                              color: AppColors.orangeColor,
                             ),
                           ),
                           TextSpan(
@@ -192,7 +200,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: getWidth(12.0),
                               fontWeight: FontWeight.w400,
-                              color: AppColors.orange,
+                              color: AppColors.orangeColor,
                             ),
                           ),
                         ],

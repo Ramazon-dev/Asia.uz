@@ -25,7 +25,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
             image: AssetImage(
               "assets/images/background.png",
             ),
-            fit: BoxFit.cover
+            fit: BoxFit.cover,
           ),
         ),
         child: Column(
@@ -63,14 +63,16 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         width: 80.0,
                         radius: 22.0,
                         primaryColor: AppColors.transparentColor,
-                        textColor:
-                            son == index ? AppColors.orangeColor : Colors.teal,
+                        textColor: son == index
+                            ? AppColors.orangeColor
+                            : AppColors.unselectedColor,
                         sideColor: son == index
                             ? AppColors.orangeColor
                             : AppColors.unselectedColor,
                         sideWidth: 2.0,
                         text: listOfString[index],
-                        textSize: getHeight(14),
+                        fontWeight: FontWeight.w700,
+                        textSize: getHeight(16),
                         onPressed: () {
                           son = index;
                           if (son == 0) {
@@ -134,7 +136,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                       style: TextStyle(
                         fontSize: getWidth(12.0),
                         fontWeight: FontWeight.w400,
-                        color: AppColors.onPressColor,
+                        color: AppColors.orangeColor,
                       ),
                     ),
                     TextSpan(
@@ -150,7 +152,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                       style: TextStyle(
                         fontSize: getWidth(12.0),
                         fontWeight: FontWeight.w400,
-                        color: AppColors.onPressColor,
+                        color: AppColors.orangeColor,
                       ),
                     ),
                   ],

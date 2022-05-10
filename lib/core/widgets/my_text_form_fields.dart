@@ -33,6 +33,9 @@ class MyTextFormFiels extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return TextFormField(
+textAlign: TextAlign.start,
+      // cursorHeight: 30,showCursor: false,
+      // scrollPadding: EdgeInsets.only(top: 20),
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.done,
       inputFormatters: inputFormatters,
@@ -46,6 +49,9 @@ class MyTextFormFiels extends StatelessWidget {
 
   _decoration() {
     return InputDecoration(
+      contentPadding: EdgeInsets.only(),
+      alignLabelWithHint: true,
+      floatingLabelAlignment: FloatingLabelAlignment.center,
       filled: true,
       fillColor: Colors.white,
       disabledBorder: OutlineInputBorder(

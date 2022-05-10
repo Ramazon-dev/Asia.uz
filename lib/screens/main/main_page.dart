@@ -43,7 +43,8 @@ class MainPage extends StatelessWidget {
                 _scaoffoldKey.currentState!.isDrawerOpen;
               },
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding:
+                    EdgeInsets.only(left: getWidth(20), top: getHeight(10)),
                 child: SvgPicture.asset(
                   SvgIcons.menu,
                   color: AppColors.black,
@@ -52,19 +53,24 @@ class MainPage extends StatelessWidget {
             ),
             text: titlesOfAppBar[model.currentTab].toString(),
             action: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProfilePage(),
-                    ),
-                  );
-                },
-                child: SvgPicture.asset(SvgIcons.avatar)),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(),
+                        ),
+                      );
+                    },
+                    child: SvgPicture.asset(SvgIcons.avatar))
+                .only(right: getWidth(10), top: getHeight(10)),
           ),
           drawer: MyDrawer(model: model),
           body: model.currentScreens,
-          bottomNavigationBar: MyBottomNavigationBar(model: model),
+          bottomNavigationBar: Container(
+            color: const Color(0xffF29443),
+            padding: EdgeInsets.only(top: getHeight(3)),
+            child: MyBottomNavigationBar(model: model),
+          ),
         ),
       ),
     );

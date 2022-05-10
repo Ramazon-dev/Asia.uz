@@ -55,6 +55,7 @@ class MyDrawer extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: SvgPicture.asset(
                       SvgIcons.menu,
+                      height: getHeight(28),
                       color: AppColors.whiteColor,
                     ),
                   ),
@@ -142,6 +143,7 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
               Container(
+                // padding: EdgeInsets.all(getHeight(5)),
                 margin: EdgeInsets.only(top: getHeight(50)),
                 height: getHeight(76),
                 width: getWidth(300),

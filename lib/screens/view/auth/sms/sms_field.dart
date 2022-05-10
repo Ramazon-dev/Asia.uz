@@ -82,26 +82,28 @@ class SmsField extends StatelessWidget {
                   radius: Radius.circular(getHeight(10)),
                 ),
                 currentCode: code,
-                onCodeSubmitted: (code) async {
-                  if (code.length == 4) {
-                    hideKeyboard(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PasswordSet(),
-                      ),
-                    );
-                  }
-                },
+                // onCodeSubmitted: (code) async {
+                //   if (code.length == 4) {
+                //     hideKeyboard(context);
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => PasswordSet(),
+                //       ),
+                //     );
+                //   }
+                // },
                 onCodeChanged: (code) async {
                   if (code!.length == 4) {
                     isActive = true;
-
+                    hideKeyboard(context);
                     // context.read<VerifyCodeCubit>().onTab();
                     await VerifyCodeService.verifyCodeService(
                       int.parse(smsController.text),
                       GetStorage().read('telNumber'),
                     );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PasswordSet()));
                   }
                 },
               ).only(bottom: getHeight(70)),
@@ -114,21 +116,21 @@ class SmsField extends StatelessWidget {
                   ),
                 ),
               ).only(bottom: getHeight(200)),
-              MyElevatedButton(
-                primaryColor: AppColors.orangeColor,
-                textColor: AppColors.whiteColor,
-                text: 'Войти'.tr(),
-                onPressed: () {
-                  isActive == true
-                      ? Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MainPage(),
-                          ),
-                        )
-                      : null;
-                },
-              ),
+              // MyElevatedButton(
+              //   primaryColor: AppColors.orangeColor,
+              //   textColor: AppColors.whiteColor,
+              //   text: 'Войти'.tr(),
+              //   onPressed: () {
+              //     isActive == true
+              //         ? Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => MainPage(),
+              //             ),
+              //           )
+              //         : null;
+              //   },
+              // ),
             ],
           ),
         ),

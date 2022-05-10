@@ -47,40 +47,45 @@ class PasswordSet extends StatelessWidget {
                   radius: Radius.circular(getHeight(10)),
                 ),
                 currentCode: code,
-                onCodeSubmitted: (code) async {
-                  if (code.length == 4) {
-                    
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ReturnPassword(text: controller.text),
-                      ),
-                    );
-                  }
-                },
+                // onCodeSubmitted: (code) async {
+                //   if (code.length == 4) {
+
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) =>
+                //             ReturnPassword(text: controller.text),
+                //       ),
+                //     );
+                //   }
+                // },
                 onCodeChanged: (code) async {
                   if (code!.length == 4) {
                     isActive = true;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ReturnPassword(text: controller.text)));
                   }
                 },
               ).only(bottom: getHeight(250)),
-              MyElevatedButton(
-                textColor: AppColors.whiteColor,
-                primaryColor: AppColors.orangeColor,
-                text: 'Войти'.tr(),
-                onPressed: () {
-                  isActive == true
-                      ? Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ReturnPassword(text: controller.text),
-                          ),
-                        )
-                      : null;
-                },
-              ),
+              // MyElevatedButton(
+              //   textColor: AppColors.whiteColor,
+              //   primaryColor: AppColors.orangeColor,
+              //   text: 'Войти'.tr(),
+              //   onPressed: () {
+              //     isActive == true
+              //         ? Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) =>
+              //                   ReturnPassword(text: controller.text),
+              //             ),
+              //           )
+              //         : null;
+              //   },
+              // ),
             ],
           ),
         ),

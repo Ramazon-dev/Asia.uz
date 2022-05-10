@@ -35,6 +35,7 @@ class MyElevatedButton extends StatelessWidget {
           fontSize: getHeight(textSize),
           fontWeight: fontWeight,
           color: textColor,
+          
         ),
       ),
       style: ElevatedButton.styleFrom(

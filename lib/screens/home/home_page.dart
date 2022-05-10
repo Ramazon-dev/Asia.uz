@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                         textAlign: TextAlign.right,
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
-                        textColor: AppColors.textButton,
+                        textColor: AppColors.black,
                       ),
                     ],
                   ),
