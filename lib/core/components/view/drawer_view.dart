@@ -111,6 +111,7 @@ class MyDrawer extends StatelessWidget {
                           break;
                         case 8:
                           GetStorage().remove('telNumber');
+                          GetStorage().remove('token');
                           Navigator.push(
                               context,
                               MaterialPageRoute(

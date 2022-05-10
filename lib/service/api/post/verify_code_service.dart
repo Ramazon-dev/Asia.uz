@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 class VerifyCodeService {
   static Future verifyCodeService(int verifyCode, String number) async {
+    print('veritify :$verifyCode');
     var response = await http.post(
       Uri.parse(
         BaseUrl.baseUrl + '/customers/verify-code',
@@ -12,7 +13,7 @@ class VerifyCodeService {
         'token': 'token',
       },
       body: {
-        "number": number,
+        "number": GetStorage().read('telNumber'),
         "code": "$verifyCode",
       },
     );

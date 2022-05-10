@@ -3,10 +3,12 @@ import 'package:asia_uz/core/imports/imports.dart';
 
 class VerifyNumberService {
   static Future verifyNumberService(String phoneNumber) async {
+    print('telefon raqam : ${GetStorage().read('telNumber')}');
+    print("+998${GetStorage().read('telNumber')}");
     var response = await http.post(
       Uri.parse(BaseUrl.baseUrl + '/customers/verify-number'),
       body: {
-        "number": phoneNumber,
+        "number": GetStorage().read('telNumber'),
       },
     );
 

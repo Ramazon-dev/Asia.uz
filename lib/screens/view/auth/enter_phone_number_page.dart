@@ -137,7 +137,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
 
                       debugPrint('on tab');
                       await GetStorage()
-                          .write('telNumber', _phoneNumberController.text);
+                          .write('telNumber', "+998${_phoneNumberController.text.replaceAll(' ', '')}");
                       // context.read<AuthCubit>().login(int.parse(
                       //     _phoneNumberController.text.replaceAll(' ', '')));
                       context.read<AuthCubit>().clear();

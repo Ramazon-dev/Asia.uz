@@ -87,7 +87,7 @@ class NewReviewPage extends StatelessWidget {
                 SvgPicture.asset(SvgIcons.phone),
                 SizedBox(width: getWidth(25.0)),
                 Text(
-                  '+998 ' + GetStorage().read('telNumber'),
+                  GetStorage().read('telNumber'),
                   style: TextStyle(
                     color: AppColors.black,
                     fontSize: getWidth(16.0),

@@ -18,11 +18,14 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
     SizeConfig().init(context);
     return Scaffold(
       body: Container(
+        // width: getWidth(),
         decoration: const BoxDecoration(
+          color: Colors.cyanAccent,
           image: DecorationImage(
             image: AssetImage(
               "assets/images/background.png",
             ),
+            fit: BoxFit.cover
           ),
         ),
         child: Column(

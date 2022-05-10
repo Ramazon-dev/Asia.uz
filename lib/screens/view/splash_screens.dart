@@ -21,7 +21,7 @@ class _SplashScreensState extends State<SplashScreens> {
       () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => GetStorage().read('telNumber') != null
+          builder: (context) => GetStorage().read('token') != null
               ? MainPage()
               : ChooseLanguagePage(),
         ),
