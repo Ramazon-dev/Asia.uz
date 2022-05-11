@@ -1,82 +1,91 @@
-
-import 'dart:convert';
-
-List<CustomersApiModel> customersApiModelFromJson(String str) => List<CustomersApiModel>.from(json.decode(str).map((x) => CustomersApiModel.fromJson(x)));
-
-String customersApiModelToJson(List<CustomersApiModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class CustomersApiModel {
-    CustomersApiModel({
-        this.id,
-        this.firstName,
-        this.lastName,
-        this.email,
-        this.mobilePhone,
-        this.landline,
-        this.backupPhone,
-        this.dob,
-        this.maritalStatus,
-        this.gender,
-        this.occupation,
-        this.notificationPreference,
-        this.notificationLanguage,
-        this.createdAt,
-        this.updatedAt,
-        this.v,
-    });
+  CustomersApiModel({
+    this.customer,
+    this.card,
+  });
 
-    String? id;
-    String? firstName;
-    String? lastName;
-    String? email;
-    String? mobilePhone;
-    String? landline;
-    String? backupPhone;
-    String? dob;
-    bool? maritalStatus;
-    String? gender;
-    String? occupation;
-    String? notificationPreference;
-    String? notificationLanguage;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    int? v;
+  Customer? customer;
+  Card? card;
 
-    factory CustomersApiModel.fromJson(Map<String, dynamic> json) => CustomersApiModel(
-        id: json["_id"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
-        email: json["email"],
+  factory CustomersApiModel.fromJson(Map<String, dynamic> json) => CustomersApiModel(
+        customer: Customer.fromJson(json["customer"]),
+        card: Card.fromJson(json["card"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "customer": customer!.toJson(),
+        "card": card!.toJson(),
+      };
+}
+
+class Card {
+  Card({
+    this.totalBalance,
+    this.cardEncrypted,
+    this.history,
+  });
+
+  int? totalBalance;
+  String? cardEncrypted;
+  List<dynamic>? history;
+
+  factory Card.fromJson(Map<String, dynamic> json) => Card(
+        totalBalance: json["total_balance"],
+        cardEncrypted: json["card_encrypted"],
+        history: List<dynamic>.from(json["history"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "total_balance": totalBalance,
+        "card_encrypted": cardEncrypted,
+        "history": List<dynamic>.from(history!.map((x) => x)),
+      };
+}
+
+class Customer {
+  Customer({
+    this.mobilePhone,
+    this.dob,
+    this.firstName,
+    this.gender,
+    this.lastName,
+    this.maritalStatus,
+    this.notificationLanguage,
+    this.notificationPreference,
+    this.occupation,
+  });
+
+  String? mobilePhone;
+  String? dob;
+  String? firstName;
+  String? gender;
+  String? lastName;
+  bool? maritalStatus;
+  String? notificationLanguage;
+  String? notificationPreference;
+  String? occupation;
+
+  factory Customer.fromJson(Map<String, dynamic> json) => Customer(
         mobilePhone: json["mobile_phone"],
-        landline: json["landline"],
-        backupPhone: json["backup_phone"],
         dob: json["dob"],
-        maritalStatus: json["marital_status"],
+        firstName: json["first_name"],
         gender: json["gender"],
-        occupation: json["occupation"],
-        notificationPreference: json["notification_preference"],
+        lastName: json["last_name"],
+        maritalStatus: json["marital_status"],
         notificationLanguage: json["notification_language"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-    );
+        notificationPreference: json["notification_preference"],
+        occupation: json["occupation"],
+      );
 
-    Map<String, dynamic> toJson() => {
-        "_id": id,
-        "first_name": firstName,
-        "last_name": lastName,
-        "email": email,
+  Map<String, dynamic> toJson() => {
         "mobile_phone": mobilePhone,
-        "landline": landline,
-        "backup_phone": backupPhone,
         "dob": dob,
-        "marital_status": maritalStatus,
+        "first_name": firstName,
         "gender": gender,
-        "occupation": occupation,
-        "notification_preference": notificationPreference,
+        "last_name": lastName,
+        "marital_status": maritalStatus,
         "notification_language": notificationLanguage,
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt!.toIso8601String(),
-        "__v": v,
-    };
+        "notification_preference": notificationPreference,
+        "occupation": occupation,
+      };
 }

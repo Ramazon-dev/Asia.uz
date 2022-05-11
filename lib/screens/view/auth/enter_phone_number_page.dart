@@ -106,9 +106,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                             obscureText: false,
                             prefixIcon: Container(
                               margin: EdgeInsets.only(
-                                left: getWidth(5.0),
-                                bottom: getHeight(2)
-                              ),
+                                  left: getWidth(5.0), bottom: getHeight(2)),
                               alignment: Alignment.center,
                               height: getHeight(40.0),
                               width: getWidth(40.0),
@@ -148,10 +146,10 @@ class EnterPhoneNumberPage extends StatelessWidget {
                           "+998${_phoneNumberController.text.replaceAll(' ', '')}");
                       // context.read<AuthCubit>().login(int.parse(
                       //     _phoneNumberController.text.replaceAll(' ', '')));
-                      context.read<AuthCubit>().clear();
                       await VerifyNumberService.verifyNumberService(
                           _phoneNumberController.text);
                       await next(context);
+                      // context.read<AuthCubit>().clear();
                     },
                     primaryColor: AppColors.orangeColor,
                     textColor: AppColors.whiteColor,

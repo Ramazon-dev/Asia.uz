@@ -1,4 +1,5 @@
 import 'package:asia_uz/cubit/profile_cubit/profile_cubit.dart';
+import 'package:asia_uz/service/api/post/customers_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import '../../core/components/view/my_app_bar.dart';
@@ -8,8 +9,8 @@ class ProfilePage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _surnameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _dataBirthController = TextEditingController();
   final TextEditingController _floorController = TextEditingController();
   final TextEditingController _seminalPositionController =
@@ -27,45 +28,61 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return BlocProvider(
-      create: (context) => ProfileCubit(
-        _formKey,
-        _nameController,
-        _surnameController,
-        _dataBirthController,
-        _floorController,
-        _seminalPositionController,
-        _employmentController,
-        _phoneNumberController,
-        _homePhoneNumberController,
-        _homeSecondPhoneNumberController,
-        _emailController,
-        _notificationController,
-        _languageController,
-      ),
-      child: BlocConsumer<ProfileCubit, ProfileState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          var _context = context.read<ProfileCubit>();
-          if (state is ProfileInitial) {
-            return buildScaffold(context, state, _context);
-          } else {
-            final error = state as ProfileError;
-            return Center(
-              child: Text(error.erroeMessange),
-            );
-          }
-        },
-      ),
-    );
+    return buildScaffold(context);
+    // return BlocProvider(
+    //   create: (context) => ProfileCubit(
+    //     _formKey,
+    //     _firstNameController,
+    //     _lastNameController,
+    //     _dataBirthController,
+    //     _phoneNumberController,
+    //     _floorController,
+    //     _seminalPositionController,
+    //     _employmentController,
+    //     _homePhoneNumberController,
+    //     _homeSecondPhoneNumberController,
+    //     _emailController,
+    //     _notificationController,
+    //     _languageController,
+    //   ),
+    //   child: BlocConsumer<ProfileCubit, ProfileState>(
+    //     listener: (context, state) {},
+    //     builder: (context, state) {
+    //       var _context = context.read<ProfileCubit>();
+    //       if (state is ProfileInitial) {
+    //         return buildScaffold(context, state, _context);
+    //       } else {
+    //         final error = state as ProfileError;
+    //         return Center(
+    //           child: Text(error.erroeMessange),
+    //         );
+    //       }
+    //     },
+    //   ),
+    // );
   }
 
   back(context) {
     Navigator.pop(context);
   }
 
-  buildScaffold(
-      BuildContext context, ProfileState state, ProfileCubit _context) {
+  String? pol;
+  String? notifLang;
+  buildScaffold(BuildContext context) {
+    // _firstNameController.text = GetStorage().read("firstName") ?? "";
+    // _lastNameController.text = GetStorage().read("lastName")?? "";
+    // _dataBirthController.text = GetStorage().read("dateOfBirth")?? "";
+    // pol = GetStorage().read("gender")?? "";
+    // _phoneNumberController.text = GetStorage().read("phoneNumber")?? "";
+    // _notificationController.text = GetStorage().read("notif")?? "";
+    // notifLang = GetStorage().read("notifLang")?? "";
+    // _seminalPositionController.text = GetStorage().read("pol")?? "";
+    // _employmentController.text = GetStorage().read("zanyatost")?? "";
+    // _homePhoneNumberController.text = GetStorage().read("homePhone")?? "";
+    // _homeSecondPhoneNumberController.text = GetStorage().read("anotherPhone")?? "";
+    // _emailController.text = GetStorage().read("email")?? "";
+    // _languageController.text = GetStorage().read("lang")?? "";
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
@@ -90,7 +107,7 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
-                  controller: _nameController,
+                  controller: _firstNameController,
                   decoration: const InputDecoration(
                     hintText: 'Имя*',
                     labelText: 'Имя*',
@@ -99,7 +116,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
-                  controller: _surnameController,
+                  controller: _lastNameController,
                   decoration: const InputDecoration(
                     hintText: 'Фамилия*',
                     labelText: 'Фамилия*',
@@ -120,6 +137,90 @@ class ProfilePage extends StatelessWidget {
                   validator: (v) => v!.isEmpty ? 'Sana kiritilmadi' : null,
                 ),
                 SizedBox(height: getHeight(4.0)),
+                DropdownButtonFormField(
+                  hint: const Text("Gender"),
+                  icon: Padding(
+                    padding: EdgeInsets.only(right: getHeight(13)),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  onChanged: (String? v) {
+                    pol = v;
+                    debugPrint("gender: $v");
+                  },
+                  items: const <DropdownMenuItem<String>>[
+                    DropdownMenuItem(
+                      value: "male",
+                      child: Text("male"),
+                    ),
+                    DropdownMenuItem(
+                      value: "female",
+                      child: Text("female"),
+                    ),
+                  ],
+                ),
+                SizedBox(height: getHeight(4.0)),
+                TextFormField(
+                  controller: _phoneNumberController,
+                  decoration: const InputDecoration(
+                    // hintText: 'Мобильный телефон*',
+                    prefixText: "+998 ",
+                    prefixStyle: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    labelText: 'Мобильный телефон*',
+                    suffixIcon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  validator: (v) =>
+                      v!.isEmpty ? 'Telefon raqam kiritilmadi' : null,
+                ),
+                SizedBox(height: getHeight(4.0)),
+                TextFormField(
+                  controller: _notificationController,
+                  decoration: const InputDecoration(
+                    hintText: 'Способ получения уведомлений*',
+                    labelText: 'Способ получения уведомлений*',
+                    suffixIcon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
+                ),
+                DropdownButtonFormField(
+                  hint: const Text("Язык уведомлений"),
+                  icon: Padding(
+                    padding: EdgeInsets.only(right: getHeight(13)),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  onChanged: (String? v) {
+                    notifLang = v;
+                  },
+                  items: const <DropdownMenuItem<String>>[
+                    DropdownMenuItem(
+                      value: "russian",
+                      child: Text("russian"),
+                    ),
+                    DropdownMenuItem(
+                      value: "o`zbek",
+                      child: Text("o`zbek"),
+                    ),
+                    DropdownMenuItem(
+                      value: "english",
+                      child: Text("english"),
+                    ),
+                  ],
+                ),
                 TextFormField(
                   controller: _floorController,
                   decoration: const InputDecoration(
@@ -158,20 +259,6 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
-                ),
-                SizedBox(height: getHeight(4.0)),
-                TextFormField(
-                  controller: _phoneNumberController,
-                  decoration: const InputDecoration(
-                    hintText: 'Мобильный телефон*',
-                    labelText: 'Мобильный телефон*',
-                    suffixIcon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  validator: (v) =>
-                      v!.isEmpty ? 'Telefon raqam kiritilmadi' : null,
                 ),
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
@@ -215,19 +302,6 @@ class ProfilePage extends StatelessWidget {
                 ),
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
-                  controller: _notificationController,
-                  decoration: const InputDecoration(
-                    hintText: 'Способ получения уведомлений*',
-                    labelText: 'Способ получения уведомлений*',
-                    suffixIcon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
-                ),
-                SizedBox(height: getHeight(4.0)),
-                TextFormField(
                   controller: _languageController,
                   decoration: const InputDecoration(
                     hintText: 'Язык уведомлений*',
@@ -242,9 +316,52 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: getHeight(25.0)),
                 MyElevatedButton(
                   text: 'Сохранить',
-                  onPressed: () {
-                    _context.validateState();
-                    _context.clear();
+                  onPressed: () async {
+                    GetStorage().write("firstName", _firstNameController.text);
+                    GetStorage().write("lastName", _lastNameController.text);
+                    GetStorage()
+                        .write("dateOfBirth", _dataBirthController.text);
+                    GetStorage().write("gender", pol);
+                    GetStorage().write(
+                        "phoneNumber", "+998${_phoneNumberController.text}");
+                    GetStorage().write("notif", _notificationController.text);
+                    GetStorage().write("notifLang", notifLang);
+                    GetStorage().write("pol", _seminalPositionController.text);
+                    GetStorage().write("zanyatost", _employmentController.text);
+                    GetStorage()
+                        .write("homePhone", _homePhoneNumberController.text);
+                    GetStorage().write(
+                        "anotherPhone", _homeSecondPhoneNumberController.text);
+                    GetStorage().write("email", _emailController.text);
+                    GetStorage().write("lang", _languageController.text);
+                    // _context.validateState();
+                    // _context.clear();
+                    debugPrint(
+                        """
+mobile_phone: ${_phoneNumberController.text}
+firstname: ${_firstNameController.text},
+lastNeme: ${_lastNameController.text},
+dob: ${_dataBirthController.text},
+gender: $pol,
+maritalStatus: true,
+occupation: occupation,
+notificationPreference: "notificationPreference",
+notificationLanguage: "notificationLanguage",
+
+""");
+                    await CustomersServices.cuspomersService(
+                      phoneNumber: "+998${_phoneNumberController.text}",
+                      dob: _dataBirthController.text,
+                      firstName: _firstNameController.text,
+                      lastName: _lastNameController.text,
+                      gender: pol ?? "male",
+                      materialStatus: true,
+                      notificationLanguage: notifLang ?? "russian",
+                      notificationPreference: "sms",
+                      occupation: "occupation",
+                    );
+                    await Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MainPage()));
                   },
                   height: 50.0,
                   // width: 161.0,

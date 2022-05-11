@@ -47,22 +47,26 @@ class MainPage extends StatelessWidget {
                     EdgeInsets.only(left: getWidth(20), top: getHeight(10)),
                 child: SvgPicture.asset(
                   SvgIcons.menu,
+                  height: getHeight(28),
                   color: AppColors.black,
                 ),
               ),
             ),
             text: titlesOfAppBar[model.currentTab].toString(),
             action: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(),
-                        ),
-                      );
-                    },
-                    child: SvgPicture.asset(SvgIcons.avatar))
-                .only(right: getWidth(10), top: getHeight(10)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfilePage(),
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                SvgIcons.avatar,
+                height: getHeight(50),
+              ),
+            ).only(right: getWidth(10), top: getHeight(10)),
           ),
           drawer: MyDrawer(model: model),
           body: model.currentScreens,

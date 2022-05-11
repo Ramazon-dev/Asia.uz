@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:asia_uz/screens/shop/local_auth_api.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,7 @@ class ReturnPassword extends StatelessWidget {
                   if (code!.length == 4 && text == controller.text) {
                     hideKeyboard(context);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MainPage()));
+                        MaterialPageRoute(builder: (context) => ProfilePage()));
                   }
                 },
               ).only(bottom: getHeight(200)),

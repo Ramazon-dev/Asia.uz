@@ -28,18 +28,9 @@ class NewReviewPage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getWidth(21.0), vertical: getHeight(10.0)),
-            child: MyTextFormFiels(
-              hintText: "",
-              labelText: "",
-              prefixText: "",
-              obscureText: true,
-              prefixIcon: Icon(Icons.search),
-              onChanged: (sa) {},
-              radius: 20,
-              sideColor: Colors.yellow,
-              sideWidth: 20,
-              validator: (c) {},
+            child: TextFormField(
               controller: _messangeController,
+              decoration: const InputDecoration(labelText: "Сообщение*"),
             ),
           ),
           MyBottomSheet(),
