@@ -13,46 +13,30 @@ class CustomersServices {
     required String notificationPreference,
     required String occupation,
   }) async {
-    debugPrint("token kep turibti mana${GetStorage().read('token')}");
-    debugPrint(
-        """
-mobile_phone: $phoneNumber
-firstname: $firstName,
-lastNeme: $lastName,
-dob: $dob,
-gender: $gender,
-maritalStatus: $materialStatus,
-occupation: $occupation,
-notificationPreference: $notificationPreference,
-notificationLanguage: $notificationLanguage,
-""");
-    var response = await http.post(
-      Uri.parse(BaseUrl.baseUrl + '/customers'),
-      headers: {
-        'Authorization': "Bearer ${GetStorage().read('token')}",
-      },
-      body: {
-        "first_name": firstName,
-        "last_name": lastName,
-        "dob": dob,
-        "marital_status": "$materialStatus",
-        "gender": gender,
-        "occupation": occupation,
-        "notification_preference": notificationPreference,
-        "notification_language": notificationLanguage,
-      },
-    );
+    var headers = {
+      'Authorization': 'Bearer ${GetStorage().read('token')}',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request(
+        'POST', Uri.parse('https://asia-uz.herokuapp.com/customers'));
+    request.body = json.encode({
+      "first_name": "$firstName",
+      "last_name": "$lastName",
+      "dob": "$dob",
+      "marital_status": true,
+      "gender": "$gender",
+      "occupation": "$occupation",
+      "notification_preference": "$notificationPreference",
+      "notification_language": "$notificationPreference"
+    });
+    request.headers.addAll(headers);
 
-    try {
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        var data = jsonDecode(response.body);
-        debugPrint("Res qaytdi $data");
-        return data;
-      } else {
-        throw 'error';
-      }
-    } catch (e) {
-      debugPrint(e.toString());
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
     }
   }
 }
