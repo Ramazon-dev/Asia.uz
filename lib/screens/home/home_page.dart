@@ -1,9 +1,23 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
+import 'package:asia_uz/service/api/post/customers_service.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetCustomersData.getDataFromApi();
+    print("DATA ");
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -317,27 +317,31 @@ class ProfilePage extends StatelessWidget {
                 MyElevatedButton(
                   text: 'Сохранить',
                   onPressed: () async {
-                    GetStorage().write("firstName", _firstNameController.text);
-                    GetStorage().write("lastName", _lastNameController.text);
-                    GetStorage()
+                    await GetStorage()
+                        .write("firstName", _firstNameController.text);
+                    await GetStorage()
+                        .write("lastName", _lastNameController.text);
+                    await GetStorage()
                         .write("dateOfBirth", _dataBirthController.text);
-                    GetStorage().write("gender", pol);
-                    GetStorage().write(
+                    await GetStorage().write("gender", pol);
+                    await GetStorage().write(
                         "phoneNumber", "+998${_phoneNumberController.text}");
-                    GetStorage().write("notif", _notificationController.text);
-                    GetStorage().write("notifLang", notifLang);
-                    GetStorage().write("pol", _seminalPositionController.text);
-                    GetStorage().write("zanyatost", _employmentController.text);
-                    GetStorage()
+                    await GetStorage()
+                        .write("notif", _notificationController.text);
+                    await GetStorage().write("notifLang", notifLang);
+                    await GetStorage()
+                        .write("pol", _seminalPositionController.text);
+                    await GetStorage()
+                        .write("zanyatost", _employmentController.text);
+                    await GetStorage()
                         .write("homePhone", _homePhoneNumberController.text);
-                    GetStorage().write(
+                    await GetStorage().write(
                         "anotherPhone", _homeSecondPhoneNumberController.text);
-                    GetStorage().write("email", _emailController.text);
-                    GetStorage().write("lang", _languageController.text);
+                    await GetStorage().write("email", _emailController.text);
+                    await GetStorage().write("lang", _languageController.text);
                     // _context.validateState();
                     // _context.clear();
-                    debugPrint(
-                        """
+                    debugPrint("""
 mobile_phone: ${_phoneNumberController.text}
 firstname: ${_firstNameController.text},
 lastNeme: ${_lastNameController.text},
@@ -360,7 +364,7 @@ notificationLanguage: "notificationLanguage",
                       notificationPreference: "sms",
                       occupation: "occupation",
                     );
-                    await Navigator.push(context,
+                    Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MainPage()));
                   },
                   height: 50.0,

@@ -57,19 +57,19 @@ class CustomersServicess {
       Uri.parse('https://asia-uz.herokuapp.com/customers'),
       headers: {
         'Authorization': 'Bearer ${GetStorage().read('token')}',
-        'Content-Type': 'application/json'
       },
       body: {
         "first_name": "$firstName",
         "last_name": "$lastName",
         "dob": "$dob",
-        "marital_status": true,
+        "marital_status": "true",
         "gender": "$gender",
         "occupation": "$occupation",
         "notification_preference": "$notificationPreference",
         "notification_language": "$notificationPreference"
       },
     );
+    print('response body : ${response.body}');
     if (response.statusCode == 200 || response.statusCode == 201) {
       var data = jsonDecode(response.body);
       CustomersGetModels customersGetModels = CustomersGetModels.fromJson(data);
@@ -178,4 +178,23 @@ class Customer {
         "notification_preference": notificationPreference,
         "occupation": occupation,
       };
+}
+
+class GetCustomersData {
+  static Future<CustomersGetModels> getDataFromApi() async {
+    var response = await http
+        .get(Uri.parse('https://asia-uz.herokuapp.com/customers'), headers: {
+      'Authorization': 'Bearer ${GetStorage().read('token')}',
+    });
+    print('get response body : ${response.body}');
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      var data = jsonDecode(response.body);
+      print('data data $data');
+      CustomersGetModels customersGetModels = CustomersGetModels.fromJson(data);
+      return customersGetModels;
+      // ! Malumot lar kevotti ! RAMAZON AKA
+    } else {
+      throw 'ERROR';
+    }
+  }
 }
