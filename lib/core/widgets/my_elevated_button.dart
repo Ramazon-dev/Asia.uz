@@ -18,7 +18,7 @@ class MyElevatedButton extends StatelessWidget {
     this.radius = 15,
     this.sideColor = AppColors.unselectedColor,
     this.sideWidth = 2,
-    this.textSize = 16,
+    this.textSize = 14,
     this.fontWeight = FontWeight.w600,
     this.textColor = AppColors.black,
   }) : super(key: key);

@@ -126,6 +126,7 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
                   controller: _dataBirthController,
+                  keyboardType: TextInputType.datetime,
                   decoration: const InputDecoration(
                     hintText: 'Дата рождения*',
                     labelText: 'Дата рождения*',
@@ -138,7 +139,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 SizedBox(height: getHeight(4.0)),
                 DropdownButtonFormField(
-                  hint: const Text("Gender"),
+                  hint: const Text("Пол*"),
                   icon: Padding(
                     padding: EdgeInsets.only(right: getHeight(13)),
                     child: const Icon(
@@ -164,16 +165,17 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
                   controller: _phoneNumberController,
-                  decoration: const InputDecoration(
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
                     // hintText: 'Мобильный телефон*',
                     prefixText: "+998 ",
                     prefixStyle: TextStyle(
                       color: AppColors.black,
-                      fontSize: 17,
+                      fontSize: getHeight(17),
                       fontWeight: FontWeight.w400,
                     ),
                     labelText: 'Мобильный телефон*',
-                    suffixIcon: Icon(
+                    suffixIcon: const Icon(
                       Icons.arrow_forward_ios,
                       color: AppColors.black,
                     ),
@@ -221,18 +223,18 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                TextFormField(
-                  controller: _floorController,
-                  decoration: const InputDecoration(
-                    hintText: 'Пол*',
-                    labelText: 'Пол*',
-                    suffixIcon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  validator: (v) => v!.isEmpty ? 'Jins kiritilmadi' : null,
-                ),
+                // TextFormField(
+                //   controller: _floorController,
+                //   decoration: const InputDecoration(
+                //     hintText: 'Пол*',
+                //     labelText: 'Пол*',
+                //     suffixIcon: Icon(
+                //       Icons.arrow_forward_ios,
+                //       color: AppColors.black,
+                //     ),
+                //   ),
+                //   validator: (v) => v!.isEmpty ? 'Jins kiritilmadi' : null,
+                // ),
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
                   controller: _seminalPositionController,
@@ -262,6 +264,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
+                  keyboardType: TextInputType.datetime,
                   controller: _homePhoneNumberController,
                   decoration: const InputDecoration(
                     hintText: 'Домашний телефон*',
@@ -276,6 +279,7 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
                   controller: _homeSecondPhoneNumberController,
+                  keyboardType: TextInputType.datetime,
                   decoration: const InputDecoration(
                     hintText: 'Дополнительный телефон*',
                     labelText: 'Дополнительный телефон*',
@@ -289,6 +293,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 SizedBox(height: getHeight(4.0)),
                 TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: const InputDecoration(
                     hintText: 'E-mail*',
@@ -301,19 +306,7 @@ class ProfilePage extends StatelessWidget {
                   validator: (v) => v!.isEmpty ? 'Email kiritilmadi' : null,
                 ),
                 SizedBox(height: getHeight(4.0)),
-                TextFormField(
-                  controller: _languageController,
-                  decoration: const InputDecoration(
-                    hintText: 'Язык уведомлений*',
-                    labelText: 'Язык уведомлений*',
-                    suffixIcon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
-                ),
-                SizedBox(height: getHeight(25.0)),
+                SizedBox(height: getHeight(70.0)),
                 MyElevatedButton(
                   text: 'Сохранить',
                   onPressed: () async {
@@ -336,8 +329,7 @@ class ProfilePage extends StatelessWidget {
                     GetStorage().write("lang", _languageController.text);
                     // _context.validateState();
                     // _context.clear();
-                    debugPrint(
-                        """
+                    debugPrint("""
 mobile_phone: ${_phoneNumberController.text}
 firstname: ${_firstNameController.text},
 lastNeme: ${_lastNameController.text},
@@ -347,7 +339,6 @@ maritalStatus: true,
 occupation: occupation,
 notificationPreference: "notificationPreference",
 notificationLanguage: "notificationLanguage",
-
 """);
                     await CustomersServices.cuspomersService(
                       phoneNumber: "+998${_phoneNumberController.text}",
@@ -360,15 +351,16 @@ notificationLanguage: "notificationLanguage",
                       notificationPreference: "sms",
                       occupation: "occupation",
                     );
-                    await Navigator.push(context,
+
+                    Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MainPage()));
                   },
-                  height: 50.0,
+                  height: getHeight(50),
                   // width: 161.0,
                   primaryColor: AppColors.transparentColor,
                   sideColor: AppColors.orangeColor,
-                  radius: 15.0,
-                  sideWidth: 2.0,
+                  radius:getHeight(15),
+                  sideWidth: getHeight(2),
                 ),
                 SizedBox(height: getHeight(20.0)),
                 SizedBox(
@@ -426,7 +418,7 @@ notificationLanguage: "notificationLanguage",
                     ),
                   ),
                 ),
-                SizedBox(height: getHeight(15.0)),
+                SizedBox(height: getHeight(40.0)),
               ],
             ),
           ),

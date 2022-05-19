@@ -113,6 +113,8 @@ class MyDrawer extends StatelessWidget {
                         case 8:
                           GetStorage().remove('telNumber');
                           GetStorage().remove('token');
+                          GetStorage().remove('firstName');
+
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -129,7 +131,7 @@ class MyDrawer extends StatelessWidget {
                         child: MyTextWidget(
                           textAlign: TextAlign.left,
                           text: titles[index],
-                          fontSize: 18.0,
+                          fontSize: getHeight(18),
                           fontWeight: FontWeight.w500,
                           textColor: Colors.white,
                         ),
@@ -180,12 +182,12 @@ class MyDrawer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           MyElevatedButton(
-            height: 32.0,
-            width: 65.0,
-            radius: 22.0,
+            height: getHeight(32),
+            width: getWidth(35),
+            radius: getHeight(22),
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress1 ? AppColors.onPressColor : Colors.white,
-            sideWidth: 2.0,
+            sideWidth: getWidth(2),
             text: "O'ZB",
             textColor: AppColors.whiteColor,
             onPressed: () {
@@ -197,13 +199,13 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           MyElevatedButton(
-            height: 32.0,
+            height:getHeight(32),
+            width:getWidth(65),
+            radius: getHeight(22),
             textColor: AppColors.whiteColor,
-            width: 65.0,
-            radius: 22.0,
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress2 ? AppColors.onPressColor : Colors.white,
-            sideWidth: 2.0,
+            sideWidth: getWidth(2),
             text: "РУС",
             onPressed: () {
               // onPressProvider!.onPress();
@@ -214,13 +216,13 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           MyElevatedButton(
-            height: 32.0,
+            height: getHeight(32),
             textColor: AppColors.whiteColor,
-            width: 65.0,
-            radius: 22.0,
+            width: getWidth(65),
+            radius: getHeight(22),
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress3 ? AppColors.onPressColor : Colors.white,
-            sideWidth: 2.0,
+            sideWidth: getHeight(2),
             text: "ENG",
             onPressed: () {
               // onPressProvider!.onPress();

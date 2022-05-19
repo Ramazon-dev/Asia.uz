@@ -1,4 +1,3 @@
-import 'package:asia_uz/core/constants/base/base_url.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,7 +16,7 @@ class VerifyCodeService {
         "code": "$verifyCode",
       },
     );
-
+    debugPrint("sssssssssssssssssssss: ${response}");
     debugPrint("rrrrr : ${response.body}");
 
     try {

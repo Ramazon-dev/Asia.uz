@@ -21,13 +21,15 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
     return Stack(
       children: [
         Positioned(
-          top: 0,
-          left: -5,
+          top: -2,
+          left: -4,
+          // right: 0,
           child: Container(
             alignment: Alignment.bottomCenter,
-            height: 110,
-            width: 405,
+            height: getHeight(110),
+            width: getWidth(381),
             decoration: const BoxDecoration(
+              // color: Colors.yellow,
               image: DecorationImage(
                 image: AssetImage(
                   "assets/images/appbar_bg.png",
@@ -54,7 +56,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(right: getHeight(10)),
+                    padding: EdgeInsets.only(right: getHeight(3)),
                     child: action ?? Container(),
                   ),
                 ],

@@ -33,6 +33,7 @@ class ShowCards extends StatelessWidget {
             child: Column(
               children: [
                 QrCodeCreator(
+                  text: "",
                   color: AppColors.bgColor,
                   size: getHeight(285),
                 ).only(bottom: getHeight(20)),

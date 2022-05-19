@@ -59,9 +59,9 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: MyElevatedButton(
-                        height: 32.0,
-                        width: 80.0,
-                        radius: 22.0,
+                        height: getHeight(32),
+                        width: getWidth(80),
+                        radius: getHeight(22),
                         primaryColor: AppColors.transparentColor,
                         textColor: son == index
                             ? AppColors.orangeColor
@@ -69,7 +69,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         sideColor: son == index
                             ? AppColors.orangeColor
                             : AppColors.unselectedColor,
-                        sideWidth: 2.0,
+                        sideWidth: getWidth(2),
                         text: listOfString[index],
                         fontWeight: FontWeight.w700,
                         textSize: getHeight(16),
@@ -101,13 +101,13 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                   ),
                 );
               },
-              height: 50.0,
-              width: 161.0,
+              height: getHeight(50),
+              width: getWidth(161),
               textColor: AppColors.whiteColor,
               primaryColor: AppColors.orangeColor,
               sideColor: AppColors.orangeColor,
-              radius: 15.0,
-              sideWidth: 2.0,
+              radius: getHeight(15),
+              sideWidth: getWidth(2),
             ),
             SizedBox(height: getHeight(140.0)),
             SizedBox(

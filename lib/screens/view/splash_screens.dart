@@ -39,7 +39,7 @@ class _SplashScreensState extends State<SplashScreens> {
             image: AssetImage(
               "assets/images/splash_screen.png",
             ),
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
         ),
       ),

@@ -137,12 +137,12 @@ class _ShopsPageState extends State<ShopsPage> {
                   ),
                 ),
                 ListTile(
-                  leading: MyTextWidget(text: "Магазин", fontSize: 18),
+                  leading: MyTextWidget(text: "Магазин", fontSize: getHeight(18)),
                   trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
                   onTap: () {},
                 ),
                 ListTile(
-                  leading: MyTextWidget(text: "Город", fontSize: 18),
+                  leading: MyTextWidget(text: "Город", fontSize: getHeight(18)),
                   trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
                   onTap: () {},
                 ),

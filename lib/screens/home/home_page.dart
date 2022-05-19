@@ -2,84 +2,95 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    debugPrint("qrcode: ${GetStorage().read("qrcode")}");
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
       // backgroundColor: Colors.cyanAccent,
-      body: Column(
-        children: [
-          Container(
-            height: getHeight(540),
-            // margin: EdgeInsets.only(top: getHeight(114)),
-            padding: EdgeInsets.only(top: getHeight(135)),
-            color: Colors.white,
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: MyTextWidget(
-                    text: 'Покажите QR-код  кассиру',
-                    fontSize: 19.0,
-                    textColor: AppColors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  width: double.infinity,
-                  height: 20.0,
-                ),
-                SizedBox(height: getHeight(20.0)),
-                QrCodeCreator(size: getHeight(280)),
-                SizedBox(height: getHeight(20.0)),
-                cashback(),
-                SizedBox(height: getHeight(18.0)),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: getHeight(20)),
-            margin: EdgeInsets.only(top: getHeight(25)),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(getHeight(10)),
-                topRight: Radius.circular(getHeight(10)),
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: getHeight(540),
+              // margin: EdgeInsets.only(top: getHeight(114)),
+              padding: EdgeInsets.only(top: getHeight(130)),
               color: Colors.white,
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    child: MyTextWidget(
+                      text: 'Покажите QR-код  кассиру',
+                      fontSize: getHeight(19),
+                      textColor: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    width: double.infinity,
+                    height: getHeight(20),
+                  ),
+                  SizedBox(height: getHeight(17.0)),
+                  QrCodeCreator(
+                    text: GetStorage().read("qrcode"),
+                    size: getHeight(280),
+                  ),
+                  SizedBox(height: getHeight(20.0)),
+                  cashback(),
+                  SizedBox(height: getHeight(18.0)),
+                ],
+              ),
             ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: getWidth(20.0),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MyTextWidget(
-                        text: 'События',
-                        textAlign: TextAlign.left,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                        textColor: AppColors.black,
-                      ),
-                      MyTextWidget(
-                        text: 'Все',
-                        textAlign: TextAlign.right,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                        textColor: AppColors.black,
-                      ),
-                    ],
-                  ),
+            Container(
+              padding: EdgeInsets.only(top: getHeight(20)),
+              margin: EdgeInsets.only(top: getHeight(25)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(getHeight(10)),
+                  topRight: Radius.circular(getHeight(10)),
                 ),
-                information(context),
-              ],
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getWidth(20.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MyTextWidget(
+                          text: 'События',
+                          textAlign: TextAlign.left,
+                          fontSize: getHeight(16),
+                          fontWeight: FontWeight.w500,
+                          textColor: AppColors.black,
+                        ),
+                        MyTextWidget(
+                          text: 'Все',
+                          textAlign: TextAlign.right,
+                          fontSize: getHeight(16),
+                          fontWeight: FontWeight.w500,
+                          textColor: AppColors.black,
+                        ),
+                      ],
+                    ),
+                  ),
+                  information(context),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -125,7 +136,7 @@ class HomePage extends StatelessWidget {
                 text: '0 баллов',
                 textAlign: TextAlign.right,
                 textColor: AppColors.teal,
-                fontSize: 13.0,
+                fontSize: getHeight(13),
                 fontWeight: FontWeight.w700,
               ),
             ],

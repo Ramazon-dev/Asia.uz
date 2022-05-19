@@ -108,12 +108,12 @@ class MyBottomSheet extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                height: 50.0,
+                height:getHeight(50),
                 // width: 161.0,
                 primaryColor: AppColors.transparentColor,
                 sideColor: AppColors.orangeColor,
-                radius: 15.0,
-                sideWidth: 2.0,
+                radius: getHeight(15),
+                sideWidth: getWidth(2),
               ),
             ],
           ),

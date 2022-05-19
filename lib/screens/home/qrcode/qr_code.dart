@@ -1,15 +1,17 @@
+import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrCodeCreator extends StatefulWidget {
   double size;
   Color color;
+  String text;
   QrCodeCreator({
     this.size = 285,
     this.color = Colors.white,
+    required this.text,
     Key? key,
   }) : super(key: key);
-
   @override
   State<QrCodeCreator> createState() => _QrCodeCreatorState();
 }
@@ -17,9 +19,10 @@ class QrCodeCreator extends StatefulWidget {
 class _QrCodeCreatorState extends State<QrCodeCreator> {
   @override
   Widget build(BuildContext context) {
+    debugPrint(GetStorage().read("cardEncrypted"));
     return QrImage(
-      data: "t.me/Ramazon1681",
-      size: widget.size,
+      data: widget.text,
+      size: getHeight(widget.size),
       backgroundColor: widget.color,
     );
   }

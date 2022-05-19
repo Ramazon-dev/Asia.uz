@@ -1,12 +1,20 @@
+import 'package:asia_uz/core/widgets/is_loading.dart';
 import 'package:asia_uz/service/api/post/verify_number_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
-class EnterPhoneNumberPage extends StatelessWidget {
+class EnterPhoneNumberPage extends StatefulWidget {
   EnterPhoneNumberPage({Key? key}) : super(key: key);
 
+  @override
+  State<EnterPhoneNumberPage> createState() => _EnterPhoneNumberPageState();
+}
+
+class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
   final TextEditingController _phoneNumberController = TextEditingController();
+
   String num = "+998";
+
   MaskTextInputFormatter maskFormatter = MaskTextInputFormatter(
     mask: '## ### ## ##',
     filter: {"#": RegExp(r'[0-9]')},
@@ -14,6 +22,9 @@ class EnterPhoneNumberPage extends StatelessWidget {
   );
 
   final _formKey = GlobalKey<FormState>();
+
+  bool isload = false;
+  var sasa;
 
   OnPressProvider? onPressProvider;
 
@@ -92,14 +103,14 @@ class EnterPhoneNumberPage extends StatelessWidget {
                           width: getWidth(320.0),
                           child: MyTextWidget(
                             text: 'Номер телефона',
-                            fontSize: 9.0,
+                            fontSize: getHeight(9),
                             fontWeight: FontWeight.w500,
                             textColor: AppColors.teal,
                           ),
                         ),
                         SizedBox(height: getHeight(6.0)),
                         SizedBox(
-                          height: 45,
+                          height: getHeight(45),
                           child: MyTextFormFiels(
                             inputFormatters: [maskFormatter],
                             controller: _phoneNumberController,
@@ -112,14 +123,14 @@ class EnterPhoneNumberPage extends StatelessWidget {
                               width: getWidth(40.0),
                               child: MyTextWidget(
                                 text: '+998',
-                                fontSize: 16.0,
+                                fontSize: getHeight(16),
                                 fontWeight: FontWeight.w400,
                                 textColor: AppColors.black,
                               ),
                             ),
-                            radius: 30.0,
+                            radius: getHeight(30),
                             sideColor: AppColors.onPressColor,
-                            sideWidth: 2.0,
+                            sideWidth: getWidth(2),
                             onChanged: (value) {
                               if ((value.replaceAll(' ', '').length == 9)) {
                                 hideKeyboard(context);
@@ -140,7 +151,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                     onPressed: () async {
                       debugPrint(
                           "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
-
+                      setState(() {});
                       debugPrint('on tab');
                       await GetStorage().write('telNumber',
                           "+998${_phoneNumberController.text.replaceAll(' ', '')}");

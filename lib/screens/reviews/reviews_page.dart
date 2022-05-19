@@ -61,7 +61,7 @@ class _ReviewsPageState extends State<ReviewsPage>
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.65,
+              height: MediaQuery.of(context).size.height * getHeight(0.65),
               child: TabBarView(
                 controller: _tabController,
                 children: [
