@@ -29,37 +29,6 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return buildScaffold(context);
-    // return BlocProvider(
-    //   create: (context) => ProfileCubit(
-    //     _formKey,
-    //     _firstNameController,
-    //     _lastNameController,
-    //     _dataBirthController,
-    //     _phoneNumberController,
-    //     _floorController,
-    //     _seminalPositionController,
-    //     _employmentController,
-    //     _homePhoneNumberController,
-    //     _homeSecondPhoneNumberController,
-    //     _emailController,
-    //     _notificationController,
-    //     _languageController,
-    //   ),
-    //   child: BlocConsumer<ProfileCubit, ProfileState>(
-    //     listener: (context, state) {},
-    //     builder: (context, state) {
-    //       var _context = context.read<ProfileCubit>();
-    //       if (state is ProfileInitial) {
-    //         return buildScaffold(context, state, _context);
-    //       } else {
-    //         final error = state as ProfileError;
-    //         return Center(
-    //           child: Text(error.erroeMessange),
-    //         );
-    //       }
-    //     },
-    //   ),
-    // );
   }
 
   back(context) {
@@ -69,20 +38,6 @@ class ProfilePage extends StatelessWidget {
   String? pol;
   String? notifLang;
   buildScaffold(BuildContext context) {
-    // _firstNameController.text = GetStorage().read("firstName") ?? "";
-    // _lastNameController.text = GetStorage().read("lastName")?? "";
-    // _dataBirthController.text = GetStorage().read("dateOfBirth")?? "";
-    // pol = GetStorage().read("gender")?? "";
-    // _phoneNumberController.text = GetStorage().read("phoneNumber")?? "";
-    // _notificationController.text = GetStorage().read("notif")?? "";
-    // notifLang = GetStorage().read("notifLang")?? "";
-    // _seminalPositionController.text = GetStorage().read("pol")?? "";
-    // _employmentController.text = GetStorage().read("zanyatost")?? "";
-    // _homePhoneNumberController.text = GetStorage().read("homePhone")?? "";
-    // _homeSecondPhoneNumberController.text = GetStorage().read("anotherPhone")?? "";
-    // _emailController.text = GetStorage().read("email")?? "";
-    // _languageController.text = GetStorage().read("lang")?? "";
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
@@ -310,23 +265,28 @@ class ProfilePage extends StatelessWidget {
                 MyElevatedButton(
                   text: 'Сохранить',
                   onPressed: () async {
-                    GetStorage().write("firstName", _firstNameController.text);
-                    GetStorage().write("lastName", _lastNameController.text);
-                    GetStorage()
+                    await GetStorage()
+                        .write("firstName", _firstNameController.text);
+                    await GetStorage()
+                        .write("lastName", _lastNameController.text);
+                    await GetStorage()
                         .write("dateOfBirth", _dataBirthController.text);
-                    GetStorage().write("gender", pol);
-                    GetStorage().write(
+                    await GetStorage().write("gender", pol);
+                    await GetStorage().write(
                         "phoneNumber", "+998${_phoneNumberController.text}");
-                    GetStorage().write("notif", _notificationController.text);
-                    GetStorage().write("notifLang", notifLang);
-                    GetStorage().write("pol", _seminalPositionController.text);
-                    GetStorage().write("zanyatost", _employmentController.text);
-                    GetStorage()
+                    await GetStorage()
+                        .write("notif", _notificationController.text);
+                    await GetStorage().write("notifLang", notifLang);
+                    await GetStorage()
+                        .write("pol", _seminalPositionController.text);
+                    await GetStorage()
+                        .write("zanyatost", _employmentController.text);
+                    await GetStorage()
                         .write("homePhone", _homePhoneNumberController.text);
-                    GetStorage().write(
+                    await GetStorage().write(
                         "anotherPhone", _homeSecondPhoneNumberController.text);
-                    GetStorage().write("email", _emailController.text);
-                    GetStorage().write("lang", _languageController.text);
+                    await GetStorage().write("email", _emailController.text);
+                    await GetStorage().write("lang", _languageController.text);
                     // _context.validateState();
                     // _context.clear();
                     debugPrint("""
@@ -351,7 +311,6 @@ notificationLanguage: "notificationLanguage",
                       notificationPreference: "sms",
                       occupation: "occupation",
                     );
-
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MainPage()));
                   },
