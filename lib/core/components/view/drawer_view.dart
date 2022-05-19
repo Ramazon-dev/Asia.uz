@@ -75,6 +75,7 @@ class MyDrawer extends StatelessWidget {
                     navigations(int i) {
                       switch (i) {
                         case 0:
+                          _context.currentTab = 0;
                           Navigator.pop(context);
                           break;
                         case 1:
@@ -145,23 +146,20 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
               Container(
+                alignment: Alignment.center,
                 // padding: EdgeInsets.all(getHeight(5)),
-                margin: EdgeInsets.only(top: getHeight(50)),
-                height: getHeight(76),
+                margin: EdgeInsets.only(top: getHeight(20)),
+                height: getHeight(100),
                 width: getWidth(300),
                 color: const Color(0xff800D0D0D),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: getHeight(20.0),
-                      child: Align(
-                        child: MyTextWidget(
-                          text: 'Выберите язык'.tr(),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
-                          textColor: Colors.white,
-                        ),
-                      ),
+                    MyTextWidget(
+                      text: 'Выберите язык'.tr(),
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                      textColor: Colors.white,
                     ),
                     SizedBox(height: getHeight(10.0)),
                     languages(context),
@@ -199,8 +197,8 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           MyElevatedButton(
-            height:getHeight(32),
-            width:getWidth(65),
+            height: getHeight(32),
+            width: getWidth(65),
             radius: getHeight(22),
             textColor: AppColors.whiteColor,
             primaryColor: AppColors.transparentColor,

@@ -56,172 +56,185 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
 
   buildScaffold(BuildContext context, AuthState state) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          // color: Colors.yellow,
-          image: DecorationImage(
-            image: AssetImage(
-              "assets/images/background.png",
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(height: getHeight(150.0)),
-                  Container(
-                    height: getHeight(188.0),
-                    width: getWidth(225.0),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/logo.png',
-                        ),
-                      ),
-                    ),
+      body: isload == true
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: const BoxDecoration(
+                // color: Colors.yellow,
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/images/background.png",
                   ),
-                  SizedBox(height: getHeight(56.0)),
-                  MyTextWidget(
-                    text: 'Введите номер телефона',
-                    fontSize: getWidth(16.0),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  SizedBox(height: getHeight(33.0)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: getWidth(25.0),
-                    ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Center(
                     child: Column(
                       children: [
+                        SizedBox(height: getHeight(150.0)),
                         Container(
-                          alignment: Alignment.centerLeft,
-                          width: getWidth(320.0),
-                          child: MyTextWidget(
-                            text: 'Номер телефона',
-                            fontSize: getHeight(9),
-                            fontWeight: FontWeight.w500,
-                            textColor: AppColors.teal,
-                          ),
-                        ),
-                        SizedBox(height: getHeight(6.0)),
-                        SizedBox(
-                          height: getHeight(45),
-                          child: MyTextFormFiels(
-                            inputFormatters: [maskFormatter],
-                            controller: _phoneNumberController,
-                            obscureText: false,
-                            prefixIcon: Container(
-                              margin: EdgeInsets.only(
-                                  left: getWidth(5.0), bottom: getHeight(2)),
-                              alignment: Alignment.center,
-                              height: getHeight(40.0),
-                              width: getWidth(40.0),
-                              child: MyTextWidget(
-                                text: '+998',
-                                fontSize: getHeight(16),
-                                fontWeight: FontWeight.w400,
-                                textColor: AppColors.black,
+                          height: getHeight(188.0),
+                          width: getWidth(225.0),
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/logo.png',
                               ),
                             ),
-                            radius: getHeight(30),
-                            sideColor: AppColors.onPressColor,
-                            sideWidth: getWidth(2),
-                            onChanged: (value) {
-                              if ((value.replaceAll(' ', '').length == 9)) {
-                                hideKeyboard(context);
-                              }
-                            },
-                            validator: (v) =>
-                                v!.isEmpty ? 'Telefon raqam kiritilmadi' : null,
+                          ),
+                        ),
+                        SizedBox(height: getHeight(56.0)),
+                        MyTextWidget(
+                          text: 'Введите номер телефона',
+                          fontSize: getWidth(16.0),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        SizedBox(height: getHeight(33.0)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: getWidth(25.0),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                width: getWidth(320.0),
+                                child: MyTextWidget(
+                                  text: 'Номер телефона',
+                                  fontSize: getHeight(9),
+                                  fontWeight: FontWeight.w500,
+                                  textColor: AppColors.teal,
+                                ),
+                              ),
+                              SizedBox(height: getHeight(6.0)),
+                              SizedBox(
+                                height: getHeight(45),
+                                child: MyTextFormFiels(
+                                  inputFormatters: [maskFormatter],
+                                  controller: _phoneNumberController,
+                                  obscureText: false,
+                                  prefixIcon: Container(
+                                    margin: EdgeInsets.only(
+                                        left: getWidth(5.0),
+                                        bottom: getHeight(2)),
+                                    alignment: Alignment.center,
+                                    height: getHeight(40.0),
+                                    width: getWidth(40.0),
+                                    child: MyTextWidget(
+                                      text: '+998',
+                                      fontSize: getHeight(16),
+                                      fontWeight: FontWeight.w400,
+                                      textColor: AppColors.black,
+                                    ),
+                                  ),
+                                  radius: getHeight(30),
+                                  sideColor: AppColors.onPressColor,
+                                  sideWidth: getWidth(2),
+                                  onChanged: (value) {
+                                    if ((value.replaceAll(' ', '').length ==
+                                        9)) {
+                                      hideKeyboard(context);
+                                    }
+                                  },
+                                  validator: (v) => v!.isEmpty
+                                      ? 'Telefon raqam kiritilmadi'
+                                      : null,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: getHeight(34.0)),
+                        MyElevatedButton(
+                          height: getHeight(50),
+                          width: getWidth(285),
+                          text: 'Продолжить',
+                          onPressed: () async {
+                            isload = true;
+                            setState(() {});
+                            debugPrint(
+                                "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
+                            setState(() {});
+                            debugPrint('on tab');
+                            await GetStorage().write('telNumber',
+                                "+998${_phoneNumberController.text.replaceAll(' ', '')}");
+                            // context.read<AuthCubit>().login(int.parse(
+                            //     _phoneNumberController.text.replaceAll(' ', '')));
+
+                            await VerifyNumberService.verifyNumberService(
+                                        _phoneNumberController.text) ==
+                                    null
+                                ? await next(context)
+                                : null;
+                            isload = false;
+                            // context.read<AuthCubit>().clear();
+                          },
+                          primaryColor: AppColors.orangeColor,
+                          textColor: AppColors.whiteColor,
+                          sideColor: AppColors.transparentColor,
+                        ),
+                        SizedBox(height: getHeight(120.0)),
+                        SizedBox(
+                          height: getHeight(70.0),
+                          width: getWidth(284.0),
+                          // color: Colors.amberAccent,
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: TextStyle(
+                                color: AppColors.black,
+                                fontSize: getWidth(12.0),
+                              ),
+                              children: [
+                                TextSpan(
+                                  text:
+                                      ('Нажимая “Продолжить” вы соглашаетесь с\n условиями '),
+                                  style: TextStyle(
+                                    fontSize: getWidth(12.0),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ('Обработки персональных '),
+                                  style: TextStyle(
+                                    fontSize: getWidth(12.0),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.orangeColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ('данных и\n'),
+                                  style: TextStyle(
+                                    fontSize: getWidth(12.0),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: (' Публичной аферты'),
+                                  style: TextStyle(
+                                    fontSize: getWidth(12.0),
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.orangeColor,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: getHeight(34.0)),
-                  MyElevatedButton(
-                    height: getHeight(50),
-                    width: getWidth(285),
-                    text: 'Продолжить',
-                    onPressed: () async {
-                      debugPrint(
-                          "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
-                      setState(() {});
-                      debugPrint('on tab');
-                      await GetStorage().write('telNumber',
-                          "+998${_phoneNumberController.text.replaceAll(' ', '')}");
-                      // context.read<AuthCubit>().login(int.parse(
-                      //     _phoneNumberController.text.replaceAll(' ', '')));
-                      await VerifyNumberService.verifyNumberService(
-                          _phoneNumberController.text);
-                      await next(context);
-                      // context.read<AuthCubit>().clear();
-                    },
-                    primaryColor: AppColors.orangeColor,
-                    textColor: AppColors.whiteColor,
-                    sideColor: AppColors.transparentColor,
-                  ),
-                  SizedBox(height: getHeight(120.0)),
-                  SizedBox(
-                    height: getHeight(70.0),
-                    width: getWidth(284.0),
-                    // color: Colors.amberAccent,
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: getWidth(12.0),
-                        ),
-                        children: [
-                          TextSpan(
-                            text:
-                                ('Нажимая “Продолжить” вы соглашаетесь с\n условиями '),
-                            style: TextStyle(
-                              fontSize: getWidth(12.0),
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.black,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ('Обработки персональных '),
-                            style: TextStyle(
-                              fontSize: getWidth(12.0),
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.orangeColor,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ('данных и\n'),
-                            style: TextStyle(
-                              fontSize: getWidth(12.0),
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.black,
-                            ),
-                          ),
-                          TextSpan(
-                            text: (' Публичной аферты'),
-                            style: TextStyle(
-                              fontSize: getWidth(12.0),
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.orangeColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 

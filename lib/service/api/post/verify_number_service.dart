@@ -1,9 +1,9 @@
 import 'package:asia_uz/core/widgets/is_loading.dart';
-import 'package:flutter/gestures.dart';
 import 'package:http/http.dart' as http;
 import 'package:asia_uz/core/imports/imports.dart';
 
 class VerifyNumberService {
+  
   static Future verifyNumberService(String phoneNumber) async {
     IsLoadingWidget(isload: false);
     debugPrint('telefon raqam : ${GetStorage().read('telNumber')}');
@@ -30,4 +30,5 @@ class VerifyNumberService {
       debugPrint(e.toString());
     }
   }
+  static setLoading() {}
 }

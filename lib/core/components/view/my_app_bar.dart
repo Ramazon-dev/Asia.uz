@@ -23,11 +23,11 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
         Positioned(
           top: -2,
           left: -4,
-          // right: 0,
+          right: -1,
           child: Container(
             alignment: Alignment.bottomCenter,
             height: getHeight(110),
-            width: getWidth(381),
+            width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
               // color: Colors.yellow,
               image: DecorationImage(

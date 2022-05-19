@@ -90,16 +90,16 @@ class CardsPage extends StatelessWidget {
             ),
           ),
           Container(
+            alignment: Alignment.center,
             margin: EdgeInsets.all(getWidth(20.0)),
-            height: getHeight(144.0),
+            height: getHeight(155.0),
             width: double.infinity,
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
-              borderRadius: BorderRadius.circular(
-                getWidth(15.0),
-              ),
+              borderRadius: BorderRadius.circular(getWidth(15.0)),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -146,7 +146,8 @@ class CardsPage extends StatelessWidget {
                     fontSize: getWidth(14.0),
                     fontWeight: FontWeight.w500,
                   ),
-                )
+                ),
+                SizedBox(height: getHeight(20)),
               ],
             ),
           ),
