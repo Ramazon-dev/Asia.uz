@@ -33,7 +33,7 @@ class MyTextFormFiels extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return TextFormField(
-textAlign: TextAlign.start,
+      textAlign: TextAlign.start,
       // cursorHeight: 30,showCursor: false,
       // scrollPadding: EdgeInsets.only(top: 20),
       keyboardType: TextInputType.number,
@@ -76,6 +76,11 @@ textAlign: TextAlign.start,
         ),
       ),
       hintText: hintText,
+      hintStyle: TextStyle(
+        color: AppColors.black,
+        fontSize: getWidth(16.0),
+        fontWeight: FontWeight.w400,
+      ),
       labelText: labelText,
       prefixText: prefixText,
       prefixStyle: TextStyle(

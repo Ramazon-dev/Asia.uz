@@ -28,7 +28,7 @@ class PasswordSet extends StatelessWidget {
             ),
           ),
           padding: EdgeInsets.only(
-            top: getHeight(143),
+            top: getHeight(183),
             left: getWidth(80),
             right: getWidth(80),
           ),
@@ -63,10 +63,12 @@ class PasswordSet extends StatelessWidget {
                   if (code!.length == 4) {
                     isActive = true;
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                ReturnPassword(text: controller.text)));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ReturnPassword(text: controller.text),
+                      ),
+                    );
                   }
                 },
               ).only(bottom: getHeight(250)),

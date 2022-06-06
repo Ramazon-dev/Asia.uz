@@ -14,7 +14,10 @@ class AboutUsPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back),
+          icon: Image.asset(
+            "assets/icons/arrow_back.png",
+          color: AppColors.whiteColor,
+          ),
           color: AppColors.whiteColor,
         ),
         action: const Icon(

@@ -67,8 +67,10 @@ class _ProfilePageState extends State<ProfilePage> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.arrow_back_ios),
-          color: AppColors.whiteColor,
+          icon: Image.asset(
+            "assets/icons/arrow_back.png",
+            color: AppColors.whiteColor,
+          ),
         ),
         text: 'Профиль',
         action: SvgPicture.asset(SvgIcons.avatar),

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:asia_uz/screens/shop/local_auth_api.dart';
@@ -11,10 +9,23 @@ class ReturnPassword extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   String code = '';
   bool isActive = false;
+  isAuthenticated(BuildContext context) async {
+    final isAuthenticated = await LocalAuthApi.authenticate();
+    if (isAuthenticated) {
+      debugPrint("auth localization ishladi");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainPage(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    isAuthenticated(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const AppBarWidget(),
@@ -32,14 +43,21 @@ class ReturnPassword extends StatelessWidget {
             ),
           ),
           padding: EdgeInsets.only(
-            top: getHeight(143),
+            top: getHeight(135),
             left: getWidth(80),
             right: getWidth(80),
           ),
           child: Column(
             children: [
-              MyTextWidget(text: 'Повторите свой PIN-код')
-                  .only(bottom: getHeight(50)),
+              Image.asset(
+                "assets/images/biometric.png",
+              ),
+              MyTextWidget(
+                text:
+                    'Введите PIN-код или удерживайте палец на сенсоре для входа в приложение',
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.center,
+              ).only(bottom: getHeight(24), top: getHeight(24)),
               PinFieldAutoFill(
                 codeLength: 4,
                 // autoFocus: true,
@@ -69,23 +87,7 @@ class ReturnPassword extends StatelessWidget {
                   }
                 },
               ).only(bottom: getHeight(200)),
-              ElevatedButton(
-                child: const Text(
-                  'Authenticate',
-                ),
-                onPressed: () async {
-                  final isAuthenticated = await LocalAuthApi.authenticate();
-                  if (isAuthenticated) {
-                    debugPrint("");
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MainPage(),
-                      ),
-                    );
-                  }
-                },
-              ),
+              // ElevatedButton( 
               // MyElevatedButton(
               //   primaryColor: AppColors.transparentColor,
               //   text: 'Войти'.tr(),

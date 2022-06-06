@@ -12,7 +12,13 @@ class ShowCards extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Image.asset(
+            "assets/icons/arrow_back.png",
+            color: AppColors.black,
+          ),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -32,11 +38,20 @@ class ShowCards extends StatelessWidget {
             ),
             child: Column(
               children: [
-                QrCodeCreator(
-                  text: "",
-                  color: AppColors.bgColor,
-                  size: getHeight(285),
-                ).only(bottom: getHeight(20)),
+                Container(
+                  padding: EdgeInsets.all(getHeight(3)),
+                  height: getHeight(280),
+                  width: getWidth(285),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.unselectedColor,
+                  ),
+                  child: QrCodeCreator(
+                    text: "",
+                    color: AppColors.transparentColor,
+                    size: getHeight(285),
+                  ),
+                ).only(bottom: getHeight(10)),
                 Text(
                   """Покажите QR-код кассиру.
 Максимальная сумма к списанию 

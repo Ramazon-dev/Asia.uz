@@ -16,8 +16,8 @@ class VerifyCodeService {
         "code": "$verifyCode",
       },
     );
-    debugPrint("sssssssssssssssssssss: ${response}");
-    debugPrint("rrrrr : ${response.body}");
+    debugPrint("response: $response");
+    debugPrint("resposne.body : ${response.body}");
 
     try {
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -25,7 +25,7 @@ class VerifyCodeService {
         String token = data['access_token'];
         debugPrint("access_token : $token");
         await GetStorage().write('token', token);
-        debugPrint("response : ${response.body}");
+        debugPrint("if ichida response : ${response.body}");
         // return data;
       } else {
         throw 'error';

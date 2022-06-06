@@ -27,6 +27,7 @@ class MyTextWidget extends StatelessWidget {
       text,
       textAlign: textAlign,
       style: _style(),
+      
     );
   }
 

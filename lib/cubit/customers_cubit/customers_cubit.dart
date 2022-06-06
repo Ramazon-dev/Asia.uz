@@ -51,19 +51,19 @@ class CustomersCubit extends Cubit<CustomersState> {
 
   void postCuspomers() async {
     if (validateState.currentState!.validate()) {
-      CuspomersServices.cuspomersService(
-        firstNameController.text,
-        lastNameController.text,
-        emailController.text,
-        landlineController.text,
-        backupPhoneController.text,
-        dopController.text,
-        materialState,
-        gemderController.text,
-        occupationController.text,
-        notificationPreferenceController.text,
-        notificationLanguageController.text,
-      );
+      // CuspomersServices.cuspomersService(
+      //   firstNameController.text,
+      //   lastNameController.text,
+      //   emailController.text,
+      //   landlineController.text,
+      //   backupPhoneController.text,
+      //   dopController.text,
+      //   materialState,
+      //   gemderController.text,
+      //   occupationController.text,
+      //   notificationPreferenceController.text,
+      //   notificationLanguageController.text,
+      // );
     } else {
       isValidateState = true;
       emit(CuspomersValidateState(isValidateState));

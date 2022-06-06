@@ -7,6 +7,13 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+        onPressed: () => Navigator.pop(context),
+        icon: Image.asset(
+          "assets/icons/arrow_back.png",
+          color: AppColors.black,
+        ),
+      ),
       iconTheme: const IconThemeData(color: AppColors.black),
       backgroundColor: AppColors.transparentColor,
       elevation: 0,

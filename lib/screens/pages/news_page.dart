@@ -15,18 +15,20 @@ class NewsPage extends StatelessWidget {
         text: 'Новости и акции',
         leading: IconButton(
           onPressed: () {
-          Navigator.pop(context);
-
+            Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back),
-          color: AppColors.whiteColor,
+          icon: Image.asset(
+            "assets/icons/arrow_back.png",
+            color: AppColors.whiteColor,
+          ),
+          // color: AppColors.whiteColor,
         ),
-          // Navigator.of(context).pop();
-          // if(scaffoldKey!.currentState!.isDrawerOpen == true){
-          //   false;
-          // }else{
-          //   true;
-          // }
+        // Navigator.of(context).pop();
+        // if(scaffoldKey!.currentState!.isDrawerOpen == true){
+        //   false;
+        // }else{
+        //   true;
+        // }
         action: const Icon(
           Icons.height,
           color: AppColors.orangeColor,
