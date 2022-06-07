@@ -15,8 +15,8 @@ class CardsPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: getHeight(125)),
-            height: getHeight(540.0),
+            padding: EdgeInsets.only(top: getHeight(120)),
+            height: getHeight(515.0),
             width: double.infinity,
             color: AppColors.whiteColor,
             child: Column(
@@ -31,7 +31,7 @@ class CardsPage extends StatelessWidget {
                     fontSize: getWidth(20.0),
                   ),
                 ),
-                SizedBox(height: getHeight(40.0)),
+                SizedBox(height: getHeight(30.0)),
                 InkWell(
                     onTap: () {
                       Navigator.push(
@@ -64,7 +64,7 @@ class CardsPage extends StatelessWidget {
                     ),
                   ],
                 ).symmetric(horizontal: getWidth(24.0)),
-                SizedBox(height: getHeight(35.0)),
+                SizedBox(height: getHeight(25.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -91,8 +91,9 @@ class CardsPage extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.all(getWidth(20.0)),
-            height: getHeight(155.0),
+            margin: EdgeInsets.all(getWidth(15.0)),
+            padding: EdgeInsets.all(getWidth(10)),
+            height: getHeight(160.0),
             width: double.infinity,
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
@@ -101,8 +102,8 @@ class CardsPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -110,34 +111,41 @@ class CardsPage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Container(
-                    margin: EdgeInsets.all(getWidth(14.0)),
-                    height: getHeight(69.0),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        getWidth(15.0),
-                      ),
-                      color: Colors.orange.shade300,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.add_circle,
-                            color: AppColors.whiteColor),
-                        SizedBox(width: getWidth(5.0)),
-                        Text(
-                          'Добавить имеющуюся карту',
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontWeight: FontWeight.w400,
-                            fontSize: getWidth(16.0),
-                          ),
-                        )
-                      ],
-                    ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(getHeight(15))),
+                    primary: Colors.orange.shade300,
+                    fixedSize: Size(getWidth(320), getHeight(69)),
+                  ),
+
+                  // child: Container(
+                  // margin: EdgeInsets.all(getWidth(14.0)),
+                  // height: getHeight(69.0),
+                  // width: double.infinity,
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(
+                  //     getWidth(15.0),
+                  //   ),
+                  //   color: Colors.orange.shade300,
+                  // ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.add_circle, color: AppColors.whiteColor),
+                      SizedBox(width: getWidth(5.0)),
+                      Text(
+                        'Добавить имеющуюся карту',
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w400,
+                          fontSize: getWidth(16.0),
+                        ),
+                      )
+                    ],
                   ),
                 ),
+                SizedBox(height: getHeight(10)),
+                // ),
                 Text(
                   'Вы можете добавить физическую карту лояльности отсканировав штрих-код',
                   textAlign: TextAlign.center,
@@ -147,7 +155,7 @@ class CardsPage extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: getHeight(20)),
+                // SizedBox(height: getHeight(20)),
               ],
             ),
           ),

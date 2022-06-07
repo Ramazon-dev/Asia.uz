@@ -44,8 +44,8 @@ class ReturnPassword extends StatelessWidget {
           ),
           padding: EdgeInsets.only(
             top: getHeight(135),
-            left: getWidth(80),
-            right: getWidth(80),
+            left: getWidth(75),
+            right: getWidth(75),
           ),
           child: Column(
             children: [

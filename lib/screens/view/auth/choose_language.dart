@@ -49,9 +49,13 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
             ).only(bottom: getHeight(34.0)),
             Container(
               height: getHeight(50),
+              // color: Colors.yellow,
+              width: MediaQuery.of(context).size.width,
               alignment: Alignment.center,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: getWidth(30.0)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 1 / 7,
+                ),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
@@ -59,9 +63,9 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: MyElevatedButton(
-                        height: getHeight(32),
-                        width: getWidth(80),
-                        radius: getHeight(22),
+                        height: getHeight(35),
+                        width: getWidth(60),
+                        radius: getHeight(18),
                         primaryColor: AppColors.transparentColor,
                         textColor: son == index
                             ? AppColors.orangeColor
@@ -109,7 +113,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
               radius: getHeight(15),
               sideWidth: getWidth(2),
             ),
-            SizedBox(height: getHeight(140.0)),
+            SizedBox(height: getHeight(116.0)),
             SizedBox(
               height: getHeight(70.0),
               width: getWidth(284.0),

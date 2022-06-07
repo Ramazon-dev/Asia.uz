@@ -67,8 +67,8 @@ class _SmsFieldState extends State<SmsField> {
                 ),
                 padding: EdgeInsets.only(
                   top: getHeight(143),
-                  left: getWidth(80),
-                  right: getWidth(80),
+                  left: getWidth(75),
+                  right: getWidth(75),
                 ),
                 child: Column(
                   children: [
