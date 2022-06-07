@@ -115,6 +115,7 @@ class MyDrawer extends StatelessWidget {
                           GetStorage().remove('telNumber');
                           GetStorage().remove('token');
                           GetStorage().remove('firstName');
+                          //! GetStorage().remove("qrcode"); 
 
                           Navigator.push(
                               context,

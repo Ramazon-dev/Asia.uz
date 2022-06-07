@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/view/auth/choose_language.dart';
+import 'package:asia_uz/screens/view/auth/password_set/return_password.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreens extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SplashScreensState extends State<SplashScreens> {
         context,
         MaterialPageRoute(
           builder: (context) => GetStorage().read('firstName') != null
-              ? MainPage()
+              ? ReturnPassword(text: GetStorage().read("password"))
               : ChooseLanguagePage(),
         ),
       ),

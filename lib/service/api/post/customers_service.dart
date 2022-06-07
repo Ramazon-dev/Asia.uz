@@ -14,6 +14,7 @@ class CustomersServices {
     required String occupation,
   }) async {
     CustomersGetModels customersGetModels;
+    debugPrint("funksiya ishga tushdi");
     var res = await http.post(
       Uri.parse(
         BaseUrl.baseUrl + '/customers',
@@ -33,7 +34,9 @@ class CustomersServices {
         "notification_language": notificationPreference
       },
     );
+    debugPrint("funksiya bodydan otdi");
     try {
+      debugPrint("funksiya try ga kirdi");
       if (res.statusCode == 200 || res.statusCode == 201) {
         var data = jsonDecode(res.body);
         debugPrint("ifga kirdi: $res");
@@ -54,6 +57,7 @@ history: ${GetStorage().read("history")}
       }
     } catch (e) {
       debugPrint(e.toString());
+      debugPrint("funksiya catch ga otib ketti");
       return customersGetModels =
           CustomersGetModels.fromJson(jsonDecode(res.body));
     }

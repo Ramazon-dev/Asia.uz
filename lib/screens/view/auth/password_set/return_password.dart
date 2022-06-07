@@ -25,7 +25,7 @@ class ReturnPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    isAuthenticated(context);
+    // isAuthenticated(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const AppBarWidget(),
@@ -71,6 +71,7 @@ class ReturnPassword extends StatelessWidget {
                 currentCode: code,
                 onCodeSubmitted: (code) async {
                   if (code.length == 4 && text == controller.text) {
+                    GetStorage().write("password", controller.text);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -81,13 +82,19 @@ class ReturnPassword extends StatelessWidget {
                 },
                 onCodeChanged: (code) async {
                   if (code!.length == 4 && text == controller.text) {
+                    GetStorage().write("password", controller.text);
                     hideKeyboard(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                GetStorage().read('firstName') != null
+                                    ? MainPage()
+                                    : ProfilePage()));
                   }
                 },
               ).only(bottom: getHeight(200)),
-              // ElevatedButton( 
+              // ElevatedButton(
               // MyElevatedButton(
               //   primaryColor: AppColors.transparentColor,
               //   text: 'Войти'.tr(),
