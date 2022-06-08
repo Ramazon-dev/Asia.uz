@@ -23,9 +23,13 @@ class NewsDetailPage extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is NewsViewInitial) {
-            return Loader.loader();
+            return Scaffold(
+              body: Loader.loader(),
+            );
           } else if (state is NewsViewLoading) {
-            return Loader.loader();
+            return Scaffold(
+              body: Loader.loader(),
+            );
           } else if (state is NewsViewCompleted) {
             return Scaffold(
               backgroundColor: AppColors.unselectedColor,
@@ -75,8 +79,9 @@ class NewsDetailPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(
                               getWidth(15.0),
                             ),
-                            image:  DecorationImage(
-                              image: NetworkImage(state.response.image.toString()),
+                            image: DecorationImage(
+                              image:
+                                  NetworkImage(state.response.image.toString()),
                               fit: BoxFit.cover,
                             ),
                           ),

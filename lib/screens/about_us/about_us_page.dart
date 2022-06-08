@@ -3,7 +3,8 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsPage extends StatelessWidget {
-  const AboutUsPage({Key? key}) : super(key: key);
+  AboutUsPage({Key? key}) : super(key: key);
+  TextEditingController _messangeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class AboutUsPage extends StatelessWidget {
           },
           icon: Image.asset(
             "assets/icons/arrow_back.png",
-          color: AppColors.whiteColor,
+            color: AppColors.whiteColor,
           ),
           color: AppColors.whiteColor,
         ),
