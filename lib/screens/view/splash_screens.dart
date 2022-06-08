@@ -21,7 +21,7 @@ class _SplashScreensState extends State<SplashScreens> {
         context,
         MaterialPageRoute(
           builder: (context) => GetStorage().read('firstName') != null
-              ? ReturnPassword(text: GetStorage().read("password"))
+              ? ReturnPassword(text: GetStorage().read("password") ?? "1234")
               : ChooseLanguagePage(),
         ),
       ),

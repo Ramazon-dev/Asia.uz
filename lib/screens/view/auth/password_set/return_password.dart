@@ -3,12 +3,22 @@ import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:asia_uz/screens/shop/local_auth_api.dart';
 import 'package:flutter/material.dart';
 
-class ReturnPassword extends StatelessWidget {
+class ReturnPassword extends StatefulWidget {
   String text;
   ReturnPassword({Key? key, required this.text}) : super(key: key);
+
+  @override
+  State<ReturnPassword> createState() => _ReturnPasswordState();
+}
+
+class _ReturnPasswordState extends State<ReturnPassword> {
   TextEditingController controller = TextEditingController();
+
   String code = '';
+
   bool isActive = false;
+  bool first = true;
+
   isAuthenticated(BuildContext context) async {
     final isAuthenticated = await LocalAuthApi.authenticate();
     if (isAuthenticated) {
@@ -22,10 +32,26 @@ class ReturnPassword extends StatelessWidget {
     }
   }
 
+  // @override
+  // void initState() {
+  //   if (first) {
+  //     isAuthenticated(context);
+  //     first = false;
+  //   }
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+
+    if (first) {
+      isAuthenticated(context);
+      first = false;
+    }
+
     // isAuthenticated(context);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const AppBarWidget(),
@@ -70,8 +96,12 @@ class ReturnPassword extends StatelessWidget {
                 ),
                 currentCode: code,
                 onCodeSubmitted: (code) async {
-                  if (code.length == 4 && text == controller.text) {
+
+                  
+
+                  if (code.length == 4 && widget.text == controller.text) {
                     GetStorage().write("password", controller.text);
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -81,8 +111,10 @@ class ReturnPassword extends StatelessWidget {
                   }
                 },
                 onCodeChanged: (code) async {
-                  if (code!.length == 4 && text == controller.text) {
+
+                  if (code!.length == 4 && widget.text == controller.text) {
                     GetStorage().write("password", controller.text);
+
                     hideKeyboard(context);
                     Navigator.push(
                         context,

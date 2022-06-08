@@ -22,9 +22,13 @@ class NewsPage extends StatelessWidget {
         listener: (context, state){},
         builder: (context, state){
           if(state is NewsInitial){
-            return Loader.loader();
+            return Scaffold(
+              body: Loader.loader(),
+            );
           } else if (state is NewsLoading){
-            return Loader.loader();
+            return Scaffold(
+              body: Loader.loader(),
+            );
           } else if (state is NewsCompleted){
             debugPrint("News title :${state.response[0].title}");
             return _buildScaffold(context, state);
