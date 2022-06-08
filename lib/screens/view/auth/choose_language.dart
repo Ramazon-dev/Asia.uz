@@ -57,14 +57,19 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                   horizontal: MediaQuery.of(context).size.width * 1 / 7,
                 ),
                 child: ListView.builder(
+                  padding: const EdgeInsets.all(0),
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: MyElevatedButton(
-                        height: getHeight(35),
-                        width: getWidth(60),
+                        height: SizerUtil.deviceType == DeviceType.mobile
+                            ? getHeight(35)
+                            : getHeight(55),
+                        width: SizerUtil.deviceType == DeviceType.mobile
+                            ? getWidth(60)
+                            : getWidth(94),
                         radius: getHeight(18),
                         primaryColor: AppColors.transparentColor,
                         textColor: son == index
@@ -76,7 +81,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         sideWidth: getWidth(2),
                         text: listOfString[index],
                         fontWeight: FontWeight.w700,
-                        textSize: getHeight(16),
+                        textSize: getWidth(16),
                         onPressed: () {
                           son = index;
                           if (son == 0) {
@@ -105,15 +110,20 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                   ),
                 );
               },
-              height: getHeight(50),
-              width: getWidth(161),
+              height: SizerUtil.deviceType == DeviceType.mobile
+                  ? getHeight(50)
+                  : getHeight(94),
+              width: SizerUtil.deviceType == DeviceType.mobile
+                  ? getWidth(161)
+                  : getWidth(303),
               textColor: AppColors.whiteColor,
               primaryColor: AppColors.orangeColor,
               sideColor: AppColors.orangeColor,
               radius: getHeight(15),
               sideWidth: getWidth(2),
             ),
-            SizedBox(height: getHeight(116.0)),
+            const Spacer(),
+            // SizedBox(height: getHeight(116.0)),
             SizedBox(
               height: getHeight(70.0),
               width: getWidth(284.0),

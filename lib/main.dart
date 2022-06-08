@@ -41,19 +41,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          
-        ),
-        primarySwatch: Colors.blue,
-      ),
-      home: SplashScreens(),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        debugPrint((SizerUtil.deviceType == DeviceType.mobile).toString());
+        return MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: SplashScreens(),
+        );
+      },
     );
   }
 }

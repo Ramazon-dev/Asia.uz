@@ -16,7 +16,7 @@ export 'package:asia_uz/core/widgets/my_elevated_button.dart';
 export 'package:asia_uz/core/widgets/my_text_widget.dart';
 export 'package:asia_uz/provider/on_press_provider.dart';
 export 'package:easy_localization/easy_localization.dart';
-export  'package:asia_uz/core/widgets/appbar_widget.dart';
+export 'package:asia_uz/core/widgets/appbar_widget.dart';
 export 'package:sms_autofill/sms_autofill.dart';
 export 'package:easy_padding/easy_padding.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,4 +33,4 @@ export 'dart:convert';
 export 'package:asia_uz/core/constants/base/base_url.dart';
 export 'package:flutter/foundation.dart';
 export 'package:asia_uz/cubit/verify_code_cubit/verify_code_state.dart';
-
+export 'package:sizer/sizer.dart';
