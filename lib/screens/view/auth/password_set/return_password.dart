@@ -44,10 +44,14 @@ class _ReturnPasswordState extends State<ReturnPassword> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+
     if (first) {
       isAuthenticated(context);
       first = false;
     }
+
+    // isAuthenticated(context);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const AppBarWidget(),
@@ -66,8 +70,8 @@ class _ReturnPasswordState extends State<ReturnPassword> {
           ),
           padding: EdgeInsets.only(
             top: getHeight(135),
-            left: getWidth(80),
-            right: getWidth(80),
+            left: getWidth(75),
+            right: getWidth(75),
           ),
           child: Column(
             children: [
@@ -92,7 +96,12 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                 ),
                 currentCode: code,
                 onCodeSubmitted: (code) async {
+
+                  
+
                   if (code.length == 4 && widget.text == controller.text) {
+                    GetStorage().write("password", controller.text);
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -102,10 +111,18 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                   }
                 },
                 onCodeChanged: (code) async {
+
                   if (code!.length == 4 && widget.text == controller.text) {
+                    GetStorage().write("password", controller.text);
+
                     hideKeyboard(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                GetStorage().read('firstName') != null
+                                    ? MainPage()
+                                    : ProfilePage()));
                   }
                 },
               ).only(bottom: getHeight(200)),

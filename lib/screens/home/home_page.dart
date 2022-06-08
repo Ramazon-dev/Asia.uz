@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: getHeight(17.0)),
                   QrCodeCreator(
+                    // text: "qrcode",
                     text: GetStorage().read("qrcode"),
                     size: getHeight(280),
                   ),

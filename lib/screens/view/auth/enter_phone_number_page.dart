@@ -119,6 +119,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                   inputFormatters: [maskFormatter],
                                   controller: _phoneNumberController,
                                   obscureText: false,
+                                  
                                   prefixIcon: Container(
                                     margin: EdgeInsets.only(
                                         left: getWidth(5.0),
@@ -128,7 +129,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                     width: getWidth(40.0),
                                     child: MyTextWidget(
                                       text: '+998',
-                                      fontSize: getHeight(16),
+                                      fontSize: 16.0,
                                       fontWeight: FontWeight.w400,
                                       textColor: AppColors.black,
                                     ),

@@ -47,7 +47,7 @@ class MainPage extends StatelessWidget {
                     EdgeInsets.only(left: getWidth(20), top: getHeight(10)),
                 child: SvgPicture.asset(
                   SvgIcons.menu,
-                  height: getHeight(28),
+                  height: getHeight(20),
                   color: AppColors.black,
                 ),
               ),

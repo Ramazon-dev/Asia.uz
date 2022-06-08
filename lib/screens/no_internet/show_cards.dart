@@ -12,6 +12,7 @@ class ShowCards extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
       appBar: AppBar(
+        toolbarHeight: getHeight(70),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: Image.asset(
@@ -39,15 +40,16 @@ class ShowCards extends StatelessWidget {
             child: Column(
               children: [
                 Container(
+                  alignment: Alignment.center,
                   padding: EdgeInsets.all(getHeight(3)),
-                  height: getHeight(280),
+                  height: getHeight(285),
                   width: getWidth(285),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.unselectedColor,
                   ),
                   child: QrCodeCreator(
-                    text: "",
+                    text: GetStorage().read("qrcode"),
                     color: AppColors.transparentColor,
                     size: getHeight(285),
                   ),
@@ -67,7 +69,7 @@ class ShowCards extends StatelessWidget {
             ),
           ).only(bottom: getHeight(12)),
           Container(
-            height: getHeight(310),
+            height: getHeight(294),
             width: getWidth(375),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -78,9 +80,10 @@ class ShowCards extends StatelessWidget {
             child: Column(
               children: [
                 MyTextWidget(
-                  text: """Эти карты используются для оплаты 
+                  text:
+                      """Эти карты используются для оплаты 
 и начисления бонусов""",
-                ).symmetric(vertical: getHeight(32), horizontal: getWidth(31)),
+                ).symmetric(vertical: getHeight(20), horizontal: getWidth(31)),
                 const CardWidget(),
               ],
             ),

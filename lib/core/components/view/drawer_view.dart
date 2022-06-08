@@ -115,6 +115,7 @@ class MyDrawer extends StatelessWidget {
                           GetStorage().remove('telNumber');
                           GetStorage().remove('token');
                           GetStorage().remove('firstName');
+                          //! GetStorage().remove("qrcode");
 
                           Navigator.push(
                               context,
@@ -149,8 +150,8 @@ class MyDrawer extends StatelessWidget {
                 alignment: Alignment.center,
                 // padding: EdgeInsets.all(getHeight(5)),
                 margin: EdgeInsets.only(top: getHeight(20)),
-                height: getHeight(100),
-                width: getWidth(300),
+                height: getHeight(105),
+                width: MediaQuery.of(context).size.width,
                 color: const Color(0xff800D0D0D),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

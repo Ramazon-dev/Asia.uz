@@ -55,7 +55,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                         fontSize: getWidth(20.0),
                         fontWeight: FontWeight.w700,
                       ),
-                    ),
+                    ).only(top: getHeight(13)),
                   ),
                   Padding(
                     padding: EdgeInsets.only(right: getHeight(3)),
