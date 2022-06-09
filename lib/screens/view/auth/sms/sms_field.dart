@@ -136,7 +136,7 @@ class _SmsFieldState extends State<SmsField> {
                           color: AppColors.drawerTextColor,
                         ),
                       ),
-                    ).only(bottom: getHeight(200)),
+                    ),
                     // MyElevatedButton(
                     //   primaryColor: AppColors.orangeColor,
                     //   textColor: AppColors.whiteColor,

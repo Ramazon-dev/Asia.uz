@@ -3,36 +3,34 @@ import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:asia_uz/screens/shop/local_auth_api.dart';
 import 'package:flutter/material.dart';
 
-class ReturnPassword extends StatefulWidget {
+class CheckPassword extends StatefulWidget {
   String text;
-  ReturnPassword({Key? key, required this.text}) : super(key: key);
+  CheckPassword({Key? key, required this.text}) : super(key: key);
 
   @override
-  State<ReturnPassword> createState() => _ReturnPasswordState();
+  State<CheckPassword> createState() => _CheckPasswordState();
 }
 
-class _ReturnPasswordState extends State<ReturnPassword> {
+class _CheckPasswordState extends State<CheckPassword> {
   TextEditingController controller = TextEditingController();
 
   String code = '';
 
-  // bool isActive = false;
-  // bool first = true;
+  bool isActive = false;
+  bool first = true;
 
-  // isAuthenticated(BuildContext context) async {
-  //   final isAuthenticated = await LocalAuthApi.authenticate();
-  //   if (isAuthenticated) {
-  //     debugPrint("auth localization ishladi");
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => GetStorage().read('firstName') != null
-  //             ? MainPage()
-  //             : ProfilePage(),
-  //       ),
-  //     );
-  //   }
-  // }
+  isAuthenticated(BuildContext context) async {
+    final isAuthenticated = await LocalAuthApi.authenticate();
+    if (isAuthenticated) {
+      debugPrint("auth localization ishladi");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainPage(),
+        ),
+      );
+    }
+  }
 
   // @override
   // void initState() {
@@ -47,16 +45,16 @@ class _ReturnPasswordState extends State<ReturnPassword> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    // if (first) {
-    //   isAuthenticated(context);
-    //   first = false;
-    // }
+    if (first) {
+      isAuthenticated(context);
+      first = false;
+    }
 
     // isAuthenticated(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const AppBarWidget(),
+      // appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,

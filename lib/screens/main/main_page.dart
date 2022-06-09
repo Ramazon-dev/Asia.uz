@@ -68,10 +68,12 @@ class MainPage extends StatelessWidget {
               ),
             ).only(right: getWidth(10), top: getHeight(10)),
           ),
-          
           drawer: MyDrawer(model: model),
           body: model.currentScreens,
-          bottomNavigationBar: MyBottomNavigationBar(model: model),
+          bottomNavigationBar: Container(
+              color: const Color(0xffF29443),
+              padding: EdgeInsets.only(top: getHeight(3)),
+              child: MyBottomNavigationBar(model: model)),
         ),
       ),
     );

@@ -32,10 +32,9 @@ class MyElevatedButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: getHeight(textSize),
+          fontSize: getWidth(textSize),
           fontWeight: fontWeight,
           color: textColor,
-          
         ),
       ),
       style: ElevatedButton.styleFrom(

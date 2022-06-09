@@ -213,12 +213,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         items: const <DropdownMenuItem<String>>[
                           DropdownMenuItem(
-                            value: "male",
-                            child: Text("male"),
+                            value: "мужчина",
+                            child: Text("мужчина"),
                           ),
                           DropdownMenuItem(
-                            value: "female",
-                            child: Text("female"),
+                            value: "женщина",
+                            child: Text("женщина"),
                           ),
                         ],
                       ),
@@ -244,46 +244,46 @@ class _ProfilePageState extends State<ProfilePage> {
                         //     v!.isEmpty ? 'Telefon raqam kiritilmadi' : null,
                       ),
                       SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        controller: _notificationController,
-                        decoration: const InputDecoration(
-                          hintText: 'Способ получения уведомлений*',
-                          labelText: 'Способ получения уведомлений*',
-                          suffixIcon: Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
-                      ),
-                      DropdownButtonFormField(
-                        hint: const Text("Язык уведомлений"),
-                        icon: Padding(
-                          padding: EdgeInsets.only(right: getHeight(13)),
-                          child: const Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        onChanged: (String? v) {
-                          notifLang = v;
-                        },
-                        validator: (v) => v == null ? "Till tanlanmadi" : null,
-                        items: const <DropdownMenuItem<String>>[
-                          DropdownMenuItem(
-                            value: "russian",
-                            child: Text("russian"),
-                          ),
-                          DropdownMenuItem(
-                            value: "o`zbek",
-                            child: Text("o`zbek"),
-                          ),
-                          DropdownMenuItem(
-                            value: "english",
-                            child: Text("english"),
-                          ),
-                        ],
-                      ),
+                      // TextFormField(
+                      //   controller: _notificationController,
+                      //   decoration: const InputDecoration(
+                      //     hintText: 'Способ получения уведомлений*',
+                      //     labelText: 'Способ получения уведомлений*',
+                      //     suffixIcon: Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: AppColors.black,
+                      //     ),
+                      //   ),
+                      //   validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
+                      // ),
+                      // DropdownButtonFormField(
+                      //   hint: const Text("Язык уведомлений"),
+                      //   icon: Padding(
+                      //     padding: EdgeInsets.only(right: getHeight(13)),
+                      //     child: const Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: AppColors.black,
+                      //     ),
+                      //   ),
+                      //   onChanged: (String? v) {
+                      //     notifLang = v;
+                      //   },
+                      //   validator: (v) => v == null ? "Till tanlanmadi" : null,
+                      //   items: const <DropdownMenuItem<String>>[
+                      //     DropdownMenuItem(
+                      //       value: "russian",
+                      //       child: Text("russian"),
+                      //     ),
+                      //     DropdownMenuItem(
+                      //       value: "o`zbek",
+                      //       child: Text("o`zbek"),
+                      //     ),
+                      //     DropdownMenuItem(
+                      //       value: "english",
+                      //       child: Text("english"),
+                      //     ),
+                      //   ],
+                      // ),
                       // TextFormField(
                       //   controller: _floorController,
                       //   decoration: const InputDecoration(
@@ -323,50 +323,50 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         // validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
                       ),
+                      // SizedBox(height: getHeight(4.0)),
+                      // TextFormField(
+                      //   keyboardType: TextInputType.datetime,
+                      //   controller: _homePhoneNumberController,
+                      //   decoration: const InputDecoration(
+                      //     hintText: 'Домашний телефон*',
+                      //     labelText: 'Домашний телефон*',
+                      //     suffixIcon: Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: AppColors.black,
+                      //     ),
+                      //   ),
+                      //   // validator: (v) => v!.isEmpty ? 'Uy raqami kiritilmadi' : null,
+                      // ),
+                      // SizedBox(height: getHeight(4.0)),
+                      // TextFormField(
+                      //   controller: _homeSecondPhoneNumberController,
+                      //   keyboardType: TextInputType.datetime,
+                      //   decoration: const InputDecoration(
+                      //     hintText: 'Дополнительный телефон*',
+                      //     labelText: 'Дополнительный телефон*',
+                      //     suffixIcon: Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: AppColors.black,
+                      //     ),
+                      //   ),
+                      //   // validator: (v) =>
+                      //   //     v!.isEmpty ? 'Qoshimcha raqam kiritilmadi' : null,
+                      // ),
                       SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        keyboardType: TextInputType.datetime,
-                        controller: _homePhoneNumberController,
-                        decoration: const InputDecoration(
-                          hintText: 'Домашний телефон*',
-                          labelText: 'Домашний телефон*',
-                          suffixIcon: Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        // validator: (v) => v!.isEmpty ? 'Uy raqami kiritilmadi' : null,
-                      ),
-                      SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        controller: _homeSecondPhoneNumberController,
-                        keyboardType: TextInputType.datetime,
-                        decoration: const InputDecoration(
-                          hintText: 'Дополнительный телефон*',
-                          labelText: 'Дополнительный телефон*',
-                          suffixIcon: Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        // validator: (v) =>
-                        //     v!.isEmpty ? 'Qoshimcha raqam kiritilmadi' : null,
-                      ),
-                      SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          hintText: 'E-mail*',
-                          labelText: 'E-mail*',
-                          suffixIcon: Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        // validator: (v) => v!.isEmpty ? 'Email kiritilmadi' : null,
-                      ),
-                      SizedBox(height: getHeight(4.0)),
+                      // TextFormField(
+                      //   keyboardType: TextInputType.emailAddress,
+                      //   controller: _emailController,
+                      //   decoration: const InputDecoration(
+                      //     hintText: 'E-mail*',
+                      //     labelText: 'E-mail*',
+                      //     suffixIcon: Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: AppColors.black,
+                      //     ),
+                      //   ),
+                      //   // validator: (v) => v!.isEmpty ? 'Email kiritilmadi' : null,
+                      // ),
+                      // SizedBox(height: getHeight(4.0)),
                       SizedBox(height: getHeight(70.0)),
                       MyElevatedButton(
                         text: 'Сохранить',
@@ -399,7 +399,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 .write("lang", _languageController.text);
                             // _context.validateState();
                             // _context.clear();
-                            debugPrint("""
+                            debugPrint(
+                                """
 mobile_phone: ${_phoneNumberController.text}
 firstname: ${_firstNameController.text},
 lastNeme: ${_lastNameController.text},
@@ -416,7 +417,7 @@ notificationLanguage: "notificationLanguage",
                                       dob: birthday!,
                                       firstName: _firstNameController.text,
                                       lastName: _lastNameController.text,
-                                      gender: pol ?? "male",
+                                      gender: pol ?? "женщина",
                                       materialStatus: true,
                                       notificationLanguage:
                                           notifLang ?? "russian",

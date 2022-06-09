@@ -26,43 +26,45 @@ class AboutUsPage extends StatelessWidget {
           color: Colors.transparent,
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          MyTextWidget(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            textAlign: TextAlign.center,
-            textColor: AppColors.black,
-            text: """Сеть супермаркетов
-Asia.uz """,
-          ).only(
-            top: getHeight(30),
-            left: getWidth(40),
-          ),
-          MyTextWidget(
-            fontSize: 16,
-            fontWeight: FontWeight.w300,
-            textAlign: TextAlign.center,
-            textColor: AppColors.black,
-            text:
-                """Asia.uz — успешно развивающаяся сеть супермаркетов. Мы объединяем традиции Азии и современный формат розничной торговли.
-
-Начиная с 2017 года, наш список клиентов пополняется благодаря постоянно растущему ассортименту, наилучшему соотношению цены и качества товаров и сохранению стандартов обслуживания.
-
-Asia.uz — качество во всём.""",
-          ).symmetric(
-            horizontal: getHeight(20),
-            vertical: getHeight(30),
-          ),
-          Image(
-            image: const AssetImage(
-              "assets/images/logo.png",
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            MyTextWidget(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              textAlign: TextAlign.center,
+              textColor: AppColors.black,
+              text: """Сеть супермаркетов
+      Asia.uz """,
+            ).only(
+              top: getHeight(30),
+              left: getWidth(40),
             ),
-            height: getHeight(230),
-            fit: BoxFit.cover,
-          ),
-        ],
+            MyTextWidget(
+              fontSize: 16,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
+              textColor: AppColors.black,
+              text:
+                  """Asia.uz — успешно развивающаяся сеть супермаркетов. Мы объединяем традиции Азии и современный формат розничной торговли.
+      
+      Начиная с 2017 года, наш список клиентов пополняется благодаря постоянно растущему ассортименту, наилучшему соотношению цены и качества товаров и сохранению стандартов обслуживания.
+      
+      Asia.uz — качество во всём.""",
+            ).symmetric(
+              horizontal: getHeight(20),
+              vertical: getHeight(30),
+            ),
+            Image(
+              image: const AssetImage(
+                "assets/images/logo.png",
+              ),
+              height: getHeight(230),
+              fit: BoxFit.cover,
+            ),
+          ],
+        ),
       ),
     );
   }

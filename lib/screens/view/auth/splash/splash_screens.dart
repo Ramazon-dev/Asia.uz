@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/view/auth/choose_language.dart';
 import 'package:asia_uz/screens/view/auth/password_set/return_password.dart';
+import 'package:asia_uz/screens/view/auth/splash/check_password.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreens extends StatefulWidget {
@@ -17,14 +18,25 @@ class _SplashScreensState extends State<SplashScreens> {
     super.initState();
     Timer(
       const Duration(seconds: 2),
-      () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => GetStorage().read('firstName') != null
-              ? ReturnPassword(text: GetStorage().read("password") ?? "1234")
-              : ChooseLanguagePage(),
-        ),
-      ),
+      () => GetStorage().read('firstName') != null
+          ? Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (
+                  context,
+                ) =>
+                    CheckPassword(
+                  text: GetStorage().read("password"),
+                ),
+              ),
+              (route) => false,
+            )
+          : Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChooseLanguagePage(),
+              ),
+            ),
     );
   }
 
@@ -33,8 +45,8 @@ class _SplashScreensState extends State<SplashScreens> {
     SizeConfig().init(context);
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: double.infinity,
+        width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(

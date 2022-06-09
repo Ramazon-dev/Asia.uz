@@ -15,7 +15,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
   List<String> listOfString = ["O'ZB", "РУС", "ENG"];
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+    // SizeConfig().init(context);
     return Scaffold(
       body: Container(
         // width: getWidth(),
@@ -29,11 +29,25 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: getHeight(150.0)),
+            SizedBox(height: getHeight(getValueForScreenType(
+                    context: context,
+                    mobile: 130,
+                    tablet: 140,
+                  ),)),
             Container(
-              height: getHeight(188.0),
-              width: getWidth(225.0),
+              height: getHeight(getValueForScreenType(
+                    context: context,
+                    mobile: 188,
+                    tablet: 302,
+                  ),),
+              width: getWidth(getValueForScreenType(
+                    context: context,
+                    mobile: 225,
+                    tablet: 340,
+                  ),),
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
@@ -41,14 +55,17 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                   ),
                 ),
               ),
-            ).only(bottom: getHeight(56.0)),
-            MyTextWidget(
-              text: 'Выберите язык'.tr(),
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
-            ).only(bottom: getHeight(34.0)),
+            ),
+            const Spacer(),
+            // MyTextWidget(
+            //   text: 'Выберите язык'.tr(),
+            //   fontSize: SizerUtil.deviceType == DeviceType.mobile
+            //       ? getHeight(16)
+            //       : getHeight(36),
+            //   fontWeight: FontWeight.w500,
+            // ).only(bottom: getHeight(34.0)),
             Container(
-              height: getHeight(50),
+              height: getHeight(40),
               // color: Colors.yellow,
               width: MediaQuery.of(context).size.width,
               alignment: Alignment.center,
@@ -62,14 +79,10 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(0.0),
                       child: MyElevatedButton(
-                        height: SizerUtil.deviceType == DeviceType.mobile
-                            ? getHeight(35)
-                            : getHeight(55),
-                        width: SizerUtil.deviceType == DeviceType.mobile
-                            ? getWidth(60)
-                            : getWidth(94),
+                        height: getHeight(40),
+                        width: getWidth(65),
                         radius: getHeight(18),
                         primaryColor: AppColors.transparentColor,
                         textColor: son == index
@@ -102,6 +115,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
             SizedBox(height: getHeight(50.0)),
             MyElevatedButton(
               text: 'Войти'.tr(),
+              textSize: getWidth(16),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -110,12 +124,8 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                   ),
                 );
               },
-              height: SizerUtil.deviceType == DeviceType.mobile
-                  ? getHeight(50)
-                  : getHeight(94),
-              width: SizerUtil.deviceType == DeviceType.mobile
-                  ? getWidth(161)
-                  : getWidth(303),
+              height: getHeight(50),
+              width: getWidth(161),
               textColor: AppColors.whiteColor,
               primaryColor: AppColors.orangeColor,
               sideColor: AppColors.orangeColor,

@@ -1,4 +1,3 @@
-import 'package:asia_uz/core/widgets/is_loading.dart';
 import 'package:asia_uz/service/api/post/verify_number_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
@@ -77,7 +76,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                   child: Center(
                     child: Column(
                       children: [
-                        SizedBox(height: getHeight(150.0)),
+                        SizedBox(height: getHeight(133.0)),
                         Container(
                           height: getHeight(188.0),
                           width: getWidth(225.0),
@@ -88,8 +87,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: getHeight(56.0)),
+                        ).only(bottom: getHeight(56.0)),
                         MyTextWidget(
                           text: 'Введите номер телефона',
                           fontSize: getWidth(16.0),
@@ -107,7 +105,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                 width: getWidth(320.0),
                                 child: MyTextWidget(
                                   text: 'Номер телефона',
-                                  fontSize: getHeight(9),
+                                  fontSize: getWidth(9),
                                   fontWeight: FontWeight.w500,
                                   textColor: AppColors.teal,
                                 ),
@@ -119,17 +117,16 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                   inputFormatters: [maskFormatter],
                                   controller: _phoneNumberController,
                                   obscureText: false,
-                                  
                                   prefixIcon: Container(
                                     margin: EdgeInsets.only(
-                                        left: getWidth(5.0),
+                                        left: getHeight(6),
                                         bottom: getHeight(2)),
                                     alignment: Alignment.center,
                                     height: getHeight(40.0),
                                     width: getWidth(40.0),
                                     child: MyTextWidget(
                                       text: '+998',
-                                      fontSize: 16.0,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                       textColor: AppColors.black,
                                     ),
@@ -153,6 +150,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                         ),
                         SizedBox(height: getHeight(34.0)),
                         MyElevatedButton(
+                          radius: getHeight(15),
                           height: getHeight(50),
                           width: getWidth(285),
                           text: 'Продолжить',

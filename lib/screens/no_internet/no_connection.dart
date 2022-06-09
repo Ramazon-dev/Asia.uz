@@ -14,12 +14,13 @@ class NoConnectionPage extends StatelessWidget {
       backgroundColor: AppColors.scaffoldColor,
       body: Padding(
         padding: EdgeInsets.only(
-          top: getHeight(190),
+          // top: getHeight(190),
           left: getWidth(44),
           right: getWidth(44),
         ),
         child: Column(
           children: [
+            const Spacer(),
             Image.asset(
               "assets/images/no_internet.png",
               height: getHeight(200),
@@ -82,7 +83,8 @@ class NoConnectionPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ).only(bottom: getHeight(60)),
+            ),
+            const Spacer(),
             InkWell(
               onTap: () {},
               child: CircleAvatar(
@@ -102,6 +104,7 @@ class NoConnectionPage extends StatelessWidget {
                 color: AppColors.black,
               ),
             ),
+            const Spacer(),
           ],
         ),
       ),

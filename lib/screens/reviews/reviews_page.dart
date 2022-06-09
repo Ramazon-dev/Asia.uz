@@ -86,21 +86,20 @@ class _ReviewsPageState extends State<ReviewsPage>
                           ),
                         ),
                       ),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.person),
-                          hintText: 'What do people call you?',
-                          labelText: 'Name *',
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: getWidth(25)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(),
+                          onSaved: (String? value) {
+                            // This optional block of code can be used to run
+                            // code when the user saves the form.
+                          },
+                          validator: (String? value) {
+                            return (value != null && value.contains('@'))
+                                ? 'Do not use the @ char.'
+                                : null;
+                          },
                         ),
-                        onSaved: (String? value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
-                        validator: (String? value) {
-                          return (value != null && value.contains('@'))
-                              ? 'Do not use the @ char.'
-                              : null;
-                        },
                       ),
                       MyBottomSheet(),
                       MyElevatedButton(

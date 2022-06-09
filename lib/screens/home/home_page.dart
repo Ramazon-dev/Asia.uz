@@ -13,6 +13,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    double width = ScreenUtil().screenHeight;
+    double height = ScreenUtil().screenWidth;
+    debugPrint(
+      "we have screen height: $height and screen width: $width",
+    );
+
     debugPrint("qrcode: ${GetStorage().read("qrcode")}");
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
@@ -23,7 +29,15 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: getHeight(540),
               // margin: EdgeInsets.only(top: getHeight(114)),
-              padding: EdgeInsets.only(top: getHeight(130)),
+              padding: EdgeInsets.only(
+                top: getHeight(
+                  getValueForScreenType(
+                    context: context,
+                    mobile: 130,
+                    tablet: 150,
+                  ),
+                ),
+              ),
               color: Colors.white,
               child: Column(
                 children: [
@@ -41,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: getHeight(17.0)),
                   QrCodeCreator(
                     // text: "qrcode",
-                    text: GetStorage().read("qrcode"),
+                    text: GetStorage().read("qrcode") ?? "",
                     size: getHeight(280),
                   ),
                   SizedBox(height: getHeight(20.0)),
