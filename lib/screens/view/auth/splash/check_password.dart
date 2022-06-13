@@ -1,5 +1,4 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:asia_uz/screens/shop/local_auth_api.dart';
 import 'package:flutter/material.dart';
 
@@ -23,11 +22,12 @@ class _CheckPasswordState extends State<CheckPassword> {
     final isAuthenticated = await LocalAuthApi.authenticate();
     if (isAuthenticated) {
       debugPrint("auth localization ishladi");
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => MainPage(),
         ),
+        (route) => false,
       );
     }
   }
@@ -99,11 +99,12 @@ class _CheckPasswordState extends State<CheckPassword> {
                   if (code.length == 4 && widget.text == controller.text) {
                     GetStorage().write("password", controller.text);
 
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => MainPage(),
                       ),
+                      (route) => false,
                     );
                   }
                 },
@@ -112,31 +113,16 @@ class _CheckPasswordState extends State<CheckPassword> {
                     GetStorage().write("password", controller.text);
 
                     hideKeyboard(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                GetStorage().read('firstName') != null
-                                    ? MainPage()
-                                    : ProfilePage()));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainPage(),
+                      ),
+                      (route) => false,
+                    );
                   }
                 },
               ).only(bottom: getHeight(200)),
-              // ElevatedButton(
-              // MyElevatedButton(
-              //   primaryColor: AppColors.transparentColor,
-              //   text: 'Войти'.tr(),
-              //   onPressed: () {
-              //     isActive == true && text == controller.text
-              //         ? Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //               builder: (context) => MainPage(),
-              //             ),
-              //           )
-              //         : null;
-              //   },
-              // ),
             ],
           ),
         ),

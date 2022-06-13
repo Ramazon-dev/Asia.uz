@@ -20,7 +20,6 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
       body: Container(
         // width: getWidth(),
         decoration: const BoxDecoration(
-          color: Colors.cyanAccent,
           image: DecorationImage(
             image: AssetImage(
               "assets/images/background.png",
@@ -32,22 +31,10 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: getHeight(getValueForScreenType(
-                    context: context,
-                    mobile: 130,
-                    tablet: 140,
-                  ),)),
+            SizedBox(height: getHeight(133.0)),
             Container(
-              height: getHeight(getValueForScreenType(
-                    context: context,
-                    mobile: 188,
-                    tablet: 302,
-                  ),),
-              width: getWidth(getValueForScreenType(
-                    context: context,
-                    mobile: 225,
-                    tablet: 340,
-                  ),),
+              height: getHeight(188.0),
+              width: getWidth(225.0),
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
@@ -81,9 +68,9 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                     return Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: MyElevatedButton(
-                        height: getHeight(40),
-                        width: getWidth(65),
-                        radius: getHeight(18),
+                        height: 40,
+                        width: 70,
+                        radius: 18,
                         primaryColor: AppColors.transparentColor,
                         textColor: son == index
                             ? AppColors.orangeColor
@@ -94,7 +81,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         sideWidth: getWidth(2),
                         text: listOfString[index],
                         fontWeight: FontWeight.w700,
-                        textSize: getWidth(16),
+                        textSize: 16,
                         onPressed: () {
                           son = index;
                           if (son == 0) {

@@ -17,6 +17,7 @@ class MyTextFormFiels extends StatelessWidget {
     this.inputFormatters,
     this.onChanged,
     this.validator,
+    this.inputTextSize = 16,
   }) : super(key: key);
 
   TextEditingController controller;
@@ -28,14 +29,20 @@ class MyTextFormFiels extends StatelessWidget {
   List<TextInputFormatter>? inputFormatters;
   Function(String)? onChanged;
   FormFieldValidator<String>? validator;
+  double inputTextSize;
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return TextFormField(
+      
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: inputTextSize,
+        color: AppColors.black
+      
+      ),
       textAlign: TextAlign.start,
-      // cursorHeight: 30,showCursor: false,
-      // scrollPadding: EdgeInsets.only(top: 20),
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.done,
       inputFormatters: inputFormatters,
@@ -49,7 +56,7 @@ class MyTextFormFiels extends StatelessWidget {
 
   _decoration() {
     return InputDecoration(
-      contentPadding: EdgeInsets.only(),
+      contentPadding: const EdgeInsets.only(),
       alignLabelWithHint: true,
       floatingLabelAlignment: FloatingLabelAlignment.center,
       filled: true,

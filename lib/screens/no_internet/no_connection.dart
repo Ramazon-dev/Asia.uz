@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/no_internet/show_cards.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +9,21 @@ class NoConnectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: getHeight(50),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: SvgPicture.asset(
+            "assets/icons/arrow_back.svg",
+          ),
+        ),
+        iconTheme: const IconThemeData(
+          color: AppColors.black,
+        ),
+      ),
       backgroundColor: AppColors.scaffoldColor,
       body: Padding(
         padding: EdgeInsets.only(

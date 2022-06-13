@@ -1,4 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/screens/cards/widgets/add_cards_widget.dart';
 import 'package:asia_uz/screens/cards/widgets/card_widget.dart';
 import 'package:asia_uz/screens/home/qrcode/qr_scanner_page.dart';
 import 'package:asia_uz/screens/no_internet/no_connection.dart';
@@ -17,12 +18,11 @@ class CardsPage extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(top: getHeight(120)),
-              height: getHeight(515.0),
+              height: getHeight(400.0),
               width: double.infinity,
               color: AppColors.whiteColor,
               child: Column(
                 children: [
-                  SizedBox(height: getHeight(10.0)),
                   Text(
                     'Добро пожаловать в систему\nлояльности',
                     textAlign: TextAlign.center,
@@ -32,132 +32,130 @@ class CardsPage extends StatelessWidget {
                       fontSize: getWidth(20.0),
                     ),
                   ),
-                  SizedBox(height: getHeight(30.0)),
+                  SizedBox(height: getHeight(15.0)),
                   InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NoConnectionPage(),
-                          ),
-                        );
-                      },
-                      child: const CardWidget()),
-                  SizedBox(height: getHeight(20.0)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Баланс:',
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: getWidth(16.0),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        '2 000.00',
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: getWidth(16.0),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ).symmetric(horizontal: getWidth(24.0)),
-                  SizedBox(height: getHeight(25.0)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Бонусы за покупку:',
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: getWidth(16.0),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        '300.00',
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: getWidth(16.0),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ).symmetric(horizontal: getWidth(24.0)),
-                ],
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.all(getWidth(15.0)),
-              padding: EdgeInsets.all(getWidth(10)),
-              height: getHeight(160.0),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                borderRadius: BorderRadius.circular(getWidth(15.0)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const QRCodeScannerPage(),
+                          builder: (context) => const NoConnectionPage(),
                         ),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(getHeight(15))),
-                      primary: Colors.orange.shade300,
-                      fixedSize: Size(getWidth(320), getHeight(69)),
+                    child: const CardWidget(),
+                  ),
+                ],
+              ),
+            ),
+            const AddCardsWidget(),
+            Container(
+              margin: EdgeInsets.only(top: getHeight(15)),
+              padding: EdgeInsets.all(getWidth(16)),
+              color: AppColors.whiteColor,
+              height: getHeight(350),
+              width: getWidth(375),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "История выплат",
+                        style: TextStyle(
+                          fontSize: getHeight(16),
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                        ),
+                      ),
+                      Text(
+                        "Все",
+                        style: TextStyle(
+                          fontSize: getHeight(16),
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.orange,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: getHeight(12)),
+                    padding: EdgeInsets.all(getWidth(15)),
+                    alignment: Alignment.topCenter,
+                    height: getHeight(270),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: getHeight(1),
+                        color: AppColors.teal,
+                      ),
+                      borderRadius: BorderRadius.circular(getHeight(15)),
                     ),
-
-                    // child: Container(
-                    // margin: EdgeInsets.all(getWidth(14.0)),
-                    // height: getHeight(69.0),
-                    // width: double.infinity,
-                    // decoration: BoxDecoration(
-                    //   borderRadius: BorderRadius.circular(
-                    //     getWidth(15.0),
-                    //   ),
-                    //   color: Colors.orange.shade300,
-                    // ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.add_circle,
-                            color: AppColors.whiteColor),
-                        SizedBox(width: getWidth(5.0)),
-                        Text(
-                          'Добавить имеющуюся карту',
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontWeight: FontWeight.w400,
-                            fontSize: getWidth(16.0),
+                    // color: Colors.yellow,
+                    child: ListView.builder(
+                      itemCount: 10,
+                      padding: EdgeInsets.only(top: getHeight(5)),
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          height: getHeight(50),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "08 iyun 15:50",
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: getHeight(12),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  Text(
+                                    "СУМ",
+                                    style: TextStyle(
+                                      color: AppColors.drawerTextColor,
+                                      fontSize: getHeight(12),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Выплачено",
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: getHeight(14),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  Text(
+                                    "215.000",
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: getHeight(14),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: getHeight(8)),
+                              Divider(
+                                // indent: getWidth(15),
+                                // endIndent: getWidth(15),
+                                height: getHeight(0.1),
+                                color: AppColors.teal,
+                                thickness: getWidth(1),
+                              ),
+                            ],
                           ),
-                        )
-                      ],
+                        );
+                      },
                     ),
                   ),
-                  SizedBox(height: getHeight(10)),
-                  // ),
-                  Text(
-                    'Вы можете добавить физическую карту лояльности отсканировав штрих-код',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontSize: getWidth(14.0),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  // SizedBox(height: getHeight(20)),
                 ],
               ),
             ),

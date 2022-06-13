@@ -1,3 +1,4 @@
+import 'package:asia_uz/main.dart';
 import 'package:asia_uz/screens/about_us/about_us_page.dart';
 import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
@@ -77,6 +78,7 @@ class MyDrawer extends StatelessWidget {
                         switch (i) {
                           case 0:
                             _context.currentTab = 0;
+                            _context.tabcurrentTab = 0;
                             Navigator.pop(context);
                             break;
                           case 1:
@@ -87,10 +89,13 @@ class MyDrawer extends StatelessWidget {
                             break;
                           case 2:
                             _context.currentTab = 3;
+                            _context.tabcurrentTab = 3;
+
                             Navigator.pop(context);
                             break;
                           case 3:
                             _context.currentTab = 2;
+                            _context.tabcurrentTab = 2;
                             Navigator.pop(context);
                             break;
                           case 4:
@@ -101,6 +106,7 @@ class MyDrawer extends StatelessWidget {
                             break;
                           case 5:
                             _context.currentTab = 1;
+                            _context.tabcurrentTab = 1;
                             Navigator.pop(context);
                             break;
                           case 6:
@@ -121,8 +127,7 @@ class MyDrawer extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SplashScreens()));
+                                    builder: (context) => const MyApp()));
                             break;
                         }
                       }

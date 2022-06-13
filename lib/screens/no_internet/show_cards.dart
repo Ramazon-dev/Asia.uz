@@ -11,18 +11,21 @@ class ShowCards extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
-      // appBar: AppBar(
-      //   toolbarHeight: getHeight(50),
-      //   leading: IconButton(
-      //     onPressed: () => Navigator.pop(context),
-      //     icon: Image.asset(
-      //       "assets/icons/arrow_back.png",
-      //       color: AppColors.black,
-      //     ),
-      //   ),
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      // ),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: getHeight(50),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: SvgPicture.asset(
+            "assets/icons/arrow_back.svg",
+          ),
+        ),
+        iconTheme: const IconThemeData(
+          color: AppColors.black,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/view/auth/choose_language.dart';
-import 'package:asia_uz/screens/view/auth/password_set/return_password.dart';
 import 'package:asia_uz/screens/view/auth/splash/check_password.dart';
 import 'package:flutter/material.dart';
 

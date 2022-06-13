@@ -9,9 +9,11 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
     this.leading,
     // this.onPress,
     this.action,
+    this.textSize = 20,
   }) : super(key: key);
 
   String? text;
+  double textSize;
   // VoidCallback? onTab, onPress;
   Widget? leading, action;
 
@@ -52,7 +54,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                       text!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
-                        fontSize: getWidth(20.0),
+                        fontSize: getWidth(textSize),
                         fontWeight: FontWeight.w700,
                       ),
                     ).only(top: getHeight(13)),

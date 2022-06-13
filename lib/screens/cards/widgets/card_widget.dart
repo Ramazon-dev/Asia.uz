@@ -7,8 +7,8 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getHeight(180),
-      width: getWidth(315),
+      height: getHeight(200),
+      width: getWidth(319),
       decoration: BoxDecoration(
         color: AppColors.orangeColor,
         borderRadius: BorderRadius.circular(
@@ -25,20 +25,33 @@ class CardWidget extends StatelessWidget {
         children: [
           Positioned(
             width: getWidth(315),
-            top: getHeight(66),
+            top: getHeight(30),
             child: Text(
               '2935 **** **** 1562',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.whiteColor,
                 fontWeight: FontWeight.w400,
-                fontSize: getWidth(24.0),
+                fontSize: getWidth(18.0),
               ),
             ),
           ),
           Positioned(
             width: getWidth(315),
-            top: getHeight(116),
+            top: getHeight(85),
+            child: Text(
+              '2935 **** **** 1562',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.whiteColor,
+                fontWeight: FontWeight.w400,
+                fontSize: getWidth(28.0),
+              ),
+            ),
+          ),
+          Positioned(
+            width: getWidth(315),
+            top: getHeight(152),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -46,16 +59,16 @@ class CardWidget extends StatelessWidget {
                   'Баланс:',
                   style: TextStyle(
                     color: AppColors.whiteColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: getWidth(24.0),
+                    fontWeight: FontWeight.w600,
+                    fontSize: getWidth(18.0),
                   ),
                 ),
                 Text(
                   '2 000.00',
                   style: TextStyle(
                     color: AppColors.whiteColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: getWidth(24.0),
+                    fontWeight: FontWeight.w600,
+                    fontSize: getWidth(18.0),
                   ),
                 ),
               ],
@@ -67,20 +80,20 @@ class CardWidget extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               margin: EdgeInsets.only(top: getHeight(15), left: getWidth(255)),
-              height: getHeight(18),
-              width: getWidth(60),
+              height: getHeight(25),
+              width: getWidth(82),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(getHeight(10)),
                   topLeft: Radius.circular(getHeight(10)),
                 ),
-                color: AppColors.drawerBgColor,
+                color: const Color(0xff800D0D0D),
               ),
               child: Text(
                 "Основная",
                 style: TextStyle(
                   color: AppColors.whiteColor,
-                  fontSize: getHeight(8),
+                  fontSize: getHeight(11),
                   fontWeight: FontWeight.w600,
                 ),
               ),

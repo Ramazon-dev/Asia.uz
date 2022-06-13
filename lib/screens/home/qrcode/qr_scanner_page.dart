@@ -39,7 +39,13 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
         children: [
           buildQRView(context),
           Positioned(
-            child: buildResult(),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return constraints.maxWidth > 600
+                    ? tabbuildResult()
+                    : buildResult();
+              },
+            ),
             bottom: getHeight(40),
           ),
         ],
@@ -83,7 +89,43 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
               width: getWidth(223),
               sideColor: AppColors.whiteColor,
               primaryColor: AppColors.orangeColor,
-              text: "Закрыть",textColor: AppColors.whiteColor,
+              text: "Закрыть",
+              textColor: AppColors.whiteColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+
+  Widget tabbuildResult() => Container(
+        alignment: Alignment.center,
+        height: getHeight(275),
+        width: getWidth(526),
+        padding: const EdgeInsets.all(55),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(22),
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              barcode != null ? "Result: ${barcode!.code}" : "Scan a code!",
+              style: TextStyle(
+                fontSize: getHeight(30),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            MyElevatedButton(
+              height: 64,
+              width: 280,
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "Закрыть",
+              textSize: 32,
+              textColor: AppColors.whiteColor,
               onPressed: () {
                 Navigator.pop(context);
               },

@@ -59,18 +59,18 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Container(
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                // color: Colors.yellow,
-                image: DecorationImage(
-                  image: AssetImage(
-                    "assets/images/background.png",
+          : SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: const BoxDecoration(
+                  // color: Colors.yellow,
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/background.png",
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
                 ),
-              ),
-              child: SingleChildScrollView(
                 child: Form(
                   key: _formKey,
                   child: Center(
@@ -118,12 +118,13 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                   controller: _phoneNumberController,
                                   obscureText: false,
                                   prefixIcon: Container(
+                                    // color: Colors.yellow,
                                     margin: EdgeInsets.only(
                                         left: getHeight(6),
                                         bottom: getHeight(2)),
-                                    alignment: Alignment.center,
-                                    height: getHeight(40.0),
-                                    width: getWidth(40.0),
+                                    alignment: Alignment.centerLeft,
+                                    height: getHeight(60.0),
+                                    width: getWidth(42.0),
                                     child: MyTextWidget(
                                       text: '+998',
                                       fontSize: 16,
@@ -131,6 +132,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                       textColor: AppColors.black,
                                     ),
                                   ),
+                                  inputTextSize: 16,
                                   radius: getHeight(30),
                                   sideColor: AppColors.onPressColor,
                                   sideWidth: getWidth(2),
@@ -140,9 +142,11 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                       hideKeyboard(context);
                                     }
                                   },
-                                  validator: (v) => v!.isEmpty
-                                      ? 'Telefon raqam kiritilmadi'
-                                      : null,
+                                  validator: (v) {
+                                    return v!.replaceAll(' ', '').length == 9
+                                        ? null
+                                        : 'Telefon raqam kiritilmadi';
+                                  },
                                 ),
                               ),
                             ],
@@ -155,30 +159,28 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                           width: getWidth(285),
                           text: 'Продолжить',
                           onPressed: () async {
-                            isload = true;
-                            setState(() {});
-                            debugPrint(
-                                "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
-                            setState(() {});
-                            debugPrint('on tab');
-                            await GetStorage().write('telNumber',
-                                "+998${_phoneNumberController.text.replaceAll(' ', '')}");
-                            // context.read<AuthCubit>().login(int.parse(
-                            //     _phoneNumberController.text.replaceAll(' ', '')));
-
-                            await VerifyNumberService.verifyNumberService(
-                                        _phoneNumberController.text) ==
-                                    null
-                                ? await next(context)
-                                : null;
-                            isload = false;
-                            // context.read<AuthCubit>().clear();
+                            if (_formKey.currentState!.validate()) {
+                              isload = true;
+                              setState(() {});
+                              debugPrint(
+                                  "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
+                              setState(() {});
+                              debugPrint('on tab');
+                              await GetStorage().write('telNumber',
+                                  "+998${_phoneNumberController.text.replaceAll(' ', '')}");
+                              await VerifyNumberService.verifyNumberService(
+                                          _phoneNumberController.text) ==
+                                      null
+                                  ? await next(context)
+                                  : null;
+                              isload = false;
+                            }
                           },
                           primaryColor: AppColors.orangeColor,
                           textColor: AppColors.whiteColor,
                           sideColor: AppColors.transparentColor,
                         ),
-                        SizedBox(height: getHeight(120.0)),
+                        SizedBox(height: getHeight(140)),
                         SizedBox(
                           height: getHeight(70.0),
                           width: getWidth(284.0),

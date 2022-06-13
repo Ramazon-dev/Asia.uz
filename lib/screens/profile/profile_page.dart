@@ -1,4 +1,3 @@
-import 'package:asia_uz/cubit/profile_cubit/profile_cubit.dart';
 import 'package:asia_uz/service/api/post/customers_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
@@ -27,8 +26,6 @@ class _ProfilePageState extends State<ProfilePage> {
       TextEditingController();
 
   final TextEditingController _employmentController = TextEditingController();
-
-  final TextEditingController _phoneNumberController = TextEditingController();
 
   final TextEditingController _homePhoneNumberController =
       TextEditingController();
@@ -130,9 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                         },
                         child: Container(
-                          // alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
-                              // color: Colors.yellow,
                               border: Border(
                             bottom: BorderSide(
                               color: AppColors.black,
@@ -162,8 +157,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     birthday ?? "",
                                     style: TextStyle(
                                       fontSize: getHeight(16),
-                                      // fontWeight: FontWeight.w500,
-                                      // color: AppColors.black,
                                     ),
                                   ),
                                 ],
@@ -179,22 +172,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                      // TextFormField(
-                      //   onTap: () {
-
-                      //   },
-                      //   controller: _dataBirthController,
-                      //   keyboardType: TextInputType.datetime,
-                      //   decoration: const InputDecoration(
-                      //     hintText: 'Дата рождения*',
-                      //     labelText: 'Дата рождения*',
-                      //     suffixIcon: Icon(
-                      //       Icons.arrow_forward_ios,
-                      //       color: AppColors.black,
-                      //     ),
-                      //   ),
-                      //   validator: (v) => v!.isEmpty ? 'Sana kiritilmadi' : null,
-                      // ),
                       SizedBox(height: getHeight(4.0)),
                       DropdownButtonFormField(
                         hint: const Text("Пол*"),
@@ -205,7 +182,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: AppColors.black,
                           ),
                         ),
-                        // value: "",
                         validator: (v) => v == null ? "Pol tanlanmadi" : null,
                         onChanged: (String? v) {
                           pol = v;
@@ -223,93 +199,57 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        controller: _phoneNumberController,
-                        keyboardType: TextInputType.datetime,
-                        decoration: InputDecoration(
-                          // hintText: 'Мобильный телефон*',
-                          prefixText: "+998 ",
-                          prefixStyle: TextStyle(
-                            color: AppColors.black,
-                            fontSize: getHeight(17),
-                            fontWeight: FontWeight.w400,
-                          ),
-                          labelText: 'Мобильный телефон*',
-                          suffixIcon: const Icon(
+                      SizedBox(height: getHeight(4.0)),
+                      DropdownButtonFormField(
+                        hint: const Text(
+                          "Семейное положение*",
+                        ),
+                        icon: Padding(
+                          padding: EdgeInsets.only(right: getHeight(10)),
+                          child: const Icon(
                             Icons.arrow_forward_ios,
                             color: AppColors.black,
                           ),
                         ),
-                        // validator: (v) =>
-                        //     v!.isEmpty ? 'Telefon raqam kiritilmadi' : null,
+                        // value: "",
+                        validator: (v) =>
+                            v == null ? "Семейное положение* tanlanmadi" : null,
+                        onChanged: (String? v) {
+                          pol = v;
+                          debugPrint("gender: $v");
+                        },
+                        items: const <DropdownMenuItem<String>>[
+                          DropdownMenuItem(
+                            value: "женат/замужем",
+                            child: Text(
+                              "женат/замужем",
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: "холост/не замужем",
+                            child: Text(
+                              "холост/не замужем",
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: "разведен/разведена",
+                            child: Text(
+                              "разведен/разведена",
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: getHeight(4.0)),
                       // TextFormField(
-                      //   controller: _notificationController,
+                      //   controller: _seminalPositionController,
                       //   decoration: const InputDecoration(
-                      //     hintText: 'Способ получения уведомлений*',
-                      //     labelText: 'Способ получения уведомлений*',
+                      //     hintText: 'Семейное положение*',
+                      //     labelText: 'Семейное положение*',
                       //     suffixIcon: Icon(
                       //       Icons.arrow_forward_ios,
                       //       color: AppColors.black,
                       //     ),
                       //   ),
-                      //   validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
                       // ),
-                      // DropdownButtonFormField(
-                      //   hint: const Text("Язык уведомлений"),
-                      //   icon: Padding(
-                      //     padding: EdgeInsets.only(right: getHeight(13)),
-                      //     child: const Icon(
-                      //       Icons.arrow_forward_ios,
-                      //       color: AppColors.black,
-                      //     ),
-                      //   ),
-                      //   onChanged: (String? v) {
-                      //     notifLang = v;
-                      //   },
-                      //   validator: (v) => v == null ? "Till tanlanmadi" : null,
-                      //   items: const <DropdownMenuItem<String>>[
-                      //     DropdownMenuItem(
-                      //       value: "russian",
-                      //       child: Text("russian"),
-                      //     ),
-                      //     DropdownMenuItem(
-                      //       value: "o`zbek",
-                      //       child: Text("o`zbek"),
-                      //     ),
-                      //     DropdownMenuItem(
-                      //       value: "english",
-                      //       child: Text("english"),
-                      //     ),
-                      //   ],
-                      // ),
-                      // TextFormField(
-                      //   controller: _floorController,
-                      //   decoration: const InputDecoration(
-                      //     hintText: 'Пол*',
-                      //     labelText: 'Пол*',
-                      //     suffixIcon: Icon(
-                      //       Icons.arrow_forward_ios,
-                      //       color: AppColors.black,
-                      //     ),
-                      //   ),
-                      //   validator: (v) => v!.isEmpty ? 'Jins kiritilmadi' : null,
-                      // ),
-                      SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        controller: _seminalPositionController,
-                        decoration: const InputDecoration(
-                          hintText: 'Семейное положение*',
-                          labelText: 'Семейное положение*',
-                          suffixIcon: Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        // validator: (v) =>
-                        //     v!.isEmpty ? 'Oilaviy sharoit kiritilmadi' : null,
-                      ),
                       SizedBox(height: getHeight(4.0)),
                       TextFormField(
                         controller: _employmentController,
@@ -321,52 +261,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: AppColors.black,
                           ),
                         ),
-                        // validator: (v) => v!.isEmpty ? 'Kiritilmadi' : null,
                       ),
-                      // SizedBox(height: getHeight(4.0)),
-                      // TextFormField(
-                      //   keyboardType: TextInputType.datetime,
-                      //   controller: _homePhoneNumberController,
-                      //   decoration: const InputDecoration(
-                      //     hintText: 'Домашний телефон*',
-                      //     labelText: 'Домашний телефон*',
-                      //     suffixIcon: Icon(
-                      //       Icons.arrow_forward_ios,
-                      //       color: AppColors.black,
-                      //     ),
-                      //   ),
-                      //   // validator: (v) => v!.isEmpty ? 'Uy raqami kiritilmadi' : null,
-                      // ),
-                      // SizedBox(height: getHeight(4.0)),
-                      // TextFormField(
-                      //   controller: _homeSecondPhoneNumberController,
-                      //   keyboardType: TextInputType.datetime,
-                      //   decoration: const InputDecoration(
-                      //     hintText: 'Дополнительный телефон*',
-                      //     labelText: 'Дополнительный телефон*',
-                      //     suffixIcon: Icon(
-                      //       Icons.arrow_forward_ios,
-                      //       color: AppColors.black,
-                      //     ),
-                      //   ),
-                      //   // validator: (v) =>
-                      //   //     v!.isEmpty ? 'Qoshimcha raqam kiritilmadi' : null,
-                      // ),
                       SizedBox(height: getHeight(4.0)),
-                      // TextFormField(
-                      //   keyboardType: TextInputType.emailAddress,
-                      //   controller: _emailController,
-                      //   decoration: const InputDecoration(
-                      //     hintText: 'E-mail*',
-                      //     labelText: 'E-mail*',
-                      //     suffixIcon: Icon(
-                      //       Icons.arrow_forward_ios,
-                      //       color: AppColors.black,
-                      //     ),
-                      //   ),
-                      //   // validator: (v) => v!.isEmpty ? 'Email kiritilmadi' : null,
-                      // ),
-                      // SizedBox(height: getHeight(4.0)),
                       SizedBox(height: getHeight(70.0)),
                       MyElevatedButton(
                         text: 'Сохранить',
@@ -380,8 +276,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 .write("lastName", _lastNameController.text);
                             await GetStorage().write("dateOfBirth", birthday);
                             await GetStorage().write("gender", pol);
-                            await GetStorage().write("phoneNumber",
-                                "+998${_phoneNumberController.text}");
                             await GetStorage()
                                 .write("notif", _notificationController.text);
                             await GetStorage().write("notifLang", notifLang);
@@ -399,9 +293,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 .write("lang", _languageController.text);
                             // _context.validateState();
                             // _context.clear();
-                            debugPrint(
-                                """
-mobile_phone: ${_phoneNumberController.text}
+                            debugPrint("""
 firstname: ${_firstNameController.text},
 lastNeme: ${_lastNameController.text},
 dob: $birthday,
@@ -412,8 +304,6 @@ notificationPreference: "notificationPreference",
 notificationLanguage: "notificationLanguage",
 """);
                             await CustomersServices.cuspomersService(
-                                      phoneNumber:
-                                          "+998${_phoneNumberController.text}",
                                       dob: birthday!,
                                       firstName: _firstNameController.text,
                                       lastName: _lastNameController.text,
@@ -425,10 +315,13 @@ notificationLanguage: "notificationLanguage",
                                       occupation: "occupation",
                                     ) !=
                                     null
-                                ? await Navigator.push(
+                                ? await Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => MainPage()))
+                                      builder: (context) => MainPage(),
+                                    ),
+                                    (route) => false,
+                                  )
                                 : null;
                             isload = false;
                           }
@@ -440,7 +333,7 @@ notificationLanguage: "notificationLanguage",
                         radius: getHeight(15),
                         sideWidth: getHeight(2),
                       ),
-                      SizedBox(height: getHeight(20.0)),
+                      SizedBox(height: getHeight(120.0)),
                       SizedBox(
                         height: getHeight(70.0),
                         width: getWidth(334.0),

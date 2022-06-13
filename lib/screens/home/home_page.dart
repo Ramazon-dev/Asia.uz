@@ -1,5 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
+import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     double width = ScreenUtil().screenHeight;
     double height = ScreenUtil().screenWidth;
     debugPrint(
-      "we have screen height: $height and screen width: $width",
+      "pfffffffffffff we have screen height: $height and screen width: $width",
     );
 
     debugPrint("qrcode: ${GetStorage().read("qrcode")}");
@@ -45,9 +46,9 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     child: MyTextWidget(
                       text: 'Покажите QR-код  кассиру',
-                      fontSize: getHeight(19),
+                      fontSize: getHeight(20),
                       textColor: AppColors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                     width: double.infinity,
                     height: getHeight(20),
@@ -90,12 +91,20 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.w500,
                           textColor: AppColors.black,
                         ),
-                        MyTextWidget(
-                          text: 'Все',
-                          textAlign: TextAlign.right,
-                          fontSize: getHeight(16),
-                          fontWeight: FontWeight.w500,
-                          textColor: AppColors.black,
+                        InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NewsPage(),
+                            ),
+                          ),
+                          child: MyTextWidget(
+                            text: 'Все',
+                            textAlign: TextAlign.right,
+                            fontSize: getHeight(16),
+                            fontWeight: FontWeight.w500,
+                            textColor: AppColors.black,
+                          ),
                         ),
                       ],
                     ),
@@ -141,7 +150,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MyTextWidget(
-                text: '0 баллов',
+                text: '0 sum',
                 textAlign: TextAlign.left,
                 textColor: AppColors.orange,
                 fontSize: 13.0,

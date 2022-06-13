@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 
 class CustomersServices {
   static Future cuspomersService({
-    required String phoneNumber,
     required String dob,
     required String firstName,
     required String lastName,

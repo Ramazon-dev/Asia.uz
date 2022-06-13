@@ -34,7 +34,7 @@ class MyTextWidget extends StatelessWidget {
   _style() {
     return TextStyle(
       color: textColor,
-      fontSize: getWidth(fontSize),
+      fontSize: fontSize,
       fontWeight: fontWeight,
       // fontFamily: fontFamily,
     );

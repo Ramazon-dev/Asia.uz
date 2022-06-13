@@ -2,7 +2,13 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
-  const AppBarWidget({Key? key}) : super(key: key);
+  double appbarHeihgt;
+  double iconSize;
+  AppBarWidget({
+    Key? key,
+    this.appbarHeihgt = 100,
+    this.iconSize = 15,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +18,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
         icon: Image.asset(
           "assets/icons/arrow_back.png",
           color: AppColors.black,
+        height: getHeight(iconSize),
         ),
       ),
       iconTheme: const IconThemeData(color: AppColors.black),
@@ -21,5 +28,5 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(getWidth(375), getHeight(100));
+  Size get preferredSize => Size(getWidth(375), getHeight(appbarHeihgt));
 }

@@ -47,7 +47,7 @@ class _SmsFieldState extends State<SmsField> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.unselectedColor,
-      appBar: const AppBarWidget(),
+      appBar:  AppBarWidget(),
       body: isload == true
           ? const Center(
               child: CircularProgressIndicator(),

@@ -13,7 +13,7 @@ class PasswordSet extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const AppBarWidget(),
+      appBar: AppBarWidget(),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -47,18 +47,6 @@ class PasswordSet extends StatelessWidget {
                   radius: Radius.circular(getHeight(10)),
                 ),
                 currentCode: code,
-                // onCodeSubmitted: (code) async {
-                //   if (code.length == 4) {
-
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) =>
-                //             ReturnPassword(text: controller.text),
-                //       ),
-                //     );
-                //   }
-                // },
                 onCodeChanged: (code) async {
                   if (code!.length == 4) {
                     isActive = true;
