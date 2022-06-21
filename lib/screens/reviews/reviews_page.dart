@@ -1,7 +1,7 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/reviews/widgets/bottom_shett.dart';
 import 'package:asia_uz/screens/reviews/widgets/history_page.dart';
-import 'package:asia_uz/screens/reviews/widgets/new_review_page.dart';
+import 'package:asia_uz/service/api/post/devices_service.dart';
 import 'package:flutter/material.dart';
 
 class ReviewsPage extends StatefulWidget {
@@ -14,14 +14,21 @@ class ReviewsPage extends StatefulWidget {
 class _ReviewsPageState extends State<ReviewsPage>
     with TickerProviderStateMixin {
   TabController? _tabController;
+  final TextEditingController _messangeController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _messangeController;
     _tabController = TabController(length: 2, vsync: this);
   }
 
-  final TextEditingController _messangeController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    _messangeController.clear();
+    _tabController!.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +96,8 @@ class _ReviewsPageState extends State<ReviewsPage>
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: getWidth(25)),
                         child: TextFormField(
+                          onTap: () => setState(() {}),
+                          controller: _messangeController,
                           decoration: const InputDecoration(),
                           onSaved: (String? value) {
                             // This optional block of code can be used to run
@@ -104,7 +113,9 @@ class _ReviewsPageState extends State<ReviewsPage>
                       MyBottomSheet(),
                       MyElevatedButton(
                         text: 'Продолжить', textSize: getHeight(18),
-                        onPressed: () {},
+                        onPressed: () {
+                          DevicesService.devicesService();
+                        },
                         height: getHeight(50),
                         // width: 161.0,
                         primaryColor: AppColors.transparentColor,

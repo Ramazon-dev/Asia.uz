@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 
 class CustomersServices {
   static Future cuspomersService({
+    required String platform,
     required String dob,
     required String firstName,
     required String lastName,
@@ -20,20 +21,21 @@ class CustomersServices {
       ),
       headers: {
         'Authorization': 'Bearer ${GetStorage().read('token')}',
-        // 'Content-Type': 'application/json'
       },
       body: {
-        "first_name": firstName,
-        "last_name": lastName,
-        "dob": dob,
-        // "marital_status": true,
-        "gender": gender,
-        "occupation": occupation,
-        "notification_preference": notificationPreference,
-        "notification_language": notificationPreference
+        "first_name": "Dev",
+        "last_name": "Anvarov",
+        "dob": "07/12/2001",
+        "marital_status": true,
+        "gender": "male",
+        "occupation": "dsfgsdf",
+        "notification_preference": "sms",
+        "notification_language": "russian",
+        "os": "Android"
       },
     );
     debugPrint("funksiya bodydan otdi");
+    debugPrint("customer service ichida token: ${GetStorage().read("token")}");
     try {
       debugPrint("funksiya try ga kirdi");
       if (res.statusCode == 200 || res.statusCode == 201) {
@@ -57,19 +59,9 @@ history: ${GetStorage().read("history")}
     } catch (e) {
       debugPrint(e.toString());
       debugPrint("funksiya catch ga otib ketti");
-      return customersGetModels =
-          CustomersGetModels.fromJson(jsonDecode(res.body));
     }
-    return customersGetModels =
-        CustomersGetModels.fromJson(jsonDecode(res.body));
   }
 }
-
-CustomersGetModels customersGetModelsFromJson(String str) =>
-    CustomersGetModels.fromJson(json.decode(str));
-
-String customersGetModelsToJson(CustomersGetModels data) =>
-    json.encode(data.toJson());
 
 class CustomersGetModels {
   CustomersGetModels({

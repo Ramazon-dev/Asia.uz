@@ -1,6 +1,8 @@
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:asia_uz/screens/view/auth/password_set/return_password.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class PasswordSet extends StatelessWidget {
   PasswordSet({Key? key}) : super(key: key);

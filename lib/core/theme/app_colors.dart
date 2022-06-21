@@ -14,6 +14,7 @@ class AppColors {
   static const Color textFormFieldColor = Color(0xFF007EFC);
   static const Color textButton = Color(0xFF0E2F8B);
   static const Color textFormField = Color(0xFFC4C4C4);
+  static const Color textRed = Color(0xFFFF1F00);
 
   static const Color drawerTextColor = Color(0xFF767676);
   static const Color onPressColor = Color(0xFF00A0E3);

@@ -1,6 +1,8 @@
+import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:asia_uz/service/api/post/verify_number_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class EnterPhoneNumberPage extends StatefulWidget {
   EnterPhoneNumberPage({Key? key}) : super(key: key);
@@ -159,21 +161,34 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                           width: getWidth(285),
                           text: 'Продолжить',
                           onPressed: () async {
+                            bool hasInternet =
+                                await InternetConnectionChecker().hasConnection;
+                            debugPrint("has internet: $hasInternet");
                             if (_formKey.currentState!.validate()) {
-                              isload = true;
-                              setState(() {});
-                              debugPrint(
-                                  "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
-                              setState(() {});
-                              debugPrint('on tab');
-                              await GetStorage().write('telNumber',
-                                  "+998${_phoneNumberController.text.replaceAll(' ', '')}");
-                              await VerifyNumberService.verifyNumberService(
-                                          _phoneNumberController.text) ==
-                                      null
-                                  ? await next(context)
-                                  : null;
-                              isload = false;
+                              if (hasInternet) {
+                                isload = true;
+                                setState(() {});
+                                debugPrint(
+                                    "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
+                                setState(() {});
+                                debugPrint('on tab');
+                                await GetStorage().write('telNumber',
+                                    "+998${_phoneNumberController.text.replaceAll(' ', '')}");
+                                await VerifyNumberService.verifyNumberService(
+                                            _phoneNumberController.text) ==
+                                        null
+                                    ? await next(context)
+                                    : null;
+                                isload = false;
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const NoConnectionPage(),
+                                  ),
+                                );
+                              }
                             }
                           },
                           primaryColor: AppColors.orangeColor,

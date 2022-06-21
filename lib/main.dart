@@ -1,17 +1,23 @@
+import 'dart:async';
+import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:asia_uz/screens/view/auth/splash/splash_screens.dart';
 import 'package:asia_uz/tablet/auth/tab_splash_screen.dart';
+import 'package:asia_uz/tablet/no_internet_connection.dart/tab_nointernet.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
   await GetStorage.init();
   runApp(
     EasyLocalization(
@@ -38,8 +44,42 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late StreamSubscription subscription;
+  String? status;
+
+  @override
+  void initState() {
+    super.initState();
+    subscription = Connectivity().onConnectivityChanged.listen(
+      (ConnectivityResult result) {
+        if (result == ConnectivityResult.none) {
+          setState(() {
+            status = "Offline";
+            debugPrint("offline");
+          });
+        } else {
+          setState(() {
+            status = "Online";
+            debugPrint("online");
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    subscription.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +97,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(primarySwatch: Colors.blue),
-            home: const TabSplashScreens(),
+            home: status == "Offline"
+                ? const TabNoConnectionPage()
+                : const TabSplashScreens(),
           ),
         );
       }
@@ -73,7 +115,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(primarySwatch: Colors.blue),
-          home: const SplashScreens(),
+          home: status == "Offline"
+              ? const NoConnectionPage()
+              : const SplashScreens(),
         ),
       );
     });

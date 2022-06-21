@@ -32,6 +32,12 @@ dependencies:
   flutter_screenutil: ^5.3.1
   responsive_builder: ^0.4.2
   flutter_launcher_icons: ^0.9.3
+  dio: ^4.0.6
+  connectivity_plus: ^2.3.4
+  internet_connection_checker: ^0.0.1+3
+  overlay_support: ^2.0.1
+  flutter_offline: ^2.1.0
+  sliding_up_panel: ^2.0.0+1
   
 
 flutter_icons:

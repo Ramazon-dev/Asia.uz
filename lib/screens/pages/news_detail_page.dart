@@ -8,12 +8,14 @@ class NewsDetailPage extends StatelessWidget {
   String title;
   String image;
   String discription;
+  String created;
   NewsDetailPage({
     Key? key,
     required this.id,
     required this.image,
     required this.title,
     required this.discription,
+    required this.created,
   }) : super(key: key);
 
   @override
@@ -115,7 +117,7 @@ class NewsDetailPage extends StatelessWidget {
                     horizontal: getWidth(10.0), vertical: getHeight(20.0)),
                 Text(
                   // 'Встречайте шестой электронный\nкаталог от Asia.uz! Наш каталог\nпредставляет собой сборник лучших\nскидок и весенних предложений.',
-                  discription,
+                  "discription: $discription + created $created",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.black,

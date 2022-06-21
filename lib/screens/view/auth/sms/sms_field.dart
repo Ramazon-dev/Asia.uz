@@ -1,8 +1,10 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
+import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
 import 'package:asia_uz/service/api/post/verify_code_service.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class SmsField extends StatefulWidget {
   String text;
@@ -47,7 +49,7 @@ class _SmsFieldState extends State<SmsField> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.unselectedColor,
-      appBar:  AppBarWidget(),
+      appBar: AppBarWidget(),
       body: isload == true
           ? const Center(
               child: CircularProgressIndicator(),
@@ -112,18 +114,30 @@ class _SmsFieldState extends State<SmsField> {
                           setState(() {});
                           hideKeyboard(context);
                           // context.read<VerifyCodeCubit>().onTab();
-                          await VerifyCodeService.verifyCodeService(
-                                    int.parse(smsController.text),
-                                    GetStorage().read('telNumber'),
-                                  ) ==
-                                  null
-                              ? await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PasswordSet(),
-                                  ),
-                                )
-                              : null;
+                          bool hasInternet =
+                              await InternetConnectionChecker().hasConnection;
+                          debugPrint("has internet: $hasInternet");
+                          if (hasInternet) {
+                            await VerifyCodeService.verifyCodeService(
+                                      int.parse(smsController.text),
+                                      GetStorage().read('telNumber'),
+                                    ) ==
+                                    null
+                                ? await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PasswordSet(),
+                                    ),
+                                  )
+                                : null;
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const NoConnectionPage(),
+                              ),
+                            );
+                          }
                           isload = false;
                         }
                       },
@@ -137,21 +151,6 @@ class _SmsFieldState extends State<SmsField> {
                         ),
                       ),
                     ),
-                    // MyElevatedButton(
-                    //   primaryColor: AppColors.orangeColor,
-                    //   textColor: AppColors.whiteColor,
-                    //   text: 'Войти'.tr(),
-                    //   onPressed: () {
-                    //     isActive == true
-                    //         ? Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //               builder: (context) => MainPage(),
-                    //             ),
-                    //           )
-                    //         : null;
-                    //   },
-                    // ),
                   ],
                 ),
               ),

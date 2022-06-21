@@ -1,6 +1,7 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ReturnPassword extends StatefulWidget {
   String text;
@@ -70,8 +71,12 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                     GetStorage().write("password", controller.text);
 
                     hideKeyboard(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
+                      ),
+                    );
                   }
                 },
               ).only(bottom: getHeight(200)),

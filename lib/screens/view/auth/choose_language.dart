@@ -81,7 +81,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         sideWidth: getWidth(2),
                         text: listOfString[index],
                         fontWeight: FontWeight.w700,
-                        textSize: 16,
+                        textSize: 15,
                         onPressed: () {
                           son = index;
                           if (son == 0) {

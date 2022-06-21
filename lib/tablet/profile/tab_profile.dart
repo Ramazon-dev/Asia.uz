@@ -1,8 +1,12 @@
+import 'dart:io' show Platform;
+
 import 'package:asia_uz/service/api/post/customers_service.dart';
 import 'package:asia_uz/tablet/main/tab_main.dart';
+import 'package:asia_uz/tablet/no_internet_connection.dart/tab_nointernet.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../core/components/view/my_app_bar.dart';
 
 class TabProfilePage extends StatefulWidget {
@@ -26,6 +30,15 @@ class _TabProfilePageState extends State<TabProfilePage> {
 
   String? birthday;
   bool isload = false;
+  String platform() {
+    String platform;
+    if (Platform.isAndroid) {
+      platform = "Android";
+    } else {
+      platform = "IOS";
+    }
+    return platform;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -324,21 +337,25 @@ class _TabProfilePageState extends State<TabProfilePage> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           isload = true;
-                          setState(() {});
-                          await GetStorage()
-                              .write("firstName", _firstNameController.text);
-                          await GetStorage()
-                              .write("lastName", _lastNameController.text);
-                          await GetStorage().write("dateOfBirth", birthday);
-                          await GetStorage().write("gender", pol);
-                          await GetStorage().write("notifLang", notifLang);
-                          await GetStorage()
-                              .write("pol", _seminalPositionController.text);
-                          await GetStorage()
-                              .write("zanyatost", _employmentController.text);
-                          // _context.validateState();
-                          // _context.clear();
-                          debugPrint("""
+                          bool hasInternet =
+                              await InternetConnectionChecker().hasConnection;
+                          debugPrint("has internet: $hasInternet");
+                          if (hasInternet) {
+                            setState(() {});
+                            await GetStorage()
+                                .write("firstName", _firstNameController.text);
+                            await GetStorage()
+                                .write("lastName", _lastNameController.text);
+                            await GetStorage().write("dateOfBirth", birthday);
+                            await GetStorage().write("gender", pol);
+                            await GetStorage().write("notifLang", notifLang);
+                            await GetStorage()
+                                .write("pol", _seminalPositionController.text);
+                            await GetStorage()
+                                .write("zanyatost", _employmentController.text);
+                            // _context.validateState();
+                            // _context.clear();
+                            debugPrint("""
 firstname: ${_firstNameController.text},
 lastNeme: ${_lastNameController.text},
 dob: $birthday,
@@ -348,26 +365,36 @@ occupation: occupation,
 notificationPreference: "notificationPreference",
 notificationLanguage: "notificationLanguage",
 """);
-                          await CustomersServices.cuspomersService(
-                                    dob: birthday!,
-                                    firstName: _firstNameController.text,
-                                    lastName: _lastNameController.text,
-                                    gender: pol ?? "женщина",
-                                    materialStatus: true,
-                                    notificationLanguage:
-                                        notifLang ?? "russian",
-                                    notificationPreference: "sms",
-                                    occupation: "occupation",
-                                  ) !=
-                                  null
-                              ? await Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TabMainPage(),
-                                  ),
-                                  (route) => false,
-                                )
-                              : null;
+                            await CustomersServices.cuspomersService(
+                                      platform: platform(),
+                                      dob: birthday!,
+                                      firstName: _firstNameController.text,
+                                      lastName: _lastNameController.text,
+                                      gender: pol ?? "женщина",
+                                      materialStatus: true,
+                                      notificationLanguage:
+                                          notifLang ?? "russian",
+                                      notificationPreference: "sms",
+                                      occupation: "occupation",
+                                    ) !=
+                                    null
+                                ? await Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TabMainPage(),
+                                    ),
+                                    (route) => false,
+                                  )
+                                : null;
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const TabNoConnectionPage(),
+                              ),
+                            );
+                          }
                           isload = false;
                         }
                       },

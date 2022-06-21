@@ -1,7 +1,13 @@
+import 'dart:io' show Platform;
+
+import 'package:asia_uz/screens/about_us/about_us_page.dart';
+import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:asia_uz/service/api/post/customers_service.dart';
+import 'package:asia_uz/service/api/post/devices_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../core/components/view/my_app_bar.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -42,8 +48,20 @@ class _ProfilePageState extends State<ProfilePage> {
   String? birthday;
   bool isload = false;
 
+  String platform() {
+    String platform;
+    if (Platform.isAndroid) {
+      platform = "Android";
+    } else {
+      platform = "IOS";
+    }
+    return platform;
+  }
+
   @override
   Widget build(BuildContext context) {
+    GetStorage().write("platform", platform());
+    debugPrint(platform());
     SizeConfig().init(context);
     return buildScaffold(context);
   }
@@ -267,63 +285,55 @@ class _ProfilePageState extends State<ProfilePage> {
                       MyElevatedButton(
                         text: 'Сохранить',
                         onPressed: () async {
+                          platform();
                           if (_formKey.currentState!.validate()) {
-                            isload = true;
-                            setState(() {});
-                            await GetStorage()
-                                .write("firstName", _firstNameController.text);
-                            await GetStorage()
-                                .write("lastName", _lastNameController.text);
-                            await GetStorage().write("dateOfBirth", birthday);
-                            await GetStorage().write("gender", pol);
-                            await GetStorage()
-                                .write("notif", _notificationController.text);
-                            await GetStorage().write("notifLang", notifLang);
-                            await GetStorage()
-                                .write("pol", _seminalPositionController.text);
-                            await GetStorage()
-                                .write("zanyatost", _employmentController.text);
-                            await GetStorage().write(
-                                "homePhone", _homePhoneNumberController.text);
-                            await GetStorage().write("anotherPhone",
-                                _homeSecondPhoneNumberController.text);
-                            await GetStorage()
-                                .write("email", _emailController.text);
-                            await GetStorage()
-                                .write("lang", _languageController.text);
-                            // _context.validateState();
-                            // _context.clear();
-                            debugPrint("""
-firstname: ${_firstNameController.text},
-lastNeme: ${_lastNameController.text},
-dob: $birthday,
-gender: $pol,
-maritalStatus: true,
-occupation: occupation,
-notificationPreference: "notificationPreference",
-notificationLanguage: "notificationLanguage",
-""");
-                            await CustomersServices.cuspomersService(
-                                      dob: birthday!,
-                                      firstName: _firstNameController.text,
-                                      lastName: _lastNameController.text,
-                                      gender: pol ?? "женщина",
-                                      materialStatus: true,
-                                      notificationLanguage:
-                                          notifLang ?? "russian",
-                                      notificationPreference: "sms",
-                                      occupation: "occupation",
-                                    ) !=
-                                    null
-                                ? await Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MainPage(),
-                                    ),
-                                    (route) => false,
-                                  )
-                                : null;
-                            isload = false;
+                            bool hasInternet =
+                                await InternetConnectionChecker().hasConnection;
+                            debugPrint("has internet: $hasInternet");
+                            if (hasInternet) {
+                              isload = true;
+                              setState(() {});
+                              GetStorage().write(
+                                "firstName",
+                                _firstNameController.text,
+                              );
+                              await CustomersServices.cuspomersService(
+                                        platform: GetStorage().read("platform"),
+                                        dob: birthday!,
+                                        firstName: _firstNameController.text,
+                                        lastName: _lastNameController.text,
+                                        gender: pol ?? "женщина",
+                                        materialStatus: true,
+                                        notificationLanguage:
+                                            notifLang ?? "russian",
+                                        notificationPreference: "sms",
+                                        occupation: "occupation",
+                                      ) !=
+                                      null
+                                  ? await Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MainPage(),
+                                      ),
+                                      (route) => false,
+                                    )
+                                  : Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AboutUsPage(),
+                                      ),
+                                    );
+                              DevicesService.devicesService();
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const NoConnectionPage(),
+                                ),
+                              );
+                              isload = false;
+                            }
                           }
                         },
                         height: getHeight(50),

@@ -27,7 +27,7 @@ class CardWidget extends StatelessWidget {
             width: getWidth(315),
             top: getHeight(30),
             child: Text(
-              '2935 **** **** 1562',
+              'Ваша карта лояльности',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.whiteColor,
@@ -40,7 +40,7 @@ class CardWidget extends StatelessWidget {
             width: getWidth(315),
             top: getHeight(85),
             child: Text(
-              '2935 **** **** 1562',
+              GetStorage().read("barcode") ?? 'card is empty',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.whiteColor,
@@ -84,8 +84,8 @@ class CardWidget extends StatelessWidget {
               width: getWidth(82),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(getHeight(10)),
-                  topLeft: Radius.circular(getHeight(10)),
+                  bottomRight: Radius.circular(getHeight(15)),
+                  topLeft: Radius.circular(getHeight(15)),
                 ),
                 color: const Color(0xff800D0D0D),
               ),

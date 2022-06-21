@@ -1,29 +1,20 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/no_internet/show_cards.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-class NoConnectionPage extends StatelessWidget {
+class NoConnectionPage extends StatefulWidget {
   const NoConnectionPage({Key? key}) : super(key: key);
 
+  @override
+  State<NoConnectionPage> createState() => _NoConnectionPageState();
+}
+
+class _NoConnectionPageState extends State<NoConnectionPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: getHeight(50),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: SvgPicture.asset(
-            "assets/icons/arrow_back.svg",
-          ),
-        ),
-        iconTheme: const IconThemeData(
-          color: AppColors.black,
-        ),
-      ),
       backgroundColor: AppColors.scaffoldColor,
       body: Padding(
         padding: EdgeInsets.only(
@@ -99,7 +90,6 @@ class NoConnectionPage extends StatelessWidget {
             ),
             const Spacer(),
             InkWell(
-              onTap: () {},
               child: CircleAvatar(
                 child: Image.asset(
                   "assets/images/float_button.png",
@@ -108,6 +98,15 @@ class NoConnectionPage extends StatelessWidget {
                 radius: getHeight(30),
                 backgroundColor: AppColors.unselectedColor,
               ).only(bottom: getHeight(8)),
+              onTap: () async {
+                bool hasInternet =
+                    await InternetConnectionChecker().hasConnection;
+                debugPrint("has internet: $hasInternet");
+                if (hasInternet) {
+                  Navigator.pop(context);
+                }
+                setState(() {});
+              },
             ),
             Text(
               "Попытаться подключиться",

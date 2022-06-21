@@ -3,7 +3,9 @@ import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
 import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
 import 'package:asia_uz/service/api/post/verify_code_service.dart';
 import 'package:asia_uz/tablet/auth/tab_password_set.dart';
+import 'package:asia_uz/tablet/no_internet_connection.dart/tab_nointernet.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class TabSmsField extends StatefulWidget {
   String text;
@@ -48,7 +50,7 @@ class _TabSmsFieldState extends State<TabSmsField> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.unselectedColor,
-      appBar:  AppBarWidget(),
+      appBar: AppBarWidget(),
       body: isload == true
           ? const Center(
               child: CircularProgressIndicator(),
@@ -116,23 +118,36 @@ class _TabSmsFieldState extends State<TabSmsField> {
                       // },
                       onCodeChanged: (code) async {
                         if (code!.length == 4) {
-                          isload = true;
-                          setState(() {});
-                          hideKeyboard(context);
-                          // context.read<VerifyCodeCubit>().onTab();
-                          await VerifyCodeService.verifyCodeService(
-                                    int.parse(smsController.text),
-                                    GetStorage().read('telNumber'),
-                                  ) ==
-                                  null
-                              ? await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TabPasswordSet(),
-                                  ),
-                                )
-                              : null;
-                          isload = false;
+                          bool hasInternet =
+                              await InternetConnectionChecker().hasConnection;
+                          debugPrint("has internet: $hasInternet");
+                          if (hasInternet) {
+                            isload = true;
+                            setState(() {});
+                            hideKeyboard(context);
+                            // context.read<VerifyCodeCubit>().onTab();
+                            await VerifyCodeService.verifyCodeService(
+                                      int.parse(smsController.text),
+                                      GetStorage().read('telNumber'),
+                                    ) ==
+                                    null
+                                ? await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TabPasswordSet(),
+                                    ),
+                                  )
+                                : null;
+                            isload = false;
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const TabNoConnectionPage(),
+                              ),
+                            );
+                          }
                         }
                       },
                     ).only(bottom: getHeight(103)),

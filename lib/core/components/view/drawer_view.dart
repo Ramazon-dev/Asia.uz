@@ -1,10 +1,11 @@
 import 'package:asia_uz/main.dart';
 import 'package:asia_uz/screens/about_us/about_us_page.dart';
+import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:asia_uz/screens/profile/profile_page.dart';
-import 'package:asia_uz/screens/view/auth/splash/splash_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
@@ -74,7 +75,7 @@ class MyDrawer extends StatelessWidget {
                     ),
                     itemCount: titles.length,
                     itemBuilder: (context, index) {
-                      navigations(int i) {
+                      navigations(int i) async {
                         switch (i) {
                           case 0:
                             _context.currentTab = 0;
@@ -82,10 +83,26 @@ class MyDrawer extends StatelessWidget {
                             Navigator.pop(context);
                             break;
                           case 1:
-                            Navigator.push(
+                            bool hasInternet =
+                                await InternetConnectionChecker().hasConnection;
+                            debugPrint("has internet: $hasInternet");
+                            if (hasInternet) {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const NewsPage()));
+                                  builder: (context) => const NewsPage(),
+                                ),
+                              );
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const NoConnectionPage(),
+                                ),
+                              );
+                            }
+
                             break;
                           case 2:
                             _context.currentTab = 3;
@@ -122,6 +139,7 @@ class MyDrawer extends StatelessWidget {
                             GetStorage().remove('telNumber');
                             GetStorage().remove('token');
                             GetStorage().remove('firstName');
+                            GetStorage().remove("barcode");
                             //! GetStorage().remove("qrcode");
 
                             Navigator.push(

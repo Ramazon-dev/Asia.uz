@@ -83,6 +83,8 @@ class NewsPage extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
+                  debugPrint("url: ${state.response[index].image}");
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -92,6 +94,7 @@ class NewsPage extends StatelessWidget {
                         title: state.response[index].title ?? "",
                         id: state.response[index].id.toString(),
                         discription: state.response[index].description ?? "",
+                        created: state.response[index].createdAt.toString(),
                       ),
                     ),
                   );
@@ -127,11 +130,15 @@ class NewsPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(
                               getWidth(15.0),
                             ),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  state.response[index].image.toString()),
-                              fit: BoxFit.cover,
-                            ),
+                            // image: DecorationImage(
+                            //   image: NetworkImage(
+                            //       state.response[index].image.toString()),
+                            //   fit: BoxFit.cover,
+                            // ),
+                          ),
+                          child: FadeInImage.assetNetwork(
+                            placeholder: "assets/images/loading_indicator.gif",
+                            image: state.response[index].image.toString(),
                           ),
                         ).symmetric(
                             horizontal: getWidth(10.0),
@@ -191,6 +198,7 @@ class NewsPage extends StatelessWidget {
                         title: state.response[index].title ?? "",
                         id: state.response[index].id.toString(),
                         discription: state.response[index].description ?? "",
+                        created: state.response[index].createdAt.toString(),
                       ),
                     ),
                   );

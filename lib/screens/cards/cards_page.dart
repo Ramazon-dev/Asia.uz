@@ -1,7 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/cards/widgets/add_cards_widget.dart';
 import 'package:asia_uz/screens/cards/widgets/card_widget.dart';
-import 'package:asia_uz/screens/home/qrcode/qr_scanner_page.dart';
 import 'package:asia_uz/screens/no_internet/no_connection.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +10,7 @@ class CardsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    debugPrint(GetStorage().read("token"));
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: SingleChildScrollView(
@@ -47,7 +47,9 @@ class CardsPage extends StatelessWidget {
                 ],
               ),
             ),
-            const AddCardsWidget(),
+            GetStorage().read('barcode') == null
+                ? const AddCardsWidget()
+                : Container(),
             Container(
               margin: EdgeInsets.only(top: getHeight(15)),
               padding: EdgeInsets.all(getWidth(16)),

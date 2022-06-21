@@ -1,6 +1,7 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/tablet/no_internet_connection.dart/show_cards.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class TabNoConnectionPage extends StatelessWidget {
   const TabNoConnectionPage({Key? key}) : super(key: key);
@@ -80,7 +81,8 @@ class TabNoConnectionPage extends StatelessWidget {
                 children: [
                   Image.asset(
                     "assets/images/qr_button.png",
-                    height: getHeight(40),fit: BoxFit.cover,
+                    height: getHeight(40),
+                    fit: BoxFit.cover,
                   ).only(right: getWidth(22)),
                   Text(
                     "Показать QR-код",
@@ -103,7 +105,14 @@ class TabNoConnectionPage extends StatelessWidget {
               ),
             ).only(bottom: getHeight(16)),
             InkWell(
-              onTap: () {},
+              onTap: () async {
+                bool hasInternet =
+                    await InternetConnectionChecker().hasConnection;
+                debugPrint("has internet: $hasInternet");
+                if (hasInternet) {
+                  Navigator.pop(context);
+                }
+              },
               child: CircleAvatar(
                 child: Image.asset(
                   "assets/images/float_button.png",
