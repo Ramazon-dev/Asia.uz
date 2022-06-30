@@ -1,5 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabHistoryPage extends StatelessWidget {
   TabHistoryPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class TabHistoryPage extends StatelessWidget {
           children: [
             SizedBox(height: getHeight(170.0)),
             Text(
-              'История отзывов пуста.',
+              'История отзывов пуста.'.tr(),
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: getWidth(32.0),
@@ -29,7 +29,8 @@ class TabHistoryPage extends StatelessWidget {
             ),
             SizedBox(height: getHeight(25)),
             Text(
-              'Вы можете оставить свой отзыв, перейдя в раздел “ Новый отзыв”',
+              'Вы можете оставить свой отзыв, перейдя в раздел “ Новый отзыв”'
+                  .tr(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.black,

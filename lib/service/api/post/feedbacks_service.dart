@@ -1,26 +1,29 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:http/http.dart' as http;
 
-class DevicesService {
-  static Future devicesService() async {
-    debugPrint("deviceService api iwga tushdi");
-    debugPrint("Platform is ${GetStorage().read("platform")}");
+class FeedbacksService {
+  static Future feedbacksService({
+    required String type,
+    required String message,
+  }) async {
+    debugPrint(
+      "feedbacksService api iwga tushdi message: $message, type: $type",
+    );
     var res = await http.post(
       Uri.parse(
-        BaseUrl.baseUrl + "/devices",
+        BaseUrl.baseUrl + "/feedbacks",
       ),
       headers: {
         'Authorization': 'Bearer ${GetStorage().read('token')}',
       },
-      body: {
-        "token":
-            "eIopELx6SMSQBg48RnutsM:APA91bG1NtHVrR8u7noCyiaX3OBbE_mOXenQ91TvbMIn0xC2PVVY8NHldavlPIl_QH4ZwELG33dg91pgu_0RvYIiQoA0TXe7RO3eymSeAdPbg1DSG6Xzp-eFL15sOfJ4hHOt9aPB_ZoT",
-        "platform": GetStorage().read("platform")
-      },
+      body: {"type": type, "message": message},
     );
+    debugPrint("bodydan otdi");
     try {
+      debugPrint("try ga kirdi res.statusCode: ${res.statusCode}");
       if (res.statusCode == 200 || res.statusCode == 201) {
         var data = jsonDecode(res.body);
+        debugPrint("res.body: ${res.body} and data: $data");
         return data;
       } else {
         throw "error";

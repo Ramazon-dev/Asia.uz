@@ -1,11 +1,6 @@
-import 'package:asia_uz/main.dart';
-import 'package:asia_uz/screens/about_us/about_us_page.dart';
-import 'package:asia_uz/screens/no_internet/no_connection.dart';
-import 'package:asia_uz/screens/pages/news_page.dart';
-import 'package:asia_uz/screens/profile/profile_page.dart';
+import 'package:asia_uz/screens/contacts/contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
@@ -52,23 +47,21 @@ class MyDrawer extends StatelessWidget {
                 SizedBox(height: getHeight(58.0)),
                 Padding(
                   padding: EdgeInsets.only(left: getHeight(20)),
-                  child: InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: SvgPicture.asset(
-                        SvgIcons.menu,
-                        height: getHeight(28),
-                        color: AppColors.whiteColor,
-                      ),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: SvgPicture.asset(
+                      SvgIcons.menu,
+                      height: getHeight(25),
+                      color: AppColors.whiteColor,
                     ),
                   ),
                 ),
                 Container(
+                  // color: Colors.yellow,
                   padding: EdgeInsets.only(top: getHeight(25)),
                   alignment: Alignment.centerLeft,
                   height: MediaQuery.of(context).size.height * 0.7,
-                  width: getWidth(171.0),
+                  width: getWidth(200.0),
                   child: ListView.builder(
                     padding: EdgeInsets.only(
                       top: getHeight(0.0),
@@ -127,20 +120,24 @@ class MyDrawer extends StatelessWidget {
                             Navigator.pop(context);
                             break;
                           case 6:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Contacts()));
                             debugPrint("bosildi : 6 kontakti ");
                             break;
                           case 7:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AboutUsPage()));
+                                    builder: (context) => const AboutUsPage()));
                             break;
                           case 8:
                             GetStorage().remove('telNumber');
                             GetStorage().remove('token');
                             GetStorage().remove('firstName');
                             GetStorage().remove("barcode");
-                            //! GetStorage().remove("qrcode");
+                            GetStorage().remove("qrcode");
 
                             Navigator.push(
                                 context,
@@ -157,7 +154,7 @@ class MyDrawer extends StatelessWidget {
                           ),
                           child: MyTextWidget(
                             textAlign: TextAlign.left,
-                            text: titles[index],
+                            text: titles[index].tr(),
                             fontSize: getHeight(18),
                             fontWeight: FontWeight.w500,
                             textColor: Colors.white,
@@ -202,13 +199,14 @@ class MyDrawer extends StatelessWidget {
 
   languages(BuildContext context) {
     return Container(
+      // color: Colors.yellow,
       alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           MyElevatedButton(
             height: getHeight(32),
-            width: getWidth(55),
+            width: getWidth(63),
             radius: getHeight(22),
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress1 ? AppColors.onPressColor : Colors.white,
@@ -225,7 +223,7 @@ class MyDrawer extends StatelessWidget {
           ),
           MyElevatedButton(
             height: getHeight(32),
-            width: getWidth(65),
+            width: getWidth(63),
             radius: getHeight(22),
             textColor: AppColors.whiteColor,
             primaryColor: AppColors.transparentColor,
@@ -243,7 +241,7 @@ class MyDrawer extends StatelessWidget {
           MyElevatedButton(
             height: getHeight(32),
             textColor: AppColors.whiteColor,
-            width: getWidth(65),
+            width: getWidth(63),
             radius: getHeight(22),
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress3 ? AppColors.onPressColor : Colors.white,

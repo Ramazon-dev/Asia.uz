@@ -1,6 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/tablet/auth/tab_return_pass.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabPasswordSet extends StatelessWidget {
   TabPasswordSet({Key? key}) : super(key: key);
@@ -37,7 +36,7 @@ class TabPasswordSet extends StatelessWidget {
           child: Column(
             children: [
               MyTextWidget(
-                text: 'Установите PIN-код',
+                text: 'Установите PIN-код'.tr(),
                 fontSize: getHeight(30),
               ).only(bottom: getHeight(50)),
               PinFieldAutoFill(

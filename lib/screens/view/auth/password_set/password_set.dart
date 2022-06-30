@@ -1,17 +1,28 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/no_internet/no_connection.dart';
-import 'package:asia_uz/screens/view/auth/password_set/return_password.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-class PasswordSet extends StatelessWidget {
-  PasswordSet({Key? key}) : super(key: key);
+class PasswordSet extends StatefulWidget {
+  const PasswordSet({Key? key}) : super(key: key);
+
+  @override
+  State<PasswordSet> createState() => _PasswordSetState();
+}
+
+class _PasswordSetState extends State<PasswordSet> {
   TextEditingController controller = TextEditingController();
+
   String code = '';
+
   bool isActive = false;
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // bu page da foydalanuvchi app uchun password o'rnatadi
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -36,11 +47,11 @@ class PasswordSet extends StatelessWidget {
           ),
           child: Column(
             children: [
-              MyTextWidget(text: 'Установите PIN-код')
+              MyTextWidget(text: 'Установите PIN-код'.tr())
                   .only(bottom: getHeight(50)),
               PinFieldAutoFill(
                 codeLength: 4,
-                // autoFocus: true,
+                autoFocus: true,
                 controller: controller,
                 decoration: BoxLooseDecoration(
                   strokeColorBuilder: const FixedColorBuilder(
@@ -50,6 +61,7 @@ class PasswordSet extends StatelessWidget {
                 ),
                 currentCode: code,
                 onCodeChanged: (code) async {
+                  // shu yerdan passwordni kegingi page ga jonatiladi
                   if (code!.length == 4) {
                     isActive = true;
                     Navigator.push(
@@ -62,22 +74,6 @@ class PasswordSet extends StatelessWidget {
                   }
                 },
               ).only(bottom: getHeight(250)),
-              // MyElevatedButton(
-              //   textColor: AppColors.whiteColor,
-              //   primaryColor: AppColors.orangeColor,
-              //   text: 'Войти'.tr(),
-              //   onPressed: () {
-              //     isActive == true
-              //         ? Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //               builder: (context) =>
-              //                   ReturnPassword(text: controller.text),
-              //             ),
-              //           )
-              //         : null;
-              //   },
-              // ),
             ],
           ),
         ),

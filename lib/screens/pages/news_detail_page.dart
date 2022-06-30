@@ -1,7 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/components/view/my_app_bar.dart';
 
 class NewsDetailPage extends StatelessWidget {
   String id;
@@ -63,7 +62,7 @@ class NewsDetailPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
       appBar: MyAppBar(
-        text: 'События',
+        text: 'События'.tr(),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -158,7 +157,7 @@ class NewsDetailPage extends StatelessWidget {
       backgroundColor: AppColors.unselectedColor,
       appBar: MyAppBar(
         textSize: 32,
-        text: 'Новости и акции',
+        text: 'Новости и акции'.tr(),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

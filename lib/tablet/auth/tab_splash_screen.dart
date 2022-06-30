@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/view/auth/splash/check_password.dart';
-import 'package:asia_uz/tablet/auth/tab_check_paass.dart';
-import 'package:asia_uz/tablet/auth/tab_choose_lang.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabSplashScreens extends StatefulWidget {
   const TabSplashScreens({Key? key}) : super(key: key);
@@ -18,7 +15,7 @@ class _TabSplashScreensState extends State<TabSplashScreens> {
     super.initState();
     Timer(
       const Duration(seconds: 2),
-      () => GetStorage().read('firstName') != null
+      () => GetStorage().read('qrcode') != null
           ? Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(

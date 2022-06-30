@@ -1,6 +1,6 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/shop/local_auth_api.dart';
+import 'package:asia_uz/service/api/get/loyality_cards_service.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class CheckPassword extends StatefulWidget {
   String text;
@@ -31,15 +31,6 @@ class _CheckPasswordState extends State<CheckPassword> {
       );
     }
   }
-
-  // @override
-  // void initState() {
-  //   if (first) {
-  //     isAuthenticated(context);
-  //     first = false;
-  //   }
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +71,8 @@ class _CheckPasswordState extends State<CheckPassword> {
               ),
               MyTextWidget(
                 text:
-                    'Введите PIN-код или удерживайте палец на сенсоре для входа в приложение',
+                    'Введите PIN-код или удерживайте палец на сенсоре для входа в приложение'
+                        .tr(),
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.center,
               ).only(bottom: getHeight(24), top: getHeight(24)),

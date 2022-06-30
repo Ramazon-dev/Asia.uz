@@ -1,6 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/tablet/profile/tab_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabReturnPassword extends StatefulWidget {
   String text;
@@ -45,7 +44,7 @@ class _TabReturnPasswordState extends State<TabReturnPassword> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               MyTextWidget(
-                text: 'Повторите свой PIN-код',
+                text: 'Повторите свой PIN-код'.tr(),
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.center,
                 fontSize: getHeight(30),

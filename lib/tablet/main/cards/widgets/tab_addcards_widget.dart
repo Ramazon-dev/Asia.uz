@@ -2,23 +2,29 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/screens/home/qrcode/qr_scanner_page.dart';
 import 'package:flutter/material.dart';
 
-class AddCardsWidget extends StatelessWidget {
-  const AddCardsWidget({Key? key}) : super(key: key);
+class TabAddCardsWidget extends StatelessWidget {
+  const TabAddCardsWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.all(getWidth(13.0)),
-      padding: EdgeInsets.all(getWidth(10)),
-      height: getHeight(123.0),
+      margin: EdgeInsets.all(getWidth(20)),
+      padding: EdgeInsets.only(
+        top: getHeight(30),
+        bottom: getHeight(20),
+        right: getWidth(20),
+        left: getWidth(20),
+      ),
+      height: getHeight(250.0),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(getWidth(15.0)),
+        borderRadius: BorderRadius.circular(getWidth(30.0)),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           ElevatedButton(
             onPressed: () {
@@ -31,36 +37,43 @@ class AddCardsWidget extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(getHeight(15))),
+                  borderRadius: BorderRadius.circular(getHeight(20))),
               primary: Colors.orange.shade300,
-              fixedSize: Size(getWidth(320), getHeight(50)),
+              fixedSize: Size(getWidth(530), getHeight(80)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.add_circle, color: AppColors.whiteColor),
-                SizedBox(width: getWidth(15.0)),
+                Icon(
+                  Icons.add_circle,
+                  color: AppColors.whiteColor,
+                  size: getHeight(40),
+                ),
+                SizedBox(width: getWidth(35.0)),
                 Text(
                   'Добавить имеющуюся карту'.tr(),
                   style: TextStyle(
                     color: AppColors.whiteColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: getWidth(16.0),
+                    fontSize: getWidth(24.0),
                   ),
                 )
               ],
             ),
           ),
-          SizedBox(height: getHeight(15)),
+          SizedBox(height: getHeight(24)),
+          // ),
           Text(
-            'Вы можете добавить физическую карту лояльности отсканировав штрих-код'.tr(),
+            'Вы можете добавить физическую карту лояльности отсканировав штрих-код'
+                .tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.black,
-              fontSize: getWidth(14.0),
+              fontSize: getWidth(24.0),
               fontWeight: FontWeight.w500,
             ),
           ),
+          // SizedBox(height: getHeight(20)),
         ],
       ),
     );

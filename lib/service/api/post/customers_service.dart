@@ -23,21 +23,23 @@ class CustomersServices {
         'Authorization': 'Bearer ${GetStorage().read('token')}',
       },
       body: {
-        "first_name": "Dev",
-        "last_name": "Anvarov",
-        "dob": "07/12/2001",
-        "marital_status": true,
-        "gender": "male",
-        "occupation": "dsfgsdf",
-        "notification_preference": "sms",
-        "notification_language": "russian",
-        "os": "Android"
+        "first_name": firstName,
+        "last_name": lastName,
+        "dob": dob,
+        // "marital_status": materialStatus,
+        "gender": gender,
+        "occupation": occupation,
+        "notification_preference": notificationPreference,
+        "notification_language": notificationLanguage,
+        "os": platform
       },
     );
     debugPrint("funksiya bodydan otdi");
     debugPrint("customer service ichida token: ${GetStorage().read("token")}");
     try {
       debugPrint("funksiya try ga kirdi");
+      debugPrint("res.statuscode: ${res.statusCode}");
+
       if (res.statusCode == 200 || res.statusCode == 201) {
         var data = jsonDecode(res.body);
         debugPrint("ifga kirdi: $res");
@@ -59,7 +61,11 @@ history: ${GetStorage().read("history")}
     } catch (e) {
       debugPrint(e.toString());
       debugPrint("funksiya catch ga otib ketti");
+      return customersGetModels =
+          CustomersGetModels.fromJson(jsonDecode(res.body));
     }
+    return customersGetModels =
+        CustomersGetModels.fromJson(jsonDecode(res.body));
   }
 }
 

@@ -1,7 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/no_internet/show_cards.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class NoConnectionPage extends StatefulWidget {
   const NoConnectionPage({Key? key}) : super(key: key);
@@ -13,12 +11,14 @@ class NoConnectionPage extends StatefulWidget {
 class _NoConnectionPageState extends State<NoConnectionPage> {
   @override
   Widget build(BuildContext context) {
+    // agar internet ishlamay qolsa shu page ga otadi
+    // bu pagedan internet yoq paytida qrcode va kartani korsatish mumkin bolgan
+    // page ga otish mumkin yoki pasdagi button orqali internetni qayta tekshirish
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppColors.scaffoldColor,
       body: Padding(
         padding: EdgeInsets.only(
-          // top: getHeight(190),
           left: getWidth(44),
           right: getWidth(44),
         ),
@@ -29,21 +29,16 @@ class _NoConnectionPageState extends State<NoConnectionPage> {
               "assets/images/no_internet.png",
               height: getHeight(200),
             ).only(bottom: getHeight(30)),
-            // SvgPicture.asset(
-            //   "assets/images/no_internet.svg",
-            //   height: getHeight(200),
-            // ).only(bottom: getHeight(30)),
             Text(
-              "Нет подключения к сети",
+              "Нет подключения к сети".tr(),
               style: TextStyle(
                 fontSize: getHeight(16),
                 fontWeight: FontWeight.w500,
               ),
             ).only(bottom: getHeight(40)),
             Text(
-              """Доступный функционал в офлайн
-режиме – начисление/списание
-бонусов с помощью QR-кода""",
+              "Доступный функционал в офлайн режиме – начисление/списание бонусов с помощью QR-кода"
+                  .tr(),
               style: TextStyle(
                 fontSize: getHeight(16),
                 fontWeight: FontWeight.w500,
@@ -78,7 +73,7 @@ class _NoConnectionPageState extends State<NoConnectionPage> {
                   Image.asset("assets/images/qr_button.png")
                       .only(right: getWidth(10)),
                   Text(
-                    "Показать QR-код",
+                    "Показать QR-код".tr(),
                     style: TextStyle(
                       fontSize: getHeight(16),
                       fontWeight: FontWeight.w700,
@@ -89,6 +84,14 @@ class _NoConnectionPageState extends State<NoConnectionPage> {
               ),
             ),
             const Spacer(),
+            Text(
+              "Попытаться подключиться".tr(),
+              style: TextStyle(
+                fontSize: getHeight(getHeight(12)),
+                fontWeight: FontWeight.w500,
+                color: AppColors.black,
+              ),
+            ).only(bottom: getHeight(20)),
             InkWell(
               child: CircleAvatar(
                 child: Image.asset(
@@ -107,14 +110,6 @@ class _NoConnectionPageState extends State<NoConnectionPage> {
                 }
                 setState(() {});
               },
-            ),
-            Text(
-              "Попытаться подключиться",
-              style: TextStyle(
-                fontSize: getHeight(getHeight(12)),
-                fontWeight: FontWeight.w500,
-                color: AppColors.black,
-              ),
             ),
             const Spacer(),
           ],

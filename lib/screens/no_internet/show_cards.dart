@@ -1,6 +1,4 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/cards/widgets/card_widget.dart';
-import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
 import 'package:flutter/material.dart';
 
 class ShowCards extends StatelessWidget {
@@ -31,7 +29,10 @@ class ShowCards extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.only(
-                  left: getWidth(20), right: getWidth(20), top: getHeight(71)),
+                left: getWidth(20),
+                right: getWidth(20),
+                top: getHeight(71),
+              ),
               padding: EdgeInsets.symmetric(
                 horizontal: getWidth(25),
                 vertical: getHeight(20),
@@ -60,9 +61,8 @@ class ShowCards extends StatelessWidget {
                     ),
                   ).only(bottom: getHeight(10)),
                   Text(
-                    """Покажите QR-код кассиру.
-      Максимальная сумма к списанию 
-      с карты лояльности - 200 000 бонусов.""",
+                    "Покажите QR-код кассиру. Максимальная сумма к списанию с карты лояльности - 200 000 бонусов."
+                        .tr(),
                     style: TextStyle(
                       fontSize: getHeight(14),
                       fontWeight: FontWeight.w400,
@@ -87,8 +87,8 @@ class ShowCards extends StatelessWidget {
                 children: [
                   MyTextWidget(
                     text:
-                        """Эти карты используются для оплаты 
-      и начисления бонусов""",
+                        "Эти карты используются для оплаты и начисления бонусов"
+                            .tr(),
                   ).symmetric(
                       vertical: getHeight(20), horizontal: getWidth(31)),
                   const CardWidget(),

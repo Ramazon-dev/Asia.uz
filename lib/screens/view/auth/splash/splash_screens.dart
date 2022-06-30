@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/view/auth/choose_language.dart';
 import 'package:asia_uz/screens/view/auth/splash/check_password.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +10,16 @@ class SplashScreens extends StatefulWidget {
 }
 
 class _SplashScreensState extends State<SplashScreens> {
+  // bu page da shunchaki 3 sekund turadi va shu orada agar foydalanuvchi oldin
+  //ro'yxatdan otgan bo'lsa asosiy screenga otadi aks xolda registratsiyaga o'tadi
   @override
   void initState() {
     super.initState();
     Timer(
       const Duration(seconds: 2),
-      () => GetStorage().read('firstName') != null
+      // foydalanuvchi oldin ro'yxatdan o'tgan yoki o'tmaganini qrCode orqali 
+      // tekshiriladi
+      () => GetStorage().read('qrcode') != null
           ? Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -33,7 +35,7 @@ class _SplashScreensState extends State<SplashScreens> {
           : Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ChooseLanguagePage(),
+                builder: (context) => const ChooseLanguagePage(),
               ),
             ),
     );

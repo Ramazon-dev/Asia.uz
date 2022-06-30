@@ -23,15 +23,18 @@ class VerifyCodeService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         var data = jsonDecode(response.body);
         String token = data['access_token'];
+        bool verify = data["is_verified"];
         debugPrint("access_token : $token");
+        debugPrint("is verified: $verify");
         await GetStorage().write('token', token);
         debugPrint("if ichida response : ${response.body}");
-        // return data;
+        return verify;
       } else {
         throw 'error';
       }
     } catch (e) {
       debugPrint(e.toString());
+      return null;
     }
   }
 }

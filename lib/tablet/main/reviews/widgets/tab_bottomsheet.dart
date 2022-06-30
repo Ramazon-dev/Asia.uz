@@ -15,7 +15,7 @@ class TabMyBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Выберите тип обращения*',
+            'Выберите тип обращения*'.tr(),
             style: TextStyle(
               color: AppColors.teal,
               fontSize: getWidth(24.0),
@@ -70,7 +70,7 @@ class TabMyBottomSheet extends StatelessWidget {
               SizedBox(height: getHeight(20.0)),
               SizedBox(
                 child: Text(
-                  "Тип обращения",
+                  "Тип обращения".tr(),
                   style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w600,
@@ -87,7 +87,7 @@ class TabMyBottomSheet extends StatelessWidget {
                       children: [
                         ListTile(
                           title: Text(
-                            names[index].toString(),
+                            names[index].toString().tr(),
                             style: TextStyle(
                               color: AppColors.black,
                               fontSize: getHeight(24.0),
@@ -105,7 +105,7 @@ class TabMyBottomSheet extends StatelessWidget {
                 ),
               ),
               MyElevatedButton(
-                text: 'Сохранить',
+                text: 'Сохранить'.tr(),
                 onPressed: () {
                   Navigator.pop(context);
                 },

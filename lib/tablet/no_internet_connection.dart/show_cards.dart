@@ -1,8 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/cards/widgets/card_widget.dart';
-import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
-import 'package:asia_uz/tablet/main/cards/widgets/tab_cards_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabShowCards extends StatelessWidget {
   const TabShowCards({Key? key}) : super(key: key);
@@ -64,9 +61,8 @@ class TabShowCards extends StatelessWidget {
                   ),
                 ).only(bottom: getHeight(50)),
                 Text(
-                  """Покажите QR-код кассиру.
-      Максимальная сумма к списанию 
-      с карты лояльности - 200 000 бонусов.""",
+                  "Покажите QR-код кассиру. Максимальная сумма к списанию с карты лояльности - 200 000 бонусов."
+                      .tr(),
                   style: TextStyle(
                     fontSize: getHeight(20),
                     fontWeight: FontWeight.w400,
@@ -90,8 +86,8 @@ class TabShowCards extends StatelessWidget {
             child: Column(
               children: [
                 MyTextWidget(
-                  text: """Эти карты используются для оплаты 
-      и начисления бонусов""",
+                  text: "Эти карты используются для оплаты и начисления бонусов"
+                      .tr(),
                   fontSize: getHeight(24),
                 ).symmetric(vertical: getHeight(25), horizontal: getWidth(80)),
                 const TabCardWidget(),

@@ -1,17 +1,8 @@
-import 'dart:io' show Platform;
-
-import 'package:asia_uz/screens/about_us/about_us_page.dart';
-import 'package:asia_uz/screens/no_internet/no_connection.dart';
-import 'package:asia_uz/service/api/post/customers_service.dart';
-import 'package:asia_uz/service/api/post/devices_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import '../../core/components/view/my_app_bar.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -24,57 +15,26 @@ class _ProfilePageState extends State<ProfilePage> {
 
   final TextEditingController _lastNameController = TextEditingController();
 
-  final TextEditingController _dataBirthController = TextEditingController();
-
-  final TextEditingController _floorController = TextEditingController();
-
-  final TextEditingController _seminalPositionController =
-      TextEditingController();
-
-  final TextEditingController _employmentController = TextEditingController();
-
-  final TextEditingController _homePhoneNumberController =
-      TextEditingController();
-
-  final TextEditingController _homeSecondPhoneNumberController =
-      TextEditingController();
-
-  final TextEditingController _emailController = TextEditingController();
-
-  final TextEditingController _notificationController = TextEditingController();
-
-  final TextEditingController _languageController = TextEditingController();
-
   String? birthday;
   bool isload = false;
+  String? pol;
+  String? zanyatost;
 
-  String platform() {
-    String platform;
-    if (Platform.isAndroid) {
-      platform = "Android";
-    } else {
-      platform = "IOS";
-    }
-    return platform;
+  String? notifLang;
+  String platform = Platform.operatingSystem;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    GetStorage().write("platform", platform());
-    debugPrint(platform());
+    // bu pageda foydalanuvchi registratsiyadan otadi
+    GetStorage().write("platform", platform);
     SizeConfig().init(context);
-    return buildScaffold(context);
-  }
-
-  back(context) {
-    Navigator.pop(context);
-  }
-
-  String? pol;
-
-  String? notifLang;
-
-  buildScaffold(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
@@ -106,21 +66,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       TextFormField(
                         controller: _firstNameController,
-                        decoration: const InputDecoration(
-                          hintText: 'Имя*',
-                          labelText: 'Имя*',
+                        decoration: InputDecoration(
+                          hintText: 'Имя*'.tr(),
+                          labelText: 'Имя*'.tr(),
                         ),
-                        validator: (v) => v!.isEmpty ? 'Ism kiritilmadi' : null,
+                        validator: (v) =>
+                            v!.isEmpty ? 'Имя не введено'.tr() : null,
                       ),
                       SizedBox(height: getHeight(4.0)),
                       TextFormField(
                         controller: _lastNameController,
-                        decoration: const InputDecoration(
-                          hintText: 'Фамилия*',
-                          labelText: 'Фамилия*',
+                        decoration: InputDecoration(
+                          hintText: 'Фамилия*'.tr(),
+                          labelText: 'Фамилия*'.tr(),
                         ),
                         validator: (v) =>
-                            v!.isEmpty ? 'Familiya kiritilmadi' : null,
+                            v!.isEmpty ? 'Фамилия не введена'.tr() : null,
                       ),
                       SizedBox(height: getHeight(4.0)),
                       InkWell(
@@ -164,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    "Дата рождения",
+                                    "Дата рождения*".tr(),
                                     style: TextStyle(
                                       fontSize: getHeight(14),
                                       fontWeight: FontWeight.w500,
@@ -192,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       SizedBox(height: getHeight(4.0)),
                       DropdownButtonFormField(
-                        hint: const Text("Пол*"),
+                        hint: Text("Пол*".tr()),
                         icon: Padding(
                           padding: EdgeInsets.only(right: getHeight(13)),
                           child: const Icon(
@@ -200,27 +161,28 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: AppColors.black,
                           ),
                         ),
-                        validator: (v) => v == null ? "Pol tanlanmadi" : null,
+                        validator: (v) =>
+                            v == null ? "Пол не был выбран".tr() : null,
                         onChanged: (String? v) {
                           pol = v;
                           debugPrint("gender: $v");
                         },
-                        items: const <DropdownMenuItem<String>>[
+                        items: <DropdownMenuItem<String>>[
                           DropdownMenuItem(
-                            value: "мужчина",
-                            child: Text("мужчина"),
+                            value: "мужчина".tr(),
+                            child: Text("мужчина".tr()),
                           ),
                           DropdownMenuItem(
-                            value: "женщина",
-                            child: Text("женщина"),
+                            value: "женщина".tr(),
+                            child: Text("женщина".tr()),
                           ),
                         ],
                       ),
                       SizedBox(height: getHeight(4.0)),
                       SizedBox(height: getHeight(4.0)),
                       DropdownButtonFormField(
-                        hint: const Text(
-                          "Семейное положение*",
+                        hint: Text(
+                          "Семейное положение*".tr(),
                         ),
                         icon: Padding(
                           padding: EdgeInsets.only(right: getHeight(10)),
@@ -230,75 +192,116 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         // value: "",
-                        validator: (v) =>
-                            v == null ? "Семейное положение* tanlanmadi" : null,
+                        validator: (v) => v == null
+                            ? "Семейное положение не выбрано".tr()
+                            : null,
                         onChanged: (String? v) {
                           pol = v;
                           debugPrint("gender: $v");
                         },
-                        items: const <DropdownMenuItem<String>>[
+                        items: <DropdownMenuItem<String>>[
                           DropdownMenuItem(
-                            value: "женат/замужем",
-                            child: Text(
-                              "женат/замужем",
-                            ),
+                            value: "женат/замужем".tr(),
+                            child: Text("женат/замужем".tr()),
                           ),
                           DropdownMenuItem(
-                            value: "холост/не замужем",
-                            child: Text(
-                              "холост/не замужем",
-                            ),
+                            value: "холост/не замужем".tr(),
+                            child: Text("холост/не замужем".tr()),
                           ),
                           DropdownMenuItem(
-                            value: "разведен/разведена",
+                            value: "разведен/разведена".tr(),
                             child: Text(
-                              "разведен/разведена",
+                              "разведен/разведена".tr(),
                             ),
                           ),
                         ],
                       ),
-                      // TextFormField(
-                      //   controller: _seminalPositionController,
-                      //   decoration: const InputDecoration(
-                      //     hintText: 'Семейное положение*',
-                      //     labelText: 'Семейное положение*',
-                      //     suffixIcon: Icon(
-                      //       Icons.arrow_forward_ios,
-                      //       color: AppColors.black,
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        controller: _employmentController,
-                        decoration: const InputDecoration(
-                          hintText: 'Занятость*',
-                          labelText: 'Занятость*',
-                          suffixIcon: Icon(
+                      DropdownButtonFormField(
+                        hint: Text(
+                          'Занятость*'.tr(),
+                        ),
+                        icon: Padding(
+                          padding: EdgeInsets.only(right: getHeight(10)),
+                          child: const Icon(
                             Icons.arrow_forward_ios,
                             color: AppColors.black,
                           ),
                         ),
+                        onChanged: (String? v) {
+                          zanyatost = v;
+                          debugPrint("zanyatost: $v");
+                        },
+                        items: <DropdownMenuItem<String>>[
+                          DropdownMenuItem(
+                            value: "Гос.служба".tr(),
+                            child: Text("Гос. служба".tr()),
+                          ),
+                          DropdownMenuItem(
+                            value: "Частный сектор ".tr(),
+                            child: Text("Частный сектор ".tr()),
+                          ),
+                          DropdownMenuItem(
+                            value: "Социальная сфера ".tr(),
+                            child: Text(
+                              "Социальная сфера ".tr(),
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: "Пенсионер".tr(),
+                            child: Text("Пенсионер".tr()),
+                          ),
+                          DropdownMenuItem(
+                            value: "Учасиийся".tr(),
+                            child: Text("Учасиийся".tr()),
+                          ),
+                          DropdownMenuItem(
+                            value: "Домохозяйка".tr(),
+                            child: Text(
+                              "Домохозяйка".tr(),
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: "Временно неработающий".tr(),
+                            child: Text(
+                              "Временно неработающий".tr(),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: getHeight(4.0)),
                       SizedBox(height: getHeight(70.0)),
                       MyElevatedButton(
-                        text: 'Сохранить',
+                        text: 'Сохранить'.tr(),
                         onPressed: () async {
-                          platform();
+                          // bu joyda inputlarni validatsiyadan otkazamiza
                           if (_formKey.currentState!.validate()) {
                             bool hasInternet =
                                 await InternetConnectionChecker().hasConnection;
                             debugPrint("has internet: $hasInternet");
+                          // internetni ketshiramiza
                             if (hasInternet) {
                               isload = true;
                               setState(() {});
+                              // Storage ga ism ni yozib qoyamiza
                               GetStorage().write(
                                 "firstName",
                                 _firstNameController.text,
                               );
+                              debugPrint(
+                                  """
+platform: ${GetStorage().read("platform")}
+dob: $birthday
+firstname: ${_firstNameController.text}
+lastname: ${_lastNameController.text}
+gender: $pol
+materialstatus: true
+notificationLanguage:$notifLang,
+notificationPreference: "sms",
+occupation: "occupation",
+""");
                               await CustomersServices.cuspomersService(
-                                        platform: GetStorage().read("platform"),
+                                        platform: platform,
                                         dob: birthday!,
                                         firstName: _firstNameController.text,
                                         lastName: _lastNameController.text,
@@ -317,13 +320,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                       (route) => false,
                                     )
-                                  : Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AboutUsPage(),
-                                      ),
-                                    );
+                                  : debugPrint("Else ga otib ketti");
+                              isload = false;
+                              debugPrint("loyality cards service ishga tushdi");
                               DevicesService.devicesService();
+                              LoyalityCardsService.getLoyalityCardsService();
                             } else {
                               Navigator.push(
                                 context,
@@ -332,7 +333,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                       const NoConnectionPage(),
                                 ),
                               );
-                              isload = false;
                             }
                           }
                         },
@@ -344,63 +344,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         sideWidth: getHeight(2),
                       ),
                       SizedBox(height: getHeight(120.0)),
-                      SizedBox(
-                        height: getHeight(70.0),
-                        width: getWidth(334.0),
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: TextStyle(
-                              color: AppColors.black,
-                              fontSize: getWidth(13.0),
-                            ),
-                            children: [
-                              TextSpan(
-                                text:
-                                    ("Нажимая “Продолжить” вы соглашаетесь с\n"),
-                                style: TextStyle(
-                                  color: AppColors.teal,
-                                  fontSize: getWidth(13.0),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              TextSpan(
-                                text: ("условиями "),
-                                style: TextStyle(
-                                  color: AppColors.teal,
-                                  fontSize: getWidth(13.0),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              TextSpan(
-                                text: ("Обработки персональных "),
-                                style: TextStyle(
-                                  color: AppColors.onPressColor,
-                                  fontSize: getWidth(13.0),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              TextSpan(
-                                text: ("данных,\n"),
-                                style: TextStyle(
-                                  color: AppColors.teal,
-                                  fontSize: getWidth(13.0),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              TextSpan(
-                                text:
-                                    ("Программой лояльности и Публичной аферты"),
-                                style: TextStyle(
-                                  color: AppColors.onPressColor,
-                                  fontSize: getWidth(13.0),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      RichTextWidget(),
                       SizedBox(height: getHeight(40.0)),
                     ],
                   ),

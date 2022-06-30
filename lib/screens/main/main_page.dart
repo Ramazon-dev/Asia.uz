@@ -1,5 +1,3 @@
-import 'package:asia_uz/core/components/view/my_app_bar.dart';
-import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -10,17 +8,15 @@ class MainPage extends StatelessWidget {
   bool closeDrawer = true;
 
   bool first = true;
-  // BottomNavigationBarProvider? updateProvider;
+  final GlobalKey<ScaffoldState> _scaoffoldKey = GlobalKey();
   OnPressProvider? onPressProvider;
 
   @override
   Widget build(BuildContext context) {
-    // updateProvider = Provider.of<BottomNavigationBarProvider>(context);
-    // first?{ updateProvider!.currentTab = index ?? 0,first = false}:null;
     onPressProvider = Provider.of<OnPressProvider>(context);
     SizeConfig().init(context);
-    GlobalKey<ScaffoldState> _scaoffoldKey = GlobalKey();
-
+// bu page main page xisoblanib
+// bottomnavbar appbar va drawer widgetlari shu joyda ishlatilgan
     return ChangeNotifierProvider<BottomNavigationBarProvider>(
       create: (context) => BottomNavigationBarProvider(),
       child: Consumer<BottomNavigationBarProvider>(
@@ -39,7 +35,6 @@ class MainPage extends StatelessWidget {
             leading: InkWell(
               onTap: () {
                 _scaoffoldKey.currentState!.openDrawer();
-
                 _scaoffoldKey.currentState!.isDrawerOpen;
               },
               child: Padding(
@@ -58,7 +53,7 @@ class MainPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfilePage(),
+                    builder: (context) => const ProfilePage(),
                   ),
                 );
               },
@@ -80,9 +75,9 @@ class MainPage extends StatelessWidget {
   }
 
   List<String> titlesOfAppBar = [
-    'Главная',
-    'Магазин',
-    'Отзывы',
-    'Карты',
+    'Главная'.tr(),
+    'Магазин'.tr(),
+    'Отзывы'.tr(),
+    'Карты'.tr(),
   ];
 }

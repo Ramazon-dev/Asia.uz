@@ -1,7 +1,5 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ReturnPassword extends StatefulWidget {
   String text;
@@ -13,10 +11,17 @@ class ReturnPassword extends StatefulWidget {
 
 class _ReturnPasswordState extends State<ReturnPassword> {
   TextEditingController controller = TextEditingController();
-
   String code = '';
   @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // bu page da birinchi kiritilgan passwordni qayta kiritadi
+    // to'gri kiritganidan kegin kegingi page ga otadi
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -41,12 +46,13 @@ class _ReturnPasswordState extends State<ReturnPassword> {
           child: Column(
             children: [
               MyTextWidget(
-                text: 'Повторите свой PIN-код',
+                text: 'Повторите свой PIN-код'.tr(),
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.center,
               ).only(bottom: getHeight(24), top: getHeight(24)),
               PinFieldAutoFill(
                 codeLength: 4,
+                autoFocus: true,
                 controller: controller,
                 decoration: BoxLooseDecoration(
                   strokeColorBuilder: const FixedColorBuilder(
@@ -67,6 +73,7 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                   }
                 },
                 onCodeChanged: (code) async {
+                  // shu joyda password tog'ri kiritganini tekshiriladi
                   if (code!.length == 4 && widget.text == controller.text) {
                     GetStorage().write("password", controller.text);
 

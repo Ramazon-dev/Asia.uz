@@ -31,7 +31,7 @@ class TabMyBottomNavigationBar extends StatelessWidget {
       ),
       items: [
         BottomNavigationBarItem(
-          label: 'Главная',
+          label: 'Главная'.tr(),
           icon: _context.tabcurrentTab == 0
               ? SvgPicture.asset(
                   SvgIcons.home,
@@ -45,7 +45,7 @@ class TabMyBottomNavigationBar extends StatelessWidget {
                 ),
         ),
         BottomNavigationBarItem(
-          label: 'Магазины',
+          label: 'Магазины'.tr(),
           icon: _context.tabcurrentTab == 1
               ? SvgPicture.asset(
                   SvgIcons.shops,
@@ -59,7 +59,7 @@ class TabMyBottomNavigationBar extends StatelessWidget {
                 ),
         ),
         BottomNavigationBarItem(
-          label: 'Отзывы',
+          label: 'Отзывы'.tr(),
           icon: _context.tabcurrentTab == 2
               ? SvgPicture.asset(
                   SvgIcons.review,
@@ -73,7 +73,7 @@ class TabMyBottomNavigationBar extends StatelessWidget {
                 ),
         ),
         BottomNavigationBarItem(
-          label: 'Карты',
+          label: 'Карты'.tr(),
           icon: _context.tabcurrentTab == 3
               ? SvgPicture.asset(
                   SvgIcons.karti,

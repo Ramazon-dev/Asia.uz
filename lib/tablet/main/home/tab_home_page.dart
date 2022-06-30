@@ -1,7 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
-import 'package:asia_uz/screens/pages/news_page.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabHomePage extends StatefulWidget {
   const TabHomePage({Key? key}) : super(key: key);
@@ -23,12 +21,10 @@ class _TabHomePageState extends State<TabHomePage> {
     debugPrint("qrcode: ${GetStorage().read("qrcode")}");
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
-      // backgroundColor: Colors.cyanAccent,
       body: Column(
         children: [
           Container(
             height: getHeight(773),
-            // margin: EdgeInsets.only(top: getHeight(114)),
             padding: EdgeInsets.only(
               top: getHeight(150),
             ),
@@ -38,7 +34,7 @@ class _TabHomePageState extends State<TabHomePage> {
                 Container(
                   alignment: Alignment.center,
                   child: MyTextWidget(
-                    text: 'Покажите QR-код  кассиру',
+                    text: 'Покажите QR-код кассиру'.tr(),
                     fontSize: getHeight(32),
                     textColor: AppColors.black,
                     fontWeight: FontWeight.w600,
@@ -60,10 +56,7 @@ class _TabHomePageState extends State<TabHomePage> {
           ),
           const Spacer(),
           Container(
-            // padding: EdgeInsets.only(top: getHeight(40)),
-            // margin: EdgeInsets.only(top: getHeight(25)),
             height: getHeight(278),
-            // width: getWidth(834),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(getHeight(20)),
@@ -78,13 +71,11 @@ class _TabHomePageState extends State<TabHomePage> {
                     horizontal: getWidth(50.0),
                     vertical: getHeight(25),
                   ),
-
-
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       MyTextWidget(
-                        text: 'События',
+                        text: 'События'.tr(),
                         textAlign: TextAlign.left,
                         fontSize: getHeight(24),
                         fontWeight: FontWeight.w500,
@@ -98,7 +89,7 @@ class _TabHomePageState extends State<TabHomePage> {
                           ),
                         ),
                         child: MyTextWidget(
-                          text: 'Все',
+                          text: 'Все'.tr(),
                           textAlign: TextAlign.right,
                           fontSize: getHeight(24),
                           fontWeight: FontWeight.w500,
@@ -128,7 +119,7 @@ class _TabHomePageState extends State<TabHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'На счету',
+                'На счету'.tr(),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: getWidth(24.0),
@@ -137,7 +128,7 @@ class _TabHomePageState extends State<TabHomePage> {
               ),
               MyTextWidget(
                 textAlign: TextAlign.right,
-                text: 'Расход за месяц',
+                text: 'Расход за месяц'.tr(),
                 fontSize: 24.0,
                 fontWeight: FontWeight.w500,
               ),
@@ -155,7 +146,7 @@ class _TabHomePageState extends State<TabHomePage> {
                 fontWeight: FontWeight.w700,
               ),
               MyTextWidget(
-                text: '0 баллов',
+                text: "0 " +'баллов'.tr(),
                 textAlign: TextAlign.right,
                 textColor: AppColors.teal,
                 fontSize: getHeight(20),

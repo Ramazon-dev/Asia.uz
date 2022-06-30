@@ -1,7 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/shop/local_auth_api.dart';
-import 'package:asia_uz/tablet/main/tab_main.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabCheckPassword extends StatefulWidget {
   String text;
@@ -80,7 +78,7 @@ class _TabCheckPasswordState extends State<TabCheckPassword> {
               ),
               MyTextWidget(
                 text:
-                    'Введите PIN-код или удерживайте палец на сенсоре для входа в приложение',
+                    'Введите PIN-код или удерживайте палец на сенсоре для входа в приложение'.tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 32,
                 textAlign: TextAlign.center,

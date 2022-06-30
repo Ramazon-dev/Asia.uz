@@ -1,6 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/service/api/post/verify_code_service.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class VerifyCodeCubit extends Cubit<VerifyCodeState> {
   final GlobalKey<FormState> validateKey;

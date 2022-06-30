@@ -1,7 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/tablet/no_internet_connection.dart/show_cards.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabNoConnectionPage extends StatelessWidget {
   const TabNoConnectionPage({Key? key}) : super(key: key);
@@ -11,22 +9,6 @@ class TabNoConnectionPage extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppColors.scaffoldColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: getHeight(100),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: SvgPicture.asset(
-            "assets/icons/arrow_back.svg",
-            height: getHeight(20),
-            width: getWidth(30),
-          ).only(left: getWidth(15)),
-        ),
-        iconTheme: const IconThemeData(
-          color: AppColors.black,
-        ),
-      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,24 +17,26 @@ class TabNoConnectionPage extends StatelessWidget {
               "assets/images/no_internet.png",
               fit: BoxFit.cover,
               height: getHeight(338),
-            ).only(bottom: getHeight(75)),
+            ).only(bottom: getHeight(75), top: getHeight(200)),
             Text(
-              "Нет подключения к сети",
+              "Нет подключения к сети".tr(),
               style: TextStyle(
                 fontSize: getHeight(24),
                 fontWeight: FontWeight.w500,
               ),
             ).only(bottom: getHeight(40)),
-            Text(
-              """Доступный функционал в офлайн
-режиме – начисление/списание
-бонусов с помощью QR-кода""",
-              style: TextStyle(
-                fontSize: getHeight(24),
-                fontWeight: FontWeight.w500,
-                color: AppColors.textTite,
+            SizedBox(
+              width: getWidth(425),
+              child: Text(
+                "Доступный функционал в офлайн режиме – начисление/списание бонусов с помощью QR-кода"
+                    .tr(),
+                style: TextStyle(
+                  fontSize: getHeight(24),
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textTite,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
             SizedBox(height: getHeight(75)),
             ElevatedButton(
@@ -85,7 +69,7 @@ class TabNoConnectionPage extends StatelessWidget {
                     fit: BoxFit.cover,
                   ).only(right: getWidth(22)),
                   Text(
-                    "Показать QR-код",
+                    "Показать QR-код".tr(),
                     style: TextStyle(
                       fontSize: getHeight(32),
                       fontWeight: FontWeight.w700,
@@ -97,7 +81,7 @@ class TabNoConnectionPage extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              "Попытаться подключиться",
+              "Попытаться подключиться".tr(),
               style: TextStyle(
                 fontSize: getHeight(getHeight(12)),
                 fontWeight: FontWeight.w500,

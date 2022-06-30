@@ -1,10 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
-import 'package:asia_uz/screens/no_internet/no_connection.dart';
-import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
-import 'package:asia_uz/service/api/post/verify_code_service.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class SmsField extends StatefulWidget {
   String text;
@@ -26,6 +21,7 @@ class _SmsFieldState extends State<SmsField> {
 
   @override
   Widget build(BuildContext context) {
+    // bu page da foydalanuvchiga jonatilgan sms code ni kiritadi
     SizeConfig().init(context);
     return BlocProvider(
       create: (context) => VerifyCodeCubit(_validateKey, smsController),
@@ -75,10 +71,10 @@ class _SmsFieldState extends State<SmsField> {
                 child: Column(
                   children: [
                     MyTextWidget(
-                      text: 'Мы отправили вам СМС ',
+                      text: 'Мы отправили вам СМС'.tr(),
                     ),
                     MyTextWidget(
-                      text: "На номер +998 ${widget.text} ",
+                      text: "На номер".tr() + "+998 ${widget.text}",
                       fontSize: getHeight(12),
                       fontWeight: FontWeight.w400,
                       textColor: AppColors.teal,
@@ -88,7 +84,7 @@ class _SmsFieldState extends State<SmsField> {
                     ),
                     PinFieldAutoFill(
                       codeLength: 4,
-                      // autoFocus: true,
+                      autoFocus: true,
                       controller: smsController,
                       decoration: BoxLooseDecoration(
                         strokeColorBuilder: const FixedColorBuilder(
@@ -118,18 +114,49 @@ class _SmsFieldState extends State<SmsField> {
                               await InternetConnectionChecker().hasConnection;
                           debugPrint("has internet: $hasInternet");
                           if (hasInternet) {
-                            await VerifyCodeService.verifyCodeService(
-                                      int.parse(smsController.text),
-                                      GetStorage().read('telNumber'),
-                                    ) ==
-                                    null
-                                ? await Navigator.push(
+                            bool verify =
+                                await VerifyCodeService.verifyCodeService(
+                              int.parse(smsController.text),
+                              GetStorage().read('telNumber'),
+                            );
+                            //  agar foydalanuvchi shu raqamdan oldin ro'yxatdan o'tgan bolsa
+                            // asosiy page ga jo'natiladi
+                            // aks xolda ro'yxatdan o'tishda davom etiladi
+                            if (verify == false) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PasswordSet(),
+                                ),
+                              );
+                            } else if (verify == true) {
+                              // agar foydalanuvchi oldin shu kiritilgan raqamdan
+                              // ro'yxatdan o'tgan bo'lsa unda foydalanuvchi malumotlarini
+                              // olish uchun mana shu api ga zapros jonatiladi
+                              DevicesService.devicesService();
+                              await LoyalityCardsService
+                                      .getLoyalityCardsService()
+                                  .then(
+                                (value) {
+                                  Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => PasswordSet(),
+                                      builder: (context) => MainPage(),
                                     ),
-                                  )
-                                : null;
+                                  );
+                                },
+                              );
+                            } else {
+                              isload = false;
+                              setState(() {});
+                              final snackBar = SnackBar(
+                                content: const Text('Parol notori kiritildi'),
+                                action: SnackBarAction(
+                                  label: 'Undo',
+                                  onPressed: () {},
+                                ),
+                              );
+                            }
                           } else {
                             Navigator.push(
                               context,
@@ -144,9 +171,9 @@ class _SmsFieldState extends State<SmsField> {
                     ).only(bottom: getHeight(70)),
                     TextButton(
                       onPressed: () {},
-                      child: const Text(
-                        "Отправить код повторно",
-                        style: TextStyle(
+                      child: Text(
+                        "Отправить код повторно".tr(),
+                        style: const TextStyle(
                           color: AppColors.drawerTextColor,
                         ),
                       ),

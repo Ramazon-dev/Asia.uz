@@ -1,9 +1,8 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/view/auth/enter_phone_number_page.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class ChooseLanguagePage extends StatefulWidget {
-  ChooseLanguagePage({Key? key}) : super(key: key);
+  const ChooseLanguagePage({Key? key}) : super(key: key);
 
   @override
   State<ChooseLanguagePage> createState() => _ChooseLanguagePageState();
@@ -11,14 +10,17 @@ class ChooseLanguagePage extends StatefulWidget {
 
 class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
   int? son;
+  bool _onPress1 = false;
+  bool _onPress2 = false;
+  bool _onPress3 = false;
 
   List<String> listOfString = ["O'ZB", "РУС", "ENG"];
   @override
   Widget build(BuildContext context) {
-    // SizeConfig().init(context);
+    // bu page dan foydalanuvchi language tanlaydi
     return Scaffold(
       body: Container(
-        // width: getWidth(),
+        alignment: Alignment.center,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
@@ -44,59 +46,95 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
               ),
             ),
             const Spacer(),
-            // MyTextWidget(
-            //   text: 'Выберите язык'.tr(),
-            //   fontSize: SizerUtil.deviceType == DeviceType.mobile
-            //       ? getHeight(16)
-            //       : getHeight(36),
-            //   fontWeight: FontWeight.w500,
-            // ).only(bottom: getHeight(34.0)),
+            Text(
+              "Выберите язык".tr(),
+              style: TextStyle(
+                fontSize: getHeight(16),
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: getHeight(30)),
             Container(
+              margin: EdgeInsets.symmetric(horizontal: getWidth(40)),
               height: getHeight(40),
-              // color: Colors.yellow,
               width: MediaQuery.of(context).size.width,
               alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 1 / 7,
-                ),
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(0),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: MyElevatedButton(
-                        height: 40,
-                        width: 70,
-                        radius: 18,
-                        primaryColor: AppColors.transparentColor,
-                        textColor: son == index
-                            ? AppColors.orangeColor
-                            : AppColors.unselectedColor,
-                        sideColor: son == index
-                            ? AppColors.orangeColor
-                            : AppColors.unselectedColor,
-                        sideWidth: getWidth(2),
-                        text: listOfString[index],
-                        fontWeight: FontWeight.w700,
-                        textSize: 15,
-                        onPressed: () {
-                          son = index;
-                          if (son == 0) {
-                            context.setLocale(const Locale('uz', 'UZ'));
-                          } else if (son == 1) {
-                            context.setLocale(const Locale('ru', 'RU'));
-                          } else if (son == 2) {
-                            context.setLocale(const Locale('en', 'EN'));
-                          }
-                          setState(() {});
-                        },
-                      ).only(right: getWidth(20)),
-                    );
-                  },
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MyElevatedButton(
+                    height: 40,
+                    width: 70,
+                    radius: 18,
+                    primaryColor: AppColors.transparentColor,
+                    sideWidth: getWidth(2),
+                    text: "O'ZB",
+                    sideColor: _onPress1
+                        ? AppColors.orangeColor
+                        : AppColors.unselectedColor,
+                    textColor: _onPress1
+                        ? AppColors.orangeColor
+                        : AppColors.unselectedColor,
+                    onPressed: () {
+                      // onPressProvider!.onPress();
+                      _onPress1 = true;
+                      _onPress2 = false;
+                      _onPress3 = false;
+                      context.setLocale(const Locale('uz', 'UZ')).then((value) {
+                        setState(() {});
+                      });
+                    },
+                  ),
+                  SizedBox(width: getWidth(20)),
+                  MyElevatedButton(
+                    height: 40,
+                    width: 70,
+                    radius: 18,
+                    primaryColor: AppColors.transparentColor,
+                    sideColor: _onPress2
+                        ? AppColors.orangeColor
+                        : AppColors.unselectedColor,
+                    textColor: _onPress2
+                        ? AppColors.orangeColor
+                        : AppColors.unselectedColor,
+                    sideWidth: getWidth(2),
+                    text: "РУС",
+                    onPressed: () {
+                      // onPressProvider!.onPress();
+                      _onPress2 = true;
+                      _onPress1 = false;
+                      _onPress3 = false;
+                      context.setLocale(const Locale('ru', 'RU')).then((value) {
+                        setState(() {});
+                      });
+                    },
+                  ),
+                  SizedBox(width: getWidth(20)),
+                  MyElevatedButton(
+                    height: 40,
+                    width: 70,
+                    radius: 18,
+                    primaryColor: AppColors.transparentColor,
+                    sideColor: _onPress3
+                        ? AppColors.orangeColor
+                        : AppColors.unselectedColor,
+                    textColor: _onPress3
+                        ? AppColors.orangeColor
+                        : AppColors.unselectedColor,
+                    sideWidth: getHeight(2),
+                    text: "ENG",
+                    onPressed: () {
+                      // onPressProvider!.onPress();
+                      _onPress3 = true;
+                      _onPress1 = false;
+                      _onPress2 = false;
+                      context.setLocale(const Locale('en', 'EN')).then((value) {
+                        setState(() {});
+                      });
+                    },
+                  ),
+                ],
               ),
             ),
             SizedBox(height: getHeight(50.0)),
@@ -107,7 +145,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EnterPhoneNumberPage(),
+                    builder: (context) => const EnterPhoneNumberPage(),
                   ),
                 );
               },
@@ -120,56 +158,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
               sideWidth: getWidth(2),
             ),
             const Spacer(),
-            // SizedBox(height: getHeight(116.0)),
-            SizedBox(
-              height: getHeight(70.0),
-              width: getWidth(284.0),
-              // color: Colors.amberAccent,
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: getWidth(12.0),
-                  ),
-                  children: [
-                    TextSpan(
-                      text:
-                          ('Нажимая “Продолжить” вы соглашаетесь с\n условиями '),
-                      style: TextStyle(
-                        fontSize: getWidth(12.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.black,
-                      ),
-                    ),
-                    TextSpan(
-                      text: ('Обработки персональных '),
-                      style: TextStyle(
-                        fontSize: getWidth(12.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.orangeColor,
-                      ),
-                    ),
-                    TextSpan(
-                      text: ('данных и\n'),
-                      style: TextStyle(
-                        fontSize: getWidth(12.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.black,
-                      ),
-                    ),
-                    TextSpan(
-                      text: (' Публичной аферты'),
-                      style: TextStyle(
-                        fontSize: getWidth(12.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.orangeColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            RichTextWidget(),
           ],
         ),
       ),

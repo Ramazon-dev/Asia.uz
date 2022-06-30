@@ -1,10 +1,3 @@
-import 'package:asia_uz/core/components/view/my_app_bar.dart';
-import 'package:asia_uz/core/constants/loader.dart';
-import 'package:asia_uz/core/widgets/notification/notification_page.dart';
-import 'package:asia_uz/cubit/news_cubit/news_cubit.dart';
-import 'package:asia_uz/cubit/news_cubit/news_state.dart';
-import 'package:asia_uz/screens/pages/news_detail_page.dart';
-import 'package:asia_uz/service/api/get/news_api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -56,7 +49,7 @@ class NewsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
       appBar: MyAppBar(
-        text: 'Новости и акции',
+        text: 'Новости и акции'.tr(),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -139,6 +132,8 @@ class NewsPage extends StatelessWidget {
                           child: FadeInImage.assetNetwork(
                             placeholder: "assets/images/loading_indicator.gif",
                             image: state.response[index].image.toString(),
+                            fit: BoxFit.cover,
+                            placeholderFit: BoxFit.cover,
                           ),
                         ).symmetric(
                             horizontal: getWidth(10.0),
@@ -160,7 +155,7 @@ class NewsPage extends StatelessWidget {
       backgroundColor: AppColors.unselectedColor,
       appBar: MyAppBar(
         textSize: 32,
-        text: 'Новости и акции',
+        text: 'Новости и акции'.tr(),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -245,13 +240,12 @@ class NewsPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(
                               getWidth(18.0),
                             ),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                state.response[index].image ??
-                                    "https://i.insider.com/61a91b0f5d47cc0018e90ed7?width=1136&format=jpeg",
-                              ),
-                              fit: BoxFit.cover,
-                            ),
+                          ),
+                          child: FadeInImage.assetNetwork(
+                            placeholder: "assets/images/loading_indicator.gif",
+                            image: state.response[index].image.toString(),
+                            fit: BoxFit.cover,
+                            placeholderFit: BoxFit.cover,
                           ),
                         ).symmetric(
                             horizontal: getWidth(10.0),

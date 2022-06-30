@@ -1,7 +1,5 @@
-import 'package:asia_uz/core/constants/base/base_url.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/core/model/get/news_view_models.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 abstract class NewsViewApiServices {

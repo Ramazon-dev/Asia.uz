@@ -1,11 +1,8 @@
-import 'package:asia_uz/screens/no_internet/no_connection.dart';
-import 'package:asia_uz/service/api/post/verify_number_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class EnterPhoneNumberPage extends StatefulWidget {
-  EnterPhoneNumberPage({Key? key}) : super(key: key);
+  const EnterPhoneNumberPage({Key? key}) : super(key: key);
 
   @override
   State<EnterPhoneNumberPage> createState() => _EnterPhoneNumberPageState();
@@ -31,6 +28,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
 
   @override
   Widget build(BuildContext context) {
+    // bu page da foydalanuvchi raqam kiritadi
     onPressProvider = Provider.of<OnPressProvider>(context);
     SizeConfig().init(context);
     return BlocProvider(
@@ -91,7 +89,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                           ),
                         ).only(bottom: getHeight(56.0)),
                         MyTextWidget(
-                          text: 'Введите номер телефона',
+                          text: 'Введите номер телефона'.tr(),
                           fontSize: getWidth(16.0),
                           fontWeight: FontWeight.w500,
                         ),
@@ -106,7 +104,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                 alignment: Alignment.centerLeft,
                                 width: getWidth(320.0),
                                 child: MyTextWidget(
-                                  text: 'Номер телефона',
+                                  text: 'Номер телефона'.tr(),
                                   fontSize: getWidth(9),
                                   fontWeight: FontWeight.w500,
                                   textColor: AppColors.teal,
@@ -147,7 +145,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                                   validator: (v) {
                                     return v!.replaceAll(' ', '').length == 9
                                         ? null
-                                        : 'Telefon raqam kiritilmadi';
+                                        : 'Номер телефона не введен'.tr();
                                   },
                                 ),
                               ),
@@ -159,13 +157,18 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                           radius: getHeight(15),
                           height: getHeight(50),
                           width: getWidth(285),
-                          text: 'Продолжить',
+                          text: 'Продолжить'.tr(),
                           onPressed: () async {
                             bool hasInternet =
                                 await InternetConnectionChecker().hasConnection;
                             debugPrint("has internet: $hasInternet");
+                            // agar telefon raqam toliq kiritilmagan bolsa validator ishga tushadi
                             if (_formKey.currentState!.validate()) {
+                              // validatsiyadan to'g'ri o'tganidan kegin internet
+                              //ishlab turgani uchun tekshiriladi
                               if (hasInternet) {
+                                // internet ishlab turgan bo'lsa api ga zapros jonatiladi
+                                // apidan javob kelganidan kegin kegingi page ga otadi
                                 isload = true;
                                 setState(() {});
                                 debugPrint(
@@ -196,55 +199,7 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                           sideColor: AppColors.transparentColor,
                         ),
                         SizedBox(height: getHeight(140)),
-                        SizedBox(
-                          height: getHeight(70.0),
-                          width: getWidth(284.0),
-                          // color: Colors.amberAccent,
-                          child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontSize: getWidth(12.0),
-                              ),
-                              children: [
-                                TextSpan(
-                                  text:
-                                      ('Нажимая “Продолжить” вы соглашаетесь с\n условиями '),
-                                  style: TextStyle(
-                                    fontSize: getWidth(12.0),
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.black,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ('Обработки персональных '),
-                                  style: TextStyle(
-                                    fontSize: getWidth(12.0),
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.orangeColor,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ('данных и\n'),
-                                  style: TextStyle(
-                                    fontSize: getWidth(12.0),
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.black,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: (' Публичной аферты'),
-                                  style: TextStyle(
-                                    fontSize: getWidth(12.0),
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.orangeColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        RichTextWidget(),
                       ],
                     ),
                   ),

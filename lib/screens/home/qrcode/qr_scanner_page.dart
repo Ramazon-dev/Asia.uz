@@ -1,7 +1,5 @@
-import 'dart:io';
-import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class QRCodeScannerPage extends StatefulWidget {
   const QRCodeScannerPage({Key? key}) : super(key: key);
@@ -94,7 +92,9 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              barcode != null ? "Result: ${barcode!.code}" : "Scan a code!",
+              barcode != null
+                  ? "Result:" "${barcode!.code}"
+                  : "Scan a code!".tr(),
               style: TextStyle(
                 fontSize: getHeight(16),
                 fontWeight: FontWeight.w400,
@@ -105,7 +105,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
               width: getWidth(223),
               sideColor: AppColors.whiteColor,
               primaryColor: AppColors.orangeColor,
-              text: "Закрыть",
+              text: "Закрыть".tr(),
               textColor: AppColors.whiteColor,
               onPressed: () {
                 if (barcode!.code != null) {
@@ -119,7 +119,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
                         alignment: Alignment.center,
                         elevation: 2,
                         title: Text(
-                          "Ваша физичнская карта",
+                          "Ваша физичнская карта".tr(),
                           style: TextStyle(
                             color: AppColors.black,
                             fontSize: getHeight(18),
@@ -141,7 +141,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
                             width: getWidth(223),
                             sideColor: AppColors.whiteColor,
                             primaryColor: AppColors.orangeColor,
-                            text: "Закрыть",
+                            text: "Добавить".tr(),
                             textColor: AppColors.whiteColor,
                             onPressed: () {
                               GetStorage().write("barcode", barcode!.code);
@@ -175,7 +175,9 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              barcode != null ? "Result: ${barcode!.code}" : "Scan a code!",
+              barcode != null
+                  ? "Result:".tr() + " ${barcode!.code}"
+                  : "Scan a code!".tr(),
               style: TextStyle(
                 fontSize: getHeight(30),
                 fontWeight: FontWeight.w500,
@@ -186,11 +188,58 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
               width: 280,
               sideColor: AppColors.whiteColor,
               primaryColor: AppColors.orangeColor,
-              text: "Закрыть",
+              text: "Закрыть".tr(),
               textSize: 32,
               textColor: AppColors.whiteColor,
               onPressed: () {
-                Navigator.pop(context);
+                if (barcode!.code != null) {
+                  const Duration(seconds: 2);
+                  debugPrint("Duration dan otdi ${barcode!.code}");
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        actionsPadding: const EdgeInsets.all(45),
+                        alignment: Alignment.center,
+                        elevation: 2,
+                        title: Text(
+                          "Ваша физичнская карта".tr(),
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: getHeight(30),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        content: Text(
+                          barcode!.code ?? "",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: getHeight(50),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        actions: [
+                          MyElevatedButton(
+                            height: getHeight(52),
+                            width: getWidth(223),
+                            sideColor: AppColors.whiteColor,
+                            primaryColor: AppColors.orangeColor,
+                            text: "Добавить",
+                            textColor: AppColors.whiteColor,
+                            onPressed: () {
+                              GetStorage().write("barcode", barcode!.code);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              setState(() {});
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  // Navigator.pop(context);
+                }
               },
             ),
           ],

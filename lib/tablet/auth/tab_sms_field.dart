@@ -1,11 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/cubit/verify_code_cubit/verify_code_cubit.dart';
-import 'package:asia_uz/screens/view/auth/password_set/password_set.dart';
-import 'package:asia_uz/service/api/post/verify_code_service.dart';
-import 'package:asia_uz/tablet/auth/tab_password_set.dart';
-import 'package:asia_uz/tablet/no_internet_connection.dart/tab_nointernet.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabSmsField extends StatefulWidget {
   String text;
@@ -77,11 +71,11 @@ class _TabSmsFieldState extends State<TabSmsField> {
                   children: [
                     MyTextWidget(
                       fontSize: getHeight(30),
-                      text: 'Мы отправили вам СМС ',
+                      text: 'Мы отправили вам СМС'.tr(),
                     ),
 
                     MyTextWidget(
-                      text: "На номер +998 ${widget.text} ",
+                      text: "На номер".tr() + "+998 ${widget.text} ",
                       fontSize: getHeight(20),
                       fontWeight: FontWeight.w400,
                       textColor: AppColors.teal,
@@ -105,17 +99,6 @@ class _TabSmsFieldState extends State<TabSmsField> {
                         radius: Radius.circular(getHeight(20)),
                       ),
                       currentCode: code,
-                      // onCodeSubmitted: (code) async {
-                      //   if (code.length == 4) {
-                      //     hideKeyboard(context);
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (context) => PasswordSet(),
-                      //       ),
-                      //     );
-                      //   }
-                      // },
                       onCodeChanged: (code) async {
                         if (code!.length == 4) {
                           bool hasInternet =
@@ -125,7 +108,6 @@ class _TabSmsFieldState extends State<TabSmsField> {
                             isload = true;
                             setState(() {});
                             hideKeyboard(context);
-                            // context.read<VerifyCodeCubit>().onTab();
                             await VerifyCodeService.verifyCodeService(
                                       int.parse(smsController.text),
                                       GetStorage().read('telNumber'),
@@ -154,28 +136,13 @@ class _TabSmsFieldState extends State<TabSmsField> {
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        "Отправить код повторно",
+                        "Отправить код повторно".tr(),
                         style: TextStyle(
                           fontSize: getHeight(20),
                           color: AppColors.drawerTextColor,
                         ),
                       ),
                     ),
-                    // MyElevatedButton(
-                    //   primaryColor: AppColors.orangeColor,
-                    //   textColor: AppColors.whiteColor,
-                    //   text: 'Войти'.tr(),
-                    //   onPressed: () {
-                    //     isActive == true
-                    //         ? Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //               builder: (context) => MainPage(),
-                    //             ),
-                    //           )
-                    //         : null;
-                    //   },
-                    // ),
                   ],
                 ),
               ),

@@ -1,7 +1,6 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/home/qrcode/qr_code.dart';
-import 'package:asia_uz/screens/pages/news_page.dart';
+import 'package:asia_uz/screens/pages/widgets/news_item.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,28 +12,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    // home page oz ichiga appbar va bottomnavbardan bowqa page ichidigi xamma widgetlarni oladi
     SizeConfig().init(context);
-    double width = ScreenUtil().screenHeight;
-    double height = ScreenUtil().screenWidth;
-    debugPrint(
-      "pfffffffffffff we have screen height: $height and screen width: $width",
-    );
-
     debugPrint("qrcode: ${GetStorage().read("qrcode")}");
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
-      // backgroundColor: Colors.cyanAccent,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               height: getHeight(540),
-              // margin: EdgeInsets.only(top: getHeight(114)),
               padding: EdgeInsets.only(
                 top: getHeight(
                   getValueForScreenType(
                     context: context,
-                    mobile: 130,
+                    mobile: 125,
                     tablet: 150,
                   ),
                 ),
@@ -43,19 +35,18 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.topCenter,
                     child: MyTextWidget(
-                      text: 'Покажите QR-код  кассиру',
+                      text: 'Покажите QR-код кассиру'.tr(),
                       fontSize: getHeight(20),
                       textColor: AppColors.black,
                       fontWeight: FontWeight.w600,
                     ),
                     width: double.infinity,
-                    height: getHeight(20),
+                    height: getHeight(23),
                   ),
                   SizedBox(height: getHeight(17.0)),
                   QrCodeCreator(
-                    // text: "qrcode",
                     text: GetStorage().read("qrcode") ?? "",
                     size: getHeight(280),
                   ),
@@ -85,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         MyTextWidget(
-                          text: 'События',
+                          text: 'События'.tr(),
                           textAlign: TextAlign.left,
                           fontSize: getHeight(16),
                           fontWeight: FontWeight.w500,
@@ -99,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           child: MyTextWidget(
-                            text: 'Все',
+                            text: 'Все'.tr(),
                             textAlign: TextAlign.right,
                             fontSize: getHeight(16),
                             fontWeight: FontWeight.w500,
@@ -109,7 +100,9 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  information(context),
+                  // api ga page ning faqatgina shu qismi boglangani uchun 
+                  //shu qismini aloxida widgetga olindi
+                  const NewsItemWidget(),
                 ],
               ),
             ),
@@ -130,7 +123,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'На счету',
+                'На счету'.tr(),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: getWidth(16.0),
@@ -139,7 +132,7 @@ class _HomePageState extends State<HomePage> {
               ),
               MyTextWidget(
                 textAlign: TextAlign.right,
-                text: 'Расход за месяц',
+                text: 'Расход за месяц'.tr(),
                 fontSize: 16.0,
                 fontWeight: FontWeight.w500,
               ),
@@ -150,14 +143,14 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MyTextWidget(
-                text: '0 sum',
+                text: "0 " + 'сумов'.tr(),
                 textAlign: TextAlign.left,
                 textColor: AppColors.orange,
                 fontSize: 13.0,
                 fontWeight: FontWeight.w700,
               ),
               MyTextWidget(
-                text: '0 баллов',
+                text: "0 " + 'баллов'.tr(),
                 textAlign: TextAlign.right,
                 textColor: AppColors.teal,
                 fontSize: getHeight(13),
@@ -170,37 +163,37 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  information(BuildContext context) {
-    return SizedBox(
-      height: getHeight(150),
-      width: double.infinity,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: getWidth(10.0),
-              vertical: getHeight(10.0),
-            ),
-            child: Container(
-              height: getHeight(120.0),
-              width: getWidth(228.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  getWidth(15.0),
-                ),
-                image: const DecorationImage(
-                  image: AssetImage(
-                    'assets/images/i.png',
-                  ),
-                  // fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  // information(BuildContext context) {
+  //   return SizedBox(
+  //     height: getHeight(150),
+  //     width: double.infinity,
+  //     child: ListView.builder(
+  //       scrollDirection: Axis.horizontal,
+  //       itemCount: 10,
+  //       itemBuilder: (context, index) {
+  //         return Padding(
+  //           padding: EdgeInsets.symmetric(
+  //             horizontal: getWidth(10.0),
+  //             vertical: getHeight(10.0),
+  //           ),
+  //           child: Container(
+  //             height: getHeight(120.0),
+  //             width: getWidth(228.0),
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(
+  //                 getWidth(15.0),
+  //               ),
+  //               image: const DecorationImage(
+  //                 image: AssetImage(
+  //                   'assets/images/i.png',
+  //                 ),
+  //                 // fit: BoxFit.cover,
+  //               ),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }

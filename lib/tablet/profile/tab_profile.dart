@@ -1,16 +1,9 @@
 import 'dart:io' show Platform;
-
-import 'package:asia_uz/service/api/post/customers_service.dart';
-import 'package:asia_uz/tablet/main/tab_main.dart';
-import 'package:asia_uz/tablet/no_internet_connection.dart/tab_nointernet.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import '../../core/components/view/my_app_bar.dart';
 
 class TabProfilePage extends StatefulWidget {
-  TabProfilePage({Key? key}) : super(key: key);
+  const TabProfilePage({Key? key}) : super(key: key);
 
   @override
   State<TabProfilePage> createState() => _TabProfilePageState();
@@ -22,9 +15,6 @@ class _TabProfilePageState extends State<TabProfilePage> {
   final TextEditingController _firstNameController = TextEditingController();
 
   final TextEditingController _lastNameController = TextEditingController();
-
-  final TextEditingController _seminalPositionController =
-      TextEditingController();
 
   final TextEditingController _employmentController = TextEditingController();
 
@@ -42,6 +32,8 @@ class _TabProfilePageState extends State<TabProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    GetStorage().write("platform", platform());
+    debugPrint(platform());
     SizeConfig().init(context);
     return buildScaffold(context);
   }
@@ -65,7 +57,7 @@ class _TabProfilePageState extends State<TabProfilePage> {
             width: getWidth(30),
           ),
         ),
-        text: 'Профиль',
+        text: 'Профиль'.tr(),
         textSize: getHeight(30),
         action: SvgPicture.asset(SvgIcons.avatar),
       ),
@@ -89,9 +81,9 @@ class _TabProfilePageState extends State<TabProfilePage> {
                         fontSize: 24,
                         color: AppColors.black,
                       ),
-                      decoration: const InputDecoration(
-                        hintText: 'Имя*',
-                        labelText: 'Имя*',
+                      decoration: InputDecoration(
+                        hintText: 'Имя*'.tr(),
+                        labelText: 'Имя*'.tr(),
                       ),
                       validator: (v) => v!.isEmpty ? 'Ism kiritilmadi' : null,
                     ),
@@ -103,9 +95,9 @@ class _TabProfilePageState extends State<TabProfilePage> {
                         color: AppColors.black,
                       ),
                       controller: _lastNameController,
-                      decoration: const InputDecoration(
-                        hintText: 'Фамилия*',
-                        labelText: 'Фамилия*',
+                      decoration: InputDecoration(
+                        hintText: 'Фамилия*'.tr(),
+                        labelText: 'Фамилия*'.tr(),
                       ),
                       validator: (v) =>
                           v!.isEmpty ? 'Familiya kiritilmadi' : null,
@@ -153,9 +145,9 @@ class _TabProfilePageState extends State<TabProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                const Text(
-                                  "Дата рождения",
-                                  style: TextStyle(
+                                Text(
+                                  "Дата рождения*".tr(),
+                                  style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.bottomUnselectedColor,
@@ -184,9 +176,9 @@ class _TabProfilePageState extends State<TabProfilePage> {
                     ),
                     SizedBox(height: getHeight(15.0)),
                     DropdownButtonFormField(
-                      hint: const Text(
-                        "Пол*",
-                        style: TextStyle(
+                      hint: Text(
+                        "Пол*".tr(),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 24,
                           color: AppColors.black,
@@ -205,12 +197,12 @@ class _TabProfilePageState extends State<TabProfilePage> {
                         pol = v;
                         debugPrint("gender: $v");
                       },
-                      items: const <DropdownMenuItem<String>>[
+                      items: <DropdownMenuItem<String>>[
                         DropdownMenuItem(
-                          value: "мужчина",
+                          value: "мужчина".tr(),
                           child: Text(
-                            "мужчина",
-                            style: TextStyle(
+                            "мужчина".tr(),
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 24,
                               color: AppColors.black,
@@ -218,10 +210,10 @@ class _TabProfilePageState extends State<TabProfilePage> {
                           ),
                         ),
                         DropdownMenuItem(
-                          value: "женщина",
+                          value: "женщина".tr(),
                           child: Text(
-                            "женщина",
-                            style: TextStyle(
+                            "женщина".tr(),
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 24,
                               color: AppColors.black,
@@ -232,9 +224,9 @@ class _TabProfilePageState extends State<TabProfilePage> {
                     ),
                     SizedBox(height: getHeight(4.0)),
                     DropdownButtonFormField(
-                      hint: const Text(
-                        "Семейное положение*",
-                        style: TextStyle(
+                      hint: Text(
+                        "Семейное положение*".tr(),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 24,
                           color: AppColors.black,
@@ -249,17 +241,17 @@ class _TabProfilePageState extends State<TabProfilePage> {
                       ),
                       // value: "",
                       validator: (v) =>
-                          v == null ? "Семейное положение* tanlanmadi" : null,
+                          v == null ? "Семейное положение не выбрано" : null,
                       onChanged: (String? v) {
                         pol = v;
                         debugPrint("gender: $v");
                       },
-                      items: const <DropdownMenuItem<String>>[
+                      items: <DropdownMenuItem<String>>[
                         DropdownMenuItem(
-                          value: "женат/замужем",
+                          value: "женат/замужем".tr(),
                           child: Text(
-                            "женат/замужем",
-                            style: TextStyle(
+                            "женат/замужем".tr(),
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 24,
                               color: AppColors.black,
@@ -267,10 +259,10 @@ class _TabProfilePageState extends State<TabProfilePage> {
                           ),
                         ),
                         DropdownMenuItem(
-                          value: "холост/не замужем",
+                          value: "холост/не замужем".tr(),
                           child: Text(
-                            "холост/не замужем",
-                            style: TextStyle(
+                            "холост/не замужем".tr(),
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 24,
                               color: AppColors.black,
@@ -278,10 +270,10 @@ class _TabProfilePageState extends State<TabProfilePage> {
                           ),
                         ),
                         DropdownMenuItem(
-                          value: "разведен/разведена",
+                          value: "разведен/разведена".tr(),
                           child: Text(
-                            "разведен/разведена",
-                            style: TextStyle(
+                            "разведен/разведена".tr(),
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 24,
                               color: AppColors.black,
@@ -290,22 +282,6 @@ class _TabProfilePageState extends State<TabProfilePage> {
                         ),
                       ],
                     ),
-                    // TextFormField(
-                    //   style: const TextStyle(
-                    //     fontWeight: FontWeight.w400,
-                    //     fontSize: 24,
-                    //     color: AppColors.black,
-                    //   ),
-                    //   controller: _seminalPositionController,
-                    //   decoration: const InputDecoration(
-                    //     hintText: 'Семейное положение*',
-                    //     labelText: 'Семейное положение*',
-                    //     suffixIcon: Icon(
-                    //       Icons.arrow_forward_ios,
-                    //       color: AppColors.black,
-                    //     ),
-                    //   ),
-                    // ),
                     SizedBox(height: getHeight(4.0)),
                     TextFormField(
                       controller: _employmentController,
@@ -314,10 +290,10 @@ class _TabProfilePageState extends State<TabProfilePage> {
                         fontSize: 24,
                         color: AppColors.black,
                       ),
-                      decoration: const InputDecoration(
-                        hintText: 'Занятость*',
-                        labelText: 'Занятость*',
-                        suffixIcon: Icon(
+                      decoration: InputDecoration(
+                        hintText: 'Занятость*'.tr(),
+                        labelText: 'Занятость*'.tr(),
+                        suffixIcon: const Icon(
                           Icons.arrow_forward_ios,
                           color: AppColors.black,
                         ),
@@ -326,7 +302,7 @@ class _TabProfilePageState extends State<TabProfilePage> {
                     SizedBox(height: getHeight(4.0)),
                     SizedBox(height: getHeight(70.0)),
                     MyElevatedButton(
-                      text: 'Сохранить',
+                      text: 'Сохранить'.tr(),
                       textSize: 36,
                       height: 83,
                       width: 473,
@@ -342,31 +318,12 @@ class _TabProfilePageState extends State<TabProfilePage> {
                           debugPrint("has internet: $hasInternet");
                           if (hasInternet) {
                             setState(() {});
-                            await GetStorage()
-                                .write("firstName", _firstNameController.text);
-                            await GetStorage()
-                                .write("lastName", _lastNameController.text);
-                            await GetStorage().write("dateOfBirth", birthday);
-                            await GetStorage().write("gender", pol);
-                            await GetStorage().write("notifLang", notifLang);
-                            await GetStorage()
-                                .write("pol", _seminalPositionController.text);
-                            await GetStorage()
-                                .write("zanyatost", _employmentController.text);
-                            // _context.validateState();
-                            // _context.clear();
-                            debugPrint("""
-firstname: ${_firstNameController.text},
-lastNeme: ${_lastNameController.text},
-dob: $birthday,
-gender: $pol,
-maritalStatus: true,
-occupation: occupation,
-notificationPreference: "notificationPreference",
-notificationLanguage: "notificationLanguage",
-""");
+                            GetStorage().write(
+                              "firstName",
+                              _firstNameController.text,
+                            );
                             await CustomersServices.cuspomersService(
-                                      platform: platform(),
+                                      platform: GetStorage().read("platform"),
                                       dob: birthday!,
                                       firstName: _firstNameController.text,
                                       lastName: _lastNameController.text,
@@ -401,62 +358,8 @@ notificationLanguage: "notificationLanguage",
                     ),
                     const Spacer(),
                     // SizedBox(height: getHeight(45.0)),
-                    SizedBox(
-                      height: getHeight(72.0),
-                      width: getWidth(512.0),
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: getWidth(13.0),
-                          ),
-                          children: [
-                            TextSpan(
-                              text:
-                                  ("Нажимая “Продолжить” вы соглашаетесь с\n"),
-                              style: TextStyle(
-                                color: AppColors.teal,
-                                fontSize: getWidth(20.0),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ("условиями "),
-                              style: TextStyle(
-                                color: AppColors.teal,
-                                fontSize: getWidth(20.0),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ("Обработки персональных "),
-                              style: TextStyle(
-                                color: AppColors.onPressColor,
-                                fontSize: getWidth(20.0),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ("данных,\n"),
-                              style: TextStyle(
-                                color: AppColors.teal,
-                                fontSize: getWidth(20.0),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            TextSpan(
-                              text:
-                                  ("Программой лояльности и Публичной аферты"),
-                              style: TextStyle(
-                                color: AppColors.onPressColor,
-                                fontSize: getWidth(20.0),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    RichTextWidget(
+                      textsize: 20,
                     ),
                     SizedBox(height: getHeight(20.0)),
                   ],

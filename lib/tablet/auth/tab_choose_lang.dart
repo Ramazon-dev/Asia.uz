@@ -1,6 +1,5 @@
-import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/tablet/auth/tab_enter_phonenum.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
 
 class TabChooseLanguagePage extends StatefulWidget {
   TabChooseLanguagePage({Key? key}) : super(key: key);
@@ -116,55 +115,7 @@ class _TabChooseLanguagePageState extends State<TabChooseLanguagePage> {
               sideWidth: getWidth(2),
             ),
             const Spacer(),
-            SizedBox(
-              height: getHeight(70.0),
-              width: getWidth(390.0),
-              // color: Colors.amberAccent,
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: getWidth(12.0),
-                  ),
-                  children: [
-                    TextSpan(
-                      text:
-                          ('Нажимая “Продолжить” вы соглашаетесь с\n условиями '),
-                      style: TextStyle(
-                        fontSize: getWidth(16.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.black,
-                      ),
-                    ),
-                    TextSpan(
-                      text: ('Обработки персональных '),
-                      style: TextStyle(
-                        fontSize: getWidth(16.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.orangeColor,
-                      ),
-                    ),
-                    TextSpan(
-                      text: ('данных и\n'),
-                      style: TextStyle(
-                        fontSize: getWidth(16.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.black,
-                      ),
-                    ),
-                    TextSpan(
-                      text: (' Публичной аферты'),
-                      style: TextStyle(
-                        fontSize: getWidth(16.0),
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.orangeColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            RichTextWidget(textsize: 16),
           ],
         ),
       ),

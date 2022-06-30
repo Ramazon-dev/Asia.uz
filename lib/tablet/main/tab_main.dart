@@ -1,7 +1,3 @@
-import 'package:asia_uz/core/components/view/my_app_bar.dart';
-import 'package:asia_uz/screens/profile/profile_page.dart';
-import 'package:asia_uz/tablet/profile/tab_profile.dart';
-import 'package:asia_uz/tablet/widgets/tab_bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -12,16 +8,13 @@ class TabMainPage extends StatelessWidget {
   bool closeDrawer = true;
 
   bool first = true;
-  // BottomNavigationBarProvider? updateProvider;
   OnPressProvider? onPressProvider;
+  final GlobalKey<ScaffoldState> _scaoffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    // updateProvider = Provider.of<BottomNavigationBarProvider>(context);
-    // first?{ updateProvider!.currentTab = index ?? 0,first = false}:null;
     onPressProvider = Provider.of<OnPressProvider>(context);
     SizeConfig().init(context);
-    GlobalKey<ScaffoldState> _scaoffoldKey = GlobalKey();
 
     return ChangeNotifierProvider<BottomNavigationBarProvider>(
       create: (context) => BottomNavigationBarProvider(),
@@ -55,13 +48,13 @@ class TabMainPage extends StatelessWidget {
               ),
             ),
             textSize: 36,
-            text: titlesOfAppBar[model.tabcurrentTab].toString(),
+            text: titlesOfAppBar[model.tabcurrentTab].toString().tr(),
             action: InkWell(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TabProfilePage(),
+                    builder: (context) => const TabProfilePage(),
                   ),
                 );
               },
@@ -74,9 +67,10 @@ class TabMainPage extends StatelessWidget {
           drawer: MyDrawer(model: model),
           body: model.tabCurrentScreens,
           bottomNavigationBar: Container(
-              color: const Color(0xffF29443),
-              padding: EdgeInsets.only(top: getHeight(3)),
-              child: TabMyBottomNavigationBar(model: model)),
+            color: const Color(0xffF29443),
+            padding: EdgeInsets.only(top: getHeight(3)),
+            child: TabMyBottomNavigationBar(model: model),
+          ),
         ),
       ),
     );

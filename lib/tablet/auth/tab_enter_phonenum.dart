@@ -1,12 +1,8 @@
-import 'package:asia_uz/service/api/post/verify_number_service.dart';
-import 'package:asia_uz/tablet/auth/tab_sms_field.dart';
-import 'package:asia_uz/tablet/no_internet_connection.dart/tab_nointernet.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class TabEnterPhoneNumberPage extends StatefulWidget {
-  TabEnterPhoneNumberPage({Key? key}) : super(key: key);
+  const TabEnterPhoneNumberPage({Key? key}) : super(key: key);
 
   @override
   State<TabEnterPhoneNumberPage> createState() =>
@@ -94,7 +90,7 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
                         ),
                       ).only(bottom: getHeight(65.0)),
                       MyTextWidget(
-                        text: 'Введите номер телефона',
+                        text: 'Введите номер телефона'.tr(),
                         fontSize: getWidth(30.0),
                         fontWeight: FontWeight.w500,
                       ),
@@ -109,7 +105,7 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
                               alignment: Alignment.centerLeft,
                               width: getWidth(540.0),
                               child: MyTextWidget(
-                                text: 'Номер телефона',
+                                text: 'Номер телефона'.tr(),
                                 fontSize: getWidth(16),
                                 fontWeight: FontWeight.w500,
                                 textColor: AppColors.teal,
@@ -149,7 +145,7 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
                                 validator: (v) {
                                   return v!.replaceAll(' ', '').length == 9
                                       ? null
-                                      : 'Telefon raqam kiritilmadi';
+                                      : 'Номер телефона не введен'.tr();
                                 },
                               ),
                             ),
@@ -161,7 +157,7 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
                         radius: getHeight(30),
                         height: 83,
                         width: 473,
-                        text: 'Продолжить',
+                        text: 'Продолжить'.tr(),
                         textSize: getHeight(32),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
@@ -199,55 +195,7 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
                         sideColor: AppColors.transparentColor,
                       ),
                       const Spacer(),
-                      SizedBox(
-                        height: getHeight(70.0),
-                        width: getWidth(390.0),
-                        // color: Colors.amberAccent,
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: TextStyle(
-                              color: AppColors.black,
-                              fontSize: getWidth(16.0),
-                            ),
-                            children: [
-                              TextSpan(
-                                text:
-                                    ('Нажимая “Продолжить” вы соглашаетесь с\n условиями '),
-                                style: TextStyle(
-                                  fontSize: getWidth(16.0),
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.black,
-                                ),
-                              ),
-                              TextSpan(
-                                text: ('Обработки персональных '),
-                                style: TextStyle(
-                                  fontSize: getWidth(16.0),
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.orangeColor,
-                                ),
-                              ),
-                              TextSpan(
-                                text: ('данных и\n'),
-                                style: TextStyle(
-                                  fontSize: getWidth(16.0),
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.black,
-                                ),
-                              ),
-                              TextSpan(
-                                text: (' Публичной аферты'),
-                                style: TextStyle(
-                                  fontSize: getWidth(16.0),
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.orangeColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      RichTextWidget(textsize: 16),
                     ],
                   ),
                 ),

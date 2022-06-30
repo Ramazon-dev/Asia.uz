@@ -1,13 +1,5 @@
-import 'dart:async';
-import 'package:asia_uz/screens/no_internet/no_connection.dart';
-import 'package:asia_uz/screens/view/auth/splash/splash_screens.dart';
-import 'package:asia_uz/tablet/auth/tab_splash_screen.dart';
-import 'package:asia_uz/tablet/no_internet_connection.dart/tab_nointernet.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:flutter/services.dart';
-import 'package:overlay_support/overlay_support.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +12,8 @@ void main() async {
   );
   await GetStorage.init();
   runApp(
+    // shu joyda easy localization ishga tushvotti
+
     EasyLocalization(
       supportedLocales: const [
         Locale('uz', 'UZ'),
@@ -53,11 +47,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late StreamSubscription subscription;
-  String? status;
+  String status = "Online";
 
   @override
   void initState() {
     super.initState();
+    // appga kirganda internet ishlavotganini tekshirish uchun listener
     subscription = Connectivity().onConnectivityChanged.listen(
       (ConnectivityResult result) {
         if (result == ConnectivityResult.none) {
@@ -83,6 +78,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // layout builder orqali appga kirganda screen razmeriga qarab mobile uchun
+    // yasalgan layoutga yoki tab uchun yasalgan layout ga kiradi
     return LayoutBuilder(builder: (context, constrains) {
       if (constrains.maxWidth > 600) {
         debugPrint("tab screenga kirdi");
@@ -97,6 +94,8 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(primarySwatch: Colors.blue),
+            // agar internet ishlab turgan bolsa splash screenga kiradi
+            // aks xolda internet ishlamayaptganini korsatuvchi screen
             home: status == "Offline"
                 ? const TabNoConnectionPage()
                 : const TabSplashScreens(),
@@ -115,6 +114,8 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(primarySwatch: Colors.blue),
+          // agar internet ishlab turgan bolsa splash screenga kiradi
+          // aks xolda internet ishlamayaptganini korsatuvchi screen
           home: status == "Offline"
               ? const NoConnectionPage()
               : const SplashScreens(),
