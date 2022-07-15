@@ -1,3 +1,4 @@
+import 'package:asia_uz/screens/view/auth/info/bonus.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -110,8 +111,7 @@ class MyDrawer extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ChooseLayoute()));
+                                    builder: (context) => const BonusPage()));
                             break;
                           case 5:
                             _context.currentTab = 1;
@@ -263,7 +263,7 @@ class MyDrawer extends StatelessWidget {
     'Новости и акции',
     'Карта лояльности',
     'Отзывы',
-    'Профиль',
+    'Бонус',
     'Карта',
     'Контакты',
     'О нас',

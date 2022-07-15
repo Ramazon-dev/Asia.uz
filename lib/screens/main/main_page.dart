@@ -1,4 +1,3 @@
-import 'package:asia_uz/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 

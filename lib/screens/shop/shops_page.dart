@@ -12,25 +12,12 @@ class ShopsPage extends StatefulWidget {
 class _ShopsPageState extends State<ShopsPage> {
   GoogleMapController? mapController;
 
-  Completer<GoogleMapController> _controller = Completer();
-  CameraPosition _kGooglePlex = const CameraPosition(
+  final Completer<GoogleMapController> _controller = Completer();
+  final CameraPosition _kGooglePlex = const CameraPosition(
     target: LatLng(41.3494548, 69.2171245),
     zoom: 12,
   );
 
-  final CameraPosition _kLake = const CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(41.3494548, 69.2171245),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
-  );
-  List<LatLng> listOfLatLng = [
-    const LatLng(41.3494548, 69.217223),
-    const LatLng(41.34, 69.21456),
-    const LatLng(41.0, 69.00),
-    const LatLng(41.30, 69.271245),
-    const LatLng(41.31, 69.2),
-  ];
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   TextEditingController controller = TextEditingController();
   String editableString = "";
@@ -426,6 +413,11 @@ ${state.response[0].workingHours}
                         trailing: Icon(Icons.arrow_forward_ios,
                             color: AppColors.black, size: getHeight(15)),
                         onTap: () {
+                          cameraPositionMethod(
+                            lat: double.parse(state[index].longitude ?? ""),
+                            long: double.parse(state[index].latitude ?? ""),
+                            zoom: 15,
+                          );
                           Navigator.pop(context);
                           shopInfoMethod(
                             state[index].name ?? "",

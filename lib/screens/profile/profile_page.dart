@@ -295,44 +295,23 @@ notificationPreference: "sms",
 occupation: "occupation",
 """);
                               await CustomersServices.cuspomersService(
-                                        platform: platform,
-                                        dob: birthday!,
-                                        firstName: _firstNameController.text,
-                                        lastName: _lastNameController.text,
-                                        gender: pol ?? "женщина",
-                                        materialStatus: true,
-                                        notificationLanguage:
-                                            notifLang ?? "russian",
-                                        notificationPreference: "sms",
-                                        occupation: "occupation",
-                                      ) !=
-                                      null
-                                  ? Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const BonusPage(),
-                                      ),
-                                      (route) => false,
-                                    )
-                                  : {
-                                      qaytaRegistratsiyaAlertDialogMethod(
-                                              context)
-                                          .then((e) {
-                                        Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BonusPage(),
-                                          ),
-                                          (route) => false,
-                                        );
-                                      }),
-                                      isload = false,
-                                      debugPrint("Isload ni false qldik"),
-                                      setState(() {
-                                        debugPrint("setstate ichidigi print");
-                                      }),
-                                    };
+                                platform: platform,
+                                dob: birthday!,
+                                firstName: _firstNameController.text,
+                                lastName: _lastNameController.text,
+                                gender: pol ?? "женщина",
+                                materialStatus: true,
+                                notificationLanguage: notifLang ?? "russian",
+                                notificationPreference: "sms",
+                                occupation: "occupation",
+                              );
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const BonusPage(),
+                                ),
+                                (route) => false,
+                              );
                               isload = false;
                               debugPrint("loyality cards service ishga tushdi");
                               DevicesService.devicesService();
