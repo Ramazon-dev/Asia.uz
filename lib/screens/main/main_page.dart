@@ -1,3 +1,4 @@
+import 'package:asia_uz/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -53,13 +54,14 @@ class MainPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ProfilePage(),
+                    builder: (context) => const SettingsPage(),
                   ),
                 );
               },
-              child: SvgPicture.asset(
-                SvgIcons.avatar,
-                height: getHeight(50),
+              child: Icon(
+                Icons.info_outline_rounded,
+                color: AppColors.whiteColor,
+                size: getHeight(30),
               ),
             ).only(right: getWidth(10), top: getHeight(10)),
           ),

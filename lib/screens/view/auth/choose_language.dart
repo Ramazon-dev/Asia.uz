@@ -76,13 +76,21 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                     textColor: _onPress1
                         ? AppColors.orangeColor
                         : AppColors.unselectedColor,
-                    onPressed: () {
+                    onPressed: () async {
                       // onPressProvider!.onPress();
-                      _onPress1 = true;
-                      _onPress2 = false;
-                      _onPress3 = false;
-                      context.setLocale(const Locale('uz', 'UZ')).then((value) {
+                      await context
+                          .setLocale(const Locale('uz', 'UZ'))
+                          .then((value) {
+                        _onPress1 = true;
+                        _onPress2 = false;
+                        _onPress3 = false;
                         setState(() {});
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EnterPhoneNumberPage(),
+                          ),
+                        );
                       });
                     },
                   ),
@@ -100,13 +108,21 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         : AppColors.unselectedColor,
                     sideWidth: getWidth(2),
                     text: "РУС",
-                    onPressed: () {
+                    onPressed: () async {
                       // onPressProvider!.onPress();
-                      _onPress2 = true;
-                      _onPress1 = false;
-                      _onPress3 = false;
-                      context.setLocale(const Locale('ru', 'RU')).then((value) {
+                      await context
+                          .setLocale(const Locale('ru', 'RU'))
+                          .then((value) {
+                        _onPress2 = true;
+                        _onPress1 = false;
+                        _onPress3 = false;
                         setState(() {});
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EnterPhoneNumberPage(),
+                          ),
+                        );
                       });
                     },
                   ),
@@ -124,13 +140,21 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         : AppColors.unselectedColor,
                     sideWidth: getHeight(2),
                     text: "ENG",
-                    onPressed: () {
+                    onPressed: () async {
                       // onPressProvider!.onPress();
-                      _onPress3 = true;
-                      _onPress1 = false;
-                      _onPress2 = false;
-                      context.setLocale(const Locale('en', 'EN')).then((value) {
+                      await context
+                          .setLocale(const Locale('en', 'EN'))
+                          .then((value) {
+                        _onPress3 = true;
+                        _onPress1 = false;
+                        _onPress2 = false;
                         setState(() {});
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EnterPhoneNumberPage(),
+                          ),
+                        );
                       });
                     },
                   ),

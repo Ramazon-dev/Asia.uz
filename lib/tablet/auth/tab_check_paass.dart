@@ -44,10 +44,15 @@ class _TabCheckPasswordState extends State<TabCheckPassword> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    if (first) {
-      isAuthenticated(context);
-      first = false;
-    }
+    GetStorage().read("touchid") == "true"
+        ? first == true
+            ? {
+                isAuthenticated(context),
+                first = false,
+              }
+            : first = false
+        : null;
+    debugPrint("touchid: ${GetStorage().read("touchid")}");
 
     // isAuthenticated(context);
 
@@ -78,7 +83,8 @@ class _TabCheckPasswordState extends State<TabCheckPassword> {
               ),
               MyTextWidget(
                 text:
-                    'Введите PIN-код или удерживайте палец на сенсоре для входа в приложение'.tr(),
+                    'Введите PIN-код или удерживайте палец на сенсоре для входа в приложение'
+                        .tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 32,
                 textAlign: TextAlign.center,

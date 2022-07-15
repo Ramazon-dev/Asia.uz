@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class MyElevatedButton extends StatelessWidget {
   String text;
+  Widget? child;
   VoidCallback onPressed;
   Color primaryColor, sideColor, textColor;
   double width, height, radius, sideWidth, textSize;
@@ -21,6 +22,7 @@ class MyElevatedButton extends StatelessWidget {
     this.textSize = 14,
     this.fontWeight = FontWeight.w600,
     this.textColor = AppColors.black,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -29,15 +31,17 @@ class MyElevatedButton extends StatelessWidget {
     return ElevatedButton(
       autofocus: false,
       onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: getWidth(textSize),
-          fontWeight: fontWeight,
-          color: textColor,
-        ),
-      ),
+      child: child ??
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: getWidth(textSize),
+              fontWeight: fontWeight,
+              color: textColor,
+            ),
+          ),
       style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(0),
         shadowColor: AppColors.whiteColor,
         elevation: 0,
         primary: primaryColor,

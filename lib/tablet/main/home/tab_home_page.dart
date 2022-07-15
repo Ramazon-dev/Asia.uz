@@ -1,3 +1,5 @@
+import 'package:asia_uz/tablet/auth/info/tab_bonus.dart';
+import 'package:asia_uz/tablet/main/home/widgets/tab_news_item.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -24,7 +26,7 @@ class _TabHomePageState extends State<TabHomePage> {
       body: Column(
         children: [
           Container(
-            height: getHeight(773),
+            height: getHeight(800),
             padding: EdgeInsets.only(
               top: getHeight(150),
             ),
@@ -43,10 +45,20 @@ class _TabHomePageState extends State<TabHomePage> {
                   height: getHeight(35),
                 ),
                 SizedBox(height: getHeight(40.0)),
-                QrCodeCreator(
-                  // text: "qrcode",
-                  text: GetStorage().read("qrcode") ?? "",
-                  size: 420,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TabBonusPage(),
+                      ),
+                    );
+                  },
+                  child: QrCodeCreator(
+                    // text: "qrcode",
+                    text: GetStorage().read("qrcode") ?? "",
+                    size: 420,
+                  ),
                 ),
                 SizedBox(height: getHeight(40.0)),
                 cashback(),
@@ -99,7 +111,8 @@ class _TabHomePageState extends State<TabHomePage> {
                     ],
                   ),
                 ),
-                information(context),
+                const TabNewsItemWidget()
+                // information(context),
               ],
             ),
           ),
@@ -146,7 +159,7 @@ class _TabHomePageState extends State<TabHomePage> {
                 fontWeight: FontWeight.w700,
               ),
               MyTextWidget(
-                text: "0 " +'баллов'.tr(),
+                text: "0 " + 'баллов'.tr(),
                 textAlign: TextAlign.right,
                 textColor: AppColors.teal,
                 fontSize: getHeight(20),

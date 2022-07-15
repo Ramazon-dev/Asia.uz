@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
-class TabPasswordSet extends StatelessWidget {
+class TabPasswordSet extends StatefulWidget {
   TabPasswordSet({Key? key}) : super(key: key);
+
+  @override
+  State<TabPasswordSet> createState() => _TabPasswordSetState();
+}
+
+class _TabPasswordSetState extends State<TabPasswordSet> {
   TextEditingController controller = TextEditingController();
+
   String code = '';
+
   bool isActive = false;
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBarWidget(
-        appbarHeihgt: getHeight(120),
-        iconSize: getHeight(50),
-      ),
+      // appBar: AppBarWidget(
+      //   appbarHeihgt: getHeight(120),
+      //   iconSize: getHeight(50),
+      // ),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -41,6 +54,7 @@ class TabPasswordSet extends StatelessWidget {
               ).only(bottom: getHeight(50)),
               PinFieldAutoFill(
                 codeLength: 4,
+                autoFocus: true,
                 controller: controller,
                 decoration: BoxLooseDecoration(
                   strokeWidth: getWidth(3),

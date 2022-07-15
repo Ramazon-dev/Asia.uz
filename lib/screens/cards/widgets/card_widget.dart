@@ -16,7 +16,7 @@ class CardWidget extends StatelessWidget {
         ),
         image: const DecorationImage(
           image: AssetImage(
-            'assets/images/bg.png',
+            'assets/images/newcardbg.png',
           ),
           fit: BoxFit.cover,
         ),

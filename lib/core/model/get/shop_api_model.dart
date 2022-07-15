@@ -1,45 +1,52 @@
-import 'dart:convert';
+class ShopsModel {
+  ShopsModel({
+    this.id,
+    this.shopId,
+    this.name,
+    this.city,
+    this.address,
+    this.longitude,
+    this.latitude,
+    this.v,
+    this.contact,
+    this.workingHours,
+  });
 
-List<ShopsApiModel> shopsApiModelFromJson(String str) => List<ShopsApiModel>.from(json.decode(str).map((x) => ShopsApiModel.fromJson(x)));
+  String? id;
+  int? shopId;
+  String? name;
+  String? city;
+  String? address;
+  String? longitude;
+  String? latitude;
+  int? v;
+  String? contact;
+  String? workingHours;
 
-String shopsApiModelToJson(List<ShopsApiModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-class ShopsApiModel {
-    ShopsApiModel({
-        this.id,
-        this.shopId,
-        this.city,
-        this.address,
-        this.longitude,
-        this.latitude,
-        this.v,
-    });
-
-    String? id;
-    int? shopId;
-    String? city;
-    String? address;
-    String? longitude;
-    String? latitude;
-    int? v;
-
-    factory ShopsApiModel.fromJson(Map<String, dynamic> json) => ShopsApiModel(
+  factory ShopsModel.fromJson(Map<String, dynamic> json) => ShopsModel(
         id: json["_id"],
         shopId: json["shop_id"],
+        name: json["name"],
         city: json["city"],
         address: json["address"],
         longitude: json["longitude"],
         latitude: json["latitude"],
         v: json["__v"],
-    );
+        contact: json["contact"] == null ? null : json["contact"],
+        workingHours:
+            json["working_hours"] == null ? null : json["working_hours"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "_id": id,
         "shop_id": shopId,
+        "name": name,
         "city": city,
         "address": address,
         "longitude": longitude,
         "latitude": latitude,
         "__v": v,
-    };
+        "contact": contact == null ? null : contact,
+        "working_hours": workingHours == null ? null : workingHours,
+      };
 }

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   double appbarHeihgt;
   double iconSize;
+  Color iconColor;
   AppBarWidget({
     Key? key,
     this.appbarHeihgt = 100,
     this.iconSize = 15,
+    this.iconColor = AppColors.black,
   }) : super(key: key);
 
   @override
@@ -17,11 +19,11 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
         onPressed: () => Navigator.pop(context),
         icon: Image.asset(
           "assets/icons/arrow_back.png",
-          color: AppColors.black,
-        height: getHeight(iconSize),
+          color: iconColor,
+          height: getHeight(iconSize),
         ),
       ),
-      iconTheme: const IconThemeData(color: AppColors.black),
+      iconTheme: IconThemeData(color: iconColor),
       backgroundColor: AppColors.transparentColor,
       elevation: 0,
     );

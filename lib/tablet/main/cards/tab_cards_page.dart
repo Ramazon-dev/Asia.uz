@@ -1,4 +1,4 @@
-import 'package:asia_uz/tablet/main/cards/widgets/payment_history.dart';
+import 'package:asia_uz/tablet/main/cards/widgets/tab_payment_history.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 

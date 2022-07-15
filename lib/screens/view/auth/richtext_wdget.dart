@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 
 class RichTextWidget extends StatelessWidget {
   double textsize;
+  double height;
+  double width;
   RichTextWidget({
     Key? key,
     this.textsize = 12,
+    this.height = 70,
+    this.width = 284,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: getHeight(70.0),
-      width: getWidth(284.0),
+      height: getHeight(height),
+      width: getWidth(width),
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
@@ -40,10 +44,9 @@ class RichTextWidget extends StatelessWidget {
             TextSpan(
               text: ('данных и\n'.tr()),
               style: TextStyle(
-                fontSize: getWidth(textsize),
-                fontWeight: FontWeight.w400,
-                color: AppColors.bottomUnselectedColor
-              ),
+                  fontSize: getWidth(textsize),
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.bottomUnselectedColor),
             ),
             TextSpan(
               text: (' Публичной аферты'.tr()),

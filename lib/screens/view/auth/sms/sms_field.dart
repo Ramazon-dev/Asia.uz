@@ -47,8 +47,12 @@ class _SmsFieldState extends State<SmsField> {
       // backgroundColor: AppColors.unselectedColor,
       appBar: AppBarWidget(),
       body: isload == true
-          ? const Center(
-              child: CircularProgressIndicator(),
+          ? Center(
+              child: Image.asset(
+                "assets/images/loading_indicator.gif",
+                fit: BoxFit.cover,
+                height: getHeight(70),
+              ),
             )
           : SingleChildScrollView(
               child: Container(
@@ -146,7 +150,7 @@ class _SmsFieldState extends State<SmsField> {
                                   );
                                 },
                               );
-                            } else {
+                            } else if (verify == null) {
                               isload = false;
                               setState(() {});
                               final snackBar = SnackBar(
@@ -157,6 +161,7 @@ class _SmsFieldState extends State<SmsField> {
                                 ),
                               );
                             }
+                            isload = false;
                           } else {
                             Navigator.push(
                               context,

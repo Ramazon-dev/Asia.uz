@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
 class TabChooseLanguagePage extends StatefulWidget {
-  TabChooseLanguagePage({Key? key}) : super(key: key);
+  const TabChooseLanguagePage({Key? key}) : super(key: key);
 
   @override
   State<TabChooseLanguagePage> createState() => _TabChooseLanguagePageState();
@@ -24,7 +24,7 @@ class _TabChooseLanguagePageState extends State<TabChooseLanguagePage> {
             image: AssetImage(
               "assets/images/background.png",
             ),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
         child: Column(
@@ -43,6 +43,15 @@ class _TabChooseLanguagePageState extends State<TabChooseLanguagePage> {
                   ),
                   fit: BoxFit.contain,
                 ),
+              ),
+            ),
+            SizedBox(height: getHeight(120)),
+            Text(
+              "Выберите язык".tr(),
+              style: TextStyle(
+                fontSize: getHeight(32),
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
               ),
             ),
             const Spacer(),
@@ -80,11 +89,23 @@ class _TabChooseLanguagePageState extends State<TabChooseLanguagePage> {
                         onPressed: () {
                           son = index;
                           if (son == 0) {
-                            context.setLocale(const Locale('uz', 'UZ'));
+                            context
+                                .setLocale(const Locale('uz', 'UZ'))
+                                .then((value) => {
+                                      setState(() {}),
+                                    });
                           } else if (son == 1) {
-                            context.setLocale(const Locale('ru', 'RU'));
+                            context
+                                .setLocale(const Locale('ru', 'RU'))
+                                .then((value) => {
+                                      setState(() {}),
+                                    });
                           } else if (son == 2) {
-                            context.setLocale(const Locale('en', 'EN'));
+                            context
+                                .setLocale(const Locale('en', 'EN'))
+                                .then((value) => {
+                                      setState(() {}),
+                                    });
                           }
                           setState(() {});
                         },
@@ -102,7 +123,7 @@ class _TabChooseLanguagePageState extends State<TabChooseLanguagePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TabEnterPhoneNumberPage(),
+                    builder: (context) => const TabEnterPhoneNumberPage(),
                   ),
                 );
               },
@@ -115,7 +136,11 @@ class _TabChooseLanguagePageState extends State<TabChooseLanguagePage> {
               sideWidth: getWidth(2),
             ),
             const Spacer(),
-            RichTextWidget(textsize: 16),
+            RichTextWidget(
+              textsize: 16,
+              width: 400,
+            ),
+            SizedBox(height: getHeight(60)),
           ],
         ),
       ),

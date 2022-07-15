@@ -17,17 +17,20 @@ class LoyalityCardsService {
     try {
       debugPrint("funksiya try ga kirdi");
       if (res.statusCode == 200 || res.statusCode == 201) {
+        // var ssasa = res.body[0]["card_encrypted"];
         var data = jsonDecode(res.body);
-        var ssasa = data[0]['total_balance'];
-        var balance = data[0]['history'];
-        var qrcode = data[0]['card_encrypted'];
-        GetStorage().write("qrcode", data['card_encrypted']);
-        debugPrint("""
-res.body:${res.body}
-data:$data
-history: $ssasa
-total ballance: $balance 
-qrcode: $qrcode
+        final qrcodeeee = data[0]["card_encrypted"];
+        final history = data[0]["history"];
+        final totalBalance = data[0]["total_balance"];
+        GetStorage().write("qrcode", qrcodeeee);
+        debugPrint(
+            """
+res.body: ${res.body}
+data: $data
+qrcode:$qrcodeeee
+history: $history
+totalBallance: $totalBalance
+qrcode: ${GetStorage().read("qrcode")}
 """);
         return (jsonDecode(res.body) as List)
             .map((e) => LoyalityCardsModel.fromJson(e))

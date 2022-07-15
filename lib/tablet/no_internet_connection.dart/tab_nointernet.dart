@@ -83,7 +83,7 @@ class TabNoConnectionPage extends StatelessWidget {
             Text(
               "Попытаться подключиться".tr(),
               style: TextStyle(
-                fontSize: getHeight(getHeight(12)),
+                fontSize: getHeight(getHeight(20)),
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
               ),

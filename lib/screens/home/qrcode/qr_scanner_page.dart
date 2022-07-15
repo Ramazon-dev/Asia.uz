@@ -33,6 +33,10 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      appBar: AppBarWidget(
+        iconColor: AppColors.whiteColor,
+      ),
+      extendBodyBehindAppBar: true,
       body: Stack(
         alignment: Alignment.center,
         children: [

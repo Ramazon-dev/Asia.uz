@@ -17,7 +17,7 @@ class _SplashScreensState extends State<SplashScreens> {
     super.initState();
     Timer(
       const Duration(seconds: 2),
-      // foydalanuvchi oldin ro'yxatdan o'tgan yoki o'tmaganini qrCode orqali 
+      // foydalanuvchi oldin ro'yxatdan o'tgan yoki o'tmaganini qrCode orqali
       // tekshiriladi
       () => GetStorage().read('qrcode') != null
           ? Navigator.pushAndRemoveUntil(
@@ -45,17 +45,36 @@ class _SplashScreensState extends State<SplashScreens> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              "assets/images/splash_screen.png",
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned.fill(
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/images/splash_screen.png",
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            fit: BoxFit.cover,
           ),
-        ),
+          Positioned(
+            // width: MediaQuery.of(context).size.width / 2,
+            bottom: getHeight(15),
+            child: Text(
+              "version: 1.0.2",
+              style: TextStyle(
+                fontSize: getHeight(15),
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

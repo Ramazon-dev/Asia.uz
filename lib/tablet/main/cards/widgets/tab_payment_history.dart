@@ -1,7 +1,7 @@
+import 'package:asia_uz/tablet/main/cards/tab_payment_history_page.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:asia_uz/core/model/get/loyality_cards_model.dart';
-import 'package:asia_uz/service/api/get/loyality_cards_service.dart';
 
 class TabPaymentHistory extends StatelessWidget {
   const TabPaymentHistory({Key? key}) : super(key: key);
@@ -34,12 +34,22 @@ class TabPaymentHistory extends StatelessWidget {
                         color: AppColors.black,
                       ),
                     ),
-                    Text(
-                      "Все".tr(),
-                      style: TextStyle(
-                        fontSize: getHeight(24),
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.orange,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TabPaymentHistoryPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Все".tr(),
+                        style: TextStyle(
+                          fontSize: getHeight(24),
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.orange,
+                        ),
                       ),
                     ),
                   ],
@@ -61,8 +71,9 @@ class TabPaymentHistory extends StatelessWidget {
                     padding: EdgeInsets.only(top: getHeight(15)),
                     itemBuilder: (context, index) {
                       return SizedBox(
-                        height: getHeight(70),
+                        height: getHeight(77),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ListTile(
                               hoverColor: AppColors.teal,
@@ -112,9 +123,9 @@ class TabPaymentHistory extends StatelessWidget {
                               ),
                             ),
                             Divider(
-                              indent: getWidth(15),
-                              endIndent: getWidth(15),
-                              height: getHeight(25),
+                              indent: getWidth(20),
+                              endIndent: getWidth(20),
+                              height: getHeight(1),
                               color: AppColors.teal,
                               thickness: getWidth(1),
                             ),
@@ -128,12 +139,20 @@ class TabPaymentHistory extends StatelessWidget {
             ),
           );
         } else if (snap.hasError) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Image.asset(
+              "assets/images/loading_indicator.gif",
+              fit: BoxFit.cover,
+              height: getHeight(70),
+            ),
           );
         }
-        return const Center(
-          child: CircularProgressIndicator(),
+        return Center(
+          child: Image.asset(
+            "assets/images/loading_indicator.gif",
+            fit: BoxFit.cover,
+            height: getHeight(70),
+          ),
         );
       },
     );

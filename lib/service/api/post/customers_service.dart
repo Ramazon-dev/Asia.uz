@@ -38,6 +38,11 @@ class CustomersServices {
     debugPrint("customer service ichida token: ${GetStorage().read("token")}");
     try {
       debugPrint("funksiya try ga kirdi");
+      debugPrint(res.reasonPhrase);
+      debugPrint(res.body);
+      debugPrint(res.isRedirect.toString());
+      debugPrint(res.persistentConnection.toString());
+
       debugPrint("res.statuscode: ${res.statusCode}");
 
       if (res.statusCode == 200 || res.statusCode == 201) {
@@ -61,11 +66,11 @@ history: ${GetStorage().read("history")}
     } catch (e) {
       debugPrint(e.toString());
       debugPrint("funksiya catch ga otib ketti");
-      return customersGetModels =
-          CustomersGetModels.fromJson(jsonDecode(res.body));
+      // return customersGetModels =
+      //     CustomersGetModels.fromJson(jsonDecode(res.body));
     }
-    return customersGetModels =
-        CustomersGetModels.fromJson(jsonDecode(res.body));
+    // return customersGetModels =
+    //     CustomersGetModels.fromJson(jsonDecode(res.body));
   }
 }
 

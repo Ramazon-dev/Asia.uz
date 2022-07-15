@@ -34,7 +34,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
               // color: Colors.yellow,
               image: DecorationImage(
                 image: AssetImage(
-                  "assets/images/bg.png",
+                  "assets/images/newappbar.png",
                 ),
                 fit: BoxFit.cover,
               ),

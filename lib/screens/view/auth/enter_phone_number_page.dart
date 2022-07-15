@@ -22,8 +22,6 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
   final _formKey = GlobalKey<FormState>();
 
   bool isload = false;
-  var sasa;
-
   OnPressProvider? onPressProvider;
 
   @override
@@ -55,110 +53,118 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
 
   buildScaffold(BuildContext context, AuthState state) {
     return Scaffold(
-      body: isload == true
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                  // color: Colors.yellow,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/background.png",
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            // color: Colors.yellow,
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/background.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Form(
+            key: _formKey,
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(height: getHeight(133.0)),
+                  Container(
+                    height: getHeight(188.0),
+                    width: getWidth(225.0),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'assets/images/logo.png',
+                        ),
+                      ),
                     ),
-                    fit: BoxFit.cover,
+                  ).only(bottom: getHeight(56.0)),
+                  MyTextWidget(
+                    text: 'Введите номер телефона'.tr(),
+                    fontSize: getWidth(16.0),
+                    fontWeight: FontWeight.w500,
                   ),
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Center(
+                  SizedBox(height: getHeight(33.0)),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getWidth(25.0),
+                    ),
                     child: Column(
                       children: [
-                        SizedBox(height: getHeight(133.0)),
                         Container(
-                          height: getHeight(188.0),
-                          width: getWidth(225.0),
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/logo.png',
+                          alignment: Alignment.centerLeft,
+                          width: getWidth(320.0),
+                          child: MyTextWidget(
+                            text: 'Номер телефона'.tr(),
+                            fontSize: getWidth(9),
+                            fontWeight: FontWeight.w500,
+                            textColor: AppColors.teal,
+                          ),
+                        ),
+                        SizedBox(height: getHeight(6.0)),
+                        SizedBox(
+                          height: getHeight(45),
+                          child: MyTextFormFiels(
+                            inputFormatters: [maskFormatter],
+                            controller: _phoneNumberController,
+                            obscureText: false,
+                            prefixIcon: Container(
+                              // color: Colors.yellow,
+                              margin: EdgeInsets.only(
+                                  left: getHeight(6), bottom: getHeight(2)),
+                              alignment: Alignment.centerLeft,
+                              height: getHeight(60.0),
+                              width: getWidth(42.0),
+                              child: MyTextWidget(
+                                text: '+998',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                textColor: AppColors.black,
                               ),
                             ),
-                          ),
-                        ).only(bottom: getHeight(56.0)),
-                        MyTextWidget(
-                          text: 'Введите номер телефона'.tr(),
-                          fontSize: getWidth(16.0),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        SizedBox(height: getHeight(33.0)),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: getWidth(25.0),
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                width: getWidth(320.0),
-                                child: MyTextWidget(
-                                  text: 'Номер телефона'.tr(),
-                                  fontSize: getWidth(9),
-                                  fontWeight: FontWeight.w500,
-                                  textColor: AppColors.teal,
-                                ),
-                              ),
-                              SizedBox(height: getHeight(6.0)),
-                              SizedBox(
-                                height: getHeight(45),
-                                child: MyTextFormFiels(
-                                  inputFormatters: [maskFormatter],
-                                  controller: _phoneNumberController,
-                                  obscureText: false,
-                                  prefixIcon: Container(
-                                    // color: Colors.yellow,
-                                    margin: EdgeInsets.only(
-                                        left: getHeight(6),
-                                        bottom: getHeight(2)),
-                                    alignment: Alignment.centerLeft,
-                                    height: getHeight(60.0),
-                                    width: getWidth(42.0),
-                                    child: MyTextWidget(
-                                      text: '+998',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      textColor: AppColors.black,
-                                    ),
-                                  ),
-                                  inputTextSize: 16,
-                                  radius: getHeight(30),
-                                  sideColor: AppColors.onPressColor,
-                                  sideWidth: getWidth(2),
-                                  onChanged: (value) {
-                                    if ((value.replaceAll(' ', '').length ==
-                                        9)) {
-                                      hideKeyboard(context);
-                                    }
-                                  },
-                                  validator: (v) {
-                                    return v!.replaceAll(' ', '').length == 9
-                                        ? null
-                                        : 'Номер телефона не введен'.tr();
-                                  },
-                                ),
-                              ),
-                            ],
+                            inputTextSize: 16,
+                            radius: getHeight(30),
+                            sideColor: AppColors.onPressColor,
+                            sideWidth: getWidth(2),
+                            onChanged: (value) {
+                              if ((value.replaceAll(' ', '').length == 9)) {
+                                hideKeyboard(context);
+                              }
+                            },
+                            validator: (v) {
+                              return v!.replaceAll(' ', '').length == 9
+                                  ? null
+                                  : 'Номер телефона не введен'.tr();
+                            },
                           ),
                         ),
-                        SizedBox(height: getHeight(34.0)),
-                        MyElevatedButton(
-                          radius: getHeight(15),
-                          height: getHeight(50),
-                          width: getWidth(285),
-                          text: 'Продолжить'.tr(),
-                          onPressed: () async {
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: getHeight(34.0)),
+                  MyElevatedButton(
+                    radius: getHeight(15),
+                    height: getHeight(50),
+                    width: getWidth(285),
+                    child: isload == true
+                        ? Center(
+                            child: Image.asset(
+                              "assets/images/loading_indicator.gif",
+                              fit: BoxFit.cover,
+                              height: getHeight(25),
+                            ),
+                          )
+                        : null,
+                    text: 'Продолжить'.tr(),
+                    onPressed: isload == true
+                        ? () {
+                            debugPrint(
+                                "Isload true and button can't be touched");
+                          }
+                        : () async {
                             bool hasInternet =
                                 await InternetConnectionChecker().hasConnection;
                             debugPrint("has internet: $hasInternet");
@@ -194,18 +200,18 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                               }
                             }
                           },
-                          primaryColor: AppColors.orangeColor,
-                          textColor: AppColors.whiteColor,
-                          sideColor: AppColors.transparentColor,
-                        ),
-                        SizedBox(height: getHeight(140)),
-                        RichTextWidget(),
-                      ],
-                    ),
+                    primaryColor: AppColors.orangeColor,
+                    textColor: AppColors.whiteColor,
+                    sideColor: AppColors.transparentColor,
                   ),
-                ),
+                  SizedBox(height: getHeight(140)),
+                  RichTextWidget(),
+                ],
               ),
             ),
+          ),
+        ),
+      ),
     );
   }
 

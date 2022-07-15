@@ -1,18 +1,28 @@
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/core/model/get/shop_api_model.dart';
 import 'package:flutter/material.dart';
 
 class ShowModalBottomSheetWidget extends StatefulWidget {
-  const ShowModalBottomSheetWidget({Key? key}) : super(key: key);
+  List<ShopsModel> state;
+  CameraPosition cameraPosition;
+  GoogleMapController mapController;
+  ShowModalBottomSheetWidget({
+    Key? key,
+    required this.state,
+    required this.cameraPosition,
+    required this.mapController,
+  }) : super(key: key);
 
   @override
   State<ShowModalBottomSheetWidget> createState() =>
       _ShowModalBottomSheetWidgetState();
 }
 
+
 class _ShowModalBottomSheetWidgetState
     extends State<ShowModalBottomSheetWidget> {
   List<String> listOfStrings = [
-    "Ташкент",
+    "Tashkent",
     "Навои",
     "Андижан",
     "Наманган",
@@ -21,6 +31,17 @@ class _ShowModalBottomSheetWidgetState
     "Бухара",
     "Самарканд",
     "Ташкент",
+  ];
+  List<String> shaxarlar = [
+    "tashkent",
+    "navoi",
+    "andijan",
+    "namangan",
+    "nukus",
+    "fergana",
+    "buxara",
+    "samarkand",
+    "tashkentVil",
   ];
   TextEditingController controller = TextEditingController();
   @override
@@ -59,43 +80,20 @@ class _ShowModalBottomSheetWidgetState
                 shopsModalBottomSheet();
               },
             ),
-            // TextFormField(
-            //   // controller: controller,
-            //   decoration: InputDecoration(
-            //     filled: true,
-            //     fillColor: Colors.white,
-            //     hoverColor: AppColors.textFormField,
-            //     focusColor: AppColors.textFormField,
-            //     label: const Icon(
-            //       Icons.search,
-            //       color: AppColors.textFormField,
-            //     ),
-            //     disabledBorder: OutlineInputBorder(
-            //       borderSide: const BorderSide(
-            //         color: AppColors.textFormField,
-            //       ),
-            //       borderRadius: BorderRadius.circular(20),
-            //     ),
-            //     enabledBorder: OutlineInputBorder(
-            //       borderSide: const BorderSide(
-            //         color: AppColors.textFormField,
-            //       ),
-            //       borderRadius: BorderRadius.circular(20),
-            //     ),
-            //     border: OutlineInputBorder(
-            //       borderSide: const BorderSide(
-            //         color: AppColors.textFormField,
-            //       ),
-            //       borderRadius: BorderRadius.circular(20),
-            //     ),
-            //   ),
-            // ),
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               leading: MyTextWidget(text: "Магазин", fontSize: getHeight(18)),
               trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
               onTap: () {
-                shopsModalBottomSheet();
+                widget.mapController.animateCamera(
+                  CameraUpdate.newCameraPosition(
+                    const CameraPosition(
+                      target: LatLng(41.574368, 64.183319),
+                      zoom: 15,
+                    ),
+                  ),
+                );
+//                shopsModalBottomSheet();
               },
             ),
             const Divider(thickness: 1.5),
@@ -104,7 +102,16 @@ class _ShowModalBottomSheetWidgetState
               leading: MyTextWidget(text: "Город", fontSize: getHeight(18)),
               trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
               onTap: () {
-                gorodBottomSHeet(context);
+                widget.mapController.animateCamera(
+                  CameraUpdate.newCameraPosition(
+                    const CameraPosition(
+                      target: LatLng(40.574368, 64.183319),
+                      zoom: 15,
+                    ),
+                  ),
+                );
+
+                // gorodBottomSHeet(context);
               },
             ),
             const Divider(thickness: 1.5),
@@ -114,7 +121,16 @@ class _ShowModalBottomSheetWidgetState
             MyElevatedButton(
               text: "Сохранить",
               sideColor: AppColors.orange,
-              onPressed: () {},
+              onPressed: () {
+                widget.mapController.animateCamera(
+                  CameraUpdate.newCameraPosition(
+                    const CameraPosition(
+                      target: LatLng(39.652451, 66.970139),
+                      zoom: 15,
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -148,7 +164,7 @@ class _ShowModalBottomSheetWidgetState
               bottom: getHeight(15),
               top: getHeight(15),
             ),
-            Container(
+            SizedBox(
               height: getHeight(500),
               // color: Colors.cyan,
               child: ListView.builder(
@@ -163,7 +179,20 @@ class _ShowModalBottomSheetWidgetState
                             fontSize: getHeight(18)),
                         trailing: Icon(Icons.arrow_forward_ios,
                             color: AppColors.black, size: getHeight(15)),
-                        onTap: () {},
+                        onTap: () {
+                          switch (index) {
+                            case 0:
+                              debugPrint("Toshkent bosildi $index");
+                              widget.cameraPosition = const CameraPosition(
+                                target: LatLng(39.652451, 66.970139),
+                                // target: LatLng(41.311081, 69.240562),
+                                zoom: 13,
+                              );
+                              Navigator.pop(context, "ma'lumot qaytaramiza");
+                              break;
+                            default:
+                          }
+                        },
                       ),
                       const Divider(thickness: 1.5),
                     ],
@@ -256,7 +285,23 @@ class _ShowModalBottomSheetWidgetState
                             fontSize: getHeight(18)),
                         trailing: Icon(Icons.arrow_forward_ios,
                             color: AppColors.black, size: getHeight(15)),
-                        onTap: () {},
+                        onTap: () {
+                          for (var i = 0; i < widget.state.length; i++) {
+                            String shaxar =
+                                widget.state[i].city == shaxarlar[index]
+                                    ? shaxarlar[index]
+                                    : "shaxar yoq";
+                            debugPrint(
+                                "shaxarlar ichidan xozir$index ${shaxarlar[index]}");
+                            debugPrint("qabul qlingan shaxar $shaxar");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AboutUsPage(),
+                              ),
+                            );
+                          }
+                        },
                       ),
                       const Divider(thickness: 1.5),
                     ],

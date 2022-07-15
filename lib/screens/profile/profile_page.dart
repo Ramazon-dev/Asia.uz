@@ -1,3 +1,4 @@
+import 'package:asia_uz/screens/view/auth/info/bonus.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -19,7 +20,6 @@ class _ProfilePageState extends State<ProfilePage> {
   bool isload = false;
   String? pol;
   String? zanyatost;
-
   String? notifLang;
   String platform = Platform.operatingSystem;
 
@@ -38,248 +38,243 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Image.asset(
-            "assets/icons/arrow_back.png",
-            color: AppColors.whiteColor,
-          ),
-        ),
-        text: 'Профиль',
-        action: SvgPicture.asset(SvgIcons.avatar),
+        text: 'Профиль'.tr(),
       ),
-      body: isload == true
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: getWidth(23.0),
-                    vertical: getHeight(6.0),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getWidth(23.0),
+              vertical: getHeight(6.0),
+            ),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _firstNameController,
+                  decoration: InputDecoration(
+                    hintText: 'Имя*'.tr(),
+                    labelText: 'Имя*'.tr(),
                   ),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _firstNameController,
-                        decoration: InputDecoration(
-                          hintText: 'Имя*'.tr(),
-                          labelText: 'Имя*'.tr(),
-                        ),
-                        validator: (v) =>
-                            v!.isEmpty ? 'Имя не введено'.tr() : null,
-                      ),
-                      SizedBox(height: getHeight(4.0)),
-                      TextFormField(
-                        controller: _lastNameController,
-                        decoration: InputDecoration(
-                          hintText: 'Фамилия*'.tr(),
-                          labelText: 'Фамилия*'.tr(),
-                        ),
-                        validator: (v) =>
-                            v!.isEmpty ? 'Фамилия не введена'.tr() : null,
-                      ),
-                      SizedBox(height: getHeight(4.0)),
-                      InkWell(
-                        onTap: () {
-                          DatePicker.showDatePicker(
-                            context,
-                            showTitleActions: true,
-                            maxTime: DateTime.now(),
-                            onChanged: (datetime) {
-                              debugPrint("changed: $datetime");
-                            },
-                            onConfirm: (datetime) {
-                              birthday =
-                                  "${datetime.day}/${datetime.month}/${datetime.year}";
-                              debugPrint(datetime.toString());
+                  validator: (v) => v!.isEmpty ? 'Имя не введено'.tr() : null,
+                ),
+                SizedBox(height: getHeight(4.0)),
+                TextFormField(
+                  controller: _lastNameController,
+                  decoration: InputDecoration(
+                    hintText: 'Фамилия*'.tr(),
+                    labelText: 'Фамилия*'.tr(),
+                  ),
+                  validator: (v) =>
+                      v!.isEmpty ? 'Фамилия не введена'.tr() : null,
+                ),
+                SizedBox(height: getHeight(4.0)),
+                InkWell(
+                  onTap: () {
+                    DatePicker.showDatePicker(
+                      context,
+                      showTitleActions: true,
+                      maxTime: DateTime.now(),
+                      onChanged: (datetime) {
+                        debugPrint("changed: $datetime");
+                      },
+                      onConfirm: (datetime) {
+                        birthday =
+                            "${datetime.day}/${datetime.month}/${datetime.year}";
+                        debugPrint(datetime.toString());
 
-                              debugPrint(birthday);
-                              setState(() {});
-                            },
-                            currentTime: DateTime.now(),
-                            locale: LocaleType.ru,
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border(
-                            bottom: BorderSide(
-                              color: AppColors.black,
-                              width: getWidth(0.5),
-                            ),
-                          )),
-                          height: getHeight(50),
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    "Дата рождения*".tr(),
-                                    style: TextStyle(
-                                      fontSize: getHeight(14),
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.bottomUnselectedColor,
-                                    ),
-                                  ),
-                                  Text(
-                                    birthday ?? "",
-                                    style: TextStyle(
-                                      fontSize: getHeight(16),
-                                    ),
-                                  ),
-                                ],
+                        debugPrint(birthday);
+                        setState(() {});
+                      },
+                      currentTime: DateTime.now(),
+                      locale: LocaleType.ru,
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                      bottom: BorderSide(
+                        color: AppColors.black,
+                        width: getWidth(0.5),
+                      ),
+                    )),
+                    height: getHeight(50),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Дата рождения*".tr(),
+                              style: TextStyle(
+                                fontSize: getHeight(14),
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.bottomUnselectedColor,
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(right: getWidth(11)),
-                                child: const Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: AppColors.black,
-                                ),
+                            ),
+                            Text(
+                              birthday ?? "",
+                              style: TextStyle(
+                                fontSize: getHeight(16),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: getHeight(4.0)),
-                      DropdownButtonFormField(
-                        hint: Text("Пол*".tr()),
-                        icon: Padding(
-                          padding: EdgeInsets.only(right: getHeight(13)),
+                        Padding(
+                          padding: EdgeInsets.only(right: getWidth(11)),
                           child: const Icon(
                             Icons.arrow_forward_ios,
                             color: AppColors.black,
                           ),
                         ),
-                        validator: (v) =>
-                            v == null ? "Пол не был выбран".tr() : null,
-                        onChanged: (String? v) {
-                          pol = v;
-                          debugPrint("gender: $v");
-                        },
-                        items: <DropdownMenuItem<String>>[
-                          DropdownMenuItem(
-                            value: "мужчина".tr(),
-                            child: Text("мужчина".tr()),
-                          ),
-                          DropdownMenuItem(
-                            value: "женщина".tr(),
-                            child: Text("женщина".tr()),
-                          ),
-                        ],
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: getHeight(4.0)),
+                DropdownButtonFormField(
+                  hint: Text("Пол*".tr()),
+                  icon: Padding(
+                    padding: EdgeInsets.only(right: getHeight(13)),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  validator: (v) => v == null ? "Пол не был выбран".tr() : null,
+                  onChanged: (String? v) {
+                    pol = v;
+                    debugPrint("gender: $v");
+                  },
+                  items: <DropdownMenuItem<String>>[
+                    DropdownMenuItem(
+                      value: "man",
+                      child: Text("мужчина".tr()),
+                    ),
+                    DropdownMenuItem(
+                      value: "woman",
+                      child: Text("женщина".tr()),
+                    ),
+                  ],
+                ),
+                SizedBox(height: getHeight(4.0)),
+                SizedBox(height: getHeight(4.0)),
+                DropdownButtonFormField(
+                  hint: Text(
+                    "Семейное положение*".tr(),
+                  ),
+                  icon: Padding(
+                    padding: EdgeInsets.only(right: getHeight(10)),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  // value: "",
+                  validator: (v) =>
+                      v == null ? "Семейное положение не выбрано".tr() : null,
+                  onChanged: (String? v) {
+                    pol = v;
+                    debugPrint("gender: $v");
+                  },
+                  items: <DropdownMenuItem<String>>[
+                    DropdownMenuItem(
+                      value: "married",
+                      child: Text("женат/замужем".tr()),
+                    ),
+                    DropdownMenuItem(
+                      value: "not married",
+                      child: Text("холост/не замужем".tr()),
+                    ),
+                    DropdownMenuItem(
+                      value: "divorced",
+                      child: Text(
+                        "разведен/разведена".tr(),
                       ),
-                      SizedBox(height: getHeight(4.0)),
-                      SizedBox(height: getHeight(4.0)),
-                      DropdownButtonFormField(
-                        hint: Text(
-                          "Семейное положение*".tr(),
-                        ),
-                        icon: Padding(
-                          padding: EdgeInsets.only(right: getHeight(10)),
-                          child: const Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        // value: "",
-                        validator: (v) => v == null
-                            ? "Семейное положение не выбрано".tr()
-                            : null,
-                        onChanged: (String? v) {
-                          pol = v;
-                          debugPrint("gender: $v");
-                        },
-                        items: <DropdownMenuItem<String>>[
-                          DropdownMenuItem(
-                            value: "женат/замужем".tr(),
-                            child: Text("женат/замужем".tr()),
-                          ),
-                          DropdownMenuItem(
-                            value: "холост/не замужем".tr(),
-                            child: Text("холост/не замужем".tr()),
-                          ),
-                          DropdownMenuItem(
-                            value: "разведен/разведена".tr(),
-                            child: Text(
-                              "разведен/разведена".tr(),
-                            ),
-                          ),
-                        ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: getHeight(4.0)),
+                DropdownButtonFormField(
+                  hint: Text(
+                    'Занятость*'.tr(),
+                  ),
+                  icon: Padding(
+                    padding: EdgeInsets.only(right: getHeight(10)),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  onChanged: (String? v) {
+                    zanyatost = v;
+                    debugPrint("zanyatost: $v");
+                  },
+                  items: <DropdownMenuItem<String>>[
+                    DropdownMenuItem(
+                      value: "State service",
+                      child: Text("Гос.служба".tr()),
+                    ),
+                    DropdownMenuItem(
+                      value: "Private sector",
+                      child: Text("Частный сектор".tr()),
+                    ),
+                    DropdownMenuItem(
+                      value: "Social sphere",
+                      child: Text(
+                        "Социальная сфера".tr(),
                       ),
-                      SizedBox(height: getHeight(4.0)),
-                      DropdownButtonFormField(
-                        hint: Text(
-                          'Занятость*'.tr(),
-                        ),
-                        icon: Padding(
-                          padding: EdgeInsets.only(right: getHeight(10)),
-                          child: const Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        onChanged: (String? v) {
-                          zanyatost = v;
-                          debugPrint("zanyatost: $v");
-                        },
-                        items: <DropdownMenuItem<String>>[
-                          DropdownMenuItem(
-                            value: "Гос.служба".tr(),
-                            child: Text("Гос. служба".tr()),
-                          ),
-                          DropdownMenuItem(
-                            value: "Частный сектор ".tr(),
-                            child: Text("Частный сектор ".tr()),
-                          ),
-                          DropdownMenuItem(
-                            value: "Социальная сфера ".tr(),
-                            child: Text(
-                              "Социальная сфера ".tr(),
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: "Пенсионер".tr(),
-                            child: Text("Пенсионер".tr()),
-                          ),
-                          DropdownMenuItem(
-                            value: "Учасиийся".tr(),
-                            child: Text("Учасиийся".tr()),
-                          ),
-                          DropdownMenuItem(
-                            value: "Домохозяйка".tr(),
-                            child: Text(
-                              "Домохозяйка".tr(),
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: "Временно неработающий".tr(),
-                            child: Text(
-                              "Временно неработающий".tr(),
-                            ),
-                          ),
-                        ],
+                    ),
+                    DropdownMenuItem(
+                      value: "Pensioner",
+                      child: Text("Пенсионер".tr()),
+                    ),
+                    DropdownMenuItem(
+                      value: "Student",
+                      child: Text("Учащийся".tr()),
+                    ),
+                    DropdownMenuItem(
+                      value: "Housewife",
+                      child: Text(
+                        "Домохозяйка".tr(),
                       ),
-                      SizedBox(height: getHeight(4.0)),
-                      SizedBox(height: getHeight(70.0)),
-                      MyElevatedButton(
-                        text: 'Сохранить'.tr(),
-                        onPressed: () async {
+                    ),
+                    DropdownMenuItem(
+                      value: "Temporarily unemployed",
+                      child: Text(
+                        "Временно неработающий".tr(),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: getHeight(4.0)),
+                SizedBox(height: getHeight(70.0)),
+                MyElevatedButton(
+                  child: isload == true
+                      ? Center(
+                          child: Image.asset(
+                            "assets/images/loading_indicator.gif",
+                            fit: BoxFit.cover,
+                            height: getHeight(25),
+                          ),
+                        )
+                      : null,
+                  text: 'Сохранить'.tr(),
+                  onPressed: isload == true
+                      ? () {
+                          debugPrint("Isload true and button can't be touched");
+                        }
+                      : () async {
                           // bu joyda inputlarni validatsiyadan otkazamiza
                           if (_formKey.currentState!.validate()) {
                             bool hasInternet =
                                 await InternetConnectionChecker().hasConnection;
                             debugPrint("has internet: $hasInternet");
-                          // internetni ketshiramiza
+                            // internetni ketshiramiza
                             if (hasInternet) {
                               isload = true;
                               setState(() {});
@@ -288,8 +283,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 "firstName",
                                 _firstNameController.text,
                               );
-                              debugPrint(
-                                  """
+                              debugPrint("""
 platform: ${GetStorage().read("platform")}
 dob: $birthday
 firstname: ${_firstNameController.text}
@@ -313,14 +307,32 @@ occupation: "occupation",
                                         occupation: "occupation",
                                       ) !=
                                       null
-                                  ? await Navigator.pushAndRemoveUntil(
+                                  ? Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => MainPage(),
+                                        builder: (context) => const BonusPage(),
                                       ),
                                       (route) => false,
                                     )
-                                  : debugPrint("Else ga otib ketti");
+                                  : {
+                                      qaytaRegistratsiyaAlertDialogMethod(
+                                              context)
+                                          .then((e) {
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BonusPage(),
+                                          ),
+                                          (route) => false,
+                                        );
+                                      }),
+                                      isload = false,
+                                      debugPrint("Isload ni false qldik"),
+                                      setState(() {
+                                        debugPrint("setstate ichidigi print");
+                                      }),
+                                    };
                               isload = false;
                               debugPrint("loyality cards service ishga tushdi");
                               DevicesService.devicesService();
@@ -334,23 +346,97 @@ occupation: "occupation",
                                 ),
                               );
                             }
+                          } else {
+                            showAlertDialogMethod(context);
                           }
                         },
-                        height: getHeight(50),
-                        // width: 161.0,
-                        primaryColor: AppColors.transparentColor,
-                        sideColor: AppColors.orangeColor,
-                        radius: getHeight(15),
-                        sideWidth: getHeight(2),
-                      ),
-                      SizedBox(height: getHeight(120.0)),
-                      RichTextWidget(),
-                      SizedBox(height: getHeight(40.0)),
-                    ],
-                  ),
+                  height: getHeight(50),
+                  // width: 161.0,
+                  primaryColor: AppColors.transparentColor,
+                  sideColor: AppColors.orangeColor,
+                  radius: getHeight(15),
+                  sideWidth: getHeight(2),
                 ),
-              ),
+                SizedBox(height: getHeight(120.0)),
+                RichTextWidget(),
+                SizedBox(height: getHeight(40.0)),
+              ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  showAlertDialogMethod(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          actionsPadding: const EdgeInsets.all(8),
+          alignment: Alignment.center,
+          elevation: 2,
+          content: Text(
+            "Ma'lumotlarni toliq kiriting",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: getHeight(24),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            MyElevatedButton(
+              height: getHeight(52),
+              width: getWidth(223),
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "Вернуться на главную".tr(),
+              textColor: AppColors.whiteColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  qaytaRegistratsiyaAlertDialogMethod(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          actionsPadding: const EdgeInsets.all(8),
+          alignment: Alignment.center,
+          elevation: 2,
+          content: Text(
+            "Siz ro'yxatdan o'tib bo'lgansiz",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: getHeight(24),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            MyElevatedButton(
+              height: getHeight(52),
+              width: getWidth(223),
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "Вернуться на главную".tr(),
+              textColor: AppColors.whiteColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

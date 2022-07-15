@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -31,7 +30,7 @@ class _TabSplashScreensState extends State<TabSplashScreens> {
           : Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => TabChooseLanguagePage(),
+                builder: (context) => const TabChooseLanguagePage(),
               ),
             ),
     );
@@ -47,7 +46,7 @@ class _TabSplashScreensState extends State<TabSplashScreens> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              "assets/images/splash_screen.png",
+              "assets/images/tab_splash_screen.png",
             ),
             fit: BoxFit.fill,
           ),

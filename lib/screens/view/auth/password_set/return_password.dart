@@ -1,5 +1,6 @@
-import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
+import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/screens/view/tuch_id.dart';
 
 class ReturnPassword extends StatefulWidget {
   String text;
@@ -25,7 +26,7 @@ class _ReturnPasswordState extends State<ReturnPassword> {
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBarWidget(),
+      // appBar: AppBarWidget(),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -67,7 +68,7 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => const TouchIDPage(),
                       ),
                     );
                   }
@@ -81,7 +82,7 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => const TouchIDPage(),
                       ),
                     );
                   }

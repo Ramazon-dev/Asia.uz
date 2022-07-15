@@ -1,4 +1,6 @@
+import 'package:asia_uz/screens/cards/payment_history_page.dart';
 import 'package:asia_uz/screens/pages/widgets/news_item.dart';
+import 'package:asia_uz/screens/view/tuch_id.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -46,9 +48,19 @@ class _HomePageState extends State<HomePage> {
                     height: getHeight(23),
                   ),
                   SizedBox(height: getHeight(17.0)),
-                  QrCodeCreator(
-                    text: GetStorage().read("qrcode") ?? "",
-                    size: getHeight(280),
+                  InkWell(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const PaymentHistoryPage(),
+                      //   ),
+                      // );
+                    },
+                    child: QrCodeCreator(
+                      text: GetStorage().read("qrcode") ?? "",
+                      size: getHeight(280),
+                    ),
                   ),
                   SizedBox(height: getHeight(20.0)),
                   cashback(),
@@ -100,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  // api ga page ning faqatgina shu qismi boglangani uchun 
+                  // api ga page ning faqatgina shu qismi boglangani uchun
                   //shu qismini aloxida widgetga olindi
                   const NewsItemWidget(),
                 ],

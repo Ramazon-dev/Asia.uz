@@ -26,7 +26,7 @@ class _PasswordSetState extends State<PasswordSet> {
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBarWidget(),
+      // appBar: AppBarWidget(),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,

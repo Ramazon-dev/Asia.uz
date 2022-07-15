@@ -46,8 +46,12 @@ class _TabSmsFieldState extends State<TabSmsField> {
       // backgroundColor: AppColors.unselectedColor,
       appBar: AppBarWidget(),
       body: isload == true
-          ? const Center(
-              child: CircularProgressIndicator(),
+          ? Center(
+              child: Image.asset(
+                "assets/images/loading_indicator.gif",
+                fit: BoxFit.cover,
+                height: getHeight(70),
+              ),
             )
           : SingleChildScrollView(
               child: Container(
@@ -73,7 +77,6 @@ class _TabSmsFieldState extends State<TabSmsField> {
                       fontSize: getHeight(30),
                       text: 'Мы отправили вам СМС'.tr(),
                     ),
-
                     MyTextWidget(
                       text: "На номер".tr() + "+998 ${widget.text} ",
                       fontSize: getHeight(20),
@@ -85,7 +88,7 @@ class _TabSmsFieldState extends State<TabSmsField> {
                     ),
                     PinFieldAutoFill(
                       codeLength: 4,
-                      // autoFocus: true,
+                      autoFocus: true,
                       controller: smsController,
                       decoration: BoxLooseDecoration(
                         strokeWidth: getWidth(3),
@@ -101,25 +104,50 @@ class _TabSmsFieldState extends State<TabSmsField> {
                       currentCode: code,
                       onCodeChanged: (code) async {
                         if (code!.length == 4) {
+                          isload = true;
+                          setState(() {});
+                          hideKeyboard(context);
                           bool hasInternet =
                               await InternetConnectionChecker().hasConnection;
                           debugPrint("has internet: $hasInternet");
                           if (hasInternet) {
-                            isload = true;
-                            setState(() {});
-                            hideKeyboard(context);
-                            await VerifyCodeService.verifyCodeService(
-                                      int.parse(smsController.text),
-                                      GetStorage().read('telNumber'),
-                                    ) ==
-                                    null
-                                ? await Navigator.push(
+                            bool verify =
+                                await VerifyCodeService.verifyCodeService(
+                              int.parse(smsController.text),
+                              GetStorage().read('telNumber'),
+                            );
+                            if (verify == false) {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TabPasswordSet(),
+                                ),
+                              );
+                            } else if (verify == true) {
+                              DevicesService.devicesService();
+                              await LoyalityCardsService
+                                      .getLoyalityCardsService()
+                                  .then(
+                                (value) {
+                                  Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => TabPasswordSet(),
+                                      builder: (context) => TabMainPage(),
                                     ),
-                                  )
-                                : null;
+                                  );
+                                },
+                              );
+                            } else {
+                              isload = false;
+                              setState(() {});
+                              final snackBar = SnackBar(
+                                content: const Text('Parol notori kiritildi'),
+                                action: SnackBarAction(
+                                  label: 'Undo',
+                                  onPressed: () {},
+                                ),
+                              );
+                            }
                             isload = false;
                           } else {
                             Navigator.push(

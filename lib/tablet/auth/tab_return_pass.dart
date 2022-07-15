@@ -1,3 +1,4 @@
+import 'package:asia_uz/tablet/auth/tab_touch_id.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -19,10 +20,10 @@ class _TabReturnPasswordState extends State<TabReturnPassword> {
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBarWidget(
-        appbarHeihgt: getHeight(120),
-        iconSize: getHeight(25),
-      ),
+      // appBar: AppBarWidget(
+      //   appbarHeihgt: getHeight(120),
+      //   iconSize: getHeight(25),
+      // ),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -50,6 +51,7 @@ class _TabReturnPasswordState extends State<TabReturnPassword> {
                 fontSize: getHeight(30),
               ).only(bottom: getHeight(50)),
               PinFieldAutoFill(
+                autoFocus: true,
                 codeLength: 4,
                 controller: controller,
                 decoration: BoxLooseDecoration(
@@ -72,7 +74,7 @@ class _TabReturnPasswordState extends State<TabReturnPassword> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TabProfilePage(),
+                        builder: (context) => const TabTouchIDPage(),
                       ),
                     );
                   }
@@ -85,7 +87,7 @@ class _TabReturnPasswordState extends State<TabReturnPassword> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TabProfilePage(),
+                        builder: (context) => const TabTouchIDPage(),
                       ),
                     );
                   }

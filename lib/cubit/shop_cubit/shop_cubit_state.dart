@@ -14,7 +14,7 @@ class ShopLoading extends ShopState {
 }
 
 class ShopCompledet extends ShopState {
-  final List<ShopsApiModel> response;
+  final List<ShopsModel> response;
 
   const ShopCompledet(this.response);
 

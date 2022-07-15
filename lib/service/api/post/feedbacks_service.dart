@@ -6,6 +6,8 @@ class FeedbacksService {
     required String type,
     required String message,
   }) async {
+    String platform = Platform.operatingSystem;
+    debugPrint("platform: $platform");
     debugPrint(
       "feedbacksService api iwga tushdi message: $message, type: $type",
     );
@@ -16,15 +18,15 @@ class FeedbacksService {
       headers: {
         'Authorization': 'Bearer ${GetStorage().read('token')}',
       },
-      body: {"type": type, "message": message},
+      body: {"type": type, "message": message, "platform": platform},
     );
     debugPrint("bodydan otdi");
     try {
       debugPrint("try ga kirdi res.statusCode: ${res.statusCode}");
       if (res.statusCode == 200 || res.statusCode == 201) {
-        var data = jsonDecode(res.body);
-        debugPrint("res.body: ${res.body} and data: $data");
-        return data;
+        debugPrint("ifga kirdi");
+        debugPrint("response: ${res.body}");
+        return res.body;
       } else {
         throw "error";
       }

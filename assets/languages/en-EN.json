@@ -92,7 +92,28 @@
     "холост/не замужем":"single/ not married",
     "разведен/разведена":"discovered",
     "мужчина": "man",
-    "женщина":"woman"
+    "женщина":"woman",
+    "Вы получили Бонус 2000 сум за регистрацию в Кэшбэк системе, показывайте QR кассиру и покупайте товары в нашей сети супермаркетов":"You received a Bonus of 2000 soums for registering in the Cashback system, show the QR to the cashier and buy goods in our supermarket chain",
+    "Получайие 1% Кэшбэка при покупке до 150 000 сум, 2% при покупке на 200 000, 3% при покупке на 300 000 сум": "Get 1% Cashback on purchases up to 150,000 soums, 2% on purchases of 200,000, 3% on purchases of 300,000 soums",
+    "Удобный поиск магазинов , новостей и связи с тех поддержкой в одном приложении": "Convenient search for stores, news and contact with those support in one application",
+    "Настройки": "Settings",
+    "Использовать Touch ID": "Use Touch ID",
+    "Использовать Touch ID для быстрого входа в приложение?" : "Use Touch ID to quickly login to an app?",
+    "Изменить ПИН-код": "Change PIN",
+    "Оценить приложение": "Rate the app",
+    "Поделиться приложением": "Share app",
+    "Информация о приложении": "App information",
+    "Служба поддержки": "Support",
+    "Занятость":"Employment",
+    "Гос.служба":"State service",
+    "Частный сектор":"Private sector",
+    "Социальная сфера": "Social sphere",
+    "Пенсионер":"Pensioner",
+    "Учащийся":"Student",
+    "Домохозяйка":"Housewife",
+    "Временно неработающий":"Temporarily unemployed",
+    
+    "":""
 
 
 }

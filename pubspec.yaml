@@ -38,6 +38,8 @@ dependencies:
   overlay_support: ^2.0.1
   flutter_offline: ^2.1.0
   sliding_up_panel: ^2.0.0+1
+  url_launcher: ^6.1.4
+  share_plus: ^4.0.10
   
 
 flutter_icons:

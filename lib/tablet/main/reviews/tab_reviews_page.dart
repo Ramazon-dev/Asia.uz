@@ -103,10 +103,19 @@ class _TabReviewsPageState extends State<TabReviewsPage>
                             vertical: getHeight(50),
                           ),
                           child: TextFormField(
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.teal,
+                            ),
                             controller: _messangeController,
                             decoration: InputDecoration(
-                                labelText: "Сообщение*".tr(),
-                                labelStyle: TextStyle(fontSize: getHeight(20))),
+                              labelText: "Сообщение*".tr(),
+                              labelStyle: TextStyle(
+                                fontSize: getHeight(24),
+                                color: AppColors.teal,
+                              ),
+                            ),
                             onSaved: (String? value) {
                               // This optional block of code can be used to run
                               // code when the user saves the form.
@@ -132,11 +141,16 @@ class _TabReviewsPageState extends State<TabReviewsPage>
                                       .hasConnection;
                               debugPrint("has internet: $hasInternet");
                               if (hasInternet) {
-                                FeedbacksService.feedbacksService(
+                                String res =
+                                    await FeedbacksService.feedbacksService(
                                   type: type ?? "Другое",
                                   message: _messangeController.text,
                                 );
-                                _messangeController.clear();
+                                if (res != null) {
+                                  _messangeController.clear();
+                                  debugPrint("res: $res");
+                                  showAlertDialogMethod(context);
+                                }
                               } else {
                                 Navigator.push(
                                   context,
@@ -208,7 +222,7 @@ class _TabReviewsPageState extends State<TabReviewsPage>
                         ),
                       ],
                     ),
-                    TabHistoryPage(),
+                    const TabHistoryPage(),
                   ],
                 ),
               ),
@@ -232,7 +246,10 @@ class _TabReviewsPageState extends State<TabReviewsPage>
       decoration: InputDecoration(
         hintText: "Выберите тип обращения*".tr(),
         alignLabelWithHint: true,
-        hintStyle: TextStyle(fontSize: getHeight(20)),
+        hintStyle: TextStyle(
+          fontSize: getHeight(24),
+          color: AppColors.teal,
+        ),
         contentPadding:
             EdgeInsets.only(bottom: getHeight(20), top: getHeight(10)),
       ),
@@ -244,7 +261,7 @@ class _TabReviewsPageState extends State<TabReviewsPage>
         padding: EdgeInsets.only(right: getHeight(10)),
         child: const Icon(
           Icons.arrow_forward_ios,
-          color: AppColors.black,
+          color: AppColors.teal,
         ),
       ),
       // value: "",
@@ -259,10 +276,51 @@ class _TabReviewsPageState extends State<TabReviewsPage>
           value: typesOfList[index].tr(),
           child: Text(
             typesOfList[index].tr(),
-            style: TextStyle(fontSize: getHeight(20)),
+            style: TextStyle(
+              fontSize: getHeight(24),
+              color: AppColors.black,
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  showAlertDialogMethod(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          actionsPadding: const EdgeInsets.all(45),
+          alignment: Alignment.center,
+          elevation: 2,
+          content: Text(
+            "Сообщение успешно отправлено".tr(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: getHeight(30),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            MyElevatedButton(
+              height: 84,
+              width: 456,
+              textSize: 32,
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "Вернуться на главную".tr(),
+              textColor: AppColors.whiteColor,
+              onPressed: () {
+                Navigator.pop(context);
+                setState(() {});
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

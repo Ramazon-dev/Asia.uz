@@ -1,3 +1,4 @@
+import 'package:asia_uz/tablet/main/tab_myappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -30,7 +31,7 @@ class TabMainPage extends StatelessWidget {
           },
           backgroundColor: AppColors.unselectedColor,
           key: _scaoffoldKey,
-          appBar: MyAppBar(
+          appBar: TabMyAppBar(
             leading: InkWell(
               onTap: () {
                 _scaoffoldKey.currentState!.openDrawer();
@@ -42,7 +43,7 @@ class TabMainPage extends StatelessWidget {
                     EdgeInsets.only(left: getWidth(20), top: getHeight(10)),
                 child: SvgPicture.asset(
                   SvgIcons.menu,
-                  height: getHeight(20),
+                  height: getHeight(28),
                   color: AppColors.black,
                 ),
               ),
@@ -54,13 +55,14 @@ class TabMainPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const TabProfilePage(),
+                    builder: (context) => const TabSettingsPage(),
                   ),
                 );
               },
-              child: SvgPicture.asset(
-                SvgIcons.avatar,
-                height: getHeight(50),
+              child: Icon(
+                Icons.info_outline,
+                color: AppColors.whiteColor,
+                size: getHeight(50),
               ),
             ).only(right: getWidth(10), top: getHeight(10)),
           ),

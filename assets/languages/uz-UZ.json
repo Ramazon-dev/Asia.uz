@@ -92,5 +92,27 @@
     "холост/не замужем":"turmush qurmagan",
     "разведен/разведена":"ajrashgan",
     "мужчина": "erkak",
-    "женщина":"ayol"
+    "женщина":"ayol",
+    "Вы получили Бонус 2000 сум за регистрацию в Кэшбэк системе, показывайте QR кассиру и покупайте товары в нашей сети супермаркетов":"Siz Cashback tizimida roʻyxatdan oʻtganingiz, kassirga QR koʻrsatganingiz va supermarketlar tarmogʻimizdan tovarlar xarid qilganingiz uchun 2000 soʻm bonus oldingiz.",
+    "Получайие 1% Кэшбэка при покупке до 150 000 сум, 2% при покупке на 200 000, 3% при покупке на 300 000 сум": "150 000 so'mgacha bo'lgan xaridlar uchun 1% Cashback, 200 000 so'mgacha bo'lgan xaridlar uchun 2%, 300 000 so'mlik xaridlar uchun 3% oling.",
+    "Удобный поиск магазинов , новостей и связи с тех поддержкой в одном приложении": "Bitta ilovada do'konlarni, yangiliklarni va ushbu yordam bilan bog'lanishni qulay qidirish",
+    "Настройки": "Sozlamalar",
+    "Использовать Touch ID": "Touch ID dan foydalanish",
+    "Использовать Touch ID для быстрого входа в приложение?" : "Ilovaga tez kirish uchun Touch ID dan foydalanish",
+    "Изменить ПИН-код": "Pin-kodni ozgartirish",
+    "Оценить приложение": "Ilovaga baho bering",
+    "Поделиться приложением": "Ilovani ulashish",
+    "Информация о приложении": "Ilova haqida ma'lumot",
+    "Служба поддержки": "Qo'llab quvvatlash xizmati",
+    "Занятость":"Bandlik",
+    "Гос.служба":"Dav. xizmati",
+    "Частный сектор":"Xususiy sektor",
+    "Социальная сфера": "Ijtimoiy soha",
+    "Пенсионер":"Nafaqada",
+    "Учащийся":"O'quvchi",
+    "Домохозяйка":"Uy bekasi",
+    "Временно неработающий":"Vaqtincha ishsiz",
+
+    "":""
+
 }

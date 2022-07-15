@@ -39,9 +39,11 @@ class NewsItemWidget extends StatelessWidget {
                       ),
                       child: FadeInImage.assetNetwork(
                         placeholder: "assets/images/loading_indicator.gif",
+                        placeholderCacheHeight: 20,
+                        placeholderCacheWidth: 20,
                         image: snap.data![index].image.toString(),
                         fit: BoxFit.cover,
-                        placeholderFit: BoxFit.cover,
+                        placeholderFit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -64,12 +66,20 @@ class NewsItemWidget extends StatelessWidget {
               },
             );
           } else if (snap.hasError) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: Image.asset(
+                "assets/images/loading_indicator.gif",
+                fit: BoxFit.cover,
+                height: getHeight(70),
+              ),
             );
           }
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Image.asset(
+              "assets/images/loading_indicator.gif",
+              fit: BoxFit.cover,
+              height: getHeight(70),
+            ),
           );
         },
       ),

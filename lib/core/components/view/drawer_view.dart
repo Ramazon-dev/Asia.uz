@@ -1,8 +1,6 @@
-import 'package:asia_uz/screens/contacts/contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
-// ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
   MyDrawer({Key? key, required this.model}) : super(key: key);
 
@@ -35,7 +33,7 @@ class MyDrawer extends StatelessWidget {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                'assets/images/bg.png',
+                'assets/images/newbg.png',
               ),
               fit: BoxFit.cover,
             ),
@@ -112,7 +110,8 @@ class MyDrawer extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProfilePage()));
+                                    builder: (context) =>
+                                        const ChooseLayoute()));
                             break;
                           case 5:
                             _context.currentTab = 1;
@@ -133,16 +132,15 @@ class MyDrawer extends StatelessWidget {
                                     builder: (context) => const AboutUsPage()));
                             break;
                           case 8:
-                            GetStorage().remove('telNumber');
-                            GetStorage().remove('token');
-                            GetStorage().remove('firstName');
-                            GetStorage().remove("barcode");
-                            GetStorage().remove("qrcode");
-
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MyApp()));
+                                    builder: (context) =>
+                                        const SettingsChooseLayout()));
+                            debugPrint("bosildi : 8 settings ");
+                            break;
+                          case 9:
+                            showAlertDialogMethod(context);
                             break;
                         }
                       }
@@ -150,7 +148,7 @@ class MyDrawer extends StatelessWidget {
                       return GestureDetector(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            vertical: getHeight(20.0),
+                            vertical: getHeight(17.0),
                           ),
                           child: MyTextWidget(
                             textAlign: TextAlign.left,
@@ -205,12 +203,12 @@ class MyDrawer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           MyElevatedButton(
-            height: getHeight(32),
-            width: getWidth(63),
-            radius: getHeight(22),
+            height: 32,
+            width: 68,
+            radius: 22,
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress1 ? AppColors.onPressColor : Colors.white,
-            sideWidth: getWidth(2),
+            sideWidth: 2,
             text: "O'ZB",
             textColor: AppColors.whiteColor,
             onPressed: () {
@@ -222,9 +220,9 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           MyElevatedButton(
-            height: getHeight(32),
-            width: getWidth(63),
-            radius: getHeight(22),
+            height: 32,
+            width: 63,
+            radius: 22,
             textColor: AppColors.whiteColor,
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress2 ? AppColors.onPressColor : Colors.white,
@@ -239,10 +237,10 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           MyElevatedButton(
-            height: getHeight(32),
+            height: 32,
             textColor: AppColors.whiteColor,
-            width: getWidth(63),
-            radius: getHeight(22),
+            width: 63,
+            radius: 22,
             primaryColor: AppColors.transparentColor,
             sideColor: _onPress3 ? AppColors.onPressColor : Colors.white,
             sideWidth: getHeight(2),
@@ -269,6 +267,59 @@ class MyDrawer extends StatelessWidget {
     'Карта',
     'Контакты',
     'О нас',
+    "Настройки",
     'Выйти',
   ];
+  showAlertDialogMethod(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          actionsPadding: const EdgeInsets.all(8),
+          alignment: Alignment.center,
+          elevation: 2,
+          content: Text(
+            "Chiqishni xoxlaysizmi",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: getHeight(24),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            MyElevatedButton(
+              height: getHeight(40),
+              width: getWidth(100),
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "cancel",
+              textColor: AppColors.whiteColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            MyElevatedButton(
+              height: getHeight(40),
+              width: getWidth(100),
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "exit",
+              textColor: AppColors.whiteColor,
+              onPressed: () {
+                GetStorage().remove('telNumber');
+                GetStorage().remove('token');
+                GetStorage().remove('firstName');
+                GetStorage().remove("barcode");
+                GetStorage().remove("qrcode");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const MyApp()));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

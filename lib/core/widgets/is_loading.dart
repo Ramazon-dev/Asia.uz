@@ -14,7 +14,11 @@ class _IsLoadingWidgetState extends State<IsLoadingWidget> {
   Widget build(BuildContext context) {
     if (widget.isload == false) {
       return Center(
-        child: CircularProgressIndicator(strokeWidth: getHeight(50)),
+        child: Image.asset(
+          "assets/images/loading_indicator.gif",
+          fit: BoxFit.cover,
+          height: getHeight(70),
+        ),
       );
     } else {
       return IsLoadingWidget(isload: true);

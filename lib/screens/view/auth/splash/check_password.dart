@@ -1,4 +1,3 @@
-import 'package:asia_uz/service/api/get/loyality_cards_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -35,12 +34,19 @@ class _CheckPasswordState extends State<CheckPassword> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
-    if (first) {
-      isAuthenticated(context);
-      first = false;
-    }
-
+    GetStorage().read("touchid") == "true"
+        ? first == true
+            ? {
+                isAuthenticated(context),
+                first = false,
+              }
+            : first = false
+        : null;
+    debugPrint("touchid: ${GetStorage().read("touchid")}");
+    // if (first) {
+    //   isAuthenticated(context);
+    //   first = false;
+    // }
     // isAuthenticated(context);
 
     return Scaffold(

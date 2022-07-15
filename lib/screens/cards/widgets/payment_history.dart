@@ -1,5 +1,4 @@
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/core/model/get/loyality_cards_model.dart';
 import 'package:flutter/material.dart';
 
 class PaymentHistoryWidget extends StatelessWidget {
@@ -26,12 +25,22 @@ class PaymentHistoryWidget extends StatelessWidget {
                   color: AppColors.black,
                 ),
               ),
-              Text(
-                "Все".tr(),
-                style: TextStyle(
-                  fontSize: getHeight(16),
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.orange,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentHistoryPage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Все".tr(),
+                  style: TextStyle(
+                    fontSize: getHeight(16),
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.orange,
+                  ),
                 ),
               ),
             ],
@@ -53,76 +62,117 @@ class PaymentHistoryWidget extends StatelessWidget {
                 builder:
                     (context, AsyncSnapshot<List<LoyalityCardsModel>> snap) {
                   if (snap.hasData) {
+                    if (snap.data![0].history!.isEmpty) {
+                      return const Align(
+                        alignment: Alignment.topCenter,
+                        child: Text(
+                          "Data is empty",
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }
                     return ListView.builder(
-                      itemCount: 10,
+                      itemCount: snap.data![0].history!.length,
                       padding: EdgeInsets.only(top: getHeight(5)),
                       itemBuilder: (context, index) {
-                        return SizedBox(
-                          height: getHeight(50),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "08 iyun 15:50",
-                                    style: TextStyle(
-                                      color: AppColors.black,
-                                      fontSize: getHeight(12),
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    "сум".tr(),
-                                    style: TextStyle(
-                                      color: AppColors.drawerTextColor,
-                                      fontSize: getHeight(12),
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
+                        debugPrint("length: ${snap.data![0].history!.length}");
+                        if (snap.data!.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              "Data is empty",
+                              style: TextStyle(
+                                color: AppColors.black,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Выплачено".tr(),
-                                    style: TextStyle(
-                                      color: AppColors.black,
-                                      fontSize: getHeight(14),
-                                      fontWeight: FontWeight.w400,
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        } else {
+                          return SizedBox(
+                            height: getHeight(50),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "08 iyun 15:50",
+                                      style: TextStyle(
+                                        color: AppColors.black,
+                                        fontSize: getHeight(12),
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "215.000",
-                                    style: TextStyle(
-                                      color: AppColors.black,
-                                      fontSize: getHeight(14),
-                                      fontWeight: FontWeight.w400,
+                                    Text(
+                                      "сум".tr(),
+                                      style: TextStyle(
+                                        color: AppColors.drawerTextColor,
+                                        fontSize: getHeight(12),
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: getHeight(8)),
-                              Divider(
-                                height: getHeight(0.1),
-                                color: AppColors.teal,
-                                thickness: getWidth(1),
-                              ),
-                            ],
-                          ),
-                        );
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Выплачено".tr(),
+                                      style: TextStyle(
+                                        color: AppColors.black,
+                                        fontSize: getHeight(14),
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      "215.000",
+                                      style: TextStyle(
+                                        color: AppColors.black,
+                                        fontSize: getHeight(14),
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: getHeight(8)),
+                                Divider(
+                                  height: getHeight(0.1),
+                                  color: AppColors.teal,
+                                  thickness: getWidth(1),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       },
                     );
                   } else if (snap.hasError) {
                     return const Center(
-                      child: CircularProgressIndicator(),
+                      child: Text(
+                        "Error!",
+                        style: TextStyle(
+                          color: AppColors.textRed,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     );
                   }
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Center(
+                    child: Image.asset(
+                      "assets/images/loading_indicator.gif",
+                      fit: BoxFit.cover,
+                      height: getHeight(70),
+                    ),
                   );
                 }),
           ),

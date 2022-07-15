@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+import 'package:asia_uz/tablet/auth/info/tab_bonus.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -16,54 +17,37 @@ class _TabProfilePageState extends State<TabProfilePage> {
 
   final TextEditingController _lastNameController = TextEditingController();
 
-  final TextEditingController _employmentController = TextEditingController();
-
   String? birthday;
   bool isload = false;
-  String platform() {
-    String platform;
-    if (Platform.isAndroid) {
-      platform = "Android";
-    } else {
-      platform = "IOS";
-    }
-    return platform;
+  String? pol;
+  String? zanyatost;
+  String? notifLang;
+  String platform = Platform.operatingSystem;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    GetStorage().write("platform", platform());
-    debugPrint(platform());
+    GetStorage().write("platform", platform);
     SizeConfig().init(context);
-    return buildScaffold(context);
-  }
-
-  String? pol;
-
-  String? notifLang;
-
-  buildScaffold(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: SvgPicture.asset(
-            "assets/icons/arrow_back.svg",
-            color: AppColors.whiteColor,
-            height: getHeight(20),
-            width: getWidth(30),
-          ),
-        ),
         text: 'Профиль'.tr(),
         textSize: getHeight(30),
-        action: SvgPicture.asset(SvgIcons.avatar),
       ),
       body: isload == true
-          ? const Center(
-              child: CircularProgressIndicator(),
+          ? Center(
+              child: Image.asset(
+                "assets/images/loading_indicator.gif",
+                fit: BoxFit.cover,
+                height: getHeight(70),
+              ),
             )
           : Form(
               key: _formKey,
@@ -135,7 +119,7 @@ class _TabProfilePageState extends State<TabProfilePage> {
                             width: getWidth(1),
                           ),
                         )),
-                        height: getHeight(60),
+                        height: getHeight(83),
                         width: MediaQuery.of(context).size.width,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -283,21 +267,105 @@ class _TabProfilePageState extends State<TabProfilePage> {
                       ],
                     ),
                     SizedBox(height: getHeight(4.0)),
-                    TextFormField(
-                      controller: _employmentController,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 24,
-                        color: AppColors.black,
+                    DropdownButtonFormField(
+                      hint: Text(
+                        'Занятость*'.tr(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 24,
+                          color: AppColors.black,
+                        ),
                       ),
-                      decoration: InputDecoration(
-                        hintText: 'Занятость*'.tr(),
-                        labelText: 'Занятость*'.tr(),
-                        suffixIcon: const Icon(
+                      icon: Padding(
+                        padding: EdgeInsets.only(right: getHeight(10)),
+                        child: const Icon(
                           Icons.arrow_forward_ios,
                           color: AppColors.black,
                         ),
                       ),
+                      onChanged: (String? v) {
+                        zanyatost = v;
+                        debugPrint("zanyatost: $v");
+                      },
+                      items: <DropdownMenuItem<String>>[
+                        DropdownMenuItem(
+                          value: "Гос.служба".tr(),
+                          child: Text(
+                            "Гос.служба".tr(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: "Частный сектор".tr(),
+                          child: Text(
+                            "Частный сектор".tr(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: "Социальная сфера".tr(),
+                          child: Text(
+                            "Социальная сфера".tr(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: "Пенсионер".tr(),
+                          child: Text(
+                            "Пенсионер".tr(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: "Учащийся".tr(),
+                          child: Text(
+                            "Учащийся".tr(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: "Домохозяйка".tr(),
+                          child: Text(
+                            "Домохозяйка".tr(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: "Временно неработающий".tr(),
+                          child: Text(
+                            "Временно неработающий".tr(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: getHeight(4.0)),
                     SizedBox(height: getHeight(70.0)),
@@ -323,7 +391,7 @@ class _TabProfilePageState extends State<TabProfilePage> {
                               _firstNameController.text,
                             );
                             await CustomersServices.cuspomersService(
-                                      platform: GetStorage().read("platform"),
+                                      platform: platform,
                                       dob: birthday!,
                                       firstName: _firstNameController.text,
                                       lastName: _lastNameController.text,
@@ -338,11 +406,16 @@ class _TabProfilePageState extends State<TabProfilePage> {
                                 ? await Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => TabMainPage(),
+                                      builder: (context) =>
+                                          const TabBonusPage(),
                                     ),
                                     (route) => false,
                                   )
-                                : null;
+                                : debugPrint("else ga otib ketti");
+                            isload = false;
+                            debugPrint("loyality cards service ishga tushdi");
+                            DevicesService.devicesService();
+                            LoyalityCardsService.getLoyalityCardsService();
                           } else {
                             Navigator.push(
                               context,
@@ -359,7 +432,8 @@ class _TabProfilePageState extends State<TabProfilePage> {
                     const Spacer(),
                     // SizedBox(height: getHeight(45.0)),
                     RichTextWidget(
-                      textsize: 20,
+                      textsize: 16,
+                      width: 400,
                     ),
                     SizedBox(height: getHeight(20.0)),
                   ],

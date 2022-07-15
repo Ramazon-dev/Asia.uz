@@ -1,5 +1,8 @@
+import 'package:asia_uz/core/widgets/show_alertdialog_widget.dart';
+import 'package:asia_uz/service/api/get/feedbacks_my_service.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReviewsPage extends StatefulWidget {
   const ReviewsPage({Key? key}) : super(key: key);
@@ -72,8 +75,9 @@ class _ReviewsPageState extends State<ReviewsPage>
                   ],
                 ),
               ),
-              SizedBox(
-                height: getHeight(450.0),
+              Container(
+                // color: Colors.yellow,
+                height: getHeight(550.0),
                 child: TabBarView(
                   controller: _tabController,
                   children: [
@@ -95,7 +99,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                         ),
                         Padding(
                           padding:
-                              EdgeInsets.symmetric(horizontal: getWidth(25)),
+                              EdgeInsets.symmetric(horizontal: getWidth(20)),
                           child: TextFormField(
                             controller: _messangeController,
                             decoration: InputDecoration(
@@ -116,7 +120,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                           text: 'Продолжить'.tr(), textSize: getHeight(18),
                           onPressed: () async {
                             // malumotlarni kiritganidan kegin request jonatishi
-                            // mumkin boladi 
+                            // mumkin boladi
                             if (formkey.currentState!.validate()) {
                               debugPrint(_messangeController.text.toString());
                               bool hasInternet =
@@ -124,11 +128,21 @@ class _ReviewsPageState extends State<ReviewsPage>
                                       .hasConnection;
                               debugPrint("has internet: $hasInternet");
                               if (hasInternet) {
-                                FeedbacksService.feedbacksService(
+                                String res =
+                                    await FeedbacksService.feedbacksService(
                                   type: type ?? "Другое",
                                   message: _messangeController.text,
                                 );
-                                _messangeController.clear();
+                                if (res != null) {
+                                  ShowAlertDialogWidget.ShowAlertDialog(
+                                    context: context,
+                                    buttonText: "",
+                                    contentText: "",
+                                  );
+                                  _messangeController.clear();
+                                  debugPrint("res: $res");
+                                }
+                                hideKeyboard(context);
                               } else {
                                 Navigator.push(
                                   context,
@@ -175,9 +189,13 @@ class _ReviewsPageState extends State<ReviewsPage>
                               width: getWidth(1.0),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             debugPrint("knopka bosildi");
-                            LoyalityCardsService.getLoyalityCardsService();
+                            // final Uri url = Uri.parse("tel:+1-555-010-999");
+                            // if (!await launchUrl(url)) throw "Could not launch $url";
+                            // SampleShopRepository().getDateFromApi();
+                            // FeedBacksMyService.getFeedbacksMyService();
+                            // LoyalityCardsService.getLoyalityCardsService();
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -209,12 +227,23 @@ class _ReviewsPageState extends State<ReviewsPage>
     );
   }
 
+  void hideKeyboard(context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
   List<String> typesOfList = [
     'Вопрос',
     'Жалоба',
     'Предложение',
     'Благодарность',
     'Другое',
+  ];
+  List<String> valuesOfList = [
+    'Question',
+    'Complaint',
+    'Suggestion',
+    'Gratitude',
+    'Other',
   ];
 
   DropdownButtonFormField<String> dropDownButtonMethod() {
@@ -227,7 +256,7 @@ class _ReviewsPageState extends State<ReviewsPage>
         padding: EdgeInsets.only(right: getHeight(10)),
         child: const Icon(
           Icons.arrow_forward_ios,
-          color: AppColors.black,
+          color: AppColors.teal,
         ),
       ),
       // value: "",
@@ -239,12 +268,48 @@ class _ReviewsPageState extends State<ReviewsPage>
       items: List.generate(
         typesOfList.length,
         (index) => DropdownMenuItem(
-          value: typesOfList[index].tr(),
+          value: valuesOfList[index],
           child: Text(
             typesOfList[index].tr(),
           ),
         ),
       ),
+    );
+  }
+
+  showAlertDialogMethod(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          actionsPadding: const EdgeInsets.all(8),
+          alignment: Alignment.center,
+          elevation: 2,
+          content: Text(
+            "Сообщение успешно отправлено".tr(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: getHeight(24),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            MyElevatedButton(
+              height: getHeight(52),
+              width: getWidth(223),
+              sideColor: AppColors.whiteColor,
+              primaryColor: AppColors.orangeColor,
+              text: "Вернуться на главную".tr(),
+              textColor: AppColors.whiteColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
