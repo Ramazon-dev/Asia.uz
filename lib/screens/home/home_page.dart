@@ -1,8 +1,6 @@
-import 'package:asia_uz/screens/cards/payment_history_page.dart';
-import 'package:asia_uz/screens/pages/widgets/news_item.dart';
-import 'package:asia_uz/screens/view/tuch_id.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
+import 'package:asia_uz/screens/pages/widgets/news_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,12 +48,14 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: getHeight(17.0)),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const PaymentHistoryPage(),
-                      //   ),
-                      // );
+                      String platform = Platform.operatingSystem;
+                      debugPrint(platform);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
+                        ),
+                      );
                     },
                     child: QrCodeCreator(
                       text: GetStorage().read("qrcode") ?? "",

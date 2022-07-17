@@ -16,8 +16,10 @@ class _CheckPasswordState extends State<CheckPassword> {
 
   bool isActive = false;
   bool first = true;
+  bool platform = Platform.isIOS;
 
   isAuthenticated(BuildContext context) async {
+    // final isAvailable = await
     final isAuthenticated = await LocalAuthApi.authenticate();
     if (isAuthenticated) {
       debugPrint("auth localization ishladi");
@@ -34,15 +36,18 @@ class _CheckPasswordState extends State<CheckPassword> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    GetStorage().read("touchid") == "true"
-        ? first == true
-            ? {
-                isAuthenticated(context),
-                first = false,
-              }
-            : first = false
-        : null;
+    platform
+        ? null
+        : GetStorage().read("touchid") == "true"
+            ? first == true
+                ? {
+                    isAuthenticated(context),
+                    first = false,
+                  }
+                : first = false
+            : null;
     debugPrint("touchid: ${GetStorage().read("touchid")}");
+    debugPrint("platform: $platform}");
     // if (first) {
     //   isAuthenticated(context);
     //   first = false;

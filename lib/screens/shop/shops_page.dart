@@ -457,8 +457,9 @@ ${state.response[0].workingHours}
   }) async {
     late BitmapDescriptor pinLocationIcon;
     pinLocationIcon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(devicePixelRatio: 5, size: Size(40, 100)),
-        "assets/icons/location.png");
+      const ImageConfiguration(devicePixelRatio: 5, size: Size(40, 100)),
+      "assets/icons/location.png",
+    );
     MarkerId markerId = MarkerId("id $index");
     final Marker marker = Marker(
       markerId: markerId,

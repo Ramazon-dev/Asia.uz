@@ -111,7 +111,7 @@ class MyDrawer extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const BonusPage()));
+                                    builder: (context) => const ChooseLayoute()));
                             break;
                           case 5:
                             _context.currentTab = 1;
