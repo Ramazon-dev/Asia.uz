@@ -44,7 +44,7 @@ class AddCardsWidget extends StatelessWidget {
                   'Добавить имеющуюся карту'.tr(),
                   style: TextStyle(
                     color: AppColors.whiteColor,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w500,
                     fontSize: getWidth(16.0),
                   ),
                 )

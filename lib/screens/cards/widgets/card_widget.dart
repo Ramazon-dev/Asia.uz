@@ -6,6 +6,10 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String ballace = GetStorage().read("totalBalance").toString();
+    double total = double.parse(ballace);
+    int son = total.toInt();
+    String? sona = son.toString();
     return Container(
       height: getHeight(200),
       width: getWidth(319),
@@ -16,62 +20,67 @@ class CardWidget extends StatelessWidget {
         ),
         image: const DecorationImage(
           image: AssetImage(
-            'assets/images/newcardbg.png',
+            'assets/images/card_other.png',
           ),
           fit: BoxFit.cover,
         ),
       ),
       child: Stack(
         children: [
+          // Positioned(
+          //   width: getWidth(315),
+          //   top: getHeight(30),
+          //   child: Text(
+          //     'Ваша карта лояльности'.tr(),
+          //     textAlign: TextAlign.center,
+          //     style: TextStyle(
+          //       color: AppColors.whiteColor,
+          //       fontWeight: FontWeight.w400,
+          //       fontSize: getWidth(18.0),
+          //     ),
+          //   ),
+          // ),
           Positioned(
             width: getWidth(315),
-            top: getHeight(30),
+            top: getHeight(108),
             child: Text(
-              'Ваша карта лояльности'.tr(),
+              GetStorage().read("barcode") ?? '2935 **** **** 1562'.tr(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.whiteColor,
-                fontWeight: FontWeight.w400,
-                fontSize: getWidth(18.0),
+                fontWeight: FontWeight.w500,
+                fontSize: getWidth(20.0),
               ),
             ),
           ),
           Positioned(
             width: getWidth(315),
-            top: getHeight(85),
-            child: Text(
-              GetStorage().read("barcode") ?? 'card is empty'.tr(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.whiteColor,
-                fontWeight: FontWeight.w400,
-                fontSize: getWidth(28.0),
+            top: getHeight(147),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Баланс:'.tr(),
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: getWidth(16.0),
+                    ),
+                  ),
+                  Text(
+                    MoneyFormatter.moneyFormat(sona + "as") +
+                        " " +
+                        'сумов'.tr(),
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: getWidth(16.0),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ),
-          Positioned(
-            width: getWidth(315),
-            top: getHeight(152),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'Баланс:'.tr(),
-                  style: TextStyle(
-                    color: AppColors.whiteColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: getWidth(18.0),
-                  ),
-                ),
-                Text(
-                  '2 000.00',
-                  style: TextStyle(
-                    color: AppColors.whiteColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: getWidth(18.0),
-                  ),
-                ),
-              ],
             ),
           ),
           Positioned(

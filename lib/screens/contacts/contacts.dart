@@ -2,18 +2,23 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 
 class Contacts extends StatelessWidget {
-  const Contacts({Key? key}) : super(key: key);
+  BottomNavigationBarProvider? model;
+  Contacts({Key? key, required this.model}) : super(key: key);
+  OnPressProvider? onPressProvider;
 
   @override
   Widget build(BuildContext context) {
+    onPressProvider = context.read<OnPressProvider>();
+    var _context = context.watch<BottomNavigationBarProvider>();
+
     return LayoutBuilder(builder: (context, constraints) {
       return constraints.maxWidth < 600
-          ? buildMobile(context)
+          ? buildMobile(context, _context)
           : buildTab(context);
     });
   }
 
-  Scaffold buildMobile(BuildContext context) {
+  Scaffold buildMobile(BuildContext context, _context) {
     debugPrint("kirdi");
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
@@ -54,7 +59,7 @@ class Contacts extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppColors.black,
-                          fontSize: getWidth(18.0),
+                          fontSize: getWidth(20.0),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -63,8 +68,8 @@ class Contacts extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppColors.teal,
-                          fontWeight: FontWeight.w300,
-                          fontSize: getWidth(14.0),
+                          fontWeight: FontWeight.w600,
+                          fontSize: getWidth(16.0),
                         ),
                       ).only(top: getHeight(15), bottom: getHeight(33)),
                       Container(
@@ -136,19 +141,24 @@ class Contacts extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      Container(
-                        height: getHeight(172),
-                        width: getWidth(315),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(getHeight(15)),
-                          // image: const DecorationImage(
-                          //   image: AssetImage(""),
-                          //   fit: BoxFit.cover,
-                          // ),
-                        ),
-                        child: const Image(
-                          image: AssetImage(
-                            "assets/images/map.png",
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          _context.currentTab = 3;
+
+                          // _context.currentTab = 1;
+                        },
+                        child: Container(
+                          height: getHeight(172),
+                          width: getWidth(315),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(getHeight(15)),
+                          ),
+                          child: const Image(
+                            image: AssetImage(
+                              "assets/images/map.png",
+                            ),
                           ),
                         ),
                       ),
@@ -168,52 +178,47 @@ class Contacts extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: Container(
-                  height: getHeight(100),
-                  width: MediaQuery.of(context).size.width,
-                  color: const Color(0xff800D0D0D),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Мы в соцсетях",
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: getHeight(18),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ).only(top: getHeight(12), bottom: getHeight(15)),
-                      SizedBox(
-                        width: getWidth(150),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image(
-                              image: const AssetImage(
-                                "assets/icons/facebook.png",
-                              ),
-                              height: getHeight(30),
-                              fit: BoxFit.cover,
+                child: Column(
+                  children: [
+                    Text(
+                      "Мы в соцсетях",
+                      style: TextStyle(
+                        color: AppColors.whiteColor,
+                        fontSize: getHeight(18),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ).only(top: getHeight(12), bottom: getHeight(15)),
+                    SizedBox(
+                      width: getWidth(150),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: const AssetImage(
+                              "assets/icons/facebook.png",
                             ),
-                            Image(
-                              image: const AssetImage(
-                                "assets/icons/telegram.png",
-                              ),
-                              height: getHeight(30),
-                              fit: BoxFit.cover,
+                            height: getHeight(30),
+                            fit: BoxFit.cover,
+                          ),
+                          Image(
+                            image: const AssetImage(
+                              "assets/icons/telegram.png",
                             ),
-                            Image(
-                              image: const AssetImage(
-                                "assets/icons/instagram.png",
-                              ),
-                              height: getHeight(30),
-                              fit: BoxFit.cover,
+                            height: getHeight(30),
+                            fit: BoxFit.cover,
+                          ),
+                          Image(
+                            image: const AssetImage(
+                              "assets/icons/instagram.png",
                             ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                            height: getHeight(30),
+                            fit: BoxFit.cover,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],

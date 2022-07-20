@@ -59,6 +59,7 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
           ? Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
+                            color: AppColors.orange,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),

@@ -1,8 +1,7 @@
-import 'package:asia_uz/core/widgets/show_alertdialog_widget.dart';
-import 'package:asia_uz/service/api/get/feedbacks_my_service.dart';
+import 'package:asia_uz/service/api/post/loyality_phythical.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ReviewsPage extends StatefulWidget {
   const ReviewsPage({Key? key}) : super(key: key);
@@ -15,8 +14,10 @@ class _ReviewsPageState extends State<ReviewsPage>
     with TickerProviderStateMixin {
   TabController? _tabController;
   final TextEditingController _messangeController = TextEditingController();
+  final TextEditingController _typeController = TextEditingController();
   var formkey = GlobalKey<FormState>();
   String? type;
+  // int status = 0;
 
   @override
   void initState() {
@@ -92,7 +93,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               color: AppColors.black,
-                              fontSize: getWidth(18.0),
+                              fontSize: getWidth(16.0),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -100,25 +101,56 @@ class _ReviewsPageState extends State<ReviewsPage>
                         Padding(
                           padding:
                               EdgeInsets.symmetric(horizontal: getWidth(20)),
-                          child: TextFormField(
-                            controller: _messangeController,
-                            decoration: InputDecoration(
-                              hintStyle: const TextStyle(color: AppColors.teal),
-                              hintText: "Сообщение*".tr(),
-                            ),
-                            onSaved: (String? value) {
-                              // This optional block of code can be used to run
-                              // code when the user saves the form.
-                            },
-                            validator: (v) => v!.isEmpty
-                                ? "отзыв не может быть пустым".tr()
-                                : null,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: getHeight(40),
+                              ),
+                              Text(
+                                "Сообщение*",
+                                style: TextStyle(
+                                  color: AppColors.drawerTextColor,
+                                  fontSize: getHeight(16),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              TextFormField(
+                                controller: _messangeController,
+                                decoration: const InputDecoration(),
+                                onSaved: (String? value) {
+                                  // This optional block of code can be used to run
+                                  // code when the user saves the form.
+                                },
+                                validator: (v) => v!.isEmpty
+                                    ? "отзыв не может быть пустым".tr()
+                                    : null,
+                              ),
+                            ],
                           ),
                         ),
-                        dropDownButtonMethod().all(20),
+                        TextFormField(
+                          readOnly: true,
+                          keyboardType: TextInputType.none,
+                          controller: _typeController,
+                          decoration: InputDecoration(
+                            suffixIcon: const Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.teal,
+                            ),
+                            hintText: 'Выберите тип обращения*'.tr(),
+                          ),
+                          onTap: () {
+                            bottomsheetMethod();
+                            // debugPrint("type: $type");
+                          },
+                        ).all(20),
+                        // dropDownButtonMethod().all(20),
                         MyElevatedButton(
                           text: 'Продолжить'.tr(), textSize: getHeight(18),
+                          fontWeight: FontWeight.w400,
                           onPressed: () async {
+                            debugPrint("type iwlawi: $type");
                             // malumotlarni kiritganidan kegin request jonatishi
                             // mumkin boladi
                             if (formkey.currentState!.validate()) {
@@ -130,7 +162,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                               if (hasInternet) {
                                 String res =
                                     await FeedbacksService.feedbacksService(
-                                  type: type ?? "Другое",
+                                  type: type ?? "Other",
                                   message: _messangeController.text,
                                 );
                                 if (res != null) {
@@ -190,12 +222,108 @@ class _ReviewsPageState extends State<ReviewsPage>
                             ),
                           ),
                           onPressed: () async {
-                            debugPrint("knopka bosildi");
-                            // final Uri url = Uri.parse("tel:+1-555-010-999");
-                            // if (!await launchUrl(url)) throw "Could not launch $url";
-                            // SampleShopRepository().getDateFromApi();
-                            // FeedBacksMyService.getFeedbacksMyService();
-                            // LoyalityCardsService.getLoyalityCardsService();
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  actionsOverflowButtonSpacing: 5,
+                                  actionsPadding: const EdgeInsets.all(8),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 30,
+                                    vertical: 20,
+                                  ),
+                                  alignment: Alignment.center,
+                                  elevation: 2,
+                                  content: Text(
+                                    "Карта успешно добавлена",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: getHeight(20),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    MyElevatedButton(
+                                      height: getHeight(52),
+                                      width: getWidth(223),
+                                      sideColor: AppColors.whiteColor,
+                                      primaryColor: AppColors.orangeColor,
+                                      text: "Вернуться на главную",
+                                      textColor: AppColors.whiteColor,
+                                      onPressed: () {
+                                        // GetStorage().write("barcode", barcode!.code);
+                                        Navigator.pop(context);
+                                        // Navigator.pop(context);
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+
+                            // return Container(
+                            //   margin: EdgeInsets.all(150),
+                            //   height: 300,
+                            //   width: 200,
+                            //   color: Colors.yellow,
+                            // );
+
+                            // AwesomeDialog(
+                            //   context: context,
+                            //   animType: AnimType.SCALE,
+                            //   dialogType: DialogType.SUCCES,
+                            //   // dialogBackgroundColor: AppColors.orange,
+                            //   body: Center(
+                            //     child: Text(
+                            //       'Карта успешно добавлена',
+                            //       style: TextStyle(fontStyle: FontStyle.italic),
+                            //     ),
+                            //   ),
+                            //   title: 'This is Ignored',
+                            //   desc: 'This is also Ignored',
+                            //   // btnOkText: "Вернуться на главную",
+                            //   // btnOkColor: AppColors.orange,
+                            //   btnOk: MyElevatedButton(
+                            //     primaryColor: AppColors.orange,
+                            //     textColor: AppColors.whiteColor,
+                            //     text: "Вернуться на главную",
+                            //     onPressed: () {
+                            //       Navigator.pop(context);
+                            //     },
+                            //   ),
+                            //   btnOkOnPress: () {},
+                            // )..show();
+
+                            // int status = await LoyalityPhythicalService
+                            //     .loyalityPhythicalService(
+                            //   "7777000006693",
+                            // );
+                            // debugPrint("statusCode: $status");
+                            // if (status == 401 || status == 400) {
+                            //   showModalBottomSheet(
+                            //     context: context,
+                            //     backgroundColor: Colors.green,
+                            //     builder: (context) => Container(),
+                            //   );
+                            // } else if (status == 200 || status == 201) {
+                            //   showModalBottomSheet(
+                            //     context: context,
+                            //     backgroundColor: Colors.yellow,
+                            //     builder: (context) => Container(),
+                            //   );
+                            // }
+                            // debugPrint(
+                            //     "endi ikinchisini ichiga kirdi: $status");
+                            // debugPrint("status oxiri:$status");
+                            // showModalBottomSheet(
+                            //   context: context,
+                            //   backgroundColor: Colors.cyan,
+                            //   builder: (context) => Container(),
+                            // );
+                            // debugPrint("knopka bosildi");
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -203,7 +331,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                               SvgPicture.asset(SvgIcons.phone),
                               SizedBox(width: getWidth(25.0)),
                               Text(
-                                GetStorage().read('telNumber'),
+                                "+998 99 860-63-63",
                                 style: TextStyle(
                                   color: AppColors.black,
                                   fontSize: getWidth(16.0),
@@ -246,11 +374,98 @@ class _ReviewsPageState extends State<ReviewsPage>
     'Other',
   ];
 
+  bottomsheetMethod() {
+    return showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: getHeight(518),
+          width: getWidth(375),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(getHeight(25)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: getHeight(5),
+                  width: getWidth(45),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(getHeight(5)),
+                    color: AppColors.textTite,
+                  ),
+                ).only(bottom: getHeight(15)),
+                MyTextWidget(
+                  text: "Выберите тип обращения*",
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  textColor: AppColors.black,
+                ),
+                // SizedBox(height: getHeight(35)),
+                Container(
+                  // color: Colors.yellow,
+                  height: 350,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: typesOfList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          _typeController.text = typesOfList[index];
+                          type = valuesOfList[index];
+                          Navigator.pop(context);
+                          debugPrint(
+                              "type: $type controlle: ${_typeController.text}");
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              typesOfList[index],
+                              style: TextStyle(
+                                fontSize: getHeight(18),
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.black,
+                              ),
+                            ).only(top: getHeight(30), bottom: getHeight(6)),
+                            const Divider(
+                              height: 2,
+                              thickness: 1,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                MyElevatedButton(
+                  text: "Сохранить",
+                  sideColor: AppColors.orange,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   DropdownButtonFormField<String> dropDownButtonMethod() {
     return DropdownButtonFormField(
       hint: Text(
         "Выберите тип обращения*".tr(),
-        style: const TextStyle(color: AppColors.teal),
+        style: TextStyle(
+          color: AppColors.drawerTextColor,
+          fontSize: getHeight(16),
+          fontWeight: FontWeight.w400,
+        ),
       ),
       icon: Padding(
         padding: EdgeInsets.only(right: getHeight(10)),

@@ -36,16 +36,16 @@ class _CheckPasswordState extends State<CheckPassword> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    platform
-        ? null
-        : GetStorage().read("touchid") == "true"
+    GetStorage().read("hasBiometric") == "true"
+        ? GetStorage().read("touchid") == "true"
             ? first == true
                 ? {
                     isAuthenticated(context),
                     first = false,
                   }
                 : first = false
-            : null;
+            : null
+        : null;
     debugPrint("touchid: ${GetStorage().read("touchid")}");
     debugPrint("platform: $platform}");
     // if (first) {

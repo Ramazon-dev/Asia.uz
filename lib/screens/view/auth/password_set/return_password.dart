@@ -63,7 +63,12 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                 ),
                 currentCode: code,
                 onCodeSubmitted: (code) async {
+                  bool localAuth = await LocalAuthApi.hasBiometrics();
+                  await GetStorage()
+                      .write("hasBiometric", localAuth.toString());
                   if (code.length == 4 && widget.text == controller.text) {
+                    debugPrint(
+                        "Has Biometric ${GetStorage().read("hasBiometric")}");
                     GetStorage().write("password", controller.text);
                     Navigator.push(
                       context,
@@ -74,10 +79,14 @@ class _ReturnPasswordState extends State<ReturnPassword> {
                   }
                 },
                 onCodeChanged: (code) async {
+                  bool localAuth = await LocalAuthApi.hasBiometrics();
+                  await GetStorage()
+                      .write("hasBiometric", localAuth.toString());
                   // shu joyda password tog'ri kiritganini tekshiriladi
                   if (code!.length == 4 && widget.text == controller.text) {
+                    debugPrint(
+                        "Has Biometric ${GetStorage().read("hasBiometric")}");
                     GetStorage().write("password", controller.text);
-
                     hideKeyboard(context);
                     Navigator.push(
                       context,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
-import 'package:asia_uz/screens/pages/widgets/news_item.dart';
+import 'package:asia_uz/screens/home/search_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +14,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // home page oz ichiga appbar va bottomnavbardan bowqa page ichidigi xamma widgetlarni oladi
     SizeConfig().init(context);
-    debugPrint("qrcode: ${GetStorage().read("qrcode")}");
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
       body: SingleChildScrollView(
@@ -53,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ProfilePage(),
+                          builder: (context) => const SearchPage(),
                         ),
                       );
                     },
@@ -125,6 +124,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   cashback() {
+    String ballace = GetStorage().read("totalBalance").toString();
+    double total = double.parse(ballace);
+    int son = total.toInt();
+    String? sona = son.toString();
+
+    debugPrint(sona.toString());
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: getWidth(20.0),
@@ -155,18 +160,20 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MyTextWidget(
-                text: "0 " + 'сумов'.tr(),
+                text: MoneyFormatter.moneyFormat(sona + "as") +
+                    " " +
+                    'сумов'.tr(),
                 textAlign: TextAlign.left,
                 textColor: AppColors.orange,
                 fontSize: 13.0,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
               ),
               MyTextWidget(
-                text: "0 " + 'баллов'.tr(),
+                text: "0 " + 'сумов'.tr(),
                 textAlign: TextAlign.right,
-                textColor: AppColors.teal,
+                textColor: AppColors.drawerTextColor,
                 fontSize: getHeight(13),
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
               ),
             ],
           ),

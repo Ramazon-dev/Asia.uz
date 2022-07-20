@@ -147,12 +147,14 @@ class _EnterPhoneNumberPageState extends State<EnterPhoneNumberPage> {
                   SizedBox(height: getHeight(34.0)),
                   MyElevatedButton(
                     radius: getHeight(15),
-                    height: getHeight(50),
-                    width: getWidth(285),
+                    // height: getHeight(50),
+                    // width: getWidth(285),
+                    textSize: 18,
                     child: isload == true
                         ? Center(
                             child: Image.asset(
                               "assets/images/loading_indicator.gif",
+                            color: AppColors.orange,
                               fit: BoxFit.cover,
                               height: getHeight(25),
                             ),

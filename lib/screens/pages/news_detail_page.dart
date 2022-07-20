@@ -1,7 +1,6 @@
 import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 
-
 class NewsDetailPage extends StatelessWidget {
   String id;
   String title;
@@ -113,10 +112,23 @@ class NewsDetailPage extends StatelessWidget {
                     ),
                   ),
                 ).symmetric(
-                    horizontal: getWidth(10.0), vertical: getHeight(20.0)),
+                    horizontal: getWidth(10.0), vertical: getHeight(10.0)),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    // '22 февраля самые низкие цены\nна манго и авакадо!',
+                    created,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.teal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: getWidth(12.0),
+                    ),
+                  ),
+                ).only(right: getWidth(15), bottom: getHeight(5)),
                 Text(
                   // 'Встречайте шестой электронный\nкаталог от Asia.uz! Наш каталог\nпредставляет собой сборник лучших\nскидок и весенних предложений.',
-                  "discription: $discription + created $created",
+                  discription,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.black,

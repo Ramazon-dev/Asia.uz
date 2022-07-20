@@ -28,13 +28,15 @@ class VerifyCodeService {
         debugPrint("is verified: $verify");
         await GetStorage().write('token', token);
         debugPrint("if ichida response : ${response.body}");
-        return verify;
+        return verify.toString();
       } else {
+        debugPrint("verify code service else ga kirdi");
         throw 'error';
       }
     } catch (e) {
       debugPrint(e.toString());
-      return null;
+      debugPrint("catch ga kirib ketti");
+      return null.toString();
     }
   }
 }

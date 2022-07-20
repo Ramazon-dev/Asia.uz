@@ -34,13 +34,13 @@ class PaymentHistoryPage extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<LoyalityCardsModel>> snap) {
           if (snap.hasData) {
             if (snap.data![0].history!.isEmpty) {
-              return const Center(
+              return Center(
                 child: Text(
-                  "Data is empty",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
+                  "История выплат пуста.".tr(),
+                  style: const TextStyle(
+                    color: AppColors.drawerTextColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -140,6 +140,7 @@ class PaymentHistoryPage extends StatelessWidget {
           return Center(
             child: Image.asset(
               "assets/images/loading_indicator.gif",
+              color: AppColors.orange,
               fit: BoxFit.cover,
               height: getHeight(70),
             ),

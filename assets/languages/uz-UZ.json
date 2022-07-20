@@ -85,6 +85,7 @@
     "Эти карты используются для оплаты и начисления бонусов": "Ushbu kartalar bonuslarni to'lash va hisoblash uchun ishlatiladi.",
     "Попытаться подключиться": "Ulanishga qayta harakat qling",
     "Имя не введено": "Ism kiritilmadi",
+    "Дата рождения не введена": "Tug'ilgan kun kiritilmadi",
     "Фамилия не введена": "Familiya kiritilmadi",
     "Пол не был выбран": "Pol tanlanmadi",
     "Семейное положение не выбрано": "Oilaviy ahvol tanlanmadi",
@@ -113,6 +114,9 @@
     "Домохозяйка":"Uy bekasi",
     "Временно неработающий":"Vaqtincha ishsiz",
     "Бонус": "Bonus",
+    "Проложить маршрут" :"Yo'nalishni davom ettirish",
+    "История выплат пуста.": "Toʻlov tarixi boʻsh.",
+
     "":""
 
 }

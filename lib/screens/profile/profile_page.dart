@@ -1,4 +1,6 @@
 import 'package:asia_uz/screens/view/auth/info/bonus.dart';
+import 'package:asia_uz/screens/view/auth/info/onboarding_screen_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -13,12 +15,17 @@ class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _firstNameController = TextEditingController();
-
   final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController semeynoePolojeniyaController =
+      TextEditingController();
+  final TextEditingController zanyatostController = TextEditingController();
+  final TextEditingController birthdayController = TextEditingController();
 
+  String? semeynoePolojeniya;
   String? birthday;
   bool isload = false;
-  String? pol;
+  String? gender;
   String? zanyatost;
   String? notifLang;
   String platform = Platform.operatingSystem;
@@ -69,7 +76,53 @@ class _ProfilePageState extends State<ProfilePage> {
                       v!.isEmpty ? 'Фамилия не введена'.tr() : null,
                 ),
                 SizedBox(height: getHeight(4.0)),
-                InkWell(
+                // Container(
+                //   decoration: BoxDecoration(
+                //       border: Border(
+                //     bottom: BorderSide(
+                //       color: AppColors.black,
+                //       width: getWidth(0.5),
+                //     ),
+                //   )),
+                //   height: getHeight(50),
+                //   width: MediaQuery.of(context).size.width,
+                //   child: Row(
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //         children: [
+                //           Text(
+                //             "Дата рождения*".tr(),
+                //             style: TextStyle(
+                //               fontSize: getHeight(14),
+                //               fontWeight: FontWeight.w500,
+                //               color: AppColors.bottomUnselectedColor,
+                //             ),
+                //           ),
+                //           Text(
+                //             birthday ?? "",
+                //             style: TextStyle(
+                //               fontSize: getHeight(16),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //       Padding(
+                //         padding: EdgeInsets.only(right: getWidth(11)),
+                //         child: const Icon(
+                //           Icons.arrow_forward_ios,
+                //           color: AppColors.black,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                TextFormField(
+                  readOnly: true,
+                  keyboardType: TextInputType.none,
                   onTap: () {
                     DatePicker.showDatePicker(
                       context,
@@ -85,171 +138,240 @@ class _ProfilePageState extends State<ProfilePage> {
 
                         debugPrint(birthday);
                         setState(() {});
+                        birthdayController.text = birthday!;
                       },
                       currentTime: DateTime.now(),
                       locale: LocaleType.ru,
                     );
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                      bottom: BorderSide(
-                        color: AppColors.black,
-                        width: getWidth(0.5),
-                      ),
-                    )),
-                    height: getHeight(50),
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Дата рождения*".tr(),
-                              style: TextStyle(
-                                fontSize: getHeight(14),
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.bottomUnselectedColor,
-                              ),
+                  controller: birthdayController,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
+                    ),
+                    hintText: "Дата рождения*".tr(),
+                    // labelText: "Дата рождения*".tr(),
+                  ),
+                  validator: (v) =>
+                      v!.isEmpty ? 'Дата рождения не введена'.tr() : null,
+                ),
+                SizedBox(height: getHeight(4.0)),
+                SizedBox(height: getHeight(4.0)),
+                SizedBox(height: getHeight(4.0)),
+                TextFormField(
+                  readOnly: true,
+                  keyboardType: TextInputType.none,
+                  onTap: () {
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (context) {
+                        return CupertinoActionSheet(
+                          actions: [
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                gender = "male";
+                                genderController.text = "мужчина".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("мужчина".tr()),
                             ),
-                            Text(
-                              birthday ?? "",
-                              style: TextStyle(
-                                fontSize: getHeight(16),
-                              ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                gender = "female";
+                                genderController.text = "женщина".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("женщина".tr()),
                             ),
                           ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(right: getWidth(11)),
-                          child: const Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.black,
+                          cancelButton: CupertinoActionSheetAction(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancel"),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: getHeight(4.0)),
-                DropdownButtonFormField(
-                  hint: Text("Пол*".tr()),
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: getHeight(13)),
-                    child: const Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  validator: (v) => v == null ? "Пол не был выбран".tr() : null,
-                  onChanged: (String? v) {
-                    pol = v;
-                    debugPrint("gender: $v");
+                        );
+                      },
+                    );
                   },
-                  items: <DropdownMenuItem<String>>[
-                    DropdownMenuItem(
-                      value: "man",
-                      child: Text("мужчина".tr()),
-                    ),
-                    DropdownMenuItem(
-                      value: "woman",
-                      child: Text("женщина".tr()),
-                    ),
-                  ],
-                ),
-                SizedBox(height: getHeight(4.0)),
-                SizedBox(height: getHeight(4.0)),
-                DropdownButtonFormField(
-                  hint: Text(
-                    "Семейное положение*".tr(),
-                  ),
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: getHeight(10)),
-                    child: const Icon(
+                  controller: genderController,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(
                       Icons.arrow_forward_ios,
                       color: AppColors.black,
                     ),
+                    hintText: 'Пол*'.tr(),
+                    // labelText: 'Пол*'.tr(),
                   ),
-                  // value: "",
                   validator: (v) =>
-                      v == null ? "Семейное положение не выбрано".tr() : null,
-                  onChanged: (String? v) {
-                    pol = v;
-                    debugPrint("gender: $v");
-                  },
-                  items: <DropdownMenuItem<String>>[
-                    DropdownMenuItem(
-                      value: "married",
-                      child: Text("женат/замужем".tr()),
-                    ),
-                    DropdownMenuItem(
-                      value: "not married",
-                      child: Text("холост/не замужем".tr()),
-                    ),
-                    DropdownMenuItem(
-                      value: "divorced",
-                      child: Text(
-                        "разведен/разведена".tr(),
-                      ),
-                    ),
-                  ],
+                      v!.isEmpty ? 'Пол не был выбран'.tr() : null,
                 ),
                 SizedBox(height: getHeight(4.0)),
-                DropdownButtonFormField(
-                  hint: Text(
-                    'Занятость*'.tr(),
-                  ),
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: getHeight(10)),
-                    child: const Icon(
+                SizedBox(height: getHeight(4.0)),
+                TextFormField(
+                  // enabled: false,
+                  // showCursor: true,
+                  readOnly: true,
+                  keyboardType: TextInputType.none,
+                  onTap: () {
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (context) {
+                        return CupertinoActionSheet(
+                          actions: [
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                semeynoePolojeniya = "married";
+                                semeynoePolojeniyaController.text =
+                                    "женат/замужем".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("женат/замужем".tr()),
+                            ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                semeynoePolojeniya = "not married";
+                                semeynoePolojeniyaController.text =
+                                    "холост/не замужем".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("холост/не замужем".tr()),
+                            ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                semeynoePolojeniya = "divorced";
+                                semeynoePolojeniyaController.text =
+                                    "разведен/разведена".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("разведен/разведена".tr()),
+                            ),
+                          ],
+                          cancelButton: CupertinoActionSheetAction(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancel"),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  controller: semeynoePolojeniyaController,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(
                       Icons.arrow_forward_ios,
                       color: AppColors.black,
                     ),
+                    hintText: 'Семейное положение*'.tr(),
                   ),
-                  onChanged: (String? v) {
-                    zanyatost = v;
-                    debugPrint("zanyatost: $v");
+                  validator: (v) =>
+                      v!.isEmpty ? 'Семейное положение не выбрано'.tr() : null,
+                ),
+                SizedBox(height: getHeight(4.0)),
+                SizedBox(height: getHeight(4.0)),
+                SizedBox(height: getHeight(4.0)),
+                TextFormField(
+                  readOnly: true,
+                  keyboardType: TextInputType.none,
+                  onTap: () {
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (context) {
+                        return CupertinoActionSheet(
+                          actions: [
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                zanyatost = "State service";
+                                zanyatostController.text = "Гос.служба".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Гос.служба".tr()),
+                            ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                zanyatost = "Private sector";
+                                zanyatostController.text =
+                                    "Частный сектор".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Частный сектор".tr()),
+                            ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                zanyatost = "Social sphere";
+                                zanyatostController.text =
+                                    "Социальная сфера".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Социальная сфера".tr()),
+                            ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                zanyatost = "Pensioner";
+                                zanyatostController.text = "Пенсионер".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Пенсионер".tr()),
+                            ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                zanyatost = "Strudent";
+                                zanyatostController.text = "Учащийся".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Учащийся".tr()),
+                            ),
+                            //
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                zanyatost = "Housewife";
+                                zanyatostController.text = "Домохозяйка".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Домохозяйка".tr()),
+                            ),
+                            CupertinoActionSheetAction(
+                              onPressed: () {
+                                zanyatost = "Temporarily unemployed";
+                                zanyatostController.text =
+                                    "Временно неработающий".tr();
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Временно неработающий".tr()),
+                            ),
+                          ],
+                          cancelButton: CupertinoActionSheetAction(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancel"),
+                          ),
+                        );
+                      },
+                    );
                   },
-                  items: <DropdownMenuItem<String>>[
-                    DropdownMenuItem(
-                      value: "State service",
-                      child: Text("Гос.служба".tr()),
+                  controller: zanyatostController,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black,
                     ),
-                    DropdownMenuItem(
-                      value: "Private sector",
-                      child: Text("Частный сектор".tr()),
-                    ),
-                    DropdownMenuItem(
-                      value: "Social sphere",
-                      child: Text(
-                        "Социальная сфера".tr(),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: "Pensioner",
-                      child: Text("Пенсионер".tr()),
-                    ),
-                    DropdownMenuItem(
-                      value: "Student",
-                      child: Text("Учащийся".tr()),
-                    ),
-                    DropdownMenuItem(
-                      value: "Housewife",
-                      child: Text(
-                        "Домохозяйка".tr(),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: "Temporarily unemployed",
-                      child: Text(
-                        "Временно неработающий".tr(),
-                      ),
-                    ),
-                  ],
+                    hintText: 'Занятость*'.tr(),
+                  ),
                 ),
                 SizedBox(height: getHeight(4.0)),
                 SizedBox(height: getHeight(70.0)),
@@ -258,12 +380,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       ? Center(
                           child: Image.asset(
                             "assets/images/loading_indicator.gif",
+                            color: AppColors.orange,
                             fit: BoxFit.cover,
                             height: getHeight(25),
                           ),
                         )
                       : null,
                   text: 'Сохранить'.tr(),
+                  textSize: 16,
+                  fontWeight: FontWeight.w600,
                   onPressed: isload == true
                       ? () {
                           debugPrint("Isload true and button can't be touched");
@@ -288,7 +413,12 @@ platform: ${GetStorage().read("platform")}
 dob: $birthday
 firstname: ${_firstNameController.text}
 lastname: ${_lastNameController.text}
-gender: $pol
+gender: $gender
+zanyatost: $zanyatost
+zanyatost: ${zanyatostController.text}
+
+semeynoePolojeniya: $semeynoePolojeniya
+semeynoePolojeniya: ${semeynoePolojeniyaController.text}
 materialstatus: true
 notificationLanguage:$notifLang,
 notificationPreference: "sms",
@@ -299,7 +429,7 @@ occupation: "occupation",
                                 dob: birthday!,
                                 firstName: _firstNameController.text,
                                 lastName: _lastNameController.text,
-                                gender: pol ?? "женщина",
+                                gender: gender ?? "male",
                                 materialStatus: true,
                                 notificationLanguage: notifLang ?? "russian",
                                 notificationPreference: "sms",
@@ -308,7 +438,8 @@ occupation: "occupation",
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const BonusPage(),
+                                  builder: (context) =>
+                                      const OnBoardingScreenPage(),
                                 ),
                                 (route) => false,
                               );

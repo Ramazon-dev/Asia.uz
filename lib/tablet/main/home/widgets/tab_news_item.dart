@@ -64,17 +64,19 @@ class TabNewsItemWidget extends StatelessWidget {
               },
             );
           } else if (snap.hasError) {
-             return Center(
-            child: Image.asset(
-              "assets/images/loading_indicator.gif",
-              fit: BoxFit.cover,
-              height: getHeight(70),
-            ),
-          );
+            return Center(
+              child: Image.asset(
+                "assets/images/loading_indicator.gif",
+                color: AppColors.orange,
+                fit: BoxFit.cover,
+                height: getHeight(70),
+              ),
+            );
           }
           return Center(
             child: Image.asset(
               "assets/images/loading_indicator.gif",
+              color: AppColors.orange,
               fit: BoxFit.cover,
               height: getHeight(70),
             ),

@@ -66,7 +66,7 @@ class _SplashScreensState extends State<SplashScreens> {
             // width: MediaQuery.of(context).size.width / 2,
             bottom: getHeight(15),
             child: Text(
-              "version: 1.0.3",
+              "version: 1.0.4",
               style: TextStyle(
                 fontSize: getHeight(15),
                 color: Colors.black,

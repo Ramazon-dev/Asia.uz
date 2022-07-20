@@ -3,7 +3,6 @@ import 'package:asia_uz/core/imports/imports.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -77,7 +76,7 @@ class NewsPage extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   debugPrint("url: ${state.response[index].image}");
-
+                  DateTime? created = state.response[index].createdAt!;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -87,7 +86,8 @@ class NewsPage extends StatelessWidget {
                         title: state.response[index].title ?? "",
                         id: state.response[index].id.toString(),
                         discription: state.response[index].description ?? "",
-                        created: state.response[index].createdAt.toString(),
+                        created:
+                            "${created.day}.${created.month}.${created.year} ${created.hour}:${created.minute}",
                       ),
                     ),
                   );
@@ -116,6 +116,19 @@ class NewsPage extends StatelessWidget {
                             ),
                           ),
                         ).only(top: getHeight(10.0)),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            // '22 февраля самые низкие цены\nна манго и авакадо!',
+                            "${state.response[index].createdAt!.hour}: ${state.response[index].createdAt!.minute}",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: AppColors.teal,
+                              fontWeight: FontWeight.w400,
+                              fontSize: getWidth(12.0),
+                            ),
+                          ),
+                        ).only(left: getWidth(15), top: getHeight(5)),
                         Container(
                           height: getHeight(257.0),
                           width: getWidth(331.0),

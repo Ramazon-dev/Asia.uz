@@ -1,8 +1,8 @@
-import 'package:asia_uz/screens/view/auth/info/bonus.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
 class MyDrawer extends StatelessWidget {
+  BottomNavigationBarProvider? model;
   MyDrawer({Key? key, required this.model}) : super(key: key);
 
   bool _onPress1 = false;
@@ -10,8 +10,6 @@ class MyDrawer extends StatelessWidget {
   bool _onPress3 = false;
 
   OnPressProvider? onPressProvider;
-
-  BottomNavigationBarProvider? model;
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +84,13 @@ class MyDrawer extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              Navigator.push(
+                              Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
                                       const NoConnectionPage(),
                                 ),
+                                (route) => false,
                               );
                             }
 
@@ -108,30 +107,26 @@ class MyDrawer extends StatelessWidget {
                             Navigator.pop(context);
                             break;
                           case 4:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ChooseLayoute()));
-                            break;
-                          case 5:
                             _context.currentTab = 1;
                             _context.tabcurrentTab = 1;
                             Navigator.pop(context);
+                            break;
+                          case 5:
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Contacts(model: model),
+                              ),
+                            );
+                            debugPrint("bosildi : 6 kontakti ");
                             break;
                           case 6:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Contacts()));
-                            debugPrint("bosildi : 6 kontakti ");
-                            break;
-                          case 7:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
                                     builder: (context) => const AboutUsPage()));
                             break;
-                          case 8:
+                          case 7:
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -139,7 +134,7 @@ class MyDrawer extends StatelessWidget {
                                         const SettingsChooseLayout()));
                             debugPrint("bosildi : 8 settings ");
                             break;
-                          case 9:
+                          case 8:
                             showAlertDialogMethod(context);
                             break;
                         }
@@ -263,7 +258,6 @@ class MyDrawer extends StatelessWidget {
     'Новости и акции',
     'Карта лояльности',
     'Отзывы',
-    'Бонус',
     'Карта',
     'Контакты',
     'О нас',
@@ -313,8 +307,13 @@ class MyDrawer extends StatelessWidget {
                 GetStorage().remove('firstName');
                 GetStorage().remove("barcode");
                 GetStorage().remove("qrcode");
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MyApp()));
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MyApp(),
+                  ),
+                  (route) => false,
+                );
               },
             ),
           ],

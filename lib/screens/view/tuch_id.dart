@@ -43,33 +43,35 @@ class _TouchIDPageState extends State<TouchIDPage> {
               textAlign: TextAlign.center,
             ).only(bottom: getHeight(24), top: getHeight(24)),
             SizedBox(height: getHeight(60)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Использовать Touch ID",
-                  style: TextStyle(
-                    fontSize: getHeight(12),
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.drawerTextColor,
-                  ),
-                ),
-                Switch(
-                  // focusColor: AppColors.drawerTextColor,
-                  // hoverColor: AppColors.drawerTextColor,
-                  // activeTrackColor: AppColors.drawerTextColor,
-                  // inactiveTrackColor: AppColors.drawerTextColor,
-                  activeColor: AppColors.orangeColor,
-                  inactiveThumbColor: AppColors.drawerTextColor,
-                  value: isActiv,
-                  onChanged: (sda) {
-                    isActiv = sda;
-                    debugPrint("isActive: $isActiv");
-                    setState(() {});
-                  },
-                ),
-              ],
-            ),
+            GetStorage().read("hasBiometric") == "true"
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Использовать Touch ID",
+                        style: TextStyle(
+                          fontSize: getHeight(12),
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.drawerTextColor,
+                        ),
+                      ),
+                      Switch(
+                        // focusColor: AppColors.unselectedColor,
+                        // hoverColor: AppColors.unselectedColor,
+                        // activeTrackColor: AppColors.unselectedColor,
+                        inactiveTrackColor: AppColors.unselectedColor,
+                        activeColor: AppColors.orangeColor,
+                        inactiveThumbColor: AppColors.drawerTextColor,
+                        value: isActiv,
+                        onChanged: (sda) {
+                          isActiv = sda;
+                          debugPrint("isActive: $isActiv");
+                          setState(() {});
+                        },
+                      ),
+                    ],
+                  )
+                : SizedBox(height: getHeight(20)),
             SizedBox(height: getHeight(80)),
             MyElevatedButton(
               textSize: getHeight(18),
@@ -77,12 +79,20 @@ class _TouchIDPageState extends State<TouchIDPage> {
               onPressed: () {
                 GetStorage().write("touchid", isActiv.toString());
                 debugPrint(GetStorage().read("touchid"));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfilePage(),
-                  ),
-                );
+                GetStorage().read("isverified") == "true"
+                    ? Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MainPage(),
+                        ),
+                        (route) => false,
+                      )
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
+                        ),
+                      );
               },
               text: "Продолжить",
               sideColor: AppColors.orangeColor,

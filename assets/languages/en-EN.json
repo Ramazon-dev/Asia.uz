@@ -85,6 +85,7 @@
     "Эти карты используются для оплаты и начисления бонусов": "These cards are used for payment and accrual of bonuses.",
     "Попытаться подключиться": "Try to connect",
     "Имя не введено": "Name not entered",
+    "Дата рождения не введена": "Date of birth not entered",
     "Фамилия не введена": "Surname not entered",
     "Пол не был выбран": "Gender has not been selected",
     "Семейное положение не выбрано": "Material status not selected",
@@ -113,6 +114,8 @@
     "Домохозяйка":"Housewife",
     "Временно неработающий":"Temporarily unemployed",
     "Бонус": "Bonus",
+    "Проложить маршрут" :"Get route",
+    "История выплат пуста.": "Payout history is empty.",
     "":""
 
 

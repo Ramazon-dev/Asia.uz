@@ -85,13 +85,14 @@ class HistoryPage extends StatelessWidget {
         } else if (snap.hasError) {
           return historyIsEmptyMethod();
         }
-         return Center(
-            child: Image.asset(
-              "assets/images/loading_indicator.gif",
-              fit: BoxFit.cover,
-              height: getHeight(70),
-            ),
-          );
+        return Center(
+          child: Image.asset(
+            "assets/images/loading_indicator.gif",
+            color: AppColors.orange,
+            fit: BoxFit.cover,
+            height: getHeight(70),
+          ),
+        );
       },
     );
   }
@@ -122,7 +123,7 @@ class HistoryPage extends StatelessWidget {
                 .tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.teal,
+              color: AppColors.drawerTextColor,
               fontSize: getWidth(14.0),
               fontWeight: FontWeight.w400,
             ),

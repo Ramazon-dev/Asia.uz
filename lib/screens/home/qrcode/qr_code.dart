@@ -19,7 +19,7 @@ class QrCodeCreator extends StatefulWidget {
 class _QrCodeCreatorState extends State<QrCodeCreator> {
   @override
   Widget build(BuildContext context) {
-    debugPrint(GetStorage().read("cardEncrypted"));
+    debugPrint("qrCode: ${GetStorage().read("qrcode")}");
     return QrImage(
       data: widget.text,
       size: getHeight(widget.size),

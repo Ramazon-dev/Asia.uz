@@ -43,7 +43,7 @@ class MainPage extends StatelessWidget {
                 child: SvgPicture.asset(
                   SvgIcons.menu,
                   height: getHeight(20),
-                  color: AppColors.black,
+                  color: AppColors.whiteColor,
                 ),
               ),
             ),

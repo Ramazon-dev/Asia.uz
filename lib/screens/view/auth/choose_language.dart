@@ -85,11 +85,18 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         _onPress2 = false;
                         _onPress3 = false;
                         setState(() {});
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EnterPhoneNumberPage(),
-                          ),
+                        Timer(
+                          const Duration(milliseconds: 20),
+                          () {
+                            debugPrint("duration ichidamiza");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const EnterPhoneNumberPage(),
+                              ),
+                            );
+                          },
                         );
                       });
                     },
@@ -117,11 +124,18 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         _onPress1 = false;
                         _onPress3 = false;
                         setState(() {});
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EnterPhoneNumberPage(),
-                          ),
+                        Timer(
+                          const Duration(milliseconds: 20),
+                          () {
+                            debugPrint("duration ichidamiza");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const EnterPhoneNumberPage(),
+                              ),
+                            );
+                          },
                         );
                       });
                     },
@@ -149,11 +163,18 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         _onPress1 = false;
                         _onPress2 = false;
                         setState(() {});
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EnterPhoneNumberPage(),
-                          ),
+                        Timer(
+                          const Duration(milliseconds: 20),
+                          () {
+                            debugPrint("duration ichidamiza");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const EnterPhoneNumberPage(),
+                              ),
+                            );
+                          },
                         );
                       });
                     },
@@ -164,7 +185,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
             SizedBox(height: getHeight(50.0)),
             MyElevatedButton(
               text: 'Войти'.tr(),
-              textSize: getWidth(16),
+              textSize: getWidth(18),
               onPressed: () {
                 Navigator.push(
                   context,

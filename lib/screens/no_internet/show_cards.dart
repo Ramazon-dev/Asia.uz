@@ -66,7 +66,7 @@ class ShowCards extends StatelessWidget {
                     style: TextStyle(
                       fontSize: getHeight(14),
                       fontWeight: FontWeight.w400,
-                      color: AppColors.teal,
+                      color: AppColors.drawerTextColor,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -86,12 +86,13 @@ class ShowCards extends StatelessWidget {
               child: Column(
                 children: [
                   MyTextWidget(
+                    fontWeight: FontWeight.w500,
                     text:
                         "Эти карты используются для оплаты и начисления бонусов"
                             .tr(),
                   ).symmetric(
                       vertical: getHeight(20), horizontal: getWidth(31)),
-                  const CardWidget(),
+                  CardWidget(),
                 ],
               ),
             ),

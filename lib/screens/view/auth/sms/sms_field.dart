@@ -18,30 +18,33 @@ class _SmsFieldState extends State<SmsField> {
   String code = '';
 
   bool isload = false;
+  String platform = Platform.operatingSystem;
 
   @override
   Widget build(BuildContext context) {
+    GetStorage().write("platform", platform);
     // bu page da foydalanuvchiga jonatilgan sms code ni kiritadi
     SizeConfig().init(context);
-    return BlocProvider(
-      create: (context) => VerifyCodeCubit(_validateKey, smsController),
-      child: BlocConsumer<VerifyCodeCubit, VerifyCodeState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is VerifyCodeInitial) {
-            return buildScaffold(context, state);
-          } else {
-            final error = state as VerifyCodeError;
-            return Center(
-              child: Text(error.errorMessage),
-            );
-          }
-        },
-      ),
-    );
+    return buildScaffold(context);
+    // return BlocProvider(
+    //   create: (context) => VerifyCodeCubit(_validateKey, smsController),
+    //   child: BlocConsumer<VerifyCodeCubit, VerifyCodeState>(
+    //     listener: (context, state) {},
+    //     builder: (context, state) {
+    //       if (state is VerifyCodeInitial) {
+    //         return buildScaffold(context, state);
+    //       } else {
+    //         final error = state as VerifyCodeError;
+    //         return Center(
+    //           child: Text(error.errorMessage),
+    //         );
+    //       }
+    //     },
+    //   ),
+    // );
   }
 
-  buildScaffold(BuildContext context, VerifyCodeState state) {
+  buildScaffold(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.unselectedColor,
@@ -50,6 +53,7 @@ class _SmsFieldState extends State<SmsField> {
           ? Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
+                color: AppColors.black,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),
@@ -75,12 +79,13 @@ class _SmsFieldState extends State<SmsField> {
                 child: Column(
                   children: [
                     MyTextWidget(
+                      fontWeight: FontWeight.w500,
                       text: 'Мы отправили вам СМС'.tr(),
                     ),
                     MyTextWidget(
-                      text: "На номер".tr() + "+998 ${widget.text}",
+                      text: "На номер".tr() + " +998 ${widget.text}",
                       fontSize: getHeight(12),
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                       textColor: AppColors.teal,
                     ).only(
                       top: getHeight(15),
@@ -108,8 +113,10 @@ class _SmsFieldState extends State<SmsField> {
                       //     );
                       //   }
                       // },
-                      onCodeChanged: (code) async {
-                        if (code!.length == 4) {
+                      onCodeSubmitted: (code) async {
+                        debugPrint("change boldi");
+                        if (code.length == 4) {
+                          debugPrint("lenth 4 ta boldi");
                           isload = true;
                           setState(() {});
                           hideKeyboard(context);
@@ -118,7 +125,8 @@ class _SmsFieldState extends State<SmsField> {
                               await InternetConnectionChecker().hasConnection;
                           debugPrint("has internet: $hasInternet");
                           if (hasInternet) {
-                            bool verify =
+                            debugPrint("internet ishlavotti");
+                            String verify =
                                 await VerifyCodeService.verifyCodeService(
                               int.parse(smsController.text),
                               GetStorage().read('telNumber'),
@@ -126,14 +134,18 @@ class _SmsFieldState extends State<SmsField> {
                             //  agar foydalanuvchi shu raqamdan oldin ro'yxatdan o'tgan bolsa
                             // asosiy page ga jo'natiladi
                             // aks xolda ro'yxatdan o'tishda davom etiladi
-                            if (verify == false) {
+                            if (verify == "false") {
+                              GetStorage().write("isverified", verify);
+                              debugPrint("verify false chiqdi");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const PasswordSet(),
                                 ),
                               );
-                            } else if (verify == true) {
+                            } else if (verify == "true") {
+                              GetStorage().write("isverified", verify);
+                              debugPrint("verify true chiqdi");
                               // agar foydalanuvchi oldin shu kiritilgan raqamdan
                               // ro'yxatdan o'tgan bo'lsa unda foydalanuvchi malumotlarini
                               // olish uchun mana shu api ga zapros jonatiladi
@@ -145,23 +157,37 @@ class _SmsFieldState extends State<SmsField> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => MainPage(),
+                                      builder: (context) => const PasswordSet(),
                                     ),
                                   );
                                 },
                               );
-                            } else if (verify == null) {
+                            } else if (verify == "null") {
+                              debugPrint("verify null chiqdi");
+                              debugPrint("if nul ga kirdik");
                               isload = false;
-                              setState(() {});
                               final snackBar = SnackBar(
-                                content: const Text('Parol notori kiritildi'),
+                                // duration: const Duration(milliseconds: 500),
+                                content: const Text('code xato kiritildi'),
+                                backgroundColor: (Colors.black),
                                 action: SnackBarAction(
-                                  label: 'Undo',
+                                  label: 'dismiss',
                                   onPressed: () {},
                                 ),
                               );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+
+                              setState(() {});
                             }
-                            isload = false;
+                            debugPrint("umuman if else dan tashqarida");
+                            setState(() {
+                              isload = false;
+                            });
+                            // showModalBottomSheet(
+                            //   context: context,
+                            //   builder: (context) => Container(),
+                            // );
                           } else {
                             Navigator.push(
                               context,
@@ -171,16 +197,30 @@ class _SmsFieldState extends State<SmsField> {
                             );
                           }
                           isload = false;
+                          setState(() {});
                         }
                       },
+                      // onCodeChanged: (code) async {},
                     ).only(bottom: getHeight(70)),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Отправить код повторно".tr(),
-                        style: const TextStyle(
-                          color: AppColors.drawerTextColor,
-                        ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset("assets/icons/reset.png"),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Отправить код повторно".tr(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: getWidth(12),
+                                color: AppColors.drawerTextColor,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

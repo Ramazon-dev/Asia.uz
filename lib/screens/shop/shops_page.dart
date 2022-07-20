@@ -140,7 +140,11 @@ ${state.response[0].workingHours}
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               leading: MyTextWidget(text: "Магазин", fontSize: getHeight(18)),
-              trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                size: getHeight(20),
+                color: AppColors.black,
+              ),
               onTap: () {
                 shopsModalBottomSheet(state);
                 debugPrint("magazin bosildi");
@@ -150,7 +154,11 @@ ${state.response[0].workingHours}
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               leading: MyTextWidget(text: "Город", fontSize: getHeight(18)),
-              trailing: Icon(Icons.arrow_forward_ios, size: getHeight(15)),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                size: getHeight(20),
+                color: AppColors.black,
+              ),
               onTap: () {
                 gorodBottomSHeet();
                 debugPrint("gorod bosildi");
@@ -230,7 +238,7 @@ ${state.response[0].workingHours}
                             text: listOfStrings[index],
                             fontSize: getHeight(18)),
                         trailing: Icon(Icons.arrow_forward_ios,
-                            color: AppColors.black, size: getHeight(15)),
+                            color: AppColors.black, size: getHeight(20)),
                         onTap: () {
                           switch (index) {
                             case 0:
@@ -410,8 +418,11 @@ ${state.response[0].workingHours}
                         leading: MyTextWidget(
                             text: state[index].name ?? state[index].city!,
                             fontSize: getHeight(18)),
-                        trailing: Icon(Icons.arrow_forward_ios,
-                            color: AppColors.black, size: getHeight(15)),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.black,
+                          size: getHeight(20),
+                        ),
                         onTap: () {
                           cameraPositionMethod(
                             lat: double.parse(state[index].longitude ?? ""),
@@ -490,14 +501,29 @@ ${state.response[0].workingHours}
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: getHeight(5),
-                width: getWidth(45),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(getHeight(5)),
-                  color: AppColors.textTite,
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                      width: 20,
+                    ),
+                    Container(
+                      height: getHeight(5),
+                      width: getWidth(45),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(getHeight(5)),
+                        color: AppColors.textTite,
+                      ),
+                    ).only(bottom: getHeight(15)),
+                    Image.asset(
+                      "assets/icons/close.png",
+                    ),
+                  ],
                 ),
-              ).only(bottom: getHeight(15)),
+              ),
               MyTextWidget(
                 text: "Asia.uz $name",
                 fontWeight: FontWeight.w600,
@@ -510,13 +536,13 @@ ${state.response[0].workingHours}
                     text: "Закрыт.",
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
-                    textColor: AppColors.textRed,
+                    textColor: AppColors.orangeColor,
                   ).only(right: getWidth(15)),
                   MyTextWidget(
                     text: "Откроется в ${workingHours ?? "8:00"}",
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
-                    textColor: AppColors.textTite,
+                    textColor: AppColors.bottomUnselectedColor,
                   ),
                 ],
               ).symmetric(
@@ -532,7 +558,7 @@ ${state.response[0].workingHours}
                   ).only(right: getWidth(20)),
                   MyTextWidget(
                     text: contact,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     fontSize: 16,
                     textColor: AppColors.black,
                   ),
@@ -568,7 +594,7 @@ ${state.response[0].workingHours}
                   ).only(right: getWidth(15)),
                   MyTextWidget(
                     text: adreess,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     fontSize: 16,
                     textColor: AppColors.black,
                     // textAlign: TextAlign.center,
@@ -576,8 +602,11 @@ ${state.response[0].workingHours}
                 ],
               ).symmetric(vertical: getHeight(13)),
               MyElevatedButton(
-                text: "Сохранить",
+                text: "Проложить маршрут".tr(),
                 sideColor: AppColors.orange,
+                textColor: AppColors.shopsColor,
+                textSize: 18,
+                fontWeight: FontWeight.w500,
                 onPressed: () {
                   Navigator.pop(context);
                 },

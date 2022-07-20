@@ -41,6 +41,7 @@ class NewsItemWidget extends StatelessWidget {
                         placeholder: "assets/images/loading_indicator.gif",
                         placeholderCacheHeight: 20,
                         placeholderCacheWidth: 20,
+                        placeholderScale: 20,
                         image: snap.data![index].image.toString(),
                         fit: BoxFit.cover,
                         placeholderFit: BoxFit.contain,
@@ -69,6 +70,7 @@ class NewsItemWidget extends StatelessWidget {
             return Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
+                color: AppColors.orange,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),
@@ -77,6 +79,7 @@ class NewsItemWidget extends StatelessWidget {
           return Center(
             child: Image.asset(
               "assets/images/loading_indicator.gif",
+              color: AppColors.orange,
               fit: BoxFit.cover,
               height: getHeight(70),
             ),

@@ -47,8 +47,9 @@ class _PasswordSetState extends State<PasswordSet> {
           ),
           child: Column(
             children: [
-              MyTextWidget(text: 'Установите PIN-код'.tr())
-                  .only(bottom: getHeight(50)),
+              MyTextWidget(
+                text: 'Установите PIN-код'.tr(),
+              ).only(bottom: getHeight(50)),
               PinFieldAutoFill(
                 codeLength: 4,
                 autoFocus: true,

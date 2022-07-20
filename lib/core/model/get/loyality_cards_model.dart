@@ -5,7 +5,7 @@ class LoyalityCardsModel {
     this.cardEncrypted,
   });
 
-  int? totalBalance;
+  dynamic totalBalance;
   List<dynamic>? history;
   String? cardEncrypted;
 
