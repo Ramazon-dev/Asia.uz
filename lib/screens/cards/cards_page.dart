@@ -1,4 +1,3 @@
-import 'package:asia_uz/screens/cards/widgets/payment_history.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -11,7 +10,7 @@ class CardsPage extends StatelessWidget {
     // agar foydalanuvchining loyal kartasi xali kiritilmagan bolsa unda
     // foydalanuvchi loyal cartani scaner qlib qo'shishi mumkin boladi
     SizeConfig().init(context);
-    debugPrint(GetStorage().read("token"));
+    debugPrint("cards lenth: ${GetStorage().read("cards")}");
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: SingleChildScrollView(
@@ -19,13 +18,13 @@ class CardsPage extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(top: getHeight(120)),
-              height: getHeight(400.0),
+              height: getHeight(450.0),
               width: double.infinity,
               color: AppColors.whiteColor,
               child: Column(
                 children: [
                   Text(
-                    'Добро пожаловать в систему лояльности'.tr(),
+                    'Ваши карты лояльности'.tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: AppColors.black,
@@ -43,15 +42,32 @@ class CardsPage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const CardWidget(),
+                    child: SizedBox(
+                      height: 200,
+                      child: ListView(
+                        // padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          const SizedBox(width: 20),
+                          const CardWidget(),
+                          const SizedBox(width: 20),
+                          // const PersonalCard(),
+                          GetStorage().read('cards') != 2
+                              ? Container()
+                              : const PersonalCard().only(right: getWidth(20)),
+                        ],
+                      ),
+                    ),
                   ),
+                  SizedBox(height: getHeight(24)),
+                  GetStorage().read('cards') != 2
+                      ? const AddCardsWidget()
+                      : Container(),
                 ],
               ),
             ),
+            const TotalBallance(),
             // mana shu joyda tekshiriladi foydalanuvchining loyal kartasi bormi
-            GetStorage().read('barcode') == null
-                ? const AddCardsWidget()
-                : Container(),
 
             // bu joyda foydalanuvchining tolovlar tarixi joylashgan boladi
             // bu malumotlarni loyality card api dan olinadi

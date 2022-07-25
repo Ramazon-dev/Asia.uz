@@ -40,41 +40,48 @@ class _TabSettingsPageState extends State<TabSettingsPage> {
         padding: const EdgeInsets.all(25.0),
         child: Column(
           children: [
-            SizedBox(height: getHeight(10)),
-            ListTile(
-              minVerticalPadding: 0,
-              contentPadding: const EdgeInsets.all(0),
-              title: Text(
-                "Использовать Touch ID",
-                style: TextStyle(fontSize: getHeight(25)),
-              ).only(bottom: getHeight(24)),
-              subtitle: Text(
-                "Использовать Touch ID для быстрого входа в приложение?",
-                style: TextStyle(fontSize: getHeight(20)),
-              ),
-              trailing: Switch(
-                // focusColor: AppColors.drawerTextColor,
-                // hoverColor: AppColors.drawerTextColor,
-                // activeTrackColor: AppColors.drawerTextColor,
-                // inactiveTrackColor: AppColors.drawerTextColor,
-                activeColor: AppColors.orangeColor,
-                inactiveThumbColor: AppColors.drawerTextColor,
-                splashRadius: 150,
+            GetStorage().read("hasBiometric") == "true"
+                ? Column(
+                    children: [
+                      SizedBox(height: getHeight(10)),
+                      ListTile(
+                        minVerticalPadding: 0,
+                        contentPadding: const EdgeInsets.all(0),
+                        title: Text(
+                          "Использовать Touch ID",
+                          style: TextStyle(fontSize: getHeight(25)),
+                        ).only(bottom: getHeight(24)),
+                        subtitle: Text(
+                          "Использовать Touch ID для быстрого входа в приложение?",
+                          style: TextStyle(fontSize: getHeight(20)),
+                        ),
+                        trailing: Switch(
+                          // focusColor: AppColors.drawerTextColor,
+                          // hoverColor: AppColors.drawerTextColor,
+                          // activeTrackColor: AppColors.drawerTextColor,
+                          // inactiveTrackColor: AppColors.drawerTextColor,
+                          activeColor: AppColors.orangeColor,
+                          inactiveThumbColor: AppColors.drawerTextColor,
+                          splashRadius: 150,
 
-                value: isActiv,
-                onChanged: (sda) {
-                  isActiv = sda;
-                  GetStorage().write("touchid", isActiv.toString());
-                  debugPrint("isActive: ${GetStorage().read("touchid")}");
-                  setState(() {});
-                },
-              ),
-            ),
-            SizedBox(height: getHeight(15)),
-            const Divider(
-              thickness: 1,
-              color: AppColors.teal,
-            ),
+                          value: isActiv,
+                          onChanged: (sda) {
+                            isActiv = sda;
+                            GetStorage().write("touchid", isActiv.toString());
+                            debugPrint(
+                                "isActive: ${GetStorage().read("touchid")}");
+                            setState(() {});
+                          },
+                        ),
+                      ),
+                      SizedBox(height: getHeight(15)),
+                      const Divider(
+                        thickness: 1,
+                        color: AppColors.teal,
+                      ),
+                    ],
+                  )
+                : Container(),
             InkWell(
               onTap: () {
                 Navigator.push(

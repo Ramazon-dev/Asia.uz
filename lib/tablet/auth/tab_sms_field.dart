@@ -18,29 +18,53 @@ class _TabSmsFieldState extends State<TabSmsField> {
   String code = '';
 
   bool isload = false;
+  String? fcmToken;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        debugPrint(message.notification!.body);
+        debugPrint(message.notification!.title);
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFromMessage = message.data["route"];
+      debugPrint("route from message: $routeFromMessage");
+      Navigator.pushNamed(context, routeFromMessage);
+    });
+    FirebaseMessaging.instance.getToken().then(
+      (token) {
+        debugPrint("firebase messaging token: $token");
+        String? tak = token;
+        fcmToken = token;
+        // final snackBar = SnackBar(
+        //   // duration: const Duration(milliseconds: 500),
+        //   content: Text(token!),
+        //   backgroundColor: (Colors.cyan),
+        //   action: SnackBarAction(
+        //     label: 'dismiss',
+        //     onPressed: () {},
+        //   ),
+        // );
+        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+        // fcmToken = token;
+        debugPrint("firebase messaging token: $tak");
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return BlocProvider(
-      create: (context) => VerifyCodeCubit(_validateKey, smsController),
-      child: BlocConsumer<VerifyCodeCubit, VerifyCodeState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is VerifyCodeInitial) {
-            return buildScaffold(context, state);
-          } else {
-            final error = state as VerifyCodeError;
-            return Center(
-              child: Text(error.errorMessage),
-            );
-          }
-        },
-      ),
-    );
+    return buildScaffold(context);
   }
 
-  buildScaffold(BuildContext context, VerifyCodeState state) {
+  buildScaffold(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.unselectedColor,
@@ -49,7 +73,6 @@ class _TabSmsFieldState extends State<TabSmsField> {
           ? Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
-                color: AppColors.orange,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),
@@ -104,28 +127,47 @@ class _TabSmsFieldState extends State<TabSmsField> {
                       ),
                       currentCode: code,
                       onCodeChanged: (code) async {
+                        debugPrint("change boldi");
                         if (code!.length == 4) {
+                          debugPrint("lenth 4 ta boldi");
                           isload = true;
                           setState(() {});
                           hideKeyboard(context);
+                          // context.read<VerifyCodeCubit>().onTab();
                           bool hasInternet =
                               await InternetConnectionChecker().hasConnection;
                           debugPrint("has internet: $hasInternet");
                           if (hasInternet) {
-                            bool verify =
+                            debugPrint("internet ishlavotti");
+                            String verify =
                                 await VerifyCodeService.verifyCodeService(
                               int.parse(smsController.text),
                               GetStorage().read('telNumber'),
                             );
-                            if (verify == false) {
-                              await Navigator.push(
+                            //  agar foydalanuvchi shu raqamdan oldin ro'yxatdan o'tgan bolsa
+                            // asosiy page ga jo'natiladi
+                            // aks xolda ro'yxatdan o'tishda davom etiladi
+                            if (verify == "false") {
+                              GetStorage().write("isverified", verify);
+                              debugPrint("verify false chiqdi");
+
+                              debugPrint("fcmToke: $fcmToken");
+                              DevicesService.devicesService(fcmToken ?? "");
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => TabPasswordSet(),
                                 ),
                               );
-                            } else if (verify == true) {
-                              DevicesService.devicesService();
+                            } else if (verify == "true") {
+                              GetStorage().write("isverified", verify);
+                              debugPrint("verify true chiqdi");
+                              // agar foydalanuvchi oldin shu kiritilgan raqamdan
+                              // ro'yxatdan o'tgan bo'lsa unda foydalanuvchi malumotlarini
+                              // olish uchun mana shu api ga zapros jonatiladi
+                              debugPrint("fcmToke: $fcmToken");
+                              DevicesService.devicesService(fcmToken ?? "");
+
                               await LoyalityCardsService
                                       .getLoyalityCardsService()
                                   .then(
@@ -133,23 +175,37 @@ class _TabSmsFieldState extends State<TabSmsField> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => TabMainPage(),
+                                      builder: (context) => TabPasswordSet(),
                                     ),
                                   );
                                 },
                               );
-                            } else {
+                            } else if (verify == "null") {
+                              debugPrint("verify null chiqdi");
+                              debugPrint("if nul ga kirdik");
                               isload = false;
-                              setState(() {});
                               final snackBar = SnackBar(
-                                content: const Text('Parol notori kiritildi'),
+                                // duration: const Duration(milliseconds: 500),
+                                content: const Text('code xato kiritildi'),
+                                backgroundColor: (Colors.black),
                                 action: SnackBarAction(
-                                  label: 'Undo',
+                                  label: 'dismiss',
                                   onPressed: () {},
                                 ),
                               );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+
+                              setState(() {});
                             }
-                            isload = false;
+                            debugPrint("umuman if else dan tashqarida");
+                            setState(() {
+                              isload = false;
+                            });
+                            // showModalBottomSheet(
+                            //   context: context,
+                            //   builder: (context) => Container(),
+                            // );
                           } else {
                             Navigator.push(
                               context,
@@ -159,7 +215,64 @@ class _TabSmsFieldState extends State<TabSmsField> {
                               ),
                             );
                           }
-                        }
+                          isload = false;
+                          setState(() {});
+                        } // if (code!.length == 4) {
+                        //   isload = true;
+                        //   setState(() {});
+                        //   hideKeyboard(context);
+                        //   bool hasInternet =
+                        //       await InternetConnectionChecker().hasConnection;
+                        //   debugPrint("has internet: $hasInternet");
+                        //   if (hasInternet) {
+                        //     bool verify =
+                        //         await VerifyCodeService.verifyCodeService(
+                        //       int.parse(smsController.text),
+                        //       GetStorage().read('telNumber'),
+                        //     );
+                        //     if (verify == false) {
+                        //       await Navigator.push(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //           builder: (context) => TabPasswordSet(),
+                        //         ),
+                        //       );
+                        //     } else if (verify == true) {
+                        //       DevicesService.devicesService("");
+                        //       await LoyalityCardsService
+                        //               .getLoyalityCardsService()
+                        //           .then(
+                        //         (value) {
+                        //           Navigator.push(
+                        //             context,
+                        //             MaterialPageRoute(
+                        //               builder: (context) => TabMainPage(),
+                        //             ),
+                        //           );
+                        //         },
+                        //       );
+                        //     } else {
+                        //       isload = false;
+                        //       setState(() {});
+                        //       final snackBar = SnackBar(
+                        //         content: const Text('Parol notori kiritildi'),
+                        //         action: SnackBarAction(
+                        //           label: 'Undo',
+                        //           onPressed: () {},
+                        //         ),
+                        //       );
+                        //     }
+                        //     isload = false;
+                        //   } else {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             const TabNoConnectionPage(),
+                        //       ),
+                        //     );
+                        //   }
+                        // }
                       },
                     ).only(bottom: getHeight(103)),
                     TextButton(

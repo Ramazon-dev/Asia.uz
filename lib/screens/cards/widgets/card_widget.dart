@@ -44,7 +44,7 @@ class CardWidget extends StatelessWidget {
             width: getWidth(315),
             top: getHeight(108),
             child: Text(
-              GetStorage().read("barcode") ?? '2935 **** **** 1562'.tr(),
+              GetStorage().read("qrcode") ?? '2935 **** **** 1562'.tr(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.whiteColor,

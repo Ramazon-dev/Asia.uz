@@ -9,7 +9,7 @@ class LoyalityBonusService {
         BaseUrl.baseUrl + '/loyalty/bonus',
       ),
       headers: {
-        'token': GetStorage().read("token"),
+        'Authorization': 'Bearer ${GetStorage().read('token')}',
       },
       body: {
         "card_number": bonus,

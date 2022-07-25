@@ -23,7 +23,6 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
   final _formKey = GlobalKey<FormState>();
 
   bool isload = false;
-  var sasa;
 
   OnPressProvider? onPressProvider;
 
@@ -59,7 +58,6 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
           ? Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
-                            color: AppColors.orange,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),
@@ -70,10 +68,11 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
                 decoration: const BoxDecoration(
                   // color: Colors.yellow,
                   image: DecorationImage(
-                      image: AssetImage(
-                        "assets/images/background.png",
-                      ),
-                      fit: BoxFit.fill),
+                    image: AssetImage(
+                      "assets/images/background.png",
+                    ),
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 child: Form(
                   key: _formKey,
@@ -163,40 +162,61 @@ class _TabEnterPhoneNumberPageState extends State<TabEnterPhoneNumberPage> {
                           radius: getHeight(30),
                           height: 83,
                           width: 473,
+                          child: isload == true
+                              ? Center(
+                                  child: Image.asset(
+                                    "assets/images/loading_indicator.gif",
+                                    fit: BoxFit.cover,
+                                    height: getHeight(40),
+                                  ),
+                                )
+                              : null,
                           text: 'Продолжить'.tr(),
                           textSize: getHeight(32),
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              bool hasInternet =
-                                  await InternetConnectionChecker()
-                                      .hasConnection;
-                              debugPrint("has internet: $hasInternet");
-                              if (hasInternet) {
-                                isload = true;
-                                setState(() {});
-                                debugPrint(
-                                    "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
-                                setState(() {});
-                                debugPrint('on tab');
-                                await GetStorage().write('telNumber',
-                                    "+998${_phoneNumberController.text.replaceAll(' ', '')}");
-                                await VerifyNumberService.verifyNumberService(
-                                            _phoneNumberController.text) ==
-                                        null
-                                    ? await next(context)
-                                    : null;
-                                isload = false;
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const TabNoConnectionPage(),
-                                  ),
-                                );
-                              }
-                            }
-                          },
+                          onPressed: isload == true
+                              ? () {
+                                  debugPrint(
+                                      "Isload true and button can't be touched");
+                                }
+                              : () async {
+                                  bool hasInternet =
+                                      await InternetConnectionChecker()
+                                          .hasConnection;
+                                  debugPrint("has internet: $hasInternet");
+                                  // agar telefon raqam toliq kiritilmagan bolsa validator ishga tushadi
+                                  if (_formKey.currentState!.validate()) {
+                                    // validatsiyadan to'g'ri o'tganidan kegin internet
+                                    //ishlab turgani uchun tekshiriladi
+                                    if (hasInternet) {
+                                      // internet ishlab turgan bo'lsa api ga zapros jonatiladi
+                                      // apidan javob kelganidan kegin kegingi page ga otadi
+                                      isload = true;
+                                      setState(() {});
+                                      debugPrint(
+                                          "ttttttttttttttttt : ${_phoneNumberController.text.replaceAll(' ', '')}");
+                                      setState(() {});
+                                      debugPrint('on tab');
+                                      await GetStorage().write('telNumber',
+                                          "+998${_phoneNumberController.text.replaceAll(' ', '')}");
+                                      await VerifyNumberService
+                                                  .verifyNumberService(
+                                                      _phoneNumberController
+                                                          .text) ==
+                                              null
+                                          ? await next(context)
+                                          : null;
+                                      isload = false;
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TabNoConnectionPage(),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
                           primaryColor: AppColors.orangeColor,
                           textColor: AppColors.whiteColor,
                           sideColor: AppColors.transparentColor,

@@ -49,6 +49,7 @@ class NewsItemWidget extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
+                    DateTime? created = snap.data![index].createdAt!;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -58,7 +59,8 @@ class NewsItemWidget extends StatelessWidget {
                           title: snap.data![index].title ?? "",
                           id: snap.data![index].id.toString(),
                           discription: snap.data![index].description ?? "",
-                          created: snap.data![index].createdAt.toString(),
+                          created:
+                              "${created.day}.${created.month}.${created.year} ${created.hour}:${created.minute}",
                         ),
                       ),
                     );
@@ -70,7 +72,6 @@ class NewsItemWidget extends StatelessWidget {
             return Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
-                color: AppColors.orange,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),
@@ -79,7 +80,6 @@ class NewsItemWidget extends StatelessWidget {
           return Center(
             child: Image.asset(
               "assets/images/loading_indicator.gif",
-              color: AppColors.orange,
               fit: BoxFit.cover,
               height: getHeight(70),
             ),
@@ -88,61 +88,4 @@ class NewsItemWidget extends StatelessWidget {
       ),
     );
   }
-
-//   _buildScaffold(BuildContext context) {
-//     return SizedBox(
-//       height: getHeight(150),
-//       width: double.infinity,
-//       child: BlocProvider(
-//         create: (context) => NewsCubut(
-//           SimpleNewsServices(),
-//         ),
-//         child: BlocConsumer<NewsCubut, NewsState>(
-//           listener: (context, state) {},
-//           builder: (context, state) {
-//             if (state is NewsInitial) {
-//               return const Center(child: CircularProgressIndicator());
-//             } else if (state is NewsLoading) {
-//               return const Center(child: CircularProgressIndicator());
-//             } else if (state is NewsCompleted) {
-//               debugPrint("News title :${state.response[0].title}");
-//               return ListView.builder(
-//                 scrollDirection: Axis.horizontal,
-//                 itemCount: state.response.length,
-//                 itemBuilder: (context, index) {
-//                   return Padding(
-//                     padding: EdgeInsets.symmetric(
-//                       horizontal: getWidth(10.0),
-//                       vertical: getHeight(10.0),
-//                     ),
-//                     child: Container(
-//                       height: getHeight(120.0),
-//                       width: getWidth(228.0),
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.circular(
-//                           getWidth(15.0),
-//                         ),
-//                       ),
-//                       child: FadeInImage.assetNetwork(
-//                         placeholder: "assets/images/loading_indicator.gif",
-//                         image: state.response[index].image.toString(),
-//                         fit: BoxFit.cover,
-//                         placeholderFit: BoxFit.cover,
-//                       ),
-//                     ),
-//                   );
-//                 },
-//               );
-//             } else {
-//               final error = state as NewsError;
-//               return const Notifications()
-//                   .flash(context, error.errorMessange, Colors.red);
-//             }
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 }

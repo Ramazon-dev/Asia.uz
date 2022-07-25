@@ -146,7 +146,7 @@ class NewsPage extends StatelessWidget {
                             placeholder: "assets/images/loading_indicator.gif",
                             image: state.response[index].image.toString(),
                             fit: BoxFit.cover,
-                            placeholderFit: BoxFit.cover,
+                            alignment: Alignment.center,
                           ),
                         ).symmetric(
                             horizontal: getWidth(10.0),
@@ -197,6 +197,9 @@ class NewsPage extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
+                  debugPrint("url: ${state.response[index].image}");
+                  DateTime? created = state.response[index].createdAt!;
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -206,7 +209,8 @@ class NewsPage extends StatelessWidget {
                         title: state.response[index].title ?? "",
                         id: state.response[index].id.toString(),
                         discription: state.response[index].description ?? "",
-                        created: state.response[index].createdAt.toString(),
+                        created:
+                            "${created.day}.${created.month}.${created.year} ${created.hour}:${created.minute}",
                       ),
                     ),
                   );
@@ -215,8 +219,8 @@ class NewsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(getWidth(15.0)),
                   child: Container(
                     padding: EdgeInsets.all(getHeight(38)),
-                    color: AppColors.whiteColor,
                     height: getHeight(751.0),
+                    color: AppColors.whiteColor,
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -236,13 +240,13 @@ class NewsPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ).only(top: getHeight(10.0)),
+                        ).only(top: getHeight(10.0), bottom: getHeight(10)),
                         Text(
                           "${state.response[index].updatedAt!.hour}: ${state.response[index].updatedAt!.minute}",
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: AppColors.black,
-                            fontWeight: FontWeight.w500,
+                            color: AppColors.teal,
+                            fontWeight: FontWeight.w400,
                             fontSize: getWidth(25.0),
                           ),
                         ).only(bottom: getHeight(10)),

@@ -114,17 +114,25 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
               textColor: AppColors.whiteColor,
               onPressed: () async {
                 if (barcode!.code != null) {
-                  int status =
+                  String message =
                       await LoyalityPhythicalService.loyalityPhythicalService(
                     barcode!.code!,
                   );
-                  debugPrint("statusCode: $status");
-                  if (status == 401 || status == 400) {
-                    showErrorDialog();
-                  } else if (status == 200 || status == 201) {
+                  debugPrint("statusCode: $message");
+                  if (message == "Success") {
                     showSuccseccDialog();
+                  } else {
+                    String error =
+                        "Unexpected error: BadRequestException: У пользователя уже существует физическая карта.";
+                    if (message == error) {
+                      showErrorDialog(
+                        "У пользователя уже существует физическая карта.",
+                      );
+                    } else {
+                      showErrorDialog(message);
+                    }
                   }
-                  debugPrint("endi ikinchisini ichiga kirdi: $status");
+                  debugPrint("endi ikinchisini ichiga kirdi: $message");
                   // showModalBottomSheet(
                   //   context: context,
                   //   backgroundColor: Colors.cyan,
@@ -366,7 +374,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
     );
   }
 
-  showErrorDialog() {
+  showErrorDialog(String message) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -380,7 +388,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
           alignment: Alignment.center,
           elevation: 2,
           content: Text(
-            "Физической карты не существует",
+            message,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.black,

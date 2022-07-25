@@ -45,33 +45,35 @@ class _TabTouchIDPageState extends State<TabTouchIDPage> {
               textAlign: TextAlign.center,
             ).only(bottom: getHeight(24), top: getHeight(24)),
             SizedBox(height: getHeight(60)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Использовать Touch ID",
-                  style: TextStyle(
-                    fontSize: getHeight(24),
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.drawerTextColor,
-                  ),
-                ),
-                Switch(
-                  // focusColor: AppColors.drawerTextColor,
-                  // hoverColor: AppColors.drawerTextColor,
-                  // activeTrackColor: AppColors.drawerTextColor,
-                  // inactiveTrackColor: AppColors.drawerTextColor,
-                  activeColor: AppColors.orangeColor,
-                  inactiveThumbColor: AppColors.drawerTextColor,
-                  value: isActiv,
-                  onChanged: (sda) {
-                    isActiv = sda;
-                    debugPrint("isActive: $isActiv");
-                    setState(() {});
-                  },
-                ),
-              ],
-            ),
+            GetStorage().read("hasBiometric") == "true"
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Использовать Touch ID",
+                        style: TextStyle(
+                          fontSize: getHeight(24),
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.drawerTextColor,
+                        ),
+                      ),
+                      Switch(
+                        // focusColor: AppColors.drawerTextColor,
+                        // hoverColor: AppColors.drawerTextColor,
+                        // activeTrackColor: AppColors.drawerTextColor,
+                        // inactiveTrackColor: AppColors.drawerTextColor,
+                        activeColor: AppColors.orangeColor,
+                        inactiveThumbColor: AppColors.drawerTextColor,
+                        value: isActiv,
+                        onChanged: (sda) {
+                          isActiv = sda;
+                          debugPrint("isActive: $isActiv");
+                          setState(() {});
+                        },
+                      ),
+                    ],
+                  )
+                : SizedBox(height: getHeight(60)),
             SizedBox(height: getHeight(80)),
             MyElevatedButton(
               height: getHeight(83),
@@ -84,12 +86,20 @@ class _TabTouchIDPageState extends State<TabTouchIDPage> {
               onPressed: () {
                 GetStorage().write("touchid", isActiv.toString());
                 debugPrint(GetStorage().read("touchid"));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TabProfilePage(),
-                  ),
-                );
+                GetStorage().read("isverified") == "true"
+                    ? Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TabMainPage(),
+                        ),
+                        (route) => false,
+                      )
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TabProfilePage(),
+                        ),
+                      );
               },
             ),
             const Spacer(),

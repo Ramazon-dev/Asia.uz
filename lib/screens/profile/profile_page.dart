@@ -1,4 +1,3 @@
-import 'package:asia_uz/screens/view/auth/info/bonus.dart';
 import 'package:asia_uz/screens/view/auth/info/onboarding_screen_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +34,10 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
     _firstNameController.dispose();
     _lastNameController.dispose();
+    genderController.dispose();
+    semeynoePolojeniyaController.dispose();
+    zanyatostController.dispose();
+    birthdayController.dispose();
   }
 
   @override
@@ -76,50 +79,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       v!.isEmpty ? 'Фамилия не введена'.tr() : null,
                 ),
                 SizedBox(height: getHeight(4.0)),
-                // Container(
-                //   decoration: BoxDecoration(
-                //       border: Border(
-                //     bottom: BorderSide(
-                //       color: AppColors.black,
-                //       width: getWidth(0.5),
-                //     ),
-                //   )),
-                //   height: getHeight(50),
-                //   width: MediaQuery.of(context).size.width,
-                //   child: Row(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //         children: [
-                //           Text(
-                //             "Дата рождения*".tr(),
-                //             style: TextStyle(
-                //               fontSize: getHeight(14),
-                //               fontWeight: FontWeight.w500,
-                //               color: AppColors.bottomUnselectedColor,
-                //             ),
-                //           ),
-                //           Text(
-                //             birthday ?? "",
-                //             style: TextStyle(
-                //               fontSize: getHeight(16),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       Padding(
-                //         padding: EdgeInsets.only(right: getWidth(11)),
-                //         child: const Icon(
-                //           Icons.arrow_forward_ios,
-                //           color: AppColors.black,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
                 TextFormField(
                   readOnly: true,
                   keyboardType: TextInputType.none,
@@ -380,7 +339,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       ? Center(
                           child: Image.asset(
                             "assets/images/loading_indicator.gif",
-                            color: AppColors.orange,
                             fit: BoxFit.cover,
                             height: getHeight(25),
                           ),
@@ -408,7 +366,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 "firstName",
                                 _firstNameController.text,
                               );
-                              debugPrint("""
+                              debugPrint(
+                                  """
 platform: ${GetStorage().read("platform")}
 dob: $birthday
 firstname: ${_firstNameController.text}
@@ -445,8 +404,8 @@ occupation: "occupation",
                               );
                               isload = false;
                               debugPrint("loyality cards service ishga tushdi");
-                              DevicesService.devicesService();
                               LoyalityCardsService.getLoyalityCardsService();
+                              // DevicesService.devicesService("asa");
                             } else {
                               Navigator.push(
                                 context,

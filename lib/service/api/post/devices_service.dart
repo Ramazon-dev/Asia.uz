@@ -2,9 +2,12 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:http/http.dart' as http;
 
 class DevicesService {
-  static Future devicesService() async {
+  static Future devicesService(String fcmToken) async {
+    String platform = Platform.operatingSystem;
+    debugPrint("fcm keldi: $fcmToken");
     debugPrint("deviceService api iwga tushdi");
-    debugPrint("Platform is ${GetStorage().read("platform")}");
+    debugPrint(" device service Platform is ${GetStorage().read("platform")}");
+    debugPrint("device service token: ${GetStorage().read('token')}");
     var res = await http.post(
       Uri.parse(
         BaseUrl.baseUrl + "/devices",
@@ -12,20 +15,22 @@ class DevicesService {
       headers: {
         'Authorization': 'Bearer ${GetStorage().read('token')}',
       },
-      body: {
-        "token":
-            "eIopELx6SMSQBg48RnutsM:APA91bG1NtHVrR8u7noCyiaX3OBbE_mOXenQ91TvbMIn0xC2PVVY8NHldavlPIl_QH4ZwELG33dg91pgu_0RvYIiQoA0TXe7RO3eymSeAdPbg1DSG6Xzp-eFL15sOfJ4hHOt9aPB_ZoT",
-        "platform": GetStorage().read("platform")
-      },
+      body: {"token": fcmToken, "platform": platform},
     );
     try {
+      debugPrint("device service try ga kirdi");
+      debugPrint("device service statuscode");
       if (res.statusCode == 200 || res.statusCode == 201) {
         var data = jsonDecode(res.body);
+        debugPrint("device service if ga kirdi va body: $data");
         return data;
       } else {
+        debugPrint("deviceService else ga otib ketti");
         throw "error";
       }
     } catch (e) {
+      debugPrint("deviceService catch ga otib ketti");
+
       debugPrint(e.toString());
     }
   }

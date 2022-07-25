@@ -1,4 +1,3 @@
-import 'package:asia_uz/tablet/main/cards/widgets/tab_payment_history.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -7,6 +6,7 @@ class TabCardsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(GetStorage().read('cards').toString());
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppColors.bgColor,
@@ -15,7 +15,7 @@ class TabCardsPage extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(top: getHeight(130)),
-              height: getHeight(550.0),
+              height: getHeight(600.0),
               width: double.infinity,
               color: AppColors.whiteColor,
               child: Column(
@@ -34,21 +34,38 @@ class TabCardsPage extends StatelessWidget {
                   ),
                   SizedBox(height: getHeight(30.0)),
                   InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TabNoConnectionPage(),
-                          ),
-                        );
-                      },
-                      child: const TabCardWidget()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TabNoConnectionPage(),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      height: getHeight(300),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          SizedBox(width: getWidth(150)),
+                          const TabCardWidget(),
+                          SizedBox(width: getWidth(40)),
+                          GetStorage().read('cards') != 2
+                              ? Container()
+                              : const TabPersonalCard()
+                                  .only(right: getWidth(20)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: getHeight(15)),
+                  GetStorage().read('cards') != 2
+                      ? const TabAddCardsWidget()
+                      : Container(),
                 ],
               ),
             ),
-            GetStorage().read('barcode') == null
-                ? const TabAddCardsWidget()
-                : Container(),
+            const TabTotalBallance(),
             const TabPaymentHistory()
           ],
         ),

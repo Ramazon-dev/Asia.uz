@@ -1,5 +1,3 @@
-import 'package:asia_uz/tablet/auth/info/tab_bonus.dart';
-import 'package:asia_uz/tablet/main/home/widgets/tab_news_item.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -50,7 +48,7 @@ class _TabHomePageState extends State<TabHomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const TabBonusPage(),
+                        builder: (context) => const TabOnBoardingScreenPage(),
                       ),
                     );
                   },
@@ -122,6 +120,18 @@ class _TabHomePageState extends State<TabHomePage> {
   }
 
   cashback() {
+    String ballace = GetStorage().read("totalBalance").toString();
+    double total = double.parse(ballace);
+    int summa = total.toInt();
+    String? totalBallance = summa.toString();
+
+    String amount = GetStorage().read("amount").toString();
+    double doubleAmount = double.parse(amount);
+    int intAmount = doubleAmount.toInt();
+    String totalAmount = intAmount.toString();
+
+    debugPrint(totalBallance.toString());
+
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: getWidth(60.0),
@@ -152,56 +162,26 @@ class _TabHomePageState extends State<TabHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MyTextWidget(
-                text: '0 sum',
+                text: MoneyFormatter.moneyFormat(totalBallance + "as") +
+                    " " +
+                    'сумов'.tr(),
                 textAlign: TextAlign.left,
                 textColor: AppColors.orange,
-                fontSize: 20.0,
+                fontSize: 22.0,
                 fontWeight: FontWeight.w700,
               ),
               MyTextWidget(
-                text: "0 " + 'баллов'.tr(),
+                text: MoneyFormatter.moneyFormat(totalAmount + "as") +
+                    " " +
+                    'сумов'.tr(),
                 textAlign: TextAlign.right,
                 textColor: AppColors.teal,
-                fontSize: getHeight(20),
+                fontSize: 22,
                 fontWeight: FontWeight.w700,
               ),
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  information(BuildContext context) {
-    return SizedBox(
-      height: getHeight(190),
-      width: double.infinity,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: getWidth(10.0),
-              vertical: getHeight(10.0),
-            ),
-            child: Container(
-              height: getHeight(160.0),
-              width: getWidth(308.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  getWidth(15.0),
-                ),
-                image: const DecorationImage(
-                  image: AssetImage(
-                    'assets/images/i.png',
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
 class TabPasswordSet extends StatefulWidget {
-  TabPasswordSet({Key? key}) : super(key: key);
+  const TabPasswordSet({Key? key}) : super(key: key);
 
   @override
   State<TabPasswordSet> createState() => _TabPasswordSetState();

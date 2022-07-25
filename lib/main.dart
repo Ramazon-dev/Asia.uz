@@ -1,8 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
+Future<void> backgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  debugPrint("message data ${message.data}");
+  debugPrint("message notif title ${message.notification!.title}");
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+
   await EasyLocalization.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
     [
@@ -52,6 +64,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
     // appga kirganda internet ishlavotganini tekshirish uchun listener
     subscription = Connectivity().onConnectivityChanged.listen(
       (ConnectivityResult result) {

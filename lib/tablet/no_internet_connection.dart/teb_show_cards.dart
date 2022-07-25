@@ -17,8 +17,8 @@ class TabShowCards extends StatelessWidget {
           icon: SvgPicture.asset(
             "assets/icons/arrow_back.svg",
             color: AppColors.black,
-            height: getHeight(20),
-            width: getWidth(30),
+            height: getHeight(40),
+            width: getWidth(60),
           ).only(left: getWidth(15)),
         ),
         backgroundColor: Colors.transparent,

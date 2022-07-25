@@ -25,38 +25,6 @@ class NewsDetailPage extends StatelessWidget {
     });
   }
 
-  //   return BlocProvider(
-  //     create: (context) => NewsViewCubit(
-  //       SampleNewsRepository(),
-  //       id,
-  //     ),
-  //     child: BlocConsumer<NewsViewCubit, NewsViewState>(
-  //       listener: (context, state) {},
-  //       builder: (context, state) {
-  //         if (state is NewsViewInitial) {
-  //           return Scaffold(
-  //             body: Loader.loader(),
-  //           );
-  //         } else if (state is NewsViewLoading) {
-  //           return Scaffold(
-  //             body: Loader.loader(),
-  //           );
-  //         } else if (state is NewsViewCompleted) {
-  //           return LayoutBuilder(builder: (context, constraints) {
-  //             return constraints.maxWidth < 600
-  //                 ? buildMobile(context, state)
-  //                 : buildTab(context, state);
-  //           });
-  //         } else {
-  //           final error = state as NewsViewError;
-  //           return const Notifications()
-  //               .flash(context, error.errorMsg, Colors.red);
-  //         }
-  //       },
-  //     ),
-  //   );
-  // }
-
   Scaffold buildMobile(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.unselectedColor,
@@ -223,6 +191,19 @@ class NewsDetailPage extends StatelessWidget {
                   ),
                 ).symmetric(
                     horizontal: getWidth(10.0), vertical: getHeight(20.0)),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    // '22 февраля самые низкие цены\nна манго и авакадо!',
+                    created,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.teal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: getWidth(24.0),
+                    ),
+                  ),
+                ).only(right: getWidth(15), bottom: getHeight(5)),
                 Text(
                   // 'Встречайте шестой электронный\nкаталог от Asia.uz! Наш каталог\nпредставляет собой сборник лучших\nскидок и весенних предложений.',
                   discription,

@@ -6,17 +6,22 @@ class TabCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String ballace = GetStorage().read("totalBalance").toString();
+    double total = double.parse(ballace);
+    int son = total.toInt();
+    String? sona = son.toString();
+
     return Container(
-      height: getHeight(280),
-      width: getWidth(500),
+      height: getHeight(300),
+      width: getWidth(525),
       decoration: BoxDecoration(
-        color: AppColors.orangeColor,
+        color: Colors.cyan,
         borderRadius: BorderRadius.circular(
           getWidth(20.0),
         ),
         image: const DecorationImage(
           image: AssetImage(
-            'assets/images/bg.png',
+            'assets/images/card_other.png',
           ),
           fit: BoxFit.cover,
         ),
@@ -24,23 +29,10 @@ class TabCardWidget extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: getHeight(35),
+            top: getHeight(150),
             width: getWidth(495),
             child: Text(
-              'Ваша карта лояльности'.tr(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.whiteColor,
-                fontWeight: FontWeight.w400,
-                fontSize: getWidth(24.0),
-              ),
-            ),
-          ),
-          Positioned(
-            top: getHeight(130),
-            width: getWidth(495),
-            child: Text(
-              GetStorage().read("barcode") ?? 'card is empty',
+              GetStorage().read("qrcode") ?? '2935 **** **** 1562'.tr(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.whiteColor,
@@ -51,7 +43,7 @@ class TabCardWidget extends StatelessWidget {
           ),
           Positioned(
             width: getWidth(495),
-            top: getHeight(210),
+            top: getHeight(230),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -65,7 +57,7 @@ class TabCardWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '2 000.00',
+                  MoneyFormatter.moneyFormat(sona + "as") + " " + 'сумов'.tr(),
                   style: TextStyle(
                     color: AppColors.whiteColor,
                     fontWeight: FontWeight.w400,

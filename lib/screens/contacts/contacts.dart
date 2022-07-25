@@ -280,7 +280,7 @@ class Contacts extends StatelessWidget {
                         style: TextStyle(
                           color: AppColors.teal,
                           fontWeight: FontWeight.w300,
-                          fontSize: getWidth(20.0),
+                          fontSize: getWidth(24.0),
                         ),
                       ).only(top: getHeight(15), bottom: getHeight(33)),
                       Container(
@@ -382,52 +382,47 @@ class Contacts extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: Container(
-                  height: getHeight(162),
-                  width: MediaQuery.of(context).size.width,
-                  color: const Color(0xff800D0D0D),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Мы в соцсетях",
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: getHeight(24),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ).only(top: getHeight(16), bottom: getHeight(26)),
-                      SizedBox(
-                        width: getWidth(312),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image(
-                              image: const AssetImage(
-                                "assets/icons/facebook.png",
-                              ),
-                              height: getHeight(66),
-                              fit: BoxFit.cover,
+                child: Column(
+                  children: [
+                    Text(
+                      "Мы в соцсетях",
+                      style: TextStyle(
+                        color: AppColors.whiteColor,
+                        fontSize: getHeight(24),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ).only(top: getHeight(16), bottom: getHeight(26)),
+                    SizedBox(
+                      width: getWidth(312),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: const AssetImage(
+                              "assets/icons/facebook.png",
                             ),
-                            Image(
-                              image: const AssetImage(
-                                "assets/icons/telegram.png",
-                              ),
-                              height: getHeight(66),
-                              fit: BoxFit.cover,
+                            height: getHeight(66),
+                            fit: BoxFit.cover,
+                          ),
+                          Image(
+                            image: const AssetImage(
+                              "assets/icons/telegram.png",
                             ),
-                            Image(
-                              image: const AssetImage(
-                                "assets/icons/instagram.png",
-                              ),
-                              height: getHeight(66),
-                              fit: BoxFit.cover,
+                            height: getHeight(66),
+                            fit: BoxFit.cover,
+                          ),
+                          Image(
+                            image: const AssetImage(
+                              "assets/icons/instagram.png",
                             ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                            height: getHeight(66),
+                            fit: BoxFit.cover,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],

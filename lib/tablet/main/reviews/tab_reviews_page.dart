@@ -12,6 +12,7 @@ class _TabReviewsPageState extends State<TabReviewsPage>
     with TickerProviderStateMixin {
   TabController? _tabController;
   final TextEditingController _messangeController = TextEditingController();
+  final TextEditingController _typeController = TextEditingController();
   var formkey = GlobalKey<FormState>();
   String? type;
 
@@ -26,6 +27,7 @@ class _TabReviewsPageState extends State<TabReviewsPage>
     super.dispose();
     _messangeController.clear();
     _tabController!.dispose();
+    _typeController.dispose();
   }
 
   @override
@@ -76,7 +78,7 @@ class _TabReviewsPageState extends State<TabReviewsPage>
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 // color: Colors.cyan.shade200,
                 height: getHeight(800.0),
                 child: TabBarView(
@@ -102,38 +104,75 @@ class _TabReviewsPageState extends State<TabReviewsPage>
                             horizontal: getWidth(50),
                             vertical: getHeight(50),
                           ),
-                          child: TextFormField(
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 24,
-                              color: AppColors.teal,
-                            ),
-                            controller: _messangeController,
-                            decoration: InputDecoration(
-                              labelText: "Сообщение*".tr(),
-                              labelStyle: TextStyle(
-                                fontSize: getHeight(24),
-                                color: AppColors.teal,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: getHeight(60),
                               ),
-                            ),
-                            onSaved: (String? value) {
-                              // This optional block of code can be used to run
-                              // code when the user saves the form.
-                            },
-                            validator: (v) => v!.isEmpty
-                                ? "отзыв не может быть пустым".tr()
-                                : null,
+                              Text(
+                                "Сообщение*",
+                                style: TextStyle(
+                                  color: AppColors.drawerTextColor,
+                                  fontSize: getHeight(24),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              TextFormField(
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: getHeight(24),
+                                  color: AppColors.teal,
+                                ),
+                                controller: _messangeController,
+                                decoration: InputDecoration(
+                                  labelStyle: TextStyle(
+                                    fontSize: getHeight(24),
+                                    color: AppColors.teal,
+                                  ),
+                                ),
+                                onSaved: (String? value) {
+                                  // This optional block of code can be used to run
+                                  // code when the user saves the form.
+                                },
+                                validator: (v) => v!.isEmpty
+                                    ? "отзыв не может быть пустым".tr()
+                                    : null,
+                              ),
+                            ],
                           ),
                         ),
-                        dropDownButtonMethod().symmetric(
-                          horizontal: getWidth(50),
-                          // vertical: getHeight(50),
-                        ),
+                        TextFormField(
+                          readOnly: true,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: getHeight(24),
+                            color: AppColors.teal,
+                          ),
+                          keyboardType: TextInputType.none,
+                          controller: _typeController,
+                          decoration: InputDecoration(
+                            suffixIcon: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 25,
+                              color: AppColors.teal,
+                            ),
+                            hintText: 'Выберите тип обращения*'.tr(),
+                          ),
+                          onTap: () {
+                            bottomsheetMethod();
+                            // debugPrint("type: $type");
+                          },
+                        ).symmetric(horizontal: getWidth(50)),
                         SizedBox(height: getHeight(70)),
                         MyElevatedButton(
                           text: 'Продолжить'.tr(),
                           textSize: getHeight(32),
+                          fontWeight: FontWeight.w400,
                           onPressed: () async {
+                            debugPrint("type iwlawi: $type");
+                            // malumotlarni kiritganidan kegin request jonatishi
+                            // mumkin boladi
                             if (formkey.currentState!.validate()) {
                               debugPrint(_messangeController.text.toString());
                               bool hasInternet =
@@ -143,14 +182,15 @@ class _TabReviewsPageState extends State<TabReviewsPage>
                               if (hasInternet) {
                                 String res =
                                     await FeedbacksService.feedbacksService(
-                                  type: type ?? "Другое",
+                                  type: type ?? "Other",
                                   message: _messangeController.text,
                                 );
                                 if (res != null) {
+                                  showAlertDialogMethod(context);
                                   _messangeController.clear();
                                   debugPrint("res: $res");
-                                  showAlertDialogMethod(context);
                                 }
+                                hideKeyboard(context);
                               } else {
                                 Navigator.push(
                                   context,
@@ -210,7 +250,7 @@ class _TabReviewsPageState extends State<TabReviewsPage>
                               ),
                               SizedBox(width: getWidth(25.0)),
                               Text(
-                                GetStorage().read('telNumber'),
+                                "+998 99 860-63-63",
                                 style: TextStyle(
                                   color: AppColors.black,
                                   fontSize: getHeight(24.0),
@@ -233,65 +273,13 @@ class _TabReviewsPageState extends State<TabReviewsPage>
     );
   }
 
-  List<String> typesOfList = [
-    'Вопрос',
-    'Жалоба',
-    'Предложение',
-    'Благодарность',
-    'Другое',
-  ];
-
-  DropdownButtonFormField<String> dropDownButtonMethod() {
-    return DropdownButtonFormField(
-      decoration: InputDecoration(
-        hintText: "Выберите тип обращения*".tr(),
-        alignLabelWithHint: true,
-        hintStyle: TextStyle(
-          fontSize: getHeight(24),
-          color: AppColors.teal,
-        ),
-        contentPadding:
-            EdgeInsets.only(bottom: getHeight(20), top: getHeight(10)),
-      ),
-      // hint: Text(
-      //   "Выберите тип обращения*".tr(),
-      //   style: TextStyle(fontSize: getHeight(20)),
-      // ),
-      icon: Padding(
-        padding: EdgeInsets.only(right: getHeight(10)),
-        child: const Icon(
-          Icons.arrow_forward_ios,
-          color: AppColors.teal,
-        ),
-      ),
-      // value: "",
-      validator: (v) => v == null ? "Тип обращения не выбрано".tr() : null,
-      onChanged: (String? v) {
-        type = v;
-        debugPrint("type: $v");
-      },
-      items: List.generate(
-        typesOfList.length,
-        (index) => DropdownMenuItem(
-          value: typesOfList[index].tr(),
-          child: Text(
-            typesOfList[index].tr(),
-            style: TextStyle(
-              fontSize: getHeight(24),
-              color: AppColors.black,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   showAlertDialogMethod(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          actionsPadding: const EdgeInsets.all(45),
+          actionsPadding: const EdgeInsets.all(25),
+          contentPadding: const EdgeInsets.all(20),
           alignment: Alignment.center,
           elevation: 2,
           content: Text(
@@ -299,26 +287,127 @@ class _TabReviewsPageState extends State<TabReviewsPage>
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.black,
-              fontSize: getHeight(30),
+              fontSize: getHeight(24),
               fontWeight: FontWeight.w400,
             ),
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
             MyElevatedButton(
-              height: 84,
-              width: 456,
-              textSize: 32,
+              height: getHeight(52),
+              width: getWidth(223),
               sideColor: AppColors.whiteColor,
               primaryColor: AppColors.orangeColor,
               text: "Вернуться на главную".tr(),
               textColor: AppColors.whiteColor,
               onPressed: () {
                 Navigator.pop(context);
-                setState(() {});
               },
             ),
           ],
+        );
+      },
+    );
+  }
+
+  void hideKeyboard(context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
+  List<String> typesOfList = [
+    'Вопрос',
+    'Жалоба',
+    'Предложение',
+    'Благодарность',
+    'Другое',
+  ];
+  List<String> valuesOfList = [
+    'Question',
+    'Complaint',
+    'Suggestion',
+    'Gratitude',
+    'Other',
+  ];
+
+  bottomsheetMethod() {
+    return showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: getHeight(834),
+          width: getWidth(670),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            // borderRadius: BorderRadius.circular(getHeight(40)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 45),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: getHeight(5),
+                  width: getWidth(45),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(getHeight(5)),
+                    color: AppColors.textTite,
+                  ),
+                ).only(bottom: getHeight(15)),
+                MyTextWidget(
+                  text: "Выберите тип обращения*",
+                  fontWeight: FontWeight.w600,
+                  fontSize: 32,
+                  textColor: AppColors.black,
+                ),
+                // SizedBox(height: getHeight(35)),
+                SizedBox(
+                  // color: Colors.yellow,
+                  height: 350,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: typesOfList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          _typeController.text = typesOfList[index];
+                          type = valuesOfList[index];
+                          Navigator.pop(context);
+                          debugPrint(
+                              "type: $type controlle: ${_typeController.text}");
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              typesOfList[index],
+                              style: TextStyle(
+                                fontSize: getHeight(24),
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.black,
+                              ),
+                            ).only(top: getHeight(30), bottom: getHeight(6)),
+                            const Divider(
+                              height: 2,
+                              thickness: 1,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                MyElevatedButton(
+                  text: "Сохранить",
+                  textSize: 32,
+                  sideColor: AppColors.orangeColor,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
         );
       },
     );

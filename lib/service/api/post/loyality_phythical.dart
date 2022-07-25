@@ -10,7 +10,7 @@ class LoyalityPhythicalService {
         BaseUrl.baseUrl + '/loyalty/physical',
       ),
       headers: {
-        'token': GetStorage().read("token"),
+        'Authorization': 'Bearer ${GetStorage().read('token')}',
       },
       body: {
         "card_number": qrNumber,
@@ -18,32 +18,44 @@ class LoyalityPhythicalService {
     );
     debugPrint("response: $response");
     debugPrint("resposne.body : ${response.body}");
-    int status = jsonDecode(response.body)["statusCode"];
-    String message = jsonDecode(response.body)["message"];
-    debugPrint("status: $status");
-    debugPrint("message: $message");
+    // int status = jsonDecode(response.body)["statusCode"];
+    // String message = jsonDecode(response.body)["message"];
+    // debugPrint("status: $status");
+    // debugPrint("message: $message");
     try {
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        var data = jsonDecode(response.body);
-        // String token = data['access_token'];
-        // bool verify = data["is_verified"];
-        // debugPrint("access_token : $token");
-        // debugPrint("is verified: $verify");
-        // await GetStorage().write('token', token);
-        // debugPrint("if ichida response : ${response.body}");
-        int status = data["statusCode"];
+      debugPrint("loyality bonus try ga krdi");
+      if (response.body == "Success") {
+        debugPrint("loyality bonus if ga krdi");
+        // var data = jsonDecode(response.body);
+        String message = response.body;
 
-        debugPrint(data.toString());
-        return status;
+        debugPrint(message.toString());
+        return message;
       } else {
-        int status = jsonDecode(response.body)["statusCode"];
-        debugPrint("Esle ga kirdi $status");
+        debugPrint("loyality bonus else ga krdi");
+        String message = jsonDecode(response.body)["message"];
+        debugPrint("Esle ga kirdi $message");
 
-        return status;
+        return message;
       }
     } catch (e) {
+      debugPrint("loyality bonus catch ga krdi");
       debugPrint(e.toString());
       return null;
     }
+    // } else if (response.statusCode == 200 || response.statusCode == 201) {
+    //   debugPrint("loyality bonus else if ga krdi");
+    //   var data = jsonDecode(response.body);
+
+    //   // String token = data['access_token'];
+    //   // bool verify = data["is_verified"];
+    //   // debugPrint("access_token : $token");
+    //   // debugPrint("is verified: $verify");
+    //   // await GetStorage().write('token', token);
+    //   // debugPrint("if ichida response : ${response.body}");
+    //   int? status = data["statusCode"];
+
+    //   debugPrint(data.toString());
+    //   return status;
   }
 }

@@ -51,6 +51,18 @@ class PaymentHistoryPage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: snap.data![0].history!.length,
                 itemBuilder: (context, index) {
+                  DateTime month = DateTime.now();
+
+                  List<History?> listOfHistory = List.generate(
+                    snap.data![0].history!.length,
+                    (index) => snap.data![0].history!.last.createdAt!.month ==
+                            month.month
+                        ? snap.data![0].history!.last
+                        : null,
+                  );
+
+                  DateTime? created = listOfHistory[index]!.createdAt;
+                  // debugPrint(created.toString());
                   return Container(
                     margin: EdgeInsets.only(
                       bottom: getHeight(10),
@@ -80,7 +92,7 @@ class PaymentHistoryPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "08 iyun 15:50",
+                              "${created!.day}.${created.month}   ${created.hour}:${created.minute}",
                               style: TextStyle(
                                 color: AppColors.drawerTextColor,
                                 fontSize: getHeight(12),
@@ -109,7 +121,7 @@ class PaymentHistoryPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "215.000",
+                              listOfHistory[index]!.amount.toString(),
                               style: TextStyle(
                                 color: AppColors.orangeColor,
                                 fontSize: getHeight(14),
@@ -140,7 +152,6 @@ class PaymentHistoryPage extends StatelessWidget {
           return Center(
             child: Image.asset(
               "assets/images/loading_indicator.gif",
-              color: AppColors.orange,
               fit: BoxFit.cover,
               height: getHeight(70),
             ),

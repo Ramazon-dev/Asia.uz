@@ -17,7 +17,6 @@ class _IsLoadingWidgetState extends State<IsLoadingWidget> {
         child: Image.asset(
           "assets/images/loading_indicator.gif",
           fit: BoxFit.cover,
-          color: AppColors.orange,
           height: getHeight(70),
         ),
       );

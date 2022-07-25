@@ -88,7 +88,6 @@ class TabHistoryPage extends StatelessWidget {
         return Center(
           child: Image.asset(
             "assets/images/loading_indicator.gif",
-            color: AppColors.orange,
             fit: BoxFit.cover,
             height: getHeight(70),
           ),

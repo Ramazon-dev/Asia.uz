@@ -2,14 +2,15 @@ import 'package:asia_uz/core/imports/imports.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnBoardingScreenPage extends StatefulWidget {
-  const OnBoardingScreenPage({Key? key}) : super(key: key);
+class TabOnBoardingScreenPage extends StatefulWidget {
+  const TabOnBoardingScreenPage({Key? key}) : super(key: key);
 
   @override
-  State<OnBoardingScreenPage> createState() => _OnBoardingScreenPageState();
+  State<TabOnBoardingScreenPage> createState() =>
+      _TabOnBoardingScreenPageState();
 }
 
-class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
+class _TabOnBoardingScreenPageState extends State<TabOnBoardingScreenPage> {
   final controller = PageController();
   bool isLastPage = false;
   @override
@@ -37,9 +38,11 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
             ),
           ),
           Positioned(
-            top: getHeight(600),
+            top: getHeight(1000),
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: getWidth(50)),
+              margin: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width / 5,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,15 +61,17 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
                   ),
                   isLastPage
                       ? MyElevatedButton(
+                          height: 83,
+                          width: 473,
                           textColor: AppColors.whiteColor,
                           primaryColor: AppColors.orangeColor,
                           text: "Закрыть",
-                          textSize: getHeight(18),
+                          textSize: getHeight(24),
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MainPage(),
+                                builder: (context) => TabMainPage(),
                               ),
                               (route) => false,
                             );
@@ -75,21 +80,23 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
                       : Column(
                           children: [
                             MyElevatedButton(
-                                textColor: AppColors.whiteColor,
-                                primaryColor: AppColors.orangeColor,
-                                text: "Далее",
-                                textSize: getHeight(18),
-                                onPressed: () => controller.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.easeInOut,
-                                    )).only(
-                                top: getHeight(20), bottom: getHeight(12)),
+                              textColor: AppColors.whiteColor,
+                              primaryColor: AppColors.orangeColor,
+                              text: "Далее",
+                              height: 83,
+                              width: 473,
+                              radius: 30,
+                              textSize: getHeight(24),
+                              onPressed: () => controller.nextPage(
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeInOut,
+                              ),
+                            ).only(top: getHeight(20), bottom: getHeight(12)),
                             TextButton(
                               onPressed: () => Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MainPage(),
+                                  builder: (context) => TabMainPage(),
                                 ),
                                 (route) => false,
                               ),
@@ -97,7 +104,7 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
                                 "Пропустить",
                                 style: TextStyle(
                                   color: AppColors.bottomUnselectedColor,
-                                  fontSize: getHeight(16),
+                                  fontSize: getHeight(24),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -126,16 +133,16 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
         ),
       ),
       padding: EdgeInsets.only(
-        top: getHeight(207),
-        left: getWidth(20),
-        right: getWidth(20),
+        top: getHeight(300),
+        left: getWidth(60),
+        right: getWidth(60),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
             "assets/images/onboarding_location.png",
-            height: getHeight(180),
+            height: getHeight(350),
             fit: BoxFit.cover,
           ),
           SizedBox(height: getHeight(120)),
@@ -144,7 +151,7 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
                 .tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: getHeight(16),
+              fontSize: getHeight(24),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -167,16 +174,16 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
         ),
       ),
       padding: EdgeInsets.only(
-        top: getHeight(155),
-        left: getWidth(20),
-        right: getWidth(20),
+        top: getHeight(300),
+        left: getWidth(60),
+        right: getWidth(60),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
             "assets/images/onboarding_cashback.png",
-            height: getHeight(200),
+            height: getHeight(400),
             fit: BoxFit.cover,
           ),
           SizedBox(height: getHeight(120)),
@@ -185,7 +192,7 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
                 .tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: getHeight(16),
+              fontSize: getHeight(24),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -208,25 +215,25 @@ class _OnBoardingScreenPageState extends State<OnBoardingScreenPage> {
         ),
       ),
       padding: EdgeInsets.only(
-        top: getHeight(200),
-        left: getWidth(20),
-        right: getWidth(20),
+        top: getHeight(300),
+        left: getWidth(60),
+        right: getWidth(60),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
             "assets/images/onboarding_bonus.png",
-            height: getHeight(160),
+            height: getHeight(300),
             fit: BoxFit.cover,
           ),
-          SizedBox(height: getHeight(120)),
+          SizedBox(height: getHeight(200)),
           Text(
             "Вы получили Бонус 2000 сум за регистрацию в Кэшбэк системе, показывайте QR кассиру и покупайте товары в нашей сети супермаркетов"
                 .tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: getHeight(16),
+              fontSize: getHeight(24),
               fontWeight: FontWeight.w500,
             ),
           ),

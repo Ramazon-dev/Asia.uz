@@ -1,5 +1,3 @@
-import 'package:asia_uz/service/api/post/loyality_phythical.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:asia_uz/core/imports/imports.dart';
 
@@ -31,6 +29,7 @@ class _ReviewsPageState extends State<ReviewsPage>
     super.dispose();
     _messangeController.clear();
     _tabController!.dispose();
+    _typeController.dispose();
   }
 
   @override
@@ -222,6 +221,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                             ),
                           ),
                           onPressed: () async {
+                            debugPrint(GetStorage().read("telNumber"));
                             showDialog(
                               context: context,
                               builder: (context) {
@@ -454,41 +454,6 @@ class _ReviewsPageState extends State<ReviewsPage>
           ),
         );
       },
-    );
-  }
-
-  DropdownButtonFormField<String> dropDownButtonMethod() {
-    return DropdownButtonFormField(
-      hint: Text(
-        "Выберите тип обращения*".tr(),
-        style: TextStyle(
-          color: AppColors.drawerTextColor,
-          fontSize: getHeight(16),
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      icon: Padding(
-        padding: EdgeInsets.only(right: getHeight(10)),
-        child: const Icon(
-          Icons.arrow_forward_ios,
-          color: AppColors.teal,
-        ),
-      ),
-      // value: "",
-      validator: (v) => v == null ? "Тип обращения не выбрано".tr() : null,
-      onChanged: (String? v) {
-        type = v;
-        debugPrint("type: $v");
-      },
-      items: List.generate(
-        typesOfList.length,
-        (index) => DropdownMenuItem(
-          value: valuesOfList[index],
-          child: Text(
-            typesOfList[index].tr(),
-          ),
-        ),
-      ),
     );
   }
 

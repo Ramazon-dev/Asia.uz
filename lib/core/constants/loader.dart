@@ -9,7 +9,6 @@ class Loader {
           ? Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
-                color: AppColors.orange,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),
@@ -17,7 +16,6 @@ class Loader {
           : Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
-                color: AppColors.orange,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),

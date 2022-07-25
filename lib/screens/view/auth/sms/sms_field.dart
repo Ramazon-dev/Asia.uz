@@ -19,6 +19,42 @@ class _SmsFieldState extends State<SmsField> {
 
   bool isload = false;
   String platform = Platform.operatingSystem;
+  String? fcmToken;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        debugPrint(message.notification!.body);
+        debugPrint(message.notification!.title);
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFromMessage = message.data["route"];
+      debugPrint("route from message: $routeFromMessage");
+      Navigator.pushNamed(context, routeFromMessage);
+    });
+    FirebaseMessaging.instance.getToken().then((token) {
+      debugPrint("firebase messaging token: $token");
+      String? tak = token;
+      fcmToken = token;
+      // final snackBar = SnackBar(
+      //   // duration: const Duration(milliseconds: 500),
+      //   content: Text(token!),
+      //   backgroundColor: (Colors.cyan),
+      //   action: SnackBarAction(
+      //     label: 'dismiss',
+      //     onPressed: () {},
+      //   ),
+      // );
+      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+      // fcmToken = token;
+      debugPrint("firebase messaging token: $tak");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +62,6 @@ class _SmsFieldState extends State<SmsField> {
     // bu page da foydalanuvchiga jonatilgan sms code ni kiritadi
     SizeConfig().init(context);
     return buildScaffold(context);
-    // return BlocProvider(
-    //   create: (context) => VerifyCodeCubit(_validateKey, smsController),
-    //   child: BlocConsumer<VerifyCodeCubit, VerifyCodeState>(
-    //     listener: (context, state) {},
-    //     builder: (context, state) {
-    //       if (state is VerifyCodeInitial) {
-    //         return buildScaffold(context, state);
-    //       } else {
-    //         final error = state as VerifyCodeError;
-    //         return Center(
-    //           child: Text(error.errorMessage),
-    //         );
-    //       }
-    //     },
-    //   ),
-    // );
   }
 
   buildScaffold(BuildContext context) {
@@ -53,7 +73,6 @@ class _SmsFieldState extends State<SmsField> {
           ? Center(
               child: Image.asset(
                 "assets/images/loading_indicator.gif",
-                color: AppColors.black,
                 fit: BoxFit.cover,
                 height: getHeight(70),
               ),
@@ -137,6 +156,9 @@ class _SmsFieldState extends State<SmsField> {
                             if (verify == "false") {
                               GetStorage().write("isverified", verify);
                               debugPrint("verify false chiqdi");
+
+                              debugPrint("fcmToke: $fcmToken");
+                              DevicesService.devicesService(fcmToken ?? "");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -149,7 +171,9 @@ class _SmsFieldState extends State<SmsField> {
                               // agar foydalanuvchi oldin shu kiritilgan raqamdan
                               // ro'yxatdan o'tgan bo'lsa unda foydalanuvchi malumotlarini
                               // olish uchun mana shu api ga zapros jonatiladi
-                              DevicesService.devicesService();
+                              debugPrint("fcmToke: $fcmToken");
+                              DevicesService.devicesService(fcmToken ?? "");
+
                               await LoyalityCardsService
                                       .getLoyalityCardsService()
                                   .then(
@@ -233,4 +257,6 @@ class _SmsFieldState extends State<SmsField> {
   void hideKeyboard(context) {
     FocusScope.of(context).requestFocus(FocusNode());
   }
+
+  ontap(code) async {}
 }

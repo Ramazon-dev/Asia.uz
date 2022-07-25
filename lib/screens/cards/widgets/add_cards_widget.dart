@@ -7,62 +7,63 @@ class AddCardsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.all(getWidth(13.0)),
-      padding: EdgeInsets.all(getWidth(10)),
-      height: getHeight(123.0),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(getWidth(15.0)),
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const QRCodeScannerPage(),
+          ),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(getHeight(15))),
+        primary: const Color(0xffF39949),
+        fixedSize: Size(getWidth(320), getHeight(50)),
       ),
-      child: Column(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const QRCodeScannerPage(),
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(getHeight(15))),
-              primary: Colors.orange.shade300,
-              fixedSize: Size(getWidth(320), getHeight(50)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.add_circle, color: AppColors.whiteColor),
-                SizedBox(width: getWidth(15.0)),
-                Text(
-                  'Добавить имеющуюся карту'.tr(),
-                  style: TextStyle(
-                    color: AppColors.whiteColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: getWidth(16.0),
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: getHeight(15)),
+          const Icon(Icons.add_circle, color: AppColors.whiteColor),
+          SizedBox(width: getWidth(15.0)),
           Text(
-            'Вы можете добавить физическую карту лояльности отсканировав штрих-код'.tr(),
-            textAlign: TextAlign.center,
+            'Добавить имеющуюся карту'.tr(),
             style: TextStyle(
-              color: AppColors.black,
-              fontSize: getWidth(14.0),
+              color: AppColors.whiteColor,
               fontWeight: FontWeight.w500,
+              fontSize: getWidth(16.0),
             ),
-          ),
+          )
         ],
       ),
     );
+    // return Container(
+    //   alignment: Alignment.center,
+    //   margin: EdgeInsets.all(getWidth(13.0)),
+    //   padding: EdgeInsets.all(getWidth(10)),
+    //   height: getHeight(123.0),
+    //   width: double.infinity,
+    //   decoration: BoxDecoration(
+    //     color: AppColors.whiteColor,
+    //     borderRadius: BorderRadius.circular(getWidth(15.0)),
+    //   ),
+    //   child: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+
+    //       // SizedBox(height: getHeight(15)),
+    //       // Text(
+    //       //   'Вы можете добавить физическую карту лояльности отсканировав штрих-код'.tr(),
+    //       //   textAlign: TextAlign.center,
+    //       //   style: TextStyle(
+    //       //     color: AppColors.black,
+    //       //     fontSize: getWidth(14.0),
+    //       //     fontWeight: FontWeight.w500,
+    //       //   ),
+    //       // ),
+    //     ],
+    //   ),
+    // );
   }
 }

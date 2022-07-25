@@ -69,21 +69,32 @@ class _TabReturnPasswordState extends State<TabReturnPassword> {
                 currentCode: code,
                 onCodeSubmitted: (code) async {
                   if (code.length == 4 && widget.text == controller.text) {
-                    GetStorage().write("password", controller.text);
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TabTouchIDPage(),
-                      ),
-                    );
+                    bool localAuth = await LocalAuthApi.hasBiometrics();
+                    await GetStorage()
+                        .write("hasBiometric", localAuth.toString());
+                    // shu joyda password tog'ri kiritganini tekshiriladi
+                    if (code.length == 4 && widget.text == controller.text) {
+                      debugPrint(
+                          "Has Biometric ${GetStorage().read("hasBiometric")}");
+                      GetStorage().write("password", controller.text);
+                      hideKeyboard(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TabTouchIDPage(),
+                        ),
+                      );
+                    }
                   }
                 },
                 onCodeChanged: (code) async {
+                  bool localAuth = await LocalAuthApi.hasBiometrics();
+                  await GetStorage()
+                      .write("hasBiometric", localAuth.toString());
                   if (code!.length == 4 && widget.text == controller.text) {
+                    debugPrint(
+                        "Has Biometric ${GetStorage().read("hasBiometric")}");
                     GetStorage().write("password", controller.text);
-
-                    hideKeyboard(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

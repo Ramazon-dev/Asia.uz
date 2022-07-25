@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SearchPage(),
+                          builder: (context) => const FaceId(),
                         ),
                       );
                     },
@@ -126,10 +126,15 @@ class _HomePageState extends State<HomePage> {
   cashback() {
     String ballace = GetStorage().read("totalBalance").toString();
     double total = double.parse(ballace);
-    int son = total.toInt();
-    String? sona = son.toString();
+    int summa = total.toInt();
+    String? totalBallance = summa.toString();
 
-    debugPrint(sona.toString());
+    String amount = GetStorage().read("amount").toString();
+    double doubleAmount = double.parse(amount);
+    int intAmount = doubleAmount.toInt();
+    String totalAmount = intAmount.toString();
+
+    debugPrint(totalBallance.toString());
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: getWidth(20.0),
@@ -160,7 +165,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MyTextWidget(
-                text: MoneyFormatter.moneyFormat(sona + "as") +
+                text: MoneyFormatter.moneyFormat(totalBallance + "as") +
                     " " +
                     'сумов'.tr(),
                 textAlign: TextAlign.left,
@@ -169,7 +174,9 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.w600,
               ),
               MyTextWidget(
-                text: "0 " + 'сумов'.tr(),
+                  text: MoneyFormatter.moneyFormat(totalAmount + "as") +
+                      " " +
+                      'сумов'.tr(),
                 textAlign: TextAlign.right,
                 textColor: AppColors.drawerTextColor,
                 fontSize: getHeight(13),

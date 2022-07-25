@@ -179,7 +179,7 @@ ${state.response[0].workingHours}
             ),
             MyElevatedButton(
               text: "Сохранить",
-              sideColor: AppColors.orange,
+              sideColor: AppColors.orangeColor,
               onPressed: () {
                 debugPrint("soxranit bosildi");
                 mapController?.animateCamera(
@@ -325,7 +325,7 @@ ${state.response[0].workingHours}
             ),
             MyElevatedButton(
               text: "Сохранить",
-              sideColor: AppColors.orange,
+              sideColor: AppColors.orangeColor,
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -446,7 +446,7 @@ ${state.response[0].workingHours}
             ),
             MyElevatedButton(
               text: "Сохранить",
-              sideColor: AppColors.orange,
+              sideColor: AppColors.orangeColor,
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -603,7 +603,7 @@ ${state.response[0].workingHours}
               ).symmetric(vertical: getHeight(13)),
               MyElevatedButton(
                 text: "Проложить маршрут".tr(),
-                sideColor: AppColors.orange,
+                sideColor: AppColors.orangeColor,
                 textColor: AppColors.shopsColor,
                 textSize: 18,
                 fontWeight: FontWeight.w500,
